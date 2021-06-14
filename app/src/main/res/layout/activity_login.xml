@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_pincode" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:card_view="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar"
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/qr_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_qrcode"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_phone"
+                app:layout_constraintRight_toLeftOf="@id/qr_code"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/top">
+
+            <com.bvb.sotp.view.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/hello"
+                android:textColor="@color/black"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:textSize="16sp"
+                app:fonts="Kuro_Regular.ttf" />
+
+            <com.bvb.sotp.view.RegularTextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:fonts="Kuro_Regular.ttf" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/tv_lbl2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="@string/login_input_pin"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:fonts="Kuro_Regular.ttf"
+            app:layout_constraintTop_toBottomOf="@id/welcome" />
+
+        <LinearLayout
+            android:id="@+id/ln_pincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/bg_border_gray"
+            android:gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingTop="16dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_lbl2">
+
+            <ImageView
+                android:id="@+id/img_code_1"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_2"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_3"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_4"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_5"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_6"
+                style="@style/circlePinView" />
+        </LinearLayout>
+
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/tvForgotPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp"
+            android:text="@string/forgot_pin"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            app:fonts="Kuro_Regular.ttf"
+            app:layout_constraintTop_toBottomOf="@id/ln_pincode" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvForgotPass">
+
+            <com.bvb.sotp.view.RegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/or_login_by_finger"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:fonts="Kuro_Regular.ttf" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/fingerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_finger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_van_tay" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:text="@string/finger_print"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:fonts="Kuro_Regular.ttf" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <LinearLayout
+            android:id="@+id/num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/langLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_1"
+                    style="@style/PadNum"
+                    android:text="1" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_2"
+                    style="@style/PadNum"
+
+                    android:text="2" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_3"
+                    style="@style/PadNum"
+                    android:text="3"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_4"
+                    style="@style/PadNum"
+
+                    android:text="4" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_5"
+                    style="@style/PadNum"
+
+                    android:text="5"
+
+                    />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_6"
+                    style="@style/PadNum"
+                    android:text="6"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_7"
+                    style="@style/PadNum"
+
+                    android:text="7" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_8"
+                    style="@style/PadNum"
+
+                    android:text="8" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_9"
+                    style="@style/PadNum"
+                    android:text="9"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/delete"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_0"
+                    style="@style/PadNum"
+                    android:text="0" />
+
+                <ImageView
+                    android:id="@+id/num_back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_16"
+                    android:src="@drawable/ic_backspace" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <include
+            layout="@layout/dialog_migrate_layout"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/langLayout"
+            layout="@layout/include_lang_none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/biometricInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgDialog"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingLeft="@dimen/_16sdp"
+        android:paddingRight="@dimen/_16sdp"
+        android:visibility="gone">
+
+        <include layout="@layout/dialog_biometric_login_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

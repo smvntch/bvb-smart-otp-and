@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EmptyView">
+        <attr name="titleText" format="reference" />
+        <attr name="descriptionText" format="reference" />
+    </declare-styleable>
+
+    <attr name="LoadingView" format="reference" />
+    <declare-styleable name="LoadingView">
+        <attr name="SpinKit_Color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="PoppinTextView">
+        <attr name="fonts" format="string" />
+    </declare-styleable>
+</resources>

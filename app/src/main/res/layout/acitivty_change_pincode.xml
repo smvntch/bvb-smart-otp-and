@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar"
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true">
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/tv_lbl2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="@string/login_input_pin"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:fonts="Kuro_Regular.ttf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ln_pincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/bg_border_gray"
+            android:gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingTop="16dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_lbl2">
+
+            <ImageView
+                android:id="@+id/img_code_1"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_2"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_3"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_4"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_5"
+                style="@style/circlePinView" />
+
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_code_6"
+                style="@style/circlePinView" />
+        </LinearLayout>
+
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:id="@+id/tv_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_gradient_add_user"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/confirm"
+            android:visibility="gone"
+            app:fonts="Kuro_Bold.ttf"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/num" />
+
+
+        <com.bvb.sotp.view.RegularTextView
+
+            android:id="@+id/tv_lbl3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            app:fonts="Kuro_Regular.ttf"
+            android:text="@string/pincode_policy"
+            android:textColor="#0e0e0e"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_next" />
+
+        <LinearLayout
+            android:id="@+id/num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_1"
+                    style="@style/PadNum"
+                    android:text="1" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_2"
+                    style="@style/PadNum"
+
+                    android:text="2" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_3"
+                    style="@style/PadNum"
+                    android:text="3"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_4"
+                    style="@style/PadNum"
+
+                    android:text="4" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_5"
+                    style="@style/PadNum"
+
+                    android:text="5"
+
+                    />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_6"
+                    style="@style/PadNum"
+                    android:text="6"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_7"
+                    style="@style/PadNum"
+
+                    android:text="7" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_8"
+                    style="@style/PadNum"
+
+                    android:text="8" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_9"
+                    style="@style/PadNum"
+                    android:text="9"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/delete"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/num_0"
+                    style="@style/PadNum"
+                    android:text="0" />
+
+                <ImageView
+                    android:id="@+id/num_back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_16"
+                    android:src="@drawable/ic_backspace" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

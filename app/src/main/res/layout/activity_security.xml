@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sw_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar">
+
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/change_pin_code"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_change_pin" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_change_pin_code"
+                    style="@style/settingTextView"
+                    android:text="@string/tittle_change_pin"
+                    app:fonts="Kuro_Regular.ttf" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/biometric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    style="@style/settingLinearLayout"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        style="@style/settingImageView"
+                        android:src="@drawable/ic_van_tay" />
+
+                    <com.bvb.sotp.view.RegularTextView
+                        android:id="@+id/tv_biometric"
+                        app:fonts="Kuro_Regular.ttf"
+                        style="@style/settingTextView"
+                        android:text="@string/setting_biometric" />
+
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swBiometric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+        <include layout="@layout/include_lang_none" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

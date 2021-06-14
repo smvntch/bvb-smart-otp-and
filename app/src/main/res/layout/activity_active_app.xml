@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@drawable/bg_normal" />-->
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_pincode" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.bvb.sotp.view.RegularTextView
+                android:id="@+id/tv_lbl1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:text="@string/username"
+                android:textSize="14sp"
+                app:fonts="Kuro_Regular.ttf" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/_20sdp">
+
+                <EditText
+                    android:id="@+id/edt_username"
+                    android:layout_width="@dimen/_210sdp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:background="@drawable/bg_border_gray"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_lbl1" />
+
+            </FrameLayout>
+
+            <com.bvb.sotp.view.RegularTextView
+                android:id="@+id/tv_lbl3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:text="@string/input_code_active_app"
+                android:textSize="14sp"
+                app:fonts="Kuro_Regular.ttf"
+                app:layout_constraintTop_toBottomOf="@id/edt_username" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/_20sdp">
+
+                <EditText
+                    android:id="@+id/edt_active_code"
+                    android:layout_width="@dimen/_210sdp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:background="@drawable/bg_border_gray"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_lbl1" />
+
+            </FrameLayout>
+
+            <com.bvb.sotp.view.RegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:paddingTop="@dimen/margin_16"
+                android:paddingBottom="@dimen/margin_16"
+                android:text="@string/text_active_warning"
+                android:textSize="13sp"
+                app:fonts="Kuro_Regular.ttf"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_active"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:layout_marginEnd="@dimen/_50sdp"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/margin_16"
+                    android:paddingBottom="@dimen/margin_16"
+                    android:text="@string/active"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:fonts="Kuro_Regular.ttf"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/langLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/include_lang_none"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

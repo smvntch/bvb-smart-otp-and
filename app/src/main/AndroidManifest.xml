@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.bvb.sotp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Step 1: Add the following permission to the app  -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- Step 2: This permission is depreciated in Android P  -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false" />
+
+    <application
+        android:name=".PeepApp"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".screen.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".screen.authen.pincode.CreatePinCodeActivity"
+            android:configChanges="locale"
+            android:label="Cài đặt mã Pin"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar">
+
+        </activity>
+        <!--<activity-->
+        <!--android:name="com.bvb.sotp.screen.transaction.TransactionDetailActivity"-->
+        <!--android:screenOrientation="portrait"-->
+
+        <!--android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />-->
+        <activity
+            android:name=".screen.authen.login.LoginActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.active.ActiveAppActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.selectlanguage.SelectLanguageActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+
+        <activity
+            android:name=".screen.transaction.OtpAdvanceActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"></activity>
+        <activity
+            android:name=".screen.authen.setting.SettingActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.user.AddUserActivity"
+            android:configChanges="layoutDirection|locale"
+            android:theme="@style/AppTheme.NoActionAndStatusBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".screen.authen.pincode.change.ChangePincodeActivity"
+            android:configChanges="locale"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.authen.security.SecurityActivity"
+            android:configChanges="locale"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.transaction.GetOtpActivity"
+            android:configChanges="locale"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.authen.setting.info.InfoActivity"
+            android:configChanges="locale"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.authen.login.LoginChangeActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+
+        <!--        <activity-->
+        <!--            android:name=".screen.active.ActiveAppMigrateActivity"-->
+        <!--            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />-->
+
+        <activity
+            android:name=".screen.transaction.OtpTimeActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.authen.setting.DisableFingerActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity
+            android:name=".screen.authen.setting.EnableFingerActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity
+            android:name=".screen.transaction.GetOtpQrActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity
+            android:name=".screen.active.ActiveAppOfflineActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+
+        <activity
+            android:name=".screen.authen.setting.SupportActivity"
+            android:configChanges="locale"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.transaction.QrCodeTransactionDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+        <activity
+            android:name=".screen.authen.login.LoginConfirmQrActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity
+            android:name=".screen.transaction.NotificationActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity android:name=".screen.authen.setting.info.WebviewActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity android:name=".screen.transaction.TransactionDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+        <activity android:name=".screen.authen.setting.info.ContactActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+
+            />
+
+        <!--<service android:name="vn.nsn.app.ocb.push.PeepFirebaseMessagingService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--        <meta-data-->
+        <!--            android:name="io.fabric.ApiKey"-->
+        <!--            android:value="5ce44ca8acf49e5028066559dd9d2387ec46fedb" />-->
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_round" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/transparent" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/app_name" />
+
+        <service
+            android:name=".firebase.SoftOTPFirebaseMessageService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

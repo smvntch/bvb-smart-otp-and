@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sw_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/security"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_security" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_security"
+                    style="@style/settingTextView"
+                    android:text="@string/security"
+                    app:fonts="Kuro_Regular.ttf" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/dividerGray" />
+
+            <LinearLayout
+                android:id="@+id/info"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_app_info" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_info"
+                    style="@style/settingTextView"
+
+                    android:text="@string/app_info"
+
+                    app:fonts="Kuro_Regular.ttf" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/dividerGray" />
+
+
+            <LinearLayout
+                android:id="@+id/sync"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_sync" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_sync"
+                    style="@style/settingTextView"
+                    android:text="@string/sync"
+
+                    app:fonts="Kuro_Regular.ttf" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/dividerGray" />
+
+            <LinearLayout
+                android:id="@+id/support"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_hotro" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_support"
+                    style="@style/settingTextView"
+                    android:text="@string/support"
+
+                    app:fonts="Kuro_Regular.ttf" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/dividerGray" />
+
+            <LinearLayout
+                android:id="@+id/logout"
+                style="@style/settingLinearLayout">
+
+                <ImageView
+                    style="@style/settingImageView"
+                    android:src="@drawable/ic_logout" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/tv_logout"
+                    style="@style/settingTextView"
+                    android:text="@string/logout"
+
+                    app:fonts="Kuro_Regular.ttf" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <include layout="@layout/include_lang_none" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

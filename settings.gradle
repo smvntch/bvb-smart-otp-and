@@ -1,0 +1,3 @@
+//include ':centagateSdk'
+include ':app'
+rootProject.name = "BVBSotp"

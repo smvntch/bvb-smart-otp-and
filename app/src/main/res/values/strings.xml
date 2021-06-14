@@ -1,0 +1,205 @@
+<resources>
+    <string name="app_name" translatable="false">Soft OTP </string>
+    <string name="input_pincode_msg">Đặt PIN (Mã PIN gồm 06 ký tự số)</string>
+    <string name="chuc_mung">Chúc mừng!</string>
+    <string name="set_pincode_success">Quý khách đã cài đặt PIN thành công!</string>
+    <string name="incorrect">Không chính xác!</string>
+    <string name="delete">Xóa</string>
+    <string name="active_app">Thêm tài khoản</string>
+    <string name="active">Kích hoạt</string>
+    <string name="username">Tên người dùng</string>
+    <string name="input_code_active_app">Mã kích hoạt</string>
+    <string name="input_pin_code">Tạo PIN ứng dụng</string>
+    <string name="input_pin_code_new">Nhập mã Pin mới</string>
+    <string name="input_pincode_policy">Nhập lại mã PIN</string>
+    <string name="input_pincode_policy_new">Nhập lại mã PIN mới</string>
+    <string name="setting_pincode_success">Cài đặt mã PIN thành công!</string>
+    <string name="next">Tiếp theo</string>
+    <string name="pincode_policy">Lưu ý:\nCác số trên bàn phím sẽ bị thay đổi vị trí</string>
+    <string name="setting_pincode_tittle">Cài đặt mã PIN</string>
+    <string name="reinput_pincode">Nhập lại mã PIN</string>
+    <string name="reinput_pincode_message">Nhập lại PIN</string>
+    <string name="reinput_pincode_message_new">Nhập lại mã PIN mới</string>
+    <string name="login_tittle">Đăng nhập </string>
+    <string name="main_msg_2">Soft OTP là hệ thống xác thực giao dịch bảo mật được SecureMetric phát triển để đáp ứng tuân thủ theo quy định của Ngân hàng Nhà Nước Việt Nam. Để biết thêm chi tiết, vui lòng xem tại đây</string>
+    <string name="notif_content">Xác thực giao dịch Soft OTP</string>
+    <string name="transaction_id">Mã giao dịch :</string>
+    <string name="transaction_time">Thời gian giao dịch :</string>
+    <string name="transaction_information">Nội dung giao dịch</string>
+    <string name="from_account">Từ tài khoản</string>
+    <string name="to_account">Đến tài khoản</string>
+    <string name="amount">Số tiền</string>
+    <string name="approve">Xác nhận</string>
+    <string name="cancel">Bỏ qua</string>
+    <string name="otp">MÃ OTP</string>
+    <string name="input_otp_message">Quý khách vui lòng nhập mã OTP này để xác thực giao dịch</string>
+    <string name="otp_time">Mã <b><font color='#3a5e4c'>OTP</font></b> sẽ hết hạn sau </string>
+    <string name="complete">Hoàn tất</string>
+    <string name="main_welcome">Chào mừng đến với Soft OTP</string>
+    <string name="main_message">Hiện tại bạn chưa có bất kỳ giao dịch nào cần xác nhận</string>
+    <string name="main_intro">Soft OTP là hệ thống xác thực giao dịch bảo mật được SecureMetric phát triển để đáp ứng tuân thủ theo quy định của Ngân hàng Nhà Nước Việt Nam. Để biết thêm chi tiết, vui lòng xem tại đây</string>
+    <string name="input_pincode_invalid">Mã PIN không trùng khớp. Vui lòng nhập lại</string>
+    <string name="transaction_approval">Xác nhận giao dịch</string>
+    <string name="file_name">sm_sotp</string>
+    <string name="setting_label">Cài đặt phương thức đăng nhập</string>
+    <string name="transaction_message">Vui lòng xác thực giao dịch/ Please verify the transaction</string>
+    <string name="setting_app">Cài đặt</string>
+
+
+    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
+    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>
+    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>
+    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>
+
+    <!-- production -->
+    <string name="app_smartotp_external_url" translatable="false">https://smvn.centagate.com.vn/Service1.asmx</string>
+
+
+    <string name="time_expired">Mã giao dịch đã hết hạn</string>
+    <string name="error_undefine">Lỗi không xác định</string>
+    <string name="lock_5_min">Ứng dụng của Quý khách sẽ bị khóa trong 5 phút do quý khách đã nhập mã PIN sai 3 lần</string>
+    <string name="locked">Tài khoản của Quý Khách đã bị khóa.</string>
+    <string name="active_message_failed">Thông tin không hợp lệ. Quý khách vui lòng thử lại</string>
+    <string name="active_message_success">Kích hoạt thành công!</string>
+    <string name="login_failed">Bạn đã nhập sai Mã PIN</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="app_verify">Xác thực hệ thống</string>
+    <string name="get_otp">Lấy mã OTP</string>
+    <string name="input_tran_id">Nhập mã giao dịch</string>
+    <string name="msg_lock_1">Quý khách đã nhập sai PIN 5 lần liên tiếp.\nỨng dụng đã bị khoá.\nVui lòng liên hệ BAOVIET Bank để được hỗ trợ</string>
+    <string name="msg_lock_2">Vui lòng kích hoạt lại.</string>
+<!--    <string name="msg_lock_3">Bấm vào <b><font color='#3a5e4c'>ĐÂY</font></b> để tiến hành đăng ký lại.</string>-->
+    <string name="text_user_name_info">Mã khách hàng: Mã khách hàng của Khách hàng cá nhân là số điện thoại đăng ký Soft OTP</string>
+    <string name="text_active_code_info">Mã kích hoạt là dãy số 6 chữ số được gửi tới số điện thoại đăng ký Soft OTP của khách hàng.</string>
+    <string name="msg_login_error">PIN không hợp lệ.\nQuý khách đã nhập sai PIN %1$s lần.\nỨng dụng sẽ bị khoá sau 5 lần nhập sai PIN liên tiếp.</string>
+    <string name="skip">Bỏ qua</string>
+    <string name="text_tutorial_4">Để cài đặt mã PIN, Quý khách bấm [img src=ic_menu_tutorial/] , chọn “<b><font color='#3a5e4c'>Bảo mật</font></b>”</string>
+    <string name="text_copy">Đã lưu vào bộ nhớ tạm</string>
+    <string name="text_tutorial_1">Quý khách đã kích hoạt SOTP thành công.</string>
+    <!--    <string name="text_tutorial_1">Quý khách đã kích hoạt Ứng dụng <b><font color='#3a5e4c'>Soft OTP</font></b> thành công trên thiết bị này</string>-->
+    <string name="text_tutorial_2">Để xác thực giao dịch: Quý khách lựa chọn tài khoản tương ứng, nhập Mã giao dịch và bấm "<b><font color='#3a5e4c'>Lấy mã OTP</font></b>"</string>
+    <string name="text_tutorial_3">Trường hợp Quý khách nhập sai PIN 5 lần liên tiếp, ứng dụng <b><font color='#3a5e4c'>Soft OTP</font></b> sẽ bị khóa. Quý khách vui lòng liên hệ SecureMetric để kích hoạt lại tài khoản</string>
+    <string name="security">Bảo mật</string>
+    <string name="text_active_warning">Tên người dùng là user Internet Banking BAOVIET Bank\n\nMã kích hoạt bao gồm 08 ký tự số đã được gửi đến số điện thoại đăng ký Internet Banking BAOVIET Bank</string>
+    <string name="add_user_online">Thêm tài khoản Online</string>
+    <string name="login_input_pin">Vui lòng nhập PIN</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="copy_otp">Sao chép mã OTP</string>
+    <string name="second">giây</string>
+    <string name="second_1">giây</string>
+    <string name="app_info">Thông tin ứng dụng</string>
+    <string name="sync">Đồng bộ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="pincode_match">Mã PIN mới không thể trùng mã PIN hiện tại</string>
+    <string name="change_pin_success">Thay đổi PIN thành công, vui lòng đăng nhập lại!</string>
+    <string name="tittle_change_pin">Đổi PIN</string>
+    <string name="tittle_finger_print">Cài đặt vân tay</string>
+    <string name="sync_complete">Đồng bộ hoàn tất</string>
+    <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất?</string>
+    <string name="delete_confirm_tit">Xác nhận xóa</string>
+    <string name="delete_confirm_msg">Bạn có chắc chắn muốn xóa người dùng %s?</string>
+    <string name="transaction_null">Bạn cần nhập mã giao dịch để thực hiện chức năng này!</string>
+    <string name="ok">Đồng ý</string>
+    <string name="update_account">Tài khoản đã tồn tại trên Soft OTP, quý khách muốn cập nhật?</string>
+    <string name="version">Phiên bản</string>
+    <string name="lbl_register_new">Để đăng ký tài khoản mới, bấm vào <b>ĐÂY</b></string>
+    <string name="identify_user">Xác thực người dùng</string>
+    <string name="client_id">Mã khách hàng</string>
+    <string name="active_code">Mã xác nhận</string>
+    <string name="edit">Sửa</string>
+    <string name="sync_error">Đã xảy ra lỗi trong quá trình xử lý. Quý khách vui lòng thử lại.</string>
+    <string name="account_exist">Tài khoản đã tồn tại trên Soft OTP. Quý khách có muốn ghi đè?</string>
+    <string name="active_otp_status_failed">Quý khách đã kích hoạt Soft OTP.</string>
+    <string name="save">Lưu</string>
+    <string name="dialog_tittle">Thông báo</string>
+    <string name="no_internet">Quý khách vui lòng kiểm tra lại kết nối mạng</string>
+    <string name="trans_code">Mã kiểm tra giao dịch</string>
+    <string name="edit_cancel">Xoá</string>
+    <string name="none_migrate">Quý khách vui lòng thực hiện chuyển đổi/nâng cấp trên thiết bị đã đăng ký Soft OTP</string>
+    <string name="msg_encrypt_user">Quý khách đã kích hoạt quá số lượng tài khoản trên 1 thiết bị.</string>
+    <string name="msg_encrypt_invalid">Lỗi không xác định.(</string>
+    <string name="msg_encrypt_user_error">Đã xảy ra lỗi trong quá trình xử lý.</string>
+    <string name="msg_error_3000">Mã khách hàng chưa đăng ký sử dụng Soft OTP (3000)</string>
+    <string name="msg_error_1005">Mã kích hoạt không chính xác. Quý khách lưu ý ứng dụng sẽ khóa sau 5 lần nhập sai mã kích hoạt liên tiếp.(1005)</string>
+    <string name="msg_error_3005">Ứng dụng chỉ cho phép đăng ký 1 mã khách hàng cá nhân. (3005)</string>
+    <string name="msg_force_change_pin">Mật khẩu của quý khách sẽ hết hạn trong %1$s ngày tới. Vui lòng chọn Đổi PIN để tiếp tục</string>
+    <string name="msg_encrypt_6">Trạng thái OTP không hợp lệ.</string>
+    <string name="sync_error_none_account">Có lỗi xảy ra trong quá trình xử lý. Vui lòng thực hiện lại.</string>
+    <string name="msg_error_10004">Quý khách vui lòng kiểm tra lại kết nối mạng.</string>
+    <string name="msg_error_1006">Mã khách hàng sử dụng Soft OTP của Quý khách đã bị khóa (1006)</string>
+    <string name="msg_migrate_noti">Quý khách thực hiện đổi mã PIN và xác thực ứng dụng bởi mã được gửi tới SĐT đăng ký dịch vụ Soft OTP</string>
+    <string name="close">Đóng</string>
+    <string name="logout_confirm_tit">Xác nhận đăng xuất</string>
+    <string name="msg_sync_error">Có lỗi xảy ra trong quá trình đồng bộ.</string>
+    <string name="msg_force_change_pin_final">Mật khẩu của quý khách đã hết hạn. Vui lòng chọn Đổi PIN để tiếp tục</string>
+    <string name="setting_biometric">Cài đặt sinh trắc học</string>
+    <string name="biometric_setup_fingerprint">Bạn có muốn cài đặt sinh trắc học cho ứng dụng Soft OTP?</string>
+    <string name="agree">Đồng ý</string>
+    <string name="disable_finger_msg">Bạn có muốn hủy cài đặt sinh trắc học trên ứng dụng Soft OTP?</string>
+
+    <string name="msg_finger_not_available">Thiết bị chưa cho phép sử dụng sinh trắc học. Quý khách vui lòng cài đặt để tiếp tục sử dụng</string>
+    <string name="bio_input_fingerprint">Touch ID cho Soft OTP</string>
+    <string name="bio_input_desc">Quý khách vui lòng xác nhận vân tay để tiếp tục</string>
+    <string name="try_again">Xin thử lại</string>
+    <string name="lock_fingerprint_msg">Thiết bị chưa cho phép sử dụng sinh trắc học. Quý khách vui lòng cài đặt để tiếp tục sử dụng</string>
+    <string name="msg_disable_finger_first">Quá trình đổi PIN sẽ tắt sinh trắc học. Quý khách có thực hiện tiếp?</string>
+    <string name="not_scan_qr">Không quét được QR?</string>
+    <string name="transaction_qr">Tạo OTP bằng số tham chiếu giao dịch</string>
+    <string name="active_by_username">Kích hoạt bằng số tham chiếu</string>
+    <string name="enter_active_code">Bạn vui lòng nhập mã kích hoạt</string>
+    <string name="add_user_offline">Thêm tài khoản Offline</string>
+    <string name="add_user">Danh sách người dùng</string>
+    <string name="active_biometric_msg">Quý khách đã kích hoạt tính năng đăng nhập bằng vân tay thành công!</string>
+    <string name="confirm_transaction_qrcode">Xác thực giao dịch - QR code</string>
+    <string name="confirm_transaction_mobile">Xác thực giao dịch - Mobile Push</string>
+    <string name="continues_transaction">Quý khách có muốn tiếp tục thực hiện giao dịch này?</string>
+    <string name="reject">Từ chối</string>
+    <string name="support">Hỗ trợ</string>
+    <string name="notification">Thông báo</string>
+    <string name="all">Tất cả</string>
+    <string name="transaction">Giao dịch</string>
+    <string name="other">Khác</string>
+    <string name="delete_success">Xóa người dùng %s thành công</string>
+    <string name="refuse">Từ chối</string>
+    <string name="msg_scan_biometric">Quý khách vui lòng xác nhận\nvân tay</string>
+    <string name="msg_setup_finger_print_success">Cài đặt vân tay thành công</string>
+    <string name="qa">Câu hỏi thường gặp</string>
+    <string name="manual">Hướng dẫn sử dụng</string>
+    <string name="term">Điều kiện điều khoản</string>
+    <string name="total_amount_transaction">Tổng số giao dịch:</string>
+    <string name="total_amount_money">Tổng giá trị giao dịch:</string>
+    <string name="transaction_date">Ngày giao dịch:</string>
+    <string name="transaction_info">Thông tin giao dịch</string>
+    <string name="msg_have_mobile_push">Bạn có Mobile Push</string>
+    <string name="msg_reset_pin">Bạn muốn cài đặt lại PIN?</string>
+    <string name="msg_unregistered">Người dùng %s đã hủy dịch vụ/ đã kích hoạt trên thiết bị khác.</string>
+    <string name="detail_trans_tittle">Chi tiết giao dịch như sau:</string>
+    <string name="result">Trạng thái:</string>
+    <string name="transaction_tittle_success">Quý khách đã thực hiện thành công giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_denied">Quý khách đã hủy bỏ giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_failed">Giao dịch chuyển tiền thất bại.</string>
+    <string name="success">Thành công</string>
+    <string name="denied">Hủy bỏ</string>
+    <string name="failed">Thất bại</string>
+    <string name="transaction_push_tittle">Thông báo chuyển tiền</string>
+    <string name="contact">Liên hệ</string>
+    <string name="location">Tầng 5, tòa nhà Corner Stone,\nsố 16 Phan Chu Trinh,P.Phan Chu Trinh,\nQuận Hoàn Kiếm, Hà Nội</string>
+    <string name="cskh">Trung tâm CSKH 24/7</string>
+    <string name="hello">Xin chào,</string>
+    <string name="forgot_pin">Quên PIN</string>
+    <string name="or_login_by_finger">Hoặc đăng nhập bằng vân tay</string>
+    <string name="finger_print">Vân tay</string>
+    <string name="fingerprint_not_set_msg">Quý khách chưa cài đặt đăng nhập bằng vân tay cho ứng dụng</string>
+    <string name="mobile_push">Thông báo Mobile Push</string>
+    <string name="mobile_push_msg">Bạn có 1 Mobile Push mới. Click để xem chi tiết</string>
+    <string name="mobile_push_invalid_tittle">Mobile push không hợp lệ</string>
+    <string name="mobile_push_invalid_msg">Mobile Push không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
+    <string name="transaction_failed">Giao dịch không hợp lệ</string>
+    <string name="invalid_active_code_tittle">Sai mã kích hoạt</string>
+    <string name="invalid_active_code_msg">Mã kích hoạt quý khách vừa nhập không đúng. Vui lòng kiểm tra lại</string>
+    <string name="invalid_qr_tittle">Mã QR không hợp lệ</string>
+    <string name="invalid_qr_msg">Mã QR không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
+</resources>
+
+
+

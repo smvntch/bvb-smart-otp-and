@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_toolbar">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/langLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:text="@string/transaction_info"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fonts="Kuro_Regular.ttf" />
+
+
+                <!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="@dimen/_20sdp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:layout_marginRight="@dimen/_20sdp">-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="@string/total_amount_transaction"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username" />-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:id="@+id/transactionCount"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username"-->
+                <!--                        tools:text="123456" />-->
+                <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+                <!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="@dimen/_20sdp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:layout_marginRight="@dimen/_20sdp">-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="@string/total_amount_money"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username" />-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:id="@+id/transactionAmount"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username"-->
+                <!--                        tools:text="123456" />-->
+                <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+                <!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="@dimen/_20sdp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:layout_marginRight="@dimen/_20sdp">-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="@string/transaction_date"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username" />-->
+
+                <!--                    <com.bvb.sotp.view.RegularTextView-->
+                <!--                        android:id="@+id/date"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        app:fonts="Kuro_Regular.ttf"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/edt_username"-->
+                <!--                        tools:text="123456" />-->
+                <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:id="@+id/transactionDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:lineSpacingExtra="@dimen/_3sdp"
+                    android:textSize="13sp"
+                    app:fonts="Kuro_Regular.ttf"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <com.bvb.sotp.view.RegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:text="@string/continues_transaction"
+                    android:textSize="13sp"
+                    app:fonts="Kuro_Regular.ttf"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_reject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/margin_8"
+                        android:paddingBottom="@dimen/margin_8"
+                        android:text="@string/reject"
+                        android:textAllCaps="false"
+                        app:fonts="Kuro_Reøgular.ttf"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="match_parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_approve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/margin_8"
+                        android:paddingBottom="@dimen/margin_8"
+                        android:text="@string/ok"
+                        android:textAllCaps="false"
+                        app:fonts="Kuro_Regular.ttf"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <include
+            android:id="@+id/langLayout"
+            layout="@layout/include_lang_none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

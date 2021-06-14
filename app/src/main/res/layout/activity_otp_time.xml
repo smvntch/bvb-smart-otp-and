@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_normal" />
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_toolbar"
+        android:layout_marginRight="@dimen/margin_16"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_marginTop="@dimen/margin_16"
+            app:fonts="Kuro_Bold.ttf"
+            tools:text="test 123" />
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:fonts="Kuro_Regular.ttf"
+            android:textColor="@color/colorUnselectedIndicator"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            tools:text="User 1" />
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_marginTop="50dp"
+            app:fonts="Kuro_Bold.ttf"
+            android:textColor="@color/colorPrimary"
+            android:text="Time OTP"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username"
+             />
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/trans_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="10dp"
+            android:textSize="16sp"
+            app:fonts="Kuro_Regular.ttf"
+            tools:text="12345678" />
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/tv_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="@dimen/margin_16"
+            android:gravity="center"
+            android:text="@string/get_otp"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:fonts="Kuro_Regular.ttf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ln_active_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            >
+
+            <include
+                layout="@layout/include_otp_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edt_active_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:cursorVisible="false"
+                android:enabled="false"
+                android:focusable="false"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:paddingTop="@dimen/margin_8"
+                android:paddingBottom="@dimen/margin_8"
+                android:singleLine="true"
+                android:textColor="@color/transparent"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_tutorial_profile_32"
+            android:layout_height="wrap_content">
+
+            <com.bvb.sotp.view.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/otp_time"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:fonts="Kuro_Regular.ttf" />
+
+            <com.bvb.sotp.view.RegularBoldTextView
+                android:id="@+id/tvOtpTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                tools:text="60"
+                android:textColor="@color/colorRed"
+                android:textSize="17sp"
+                app:fonts="Kuro_Bold.ttf" />
+
+            <com.bvb.sotp.view.RegularTextView
+                android:id="@+id/timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:layout_marginStart="3dp"
+                android:text="@string/second"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:fonts="Kuro_Regular.ttf" />
+
+        </LinearLayout>
+
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:id="@+id/tv_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:background="@drawable/bg_gradient_add_user"
+            android:gravity="center"
+            android:paddingTop="@dimen/margin_16"
+            android:paddingBottom="@dimen/margin_16"
+            android:text="@string/copy_otp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:fonts="Kuro_Regular.ttf" />
+    </LinearLayout>
+    <include layout="@layout/include_lang" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

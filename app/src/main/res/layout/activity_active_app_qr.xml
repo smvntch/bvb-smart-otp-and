@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_new"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_toolbar_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true">
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.bvb.sotp.view.RegularTextView
+            android:id="@+id/can_not_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/not_scan_qr"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_next" />
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:id="@+id/tv_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:visibility="gone"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_gradient_add_user"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/active_by_username"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_cancel" />
+
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_btn_gray_corner_radius"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inputActiveCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgDialog"
+            android:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/btn_radius_white"
+                android:paddingBottom="@dimen/_42sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.bvb.sotp.view.RegularTextView
+
+                    android:id="@+id/tv_success"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:text="@string/enter_active_code"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:layout_marginRight="@dimen/_16sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_success">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <LinearLayout style="@style/layoutActiveCode">
+
+                            <com.bvb.sotp.view.RegularTextView
+
+                                android:id="@+id/tv_code_1"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layoutActiveCode"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <com.bvb.sotp.view.RegularTextView
+
+                                android:id="@+id/tv_code_2"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layoutActiveCode"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout7">
+
+                            <com.bvb.sotp.view.RegularTextView
+
+                                android:id="@+id/tv_code_3"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layoutActiveCode"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout6">
+
+                            <com.bvb.sotp.view.RegularTextView
+                                android:id="@+id/tv_code_4"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layoutActiveCode"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout5">
+
+                            <com.bvb.sotp.view.RegularTextView
+
+                                android:id="@+id/tv_code_5"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layoutActiveCode"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout4">
+
+                            <com.bvb.sotp.view.RegularTextView
+
+                                android:id="@+id/tv_code_6"
+                                style="@style/textViewActiveCode"
+                                tools:text="*" />
+
+                            <View style="@style/underlineActiveCode" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edtPincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:cursorVisible="false"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:textColor="@android:color/transparent" />
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/img_close_success"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/icon_close_black"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

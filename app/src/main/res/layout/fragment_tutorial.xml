@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_tutorial_profile_32">
+
+    <com.bvb.sotp.view.RegularTextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:fonts="Kuro_Regular.ttf"
+        android:text="@string/text_tutorial_1"
+        android:textColor="@color/colorBlackWithOpacity"
+        android:textSize="15sp"
+        tools:ignore="MissingConstraints" />
+
+</LinearLayout>
