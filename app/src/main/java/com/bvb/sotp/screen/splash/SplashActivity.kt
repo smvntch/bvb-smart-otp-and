@@ -82,9 +82,9 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
             applicationContext.resources.getString(R.string.app_default_web_service_url)
         Configuration.getInstance().approvalUrl =
             applicationContext.resources.getString(R.string.app_default_soft_cert_url)
-        //Configuration.getInstance().authenticationUrl = "https://103.56.168.30/v2/CentagateWS/webresources"
-        Configuration.getInstance().authenticationUrl =
-            "https://117.4.241.150:448/v2/CentagateWS/webresources"
+        Configuration.getInstance().authenticationUrl = "https://103.56.168.30/v2/CentagateWS/webresources"
+//        Configuration.getInstance().authenticationUrl =
+//            "https://117.4.241.150:448/v2/CentagateWS/webresources"
 
         Configuration.getInstance().timeout = timeout
         Configuration.getInstance().serverEncPublicKey =
@@ -114,6 +114,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         val Securemetric_internal_SSL_CA =
             "MIIDSzCCAjOgAwIBAgIUHBDkhfBl7KMAu29YEwvXEwlXkakwDQYJKoZIhvcNAQELBQAwMTEQMA4GA1UEAwwHU1NMQ09SUDEQMA4GA1UECgwHU1NMQ09SUDELMAkGA1UEBhMCVVMwHhcNMjAwOTE2MTcyNzM1WhcNMjMwNjEzMTcyNzM1WjApMQwwCgYDVQQDDANTU0wxDDAKBgNVBAoMA1NTTDELMAkGA1UEBhMCVk4wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2P8R9/TkKP5NLwZBuVXlLlQ/Q9Ry2JGm1DW2Kd4Ljdl86SgQXe1GQOsVGBPqb/dYJLi++As6nwStPZqjpmG7Oh2fumzmxbv7ZR8N8qPjduVXNnoZ+y42ZN4kST+F6Y29S6qnEwmY+tXYLRnqrXX+Z4ai6W79P8X4uW6/6fF2mgfb+1z4rIU/6mMvlbyaYDmEU7T58qHzTU44Dy/36nER2JSs7sC7ScJjJhyL2uhvkj7Q6ruiZCAowXQ/7UrF70XCKW4xSbqaagGfYQE/y+++PYDZ36GVJe2VQo0J7EItThImrTKFXxXaHzDTkOn+CHY660rDJi4ng8Z3yTBPwCi2dAgMBAAGjYzBhMA8GA1UdEwEB/wQFMAMBAf8wHwYDVR0jBBgwFoAUhpEApx1eOnDkmHoJw3z+6/NVuUowHQYDVR0OBBYEFEwHk+DZ6bkkY8a5c8dDQ/xYex05MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAQEAIf1kPVa74ZNV4v+DXPx5hFwSmZkZfAA1c7WX8J/zeoP5ulCZeW+DH+qN+QD0cPUHpgnk4QTlo6KO+GOJaeIKEIyLvodx+N2tacUKHQ78J9VOnUe3AmSDobN99vQ845lHQtYFANwD8JUwbyf5M9t+7Xhe9EDgIHBWqum4UbHnhHSebMIvzdf7E1lmxtPYpn0CKzQsCA/44BygzpU5+trN7Q1lQX0kZ7rFJXc9ILAi5bGpDp8dMcPREJy+o9NPPafG3EFV4N44oamNNvIvh3YtzDP00rGFsEnuCzKLfIWeUGFNzYbb8HWLSF6HlxyPzpyeExKatz1eFHVOr2SsudPVFg=="
 
+        val bvbRootCA_UAT = "MIIFvTCCBKWgAwIBAgITPgAAAHoTJac0cp+P4QADAAAAejANBgkqhkiG9w0BAQUFADBWMRIwEAYKCZImiZPyLGQBGRYCdm4xGzAZBgoJkiaJk/IsZAEZFgtiYW92aWV0YmFuazEjMCEGA1UEAxMaYmFvdmlldGJhbmstSE5JLUFELVNSVjItQ0EwHhcNMjEwNTI1MDE0NzU1WhcNMjQwNTI0MDE0NzU1WjBxMQswCQYDVQQGEwJWTjEOMAwGA1UECBMFSGFOb2kxDjAMBgNVBAcTBUhhTm9pMRQwEgYDVQQKEwtCYW9WaWV0QmFuazEOMAwGA1UECxMFSVREZXAxHDAaBgNVBAMTE3NvdHAuYmFvdmlldGJhbmsudm4wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC5GA9AnZ6E2lkqDSzAGwl9p26e4blAoO11nHwSsq2kqjW5M2BNmMGqW/05THkSbrfm91tdJbgDwslxCTUPSdEYo0q0AB/SlVoltGI2ZQem2JGH0ofVBFBQuRTjf+xp5XdLnEIpumUj7/EOefk3IvJSS7GrxpIf54WeW9iUIMFQZzzfJUqzYQ+2kVtZknoA1YLxPhqhvc4DeXEY9MscBFTpVxyoma3+zLswocogUW+q4CjdUd0oXId0fbcKiXZaE+H2lKh0bmISPiOuCIcldNx+5OKv6YUr72zjPKPI8SRq3CmxFct+yncuJ0dPgfzzKMTU4E2bC5zpaPU6hPoEgHKtAgMBAAGjggJnMIICYzAmBgNVHREEHzAdghVzb3RwLmJhb3ZpZXRiYW5rLnZuIDuHBGc4qCAwHQYDVR0OBBYEFMlvB1PS2xIt+LdBIWfM7DzsYIe4MB8GA1UdIwQYMBaAFGzrZ+WbnS/osF8M94ldoqlvjsPpMIHhBgNVHR8EgdkwgdYwgdOggdCggc2GgcpsZGFwOi8vL0NOPWJhb3ZpZXRiYW5rLUhOSS1BRC1TUlYyLUNBKDMpLENOPURDLUFEMTktMDIsQ049Q0RQLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9YmFvdmlldGJhbmssREM9dm4/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MIHPBggrBgEFBQcBAQSBwjCBvzCBvAYIKwYBBQUHMAKGga9sZGFwOi8vL0NOPWJhb3ZpZXRiYW5rLUhOSS1BRC1TUlYyLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPWJhb3ZpZXRiYW5rLERDPXZuP2NBQ2VydGlmaWNhdGU/YmFzZT9vYmplY3RDbGFzcz1jZXJ0aWZpY2F0aW9uQXV0aG9yaXR5MCEGCSsGAQQBgjcUAgQUHhIAVwBlAGIAUwBlAHIAdgBlAHIwCwYDVR0PBAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA0GCSqGSIb3DQEBBQUAA4IBAQBZ3BdAlZ2xSnoWe20jZwYrCsI1n94an1+LdERJJQqB1L98rxunNYGyMnCNBgXYErf8rJD758/gn7LUJJWH5faJrgiMti7PG+TyyoJGBay8xRxeAzBJTjMzDjVbsKuWqRbzdZEY8yRt1nhs/ygZGsYcZ5ngookhRZuU1vCFZTVm+V2oz/dISHorkAKESr+WjbCc8XjB/lnp2uvrgir+dl1fwtKK9bJhh+j5nin4IoMGAmJ0NnvIE1/C2QafhYM7J8TcKUgQhev84AWJaGwQv9u45pvuwd4m6tCuIQW6VQaNT5B9cbU+3QEvWwN1uUefSdw5xTQ5P1+254xkK2Bcn01L"
 
         var keyStore: KeyStore? = null
         try {
@@ -147,6 +148,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                 "securemetric_internal_SSL_CA",
                 securemetric_internal_SSL_CA
             )
+            keyStore.setCertificateEntry("bvb_ROOT_CA_UAT", cf.generateCertificate(ByteArrayInputStream(Base64.decode(bvbRootCA_UAT, Base64.DEFAULT))))
 
             val go_Daddy_Root_CA = cf.generateCertificate(
                 ByteArrayInputStream(
