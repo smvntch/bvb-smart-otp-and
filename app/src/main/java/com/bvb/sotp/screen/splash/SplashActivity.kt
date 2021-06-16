@@ -82,9 +82,8 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
             applicationContext.resources.getString(R.string.app_default_web_service_url)
         Configuration.getInstance().approvalUrl =
             applicationContext.resources.getString(R.string.app_default_soft_cert_url)
-        Configuration.getInstance().authenticationUrl = "https://103.56.168.30/v2/CentagateWS/webresources"
-//        Configuration.getInstance().authenticationUrl =
-//            "https://117.4.241.150:448/v2/CentagateWS/webresources"
+        Configuration.getInstance().authenticationUrl =
+            applicationContext.resources.getString(R.string.app_default_auth_url)
 
         Configuration.getInstance().timeout = timeout
         Configuration.getInstance().serverEncPublicKey =
