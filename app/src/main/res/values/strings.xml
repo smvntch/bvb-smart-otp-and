@@ -214,6 +214,7 @@
     <string name="invalid_active_code_msg">Mã kích hoạt quý khách vừa nhập không đúng. Vui lòng kiểm tra lại</string>
     <string name="invalid_qr_tittle">Mã QR không hợp lệ</string>
     <string name="invalid_qr_msg">Mã QR không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
+    <string name="otp_qr_tittle">Xác thực bằng QR code</string>
 </resources>
 
 

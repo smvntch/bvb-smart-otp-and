@@ -63,7 +63,7 @@
     <string name="msg_login_error">You have entered your PIN incorrectly %1$s times. The application will be locked after 5 incorrect PIN entries.</string>
     <string name="otp_time">The <b><font color="#3a5e4c"> OTP </font></b>code is valid within </string>
     <string name="text_active_code_info">Activation code is 6-digits sequence sent to the phone number that registered for Soft OTP.</string>
-    <string name="text_active_warning">Please note: The activation code (6 digits) has been sent to the phone number registered with <b><font color="#3a5e4c">Soft OTP</font></b> service</string>
+    <string name="text_active_warning">Please note: Activation code includes 08 digits has been sent to the phone number registered with <b><font color="#3a5e4c">Soft OTP</font></b> service</string>
 
     <string name="text_tutorial_1">Congratulations! You have activated SOTP successfully.</string>
     <string name="text_tutorial_2">To authenticate transactions: Select the account, enter Transaction code and press "<b><font color="#3a5e4c"> Get the OTP </font></b> code"</string>
@@ -187,4 +187,5 @@
     <string name="invalid_active_code_msg">The activation code is not valid. Please check again.</string>
     <string name="invalid_qr_tittle">Invalid QR Code</string>
     <string name="invalid_qr_msg">Invalid QR Code. Transaction failed.</string>
+    <string name="otp_qr_tittle">Confirm transaction – QR code</string>
 </resources>

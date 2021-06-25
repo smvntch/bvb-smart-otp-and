@@ -101,7 +101,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
     fun reloadUI() {
-        tvTittle.text = getString(R.string.get_otp)
+        tvTittle.text = getString(R.string.otp_qr_tittle)
 
         mNext.text = getString(R.string.transaction_qr)
         notScan.text = getString(R.string.not_scan_qr)
