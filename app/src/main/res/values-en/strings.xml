@@ -63,7 +63,7 @@
     <string name="msg_login_error">You have entered your PIN incorrectly %1$s times. The application will be locked after 5 incorrect PIN entries.</string>
     <string name="otp_time">The <b><font color="#3a5e4c"> OTP </font></b>code is valid within </string>
     <string name="text_active_code_info">Activation code is 6-digits sequence sent to the phone number that registered for Soft OTP.</string>
-    <string name="text_active_warning">Please note: Activation code includes 08 digits has been sent to the phone number registered with <b><font color="#3a5e4c">Soft OTP</font></b> service</string>
+    <string name="text_active_warning">Username is the username of BAOVIET Bank Internet Banking\n\nActivation Code includes 06 digits sent via SMS to your phone number which registered for BAOVIET Bank Internet Banking.</string>
 
     <string name="text_tutorial_1">Congratulations! You have activated SOTP successfully.</string>
     <string name="text_tutorial_2">To authenticate transactions: Select the account, enter Transaction code and press "<b><font color="#3a5e4c"> Get the OTP </font></b> code"</string>
@@ -77,9 +77,9 @@
     <string name="second"> seconds</string>
     <string name="app_info">Application information</string>
     <string name="logout">Logout</string>
-    <string name="sync">Sync</string>
+    <string name="sync">Synchronization</string>
     <string name="pincode_match">The New PIN code cannot match the existing PIN code</string>
-    <string name="change_pin_success">Change PIN successfully. Please login again!</string>
+    <string name="change_pin_success">Change PIN successfully</string>
     <string name="tittle_finger_print">FingerPrint</string>
     <string name="tittle_change_pin">Change PIN</string>
     <string name="sync_complete">Sync complete</string>
@@ -127,7 +127,7 @@
     <string name="disable_finger_msg">Do you want to disable biometric on Soft OTP app?</string>
     <string name="msg_finger_not_available">Device is not enable biometric. Please enable to continue your setting.</string>
     <string name="bio_input_fingerprint">Touch ID for Soft OTP </string>
-    <string name="bio_input_desc">Please scan you fingerprint to login</string>
+    <string name="bio_input_desc">Please confirm your fingerprint to login</string>
     <string name="try_again">Please try again</string>
     <string name="lock_fingerprint_msg">Device is not enable biometric. Please enable to continue your setting</string>
     <string name="msg_disable_finger_first">Changing PIN will disable biometric. Do you want to continue?</string>
@@ -136,8 +136,8 @@
     <string name="active_by_username">Activate by reference number</string>
     <string name="enter_active_code">Please enter the Activation Code</string>
     <string name="add_user_offline">Add User Offline</string>
-    <string name="add_user">Add User</string>
-    <string name="active_biometric_msg">Fingerprint registered successfully!/</string>
+    <string name="add_user">List of user</string>
+    <string name="active_biometric_msg">Fingerprint registered successfully!</string>
     <string name="confirm_transaction_qrcode">Confirm transaction – QR code</string>
     <string name="continues_transaction">Are you sure you want to continue this transaction?</string>
     <string name="reject">Cancel</string>
@@ -190,4 +190,5 @@
     <string name="otp_qr_tittle">Confirm transaction – QR code</string>
     <string name="qr_invalid">Invalid QR code!</string>
     <string name="transaction_qr_login_tittle">Confirm transaction – QR code</string>
+    <string name="huy">Cancel</string>
 </resources>

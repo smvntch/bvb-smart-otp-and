@@ -59,7 +59,7 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
             jsonObject = new JSONObject(params);
 
             String message = jsonObject.getString("message");
-            saveNoti(remoteMessage.getData().toString());
+            saveNoti(jsonObject.getString("sessioncode"));
             if (message.contains("#2004") || message.contains("#2005")) {
                 FileSystem fileSystem = new FileSystem();
                 fileSystem.deleteAccountFile(getString(R.string.file_name));

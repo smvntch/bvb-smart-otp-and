@@ -33,6 +33,7 @@ import com.bvb.sotp.screen.authen.login.LoginViewContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
@@ -116,6 +117,9 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     @BindView(R.id.bio_status)
     lateinit var tvBioStatus: RegularTextView
+
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 
     companion object {
         fun newValidateIntent(context: Context): Intent {
@@ -215,6 +219,7 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     override fun initViews() {
         setAppBarHeight()
+        tvTittle.text = getString(R.string.security)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
@@ -267,10 +272,10 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
 
-        if (!isValidate()) {
-            val intent = Intent(this@DisableFingerActivity, AddUserActivity::class.java)
-            startActivity(intent)
-        }
+//        if (!isValidate()) {
+//            val intent = Intent(this@DisableFingerActivity, AddUserActivity::class.java)
+//            startActivity(intent)
+//        }
         finish()
     }
 
@@ -453,6 +458,11 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
             onResetInfo()
         })
 
+    }
+
+    @OnClick(R.id.menu)
+    fun onBack() {
+        finish()
     }
 
     @OnClick(R.id.lnVn)

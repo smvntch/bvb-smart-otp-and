@@ -474,34 +474,12 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
             progressDialog!!.dismiss()
 
             if (param == 1) {
-//                if (otpStatus == 1) {
-//                    var temp = StringBuilder()
-//                    temp.append("otpStatus :" + otpStatus + "\n")
-//                    temp.append("param :" + param + "\n")
-//                    LogUtils.printLog("ActiveApp onSuccess ", temp.toString())
-////                    showDialogActiveSuccess()
+
                 val dialog = DialogHelper(this@ActiveAppActivity)
                 dialog.showAlertDialog(getString(R.string.text_tutorial_1), false,
                     Runnable() {
                         onActiveSuccess()
                     })
-//                    preferenceHelper.setMigrate(true)
-//
-//                } else {
-//                    var temp = StringBuilder()
-//                    temp.append("otpStatus :" + otpStatus + "\n")
-//                    temp.append("param :" + param + "\n")
-//                    LogUtils.printLog("ActiveApp onError Otp Status ", temp.toString())
-//                    val dialogHelper = DialogHelper(this@ActiveAppActivity)
-//                    dialogHelper.showAlertDialog(
-//                        getString(R.string.active_otp_status_failed),
-//                        true,
-//                        object : Runnable {
-//                            override fun run() {
-//                            }
-//                        })
-//                }
-
             } else {
                 Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE)
 

@@ -245,7 +245,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 //        bioClose.visibility = View.GONE
         var authentication = AccountRepository.getInstance(this).authentication
 
-        if (authentication is FingerprintAuthentication || Utils.isAvailable(this)) {
+        if (authentication is FingerprintAuthentication && Utils.isAvailable(this)) {
             biometricZone.visibility = View.VISIBLE
         } else {
             biometricZone.visibility = View.GONE
@@ -435,7 +435,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
 
-                if (authentication.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 

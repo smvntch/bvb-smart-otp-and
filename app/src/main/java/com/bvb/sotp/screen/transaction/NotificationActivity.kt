@@ -103,7 +103,9 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
                     if (data.type == "1") {
 
-                        var sessionCode = Utils.getSessionCode(data.detail)
+                        var sessionCode = data.detail
+                        println("----onItemClick---------sessionCode------"+data.detail)
+//                        println("----onItemClick---------detail------"+data.detail)
                         getTokenProcess().execute(sessionCode)
 
                     }
@@ -227,7 +229,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                 btnTransaction.setBackgroundResource(R.drawable.bg_tab_active)
                 btnTransaction.setTextColor(ContextCompat.getColor(this, R.color.white))
                 onChangeTab(3)
-                PendingRequest().execute()
+//                PendingRequest().execute()
 
             }
 
@@ -351,6 +353,8 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         override fun doInBackground(vararg params: String?): String? {
             var result: Boolean? = false
             try {
+                println("----getTokenProcess---------params------"+params[0])
+
                 result = getTransactionDetail(params[0])
             } catch (e: CentagateException) {
                 return e.errorCode.toString()
@@ -401,6 +405,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     var requestInfo: RequestInfo? = null
 
     fun getTransactionDetail(sessionCode: String?): Boolean {
+        println("----getTransactionDetail---------sessionCode------"+sessionCode)
 
         var success = false
         try {

@@ -16,7 +16,7 @@ class ErrorUtils {
             return
         }
         val dialogHelper = DialogHelper(context)
-        dialogHelper.showAlertDialog(context.getString(R.string.active_message_failed) + "(" + param + ")", true, Runnable {
+        dialogHelper.showAlertDialog(context.getString(R.string.active_message_failed), true, Runnable {
 
         })
         return
