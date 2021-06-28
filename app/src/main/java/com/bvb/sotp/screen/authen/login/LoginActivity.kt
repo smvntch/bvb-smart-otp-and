@@ -19,6 +19,7 @@ import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
+import com.bvb.sotp.repository.CommonListener
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.setting.info.ContactActivity
 import com.bvb.sotp.screen.transaction.GetOtpQrActivity
@@ -115,6 +116,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     @BindView(R.id.fingerLayout)
     lateinit var fingerLayout: View
+
+    @BindView(R.id.biometricZone)
+    lateinit var biometricZone: View
 
     var count: Int = 0
 
@@ -232,10 +236,21 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         }
         initKeyPad()
         loadLang()
+        getUsers()
+
+        onCheckStatus()
 
         tvTittle.setText(getString(R.string.login_tittle))
 
 //        bioClose.visibility = View.GONE
+        var authentication = AccountRepository.getInstance(this).authentication
+
+        if (authentication is FingerprintAuthentication || Utils.isAvailable(this)) {
+            biometricZone.visibility = View.VISIBLE
+        } else {
+            biometricZone.visibility = View.GONE
+
+        }
 
         num1.setOnClickListener(this)
         num2.setOnClickListener(this)
@@ -337,8 +352,8 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             if (requestCode == 1) {
                 var intent = Intent(this@LoginActivity, GetOtpQrActivity::class.java)
                 intent.putExtra("id", account?.accountInfo?.accountId)
-                startActivityForResult(intent, 1)
-                finish()
+                startActivity(intent)
+//                finish()
             }
         }
     }
@@ -608,5 +623,81 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     override fun onStartListen() {
         biometricInputLayout.visibility = View.VISIBLE
+    }
+
+    fun onCheckStatus() {
+        var list = AccountRepository.getInstance(this).accounts.value
+        if (list?.size == 0) {
+            return
+        }
+
+        val securityDevice = AccountRepository.getInstance(application).authentication
+        var count = 0
+        val hid: String
+        hid = preferenceHelper.getHid()
+
+        val meMap = HashMap<Int, Int>()
+
+        for (i in 0 until list?.size!!) {
+
+            AccountRepository.getInstance(application)
+                .syncOtp(hid, list[i], securityDevice, object :
+                    CommonListener {
+
+                    override fun onSuccess() {
+                        count++
+                        if (count == list.size) {
+                            if (meMap.size > 0) {
+                                onUnregistered()
+
+                            }
+                        }
+                    }
+
+                    override fun onError(code: Int?) {
+                        code?.let {
+                            if (it == 1001 || it == 1002 || it == 3000 || it == 6000)
+                                meMap.put(i, it)
+                        }
+                        count++
+                        if (count == list.size) {
+                            if (meMap.size > 0) {
+                                onUnregistered()
+                            }
+                        }
+                    }
+                })
+        }
+    }
+
+    var listUser: ArrayList<Account> = ArrayList()
+    fun getUsers() {
+        var list = AccountRepository.getInstance(this).accounts.value
+        if (list != null) {
+//            accountName.text = list[0].accountInfo.displayName
+            listUser.clear()
+//        adapter.notifyDataSetChanged()
+            listUser.addAll(list)
+
+        }
+
+    }
+
+    fun onUnregistered() {
+        var name = ""
+        try {
+            name = listUser[0].accountInfo.displayName
+
+        } catch (e: Exception) {
+
+        }
+        val dialog = DialogHelper(this)
+        dialog.showAlertDialog(
+            getString(R.string.msg_unregistered, name), true
+        ) {
+            AccountRepository.getInstance(this).resetData()
+            onResetInfo()
+        }
+
     }
 }

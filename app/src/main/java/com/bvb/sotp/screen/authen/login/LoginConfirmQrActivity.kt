@@ -36,6 +36,7 @@ import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.util.Utils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
@@ -116,8 +117,8 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
     @BindView(R.id.tvForgotPass)
     lateinit var tvForgotPass: RegularTextView
 
-    @BindView(R.id.title)
-    lateinit var tvTittle: AppCompatTextView
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 
 
     var count: Int = 0
@@ -257,7 +258,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
         }
         initKeyPad()
         loadLang()
-        tvTittle.setText(getString(R.string.login_tittle))
+        tvTittle.setText(getString(R.string.transaction_qr_login_tittle))
 
 
 //        bioClose.visibility = View.GONE
@@ -381,7 +382,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -496,6 +497,10 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
 
     }
 
+    @OnClick(R.id.menu)
+    fun onBackClick() {
+        finish()
+    }
     @OnClick(R.id.lnVn)
     fun OnVnClick() {
         changeLang("vi")

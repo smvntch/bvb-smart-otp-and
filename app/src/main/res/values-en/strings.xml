@@ -43,7 +43,7 @@
     <string name="time_expired">Time has expired</string>
     <string name="lock_5_min">Your application will be locked within 5 minutes because you tried enter incorrect PIN 3 times.</string>
     <string name="locked">Your account has locked on Soft OTP.</string>
-    <string name="active_message_failed">Invalid information.</string>
+    <string name="active_message_failed">Incorrect activation information. Please re-enter information</string>
     <string name="login_failed">You have entered incorrect PIN code. Please try again</string>
     <string name="login_success">You have logged in successfully</string>
     <string name="app_verify">Application verification</string>
@@ -146,7 +146,7 @@
     <string name="all">All</string>
     <string name="transaction">Transaction</string>
     <string name="other">Others</string>
-    <string name="delete_success">Unregister SOTP for %s successfully</string>
+    <string name="delete_success">Unregister SOTP for %s successfully!</string>
     <string name="refuse">Cancel</string>
     <string name="msg_scan_biometric">Please place your fingerprint on the sensor</string>
     <string name="msg_setup_finger_print_success">Fingerprint registered successfully</string>
@@ -188,4 +188,6 @@
     <string name="invalid_qr_tittle">Invalid QR Code</string>
     <string name="invalid_qr_msg">Invalid QR Code. Transaction failed.</string>
     <string name="otp_qr_tittle">Confirm transaction – QR code</string>
+    <string name="qr_invalid">Invalid QR code!</string>
+    <string name="transaction_qr_login_tittle">Confirm transaction – QR code</string>
 </resources>

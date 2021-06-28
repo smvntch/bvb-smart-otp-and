@@ -157,7 +157,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "1")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch thành công", false, Runnable {
+                dialogHelper.showAlertDialog("Giao dịch thành công", false,"OK", Runnable {
                     finish()
 
                 })
@@ -170,7 +170,9 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
                         "Giao dịch không hợp lệ",
+
                         true,
+                        "OK",
                         Runnable { })
                 }
 

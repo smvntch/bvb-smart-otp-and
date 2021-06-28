@@ -328,7 +328,7 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 

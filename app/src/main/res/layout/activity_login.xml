@@ -80,7 +80,6 @@
                 app:fonts="Kuro_Regular.ttf" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
         <com.bvb.sotp.view.RegularTextView
             android:id="@+id/tv_lbl2"
             android:layout_width="match_parent"
@@ -170,6 +169,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/biometricZone"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/tvForgotPass">

@@ -286,7 +286,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        "Không thể lấy thông tin giao dịch",
+                        getString(R.string.qr_invalid),
                         true,
                         Runnable {
                             resumeQrScan()

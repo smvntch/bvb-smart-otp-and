@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Soft OTP </string>
+    <string name="app_name" translatable="false">BAOVIET eToken</string>
     <string name="input_pincode_msg">Đặt PIN (Mã PIN gồm 06 ký tự số)</string>
     <string name="chuc_mung">Chúc mừng!</string>
     <string name="set_pincode_success">Quý khách đã cài đặt PIN thành công!</string>
@@ -74,7 +74,7 @@
     <string name="error_undefine">Lỗi không xác định</string>
     <string name="lock_5_min">Ứng dụng của Quý khách sẽ bị khóa trong 5 phút do quý khách đã nhập mã PIN sai 3 lần</string>
     <string name="locked">Tài khoản của Quý Khách đã bị khóa.</string>
-    <string name="active_message_failed">Thông tin không hợp lệ. Quý khách vui lòng thử lại</string>
+    <string name="active_message_failed">Thông tin kích hoạt không hợp lệ. Quý khách vui lòng thử lại</string>
     <string name="active_message_success">Kích hoạt thành công!</string>
     <string name="login_failed">Bạn đã nhập sai Mã PIN</string>
     <string name="login_success">Đăng nhập thành công</string>
@@ -112,7 +112,7 @@
     <string name="sync_complete">Đồng bộ hoàn tất</string>
     <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất?</string>
     <string name="delete_confirm_tit">Xác nhận xóa</string>
-    <string name="delete_confirm_msg">Bạn có chắc chắn muốn xóa người dùng %s?</string>
+    <string name="delete_confirm_msg">Bạn chắc chắn muốn xóa người dùng %s?</string>
     <string name="transaction_null">Bạn cần nhập mã giao dịch để thực hiện chức năng này!</string>
     <string name="ok">Đồng ý</string>
     <string name="update_account">Tài khoản đã tồn tại trên Soft OTP, quý khách muốn cập nhật?</string>
@@ -148,7 +148,7 @@
     <string name="msg_sync_error">Có lỗi xảy ra trong quá trình đồng bộ.</string>
     <string name="msg_force_change_pin_final">Mật khẩu của quý khách đã hết hạn. Vui lòng chọn Đổi PIN để tiếp tục</string>
     <string name="setting_biometric">Cài đặt sinh trắc học</string>
-    <string name="biometric_setup_fingerprint">Bạn có muốn cài đặt sinh trắc học cho ứng dụng Soft OTP?</string>
+    <string name="biometric_setup_fingerprint">Quý khách có muốn cài đặt vân tay cho ứng dụng?</string>
     <string name="agree">Đồng ý</string>
     <string name="disable_finger_msg">Bạn có muốn hủy cài đặt sinh trắc học trên ứng dụng Soft OTP?</string>
 
@@ -174,7 +174,7 @@
     <string name="all">Tất cả</string>
     <string name="transaction">Giao dịch</string>
     <string name="other">Khác</string>
-    <string name="delete_success">Xóa người dùng %s thành công</string>
+    <string name="delete_success">Xóa người dùng %s thành công!</string>
     <string name="refuse">Từ chối</string>
     <string name="msg_scan_biometric">Quý khách vui lòng xác nhận\nvân tay</string>
     <string name="msg_setup_finger_print_success">Cài đặt vân tay thành công</string>
@@ -198,7 +198,7 @@
     <string name="failed">Thất bại</string>
     <string name="transaction_push_tittle">Thông báo chuyển tiền</string>
     <string name="contact">Liên hệ</string>
-    <string name="location">Tầng 5, tòa nhà Corner Stone,\nsố 16 Phan Chu Trinh,P.Phan Chu Trinh,\nQuận Hoàn Kiếm, Hà Nội</string>
+    <string name="location">Tầng 5, tòa nhà Corner Stone,\nsố 16 Phan Chu Trinh, P. Phan Chu Trinh,\nQuận Hoàn Kiếm, Hà Nội</string>
     <string name="cskh">Trung tâm CSKH 24/7</string>
     <string name="hello">Xin chào,</string>
     <string name="forgot_pin">Quên PIN</string>
@@ -215,6 +215,8 @@
     <string name="invalid_qr_tittle">Mã QR không hợp lệ</string>
     <string name="invalid_qr_msg">Mã QR không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
     <string name="otp_qr_tittle">Xác thực bằng QR code</string>
+    <string name="qr_invalid">QR Code không hợp lệ!</string>
+    <string name="transaction_qr_login_tittle">Xác thực giao dịch - QR code</string>
 </resources>
 
 

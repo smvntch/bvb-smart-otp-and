@@ -30,6 +30,7 @@ import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.pincode.change.ChangePincodeActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
@@ -91,6 +92,8 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
     @BindView(R.id.num_back)
     lateinit var numBack: ImageView
 
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 //    @BindView(R.id.img_close_fail)
 //    lateinit var imgCloseFail: ImageView
 //
@@ -207,6 +210,7 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
 
     override fun initViews() {
         setAppBarHeight()
+        tvTittle.text = getString(R.string.security)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
@@ -309,7 +313,7 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 

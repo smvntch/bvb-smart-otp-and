@@ -101,7 +101,7 @@ class ItemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         }
 
 
-        val dateString: String = SimpleDateFormat("HH:mm:ss MM-dd-yyyy").format(Date(model.date))
+        val dateString: String = SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Date(model.date))
         date?.text = dateString
 
     }
