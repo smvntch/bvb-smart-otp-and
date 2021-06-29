@@ -4,11 +4,11 @@
     <string name="input_pincode_policy">Re enter your PIN Code</string>
     <string name="input_pin_code">Create PIN Code</string>
     <string name="next">Continue</string>
-    <string name="pincode_policy">The numpad layout is randomized</string>
+    <string name="pincode_policy">Note:\nPosition of numbers on keyboard will be changed each time.</string>
     <string name="delete">Remove</string>
     <string name="reinput_pincode">Enter your PIN Code</string>
-    <string name="reinput_pincode_message">Re enter PIN Code</string>
-    <string name="set_pincode_success">Create PIN code successfully</string>
+    <string name="reinput_pincode_message">Re-enter PIN (06 digit number)/</string>
+    <string name="set_pincode_success">Create PIN successfully</string>
     <string name="chuc_mung">Congratulation!</string>
     <string name="incorrect">Failed!</string>
     <string name="username">Username</string>
@@ -16,7 +16,7 @@
     <string name="setting_pincode_success">You have activated your account successfully</string>
     <string name="active">Activate</string>
     <string name="active_app">Add User</string>
-    <string name="input_pincode_msg">Please, enter your PIN Code</string>
+    <string name="input_pincode_msg">Create PIN (06 digit number)</string>
     <string name="login_tittle">Login</string>
     <string name="main_msg_2">"Soft OTP was built by SecureMetric for secure your transaction based on the Policy of The State Bank of Viet Nam. For more detail, Please click here"</string>
     <string name="notif_content">Transaction approval needed</string>

@@ -1,8 +1,11 @@
 package com.bvb.sotp.screen.authen.pincode
 
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
@@ -100,6 +103,10 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     @BindView(R.id.back)
     lateinit var mBack: ImageView
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.bio_cancel)
+    lateinit var bioCancel: AppCompatTextView
+
     var count: Int = 0
 
     private var pincode: StringBuilder = StringBuilder()
@@ -158,6 +165,10 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
         mBack.setOnClickListener {
             reset()
+        }
+
+        bioCancel.setOnClickListener {
+            onIdentifySuccess()
         }
     }
 
@@ -364,7 +375,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     }
 
     fun onIdentifySuccess() {
-
+        println("--onIdentifySuccess-----------------")
         preferenceHelper.setPincodeLoginLastTime(System.currentTimeMillis())
 
         val intent = ActiveAppActivity.newIntent(this)
