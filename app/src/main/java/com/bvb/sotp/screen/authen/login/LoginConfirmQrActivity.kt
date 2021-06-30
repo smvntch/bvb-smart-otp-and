@@ -36,6 +36,7 @@ import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.util.Utils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
@@ -116,31 +117,29 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
     @BindView(R.id.tvForgotPass)
     lateinit var tvForgotPass: RegularTextView
 
-    @BindView(R.id.title)
-    lateinit var tvTittle: AppCompatTextView
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 
 
     var count: Int = 0
 
     companion object {
-        fun newValidateIntent(context: Context): Intent {
+        fun newMobilePushIntent(context: Context): Intent {
             val intent = Intent(context, LoginConfirmQrActivity::class.java)
-            intent.putExtra("is_validate", true)
-            intent.putExtra("cancelable", false)
+            intent.putExtra("is_mobile_push", true)
             return intent
         }
 
         fun newCancelAbleIntent(context: Context): Intent {
             val intent = Intent(context, LoginConfirmQrActivity::class.java)
-            intent.putExtra("is_validate", false)
-            intent.putExtra("cancelable", true)
+            intent.putExtra("is_mobile_push", false)
             return intent
         }
     }
 
 
-    private fun isValidate(): Boolean {
-        return intent.getBooleanExtra("is_validate", false)
+    private fun isMobilePush(): Boolean {
+        return intent.getBooleanExtra("is_mobile_push", false)
     }
 
     private fun isCancelable(): Boolean {
@@ -257,7 +256,13 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
         }
         initKeyPad()
         loadLang()
-        tvTittle.setText(getString(R.string.login_tittle))
+        if (isMobilePush()) {
+            tvTittle.setText(getString(R.string.confirm_transaction_mobile))
+
+        } else {
+            tvTittle.setText(getString(R.string.transaction_qr_login_tittle))
+
+        }
 
 
 //        bioClose.visibility = View.GONE
@@ -366,7 +371,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
                     authentication.setTryLeft(Constant.tryLimitFinger)
                     authentication.tryLimit = Constant.tryLimitFinger
                     AccountRepository.getInstance(this).savePin(authentication)
-                }else{
+                } else {
                     authentication.setTryLeft(Constant.tryLimit)
                     authentication.tryLimit = Constant.tryLimit
                     AccountRepository.getInstance(this).savePin(authentication)
@@ -381,7 +386,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -476,7 +481,6 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
     }
 
 
-
     fun showDialogError(count: String) {
 
         var text = getString(R.string.msg_login_error, count)
@@ -494,6 +498,11 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
             onResetInfo()
         })
 
+    }
+
+    @OnClick(R.id.menu)
+    fun onBackClick() {
+        finish()
     }
 
     @OnClick(R.id.lnVn)

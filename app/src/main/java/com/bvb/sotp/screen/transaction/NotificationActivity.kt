@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
+import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -54,6 +55,9 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     @BindView(R.id.btn_other)
     lateinit var btnOther: AppCompatTextView
 
+    @BindView(R.id.btnLayout)
+    lateinit var btnLayout: View
+
     lateinit var adapter: NotificationAdapter
 
     var rawData: ArrayList<MobilePushRealmModel> = ArrayList()
@@ -72,6 +76,10 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     override val layoutResId: Int
         get() = R.layout.activity_notification
 
+
+    fun getType(): String? {
+        return intent.getStringExtra("type")
+    }
 
     override fun initViews() {
 
@@ -95,7 +103,9 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
                     if (data.type == "1") {
 
-                        var sessionCode = Utils.getSessionCode(data.detail)
+                        var sessionCode = data.detail
+                        println("----onItemClick---------sessionCode------"+data.detail)
+//                        println("----onItemClick---------detail------"+data.detail)
                         getTokenProcess().execute(sessionCode)
 
                     }
@@ -107,6 +117,13 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         })
 
         recycleView.adapter = adapter
+        var type = getType()
+        if (!TextUtils.isEmpty(type) && type == "other"){
+            btnLayout.visibility = View.GONE
+            currentTab = 4
+            onChangeTab(currentTab)
+
+        }
 
     }
 
@@ -133,7 +150,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
             }
             4 -> {
-                listUser.addAll(rawData.filter { it.type == "3" || it.type == "4" || it.type == "5"})
+                listUser.addAll(rawData.filter { it.type == "3" || it.type == "4" || it.type == "5" })
 
             }
         }
@@ -212,7 +229,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                 btnTransaction.setBackgroundResource(R.drawable.bg_tab_active)
                 btnTransaction.setTextColor(ContextCompat.getColor(this, R.color.white))
                 onChangeTab(3)
-                PendingRequest().execute()
+//                PendingRequest().execute()
 
             }
 
@@ -336,6 +353,8 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         override fun doInBackground(vararg params: String?): String? {
             var result: Boolean? = false
             try {
+                println("----getTokenProcess---------params------"+params[0])
+
                 result = getTransactionDetail(params[0])
             } catch (e: CentagateException) {
                 return e.errorCode.toString()
@@ -386,6 +405,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     var requestInfo: RequestInfo? = null
 
     fun getTransactionDetail(sessionCode: String?): Boolean {
+        println("----getTransactionDetail---------sessionCode------"+sessionCode)
 
         var success = false
         try {

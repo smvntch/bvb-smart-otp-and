@@ -69,11 +69,7 @@
             android:configChanges="locale"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
-        <activity
-            android:name=".screen.selectlanguage.SelectLanguageActivity"
-            android:configChanges="locale"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+
 
         <activity
             android:name=".screen.transaction.OtpAdvanceActivity"

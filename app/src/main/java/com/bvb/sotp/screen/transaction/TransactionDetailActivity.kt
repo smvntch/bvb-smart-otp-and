@@ -98,7 +98,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
     override fun setupViews() {
         loadLang()
         btnApprove.setOnClickListener {
-            var intent = Intent(this, LoginConfirmQrActivity::class.java)
+            var intent = LoginConfirmQrActivity.newMobilePushIntent(this)
             startActivityForResult(intent, 1)
         }
         btnReject.setOnClickListener {

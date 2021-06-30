@@ -21,7 +21,7 @@
         android:background="@drawable/bg_header_new"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/include_toolbar_back" />
+        <include layout="@layout/include_toolbar_notification" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

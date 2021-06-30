@@ -171,11 +171,13 @@ class Utils {
             }
         }
 
-        fun getSessionCode(content: String): String {
+        fun getSessionCode(s: String): String {
             var result = ""
             try {
-                val jObject = JSONObject(content)
-                result = jObject.getString("sessioncode")
+                val ssContent: String = s.substring(s.indexOf("sessioncode=") + 12, s.length)
+                result = ssContent.substring(0, s.indexOf("type"))
+//                val jObject = JSONObject(content)
+//                result = jObject.getString("sessioncode")
             } catch (e: Exception) {
 
             }

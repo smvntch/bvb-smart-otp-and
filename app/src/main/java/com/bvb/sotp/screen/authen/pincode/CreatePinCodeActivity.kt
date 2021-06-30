@@ -1,8 +1,11 @@
 package com.bvb.sotp.screen.authen.pincode
 
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
@@ -24,7 +27,8 @@ import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
 
-class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), CreatePinCodeContract, View.OnClickListener {
+class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), CreatePinCodeContract,
+    View.OnClickListener {
 
 
     @BindView(R.id.img_code_1)
@@ -96,6 +100,13 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     @BindView(R.id.bio_status)
     lateinit var tvBioStatus: RegularTextView
 
+    @BindView(R.id.back)
+    lateinit var mBack: ImageView
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.bio_cancel)
+    lateinit var bioCancel: AppCompatTextView
+
     var count: Int = 0
 
     private var pincode: StringBuilder = StringBuilder()
@@ -152,6 +163,13 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
         }
 
+        mBack.setOnClickListener {
+            reset()
+        }
+
+        bioCancel.setOnClickListener {
+            onIdentifySuccess()
+        }
     }
 
     override fun initLocale() {
@@ -314,7 +332,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     fun onNextClick() {
         if (count == 0) {
             tvLbl.text = getString(R.string.reinput_pincode_message)
-//            langLayout.visibility = View.GONE
+            mBack.visibility = View.VISIBLE
 
             count++
             pin1 = pincode.toString()
@@ -329,25 +347,25 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
                 var pinAuthentication = PinAuthentication()
                 pinAuthentication.tryLimit = Constant.tryLimit
                 pinAuthentication.setTryLeft(Constant.tryLimit)
-                println("--getHid-----------"+ preferenceHelper.getHid())
+                println("--getHid-----------" + preferenceHelper.getHid())
                 pinAuthentication.setPin(pin1, preferenceHelper.getHid())
                 AccountRepository.getInstance(this).savePin(pinAuthentication)
 
                 preferenceHelper.setLastChangePin(System.currentTimeMillis())
 
                 val dialog = DialogHelper(this)
-                dialog.showAlertDialog(getString(R.string.set_pincode_success), false,
-                        Runnable() {
-                            onCloseSuccessClick()
-                        })
+                dialog.showAlertDialog(getString(R.string.set_pincode_success), false, "OK",
+                    Runnable() {
+                        onCloseSuccessClick()
+                    })
             } else {
 
                 val dialog = DialogHelper(this)
 
-                dialog.showAlertDialog(getString(R.string.input_pincode_invalid), false,
-                        Runnable() {
-                            reset()
-                        })
+                dialog.showAlertDialog(getString(R.string.input_pincode_invalid), true,
+                    Runnable() {
+                        reset()
+                    })
 
                 enableKeyboard(false)
             }
@@ -357,7 +375,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     }
 
     fun onIdentifySuccess() {
-
+        println("--onIdentifySuccess-----------------")
         preferenceHelper.setPincodeLoginLastTime(System.currentTimeMillis())
 
         val intent = ActiveAppActivity.newIntent(this)
@@ -369,7 +387,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         if (isAvailableFinger(this)) {
             var dialogHelper = DialogHelper(this)
             dialogHelper.showAlertDialogBiometric(
-                    getString(R.string.biometric_setup_fingerprint),
+                getString(R.string.biometric_setup_fingerprint),
                 {
 
                     showBiometric()
@@ -384,6 +402,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         }
 
     }
+
     fun showBiometric() {
         if (isAvailable(this)) {
 
@@ -398,11 +417,11 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         } else {
             var dialogHelper = DialogHelper(this)
             dialogHelper.showAlertDialog(
-                    getString(R.string.msg_finger_not_available),
-                    true,
-                    Runnable {
-                        onIdentifySuccess()
-                    })
+                getString(R.string.msg_finger_not_available),
+                true,
+                Runnable {
+                    onIdentifySuccess()
+                })
         }
     }
 
@@ -429,14 +448,14 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         onNextClick()
     }
 
-//    @OnClick(R.id.bio_close)
-//    fun onBioCloseClick() {
-//        onIdentifySuccess()
-//    }
+    @OnClick(R.id.bio_cancel)
+    fun onBioCloseClick() {
+        onIdentifySuccess()
+    }
 
     private fun reset() {
         tvLbl.text = getString(R.string.input_pincode_msg)
-//        langLayout.visibility = View.VISIBLE
+        mBack.visibility = View.GONE
 
         changeKeypad()
         count = 0
@@ -463,7 +482,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
             fprint?.setTryLeft(Constant.tryLimitFinger)
 
             AccountRepository.getInstance(this@CreatePinCodeActivity)
-                    .savePin(fprint)
+                .savePin(fprint)
 
             val dialog = DialogHelper(this)
             dialog.showAlertDialog(getString(R.string.active_biometric_msg), false,
@@ -477,9 +496,9 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     }
 
     override fun onAuthenticatedError(
-            fprint: FingerprintAuthentication?,
-            p0: Int,
-            p1: CharSequence?
+        fprint: FingerprintAuthentication?,
+        p0: Int,
+        p1: CharSequence?
     ) {
         tvBioStatus.text = getString(R.string.try_again)
     }

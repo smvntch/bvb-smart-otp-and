@@ -35,6 +35,7 @@ import com.bvb.sotp.screen.authen.login.LoginViewContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
@@ -117,6 +118,9 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     //
     @BindView(R.id.bio_status)
     lateinit var tvBioStatus: RegularTextView
+
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 
     var count: Int = 0
 
@@ -219,6 +223,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     override fun initViews() {
         setAppBarHeight()
 //        bioClose.visibility = View.GONE
+        tvTittle.text = getString(R.string.security)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
@@ -328,7 +333,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -464,7 +469,10 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
 
     }
 
-
+    @OnClick(R.id.menu)
+    fun onBack() {
+        finish()
+    }
 
     @OnClick(R.id.lnVn)
     fun OnVnClick() {

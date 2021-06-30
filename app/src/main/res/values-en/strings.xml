@@ -4,11 +4,11 @@
     <string name="input_pincode_policy">Re enter your PIN Code</string>
     <string name="input_pin_code">Create PIN Code</string>
     <string name="next">Continue</string>
-    <string name="pincode_policy">The numpad layout is randomized</string>
+    <string name="pincode_policy">Note:\nPosition of numbers on keyboard will be changed each time.</string>
     <string name="delete">Remove</string>
     <string name="reinput_pincode">Enter your PIN Code</string>
-    <string name="reinput_pincode_message">Re enter PIN Code</string>
-    <string name="set_pincode_success">Create PIN code successfully</string>
+    <string name="reinput_pincode_message">Re-enter PIN (06 digit number)/</string>
+    <string name="set_pincode_success">Create PIN successfully</string>
     <string name="chuc_mung">Congratulation!</string>
     <string name="incorrect">Failed!</string>
     <string name="username">Username</string>
@@ -16,7 +16,7 @@
     <string name="setting_pincode_success">You have activated your account successfully</string>
     <string name="active">Activate</string>
     <string name="active_app">Add User</string>
-    <string name="input_pincode_msg">Please, enter your PIN Code</string>
+    <string name="input_pincode_msg">Create PIN (06 digit number)</string>
     <string name="login_tittle">Login</string>
     <string name="main_msg_2">"Soft OTP was built by SecureMetric for secure your transaction based on the Policy of The State Bank of Viet Nam. For more detail, Please click here"</string>
     <string name="notif_content">Transaction approval needed</string>
@@ -43,7 +43,7 @@
     <string name="time_expired">Time has expired</string>
     <string name="lock_5_min">Your application will be locked within 5 minutes because you tried enter incorrect PIN 3 times.</string>
     <string name="locked">Your account has locked on Soft OTP.</string>
-    <string name="active_message_failed">Invalid information.</string>
+    <string name="active_message_failed">Incorrect activation information. Please re-enter information</string>
     <string name="login_failed">You have entered incorrect PIN code. Please try again</string>
     <string name="login_success">You have logged in successfully</string>
     <string name="app_verify">Application verification</string>
@@ -63,7 +63,7 @@
     <string name="msg_login_error">You have entered your PIN incorrectly %1$s times. The application will be locked after 5 incorrect PIN entries.</string>
     <string name="otp_time">The <b><font color="#3a5e4c"> OTP </font></b>code is valid within </string>
     <string name="text_active_code_info">Activation code is 6-digits sequence sent to the phone number that registered for Soft OTP.</string>
-    <string name="text_active_warning">Please note: The activation code (6 digits) has been sent to the phone number registered with <b><font color="#3a5e4c">Soft OTP</font></b> service</string>
+    <string name="text_active_warning">Username is the username of BAOVIET Bank Internet Banking\n\nActivation Code includes 06 digits sent via SMS to your phone number which registered for BAOVIET Bank Internet Banking.</string>
 
     <string name="text_tutorial_1">Congratulations! You have activated SOTP successfully.</string>
     <string name="text_tutorial_2">To authenticate transactions: Select the account, enter Transaction code and press "<b><font color="#3a5e4c"> Get the OTP </font></b> code"</string>
@@ -77,9 +77,9 @@
     <string name="second"> seconds</string>
     <string name="app_info">Application information</string>
     <string name="logout">Logout</string>
-    <string name="sync">Sync</string>
+    <string name="sync">Synchronization</string>
     <string name="pincode_match">The New PIN code cannot match the existing PIN code</string>
-    <string name="change_pin_success">Change PIN successfully. Please login again!</string>
+    <string name="change_pin_success">Change PIN successfully</string>
     <string name="tittle_finger_print">FingerPrint</string>
     <string name="tittle_change_pin">Change PIN</string>
     <string name="sync_complete">Sync complete</string>
@@ -127,7 +127,7 @@
     <string name="disable_finger_msg">Do you want to disable biometric on Soft OTP app?</string>
     <string name="msg_finger_not_available">Device is not enable biometric. Please enable to continue your setting.</string>
     <string name="bio_input_fingerprint">Touch ID for Soft OTP </string>
-    <string name="bio_input_desc">Please scan you fingerprint to login</string>
+    <string name="bio_input_desc">Please confirm your fingerprint to login</string>
     <string name="try_again">Please try again</string>
     <string name="lock_fingerprint_msg">Device is not enable biometric. Please enable to continue your setting</string>
     <string name="msg_disable_finger_first">Changing PIN will disable biometric. Do you want to continue?</string>
@@ -136,8 +136,8 @@
     <string name="active_by_username">Activate by reference number</string>
     <string name="enter_active_code">Please enter the Activation Code</string>
     <string name="add_user_offline">Add User Offline</string>
-    <string name="add_user">Add User</string>
-    <string name="active_biometric_msg">Fingerprint registered successfully!/</string>
+    <string name="add_user">List of user</string>
+    <string name="active_biometric_msg">Fingerprint registered successfully!</string>
     <string name="confirm_transaction_qrcode">Confirm transaction – QR code</string>
     <string name="continues_transaction">Are you sure you want to continue this transaction?</string>
     <string name="reject">Cancel</string>
@@ -146,7 +146,7 @@
     <string name="all">All</string>
     <string name="transaction">Transaction</string>
     <string name="other">Others</string>
-    <string name="delete_success">Unregister SOTP for %s successfully</string>
+    <string name="delete_success">Unregister SOTP for %s successfully!</string>
     <string name="refuse">Cancel</string>
     <string name="msg_scan_biometric">Please place your fingerprint on the sensor</string>
     <string name="msg_setup_finger_print_success">Fingerprint registered successfully</string>
@@ -187,4 +187,8 @@
     <string name="invalid_active_code_msg">The activation code is not valid. Please check again.</string>
     <string name="invalid_qr_tittle">Invalid QR Code</string>
     <string name="invalid_qr_msg">Invalid QR Code. Transaction failed.</string>
+    <string name="otp_qr_tittle">Confirm transaction – QR code</string>
+    <string name="qr_invalid">Invalid QR code!</string>
+    <string name="transaction_qr_login_tittle">Confirm transaction – QR code</string>
+    <string name="huy">Cancel</string>
 </resources>
