@@ -276,33 +276,11 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @OnClick(R.id.logout)
     fun onLogoutClick() {
         var dialog = DialogHelper(this@SettingActivity)
-        dialog.showAlertDialogYesNo(getString(R.string.logout_confirm_tit), getString(R.string.logout_confirm), Runnable {
+        dialog.showAlertDialogYN( getString(R.string.logout_confirm),getString(R.string.cancel),getString(R.string.ok), Runnable {
             var intent = Intent(this@SettingActivity, SplashActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
-//            val securityDevice = PinAuthentication()
-//            //set Pin or Password
-//            securityDevice.setPin(preferenceHelper.getPincode())
-//            AccountRepository.getInstance(this).deleteAllAccount(securityDevice, object : CommonListener {
-//                override fun onSuccess() {
-//                    preferenceHelper.setPincode("")
-//                    preferenceHelper.setPincodeFail(0)
-//                    var intent = Intent(this@SettingActivity, SplashActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                }
-//
-//                override fun onError(code: Int?) {
-//                    preferenceHelper.setPincode("")
-//                    preferenceHelper.setPincodeFail(0)
-//                    var intent = Intent(this@SettingActivity, SplashActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                }
-//            })
-
-        }, Runnable {
 
         })
 

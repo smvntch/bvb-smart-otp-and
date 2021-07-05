@@ -198,7 +198,7 @@ class Utils {
                 }
 
                 if (jObject.has("f3")) {
-                    result += "Người thụ hưởng:: " + jObject.getString("f3") + "\n"
+                    result += "Người thụ hưởng: " + jObject.getString("f3") + "\n"
                 }
 
                 if (jObject.has("f4")) {

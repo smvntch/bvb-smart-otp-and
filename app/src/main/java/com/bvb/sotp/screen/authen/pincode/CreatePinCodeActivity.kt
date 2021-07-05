@@ -364,7 +364,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
                 dialog.showAlertDialog(getString(R.string.input_pincode_invalid), true,
                     Runnable() {
-                        reset()
+                        resetConfirmPin()
                     })
 
                 enableKeyboard(false)
@@ -460,6 +460,16 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         changeKeypad()
         count = 0
         pin1 = ""
+        pin2 = ""
+        pincode.delete(0, pincode.length)
+        bindView()
+        enableKeyboard(true)
+
+    }
+
+    private fun resetConfirmPin() {
+        changeKeypad()
+        count = 1
         pin2 = ""
         pincode.delete(0, pincode.length)
         bindView()

@@ -19,7 +19,7 @@
     <string name="setting_pincode_tittle">Cài đặt mã PIN</string>
     <string name="reinput_pincode">Nhập lại mã PIN</string>
     <string name="reinput_pincode_message">Nhập lại PIN</string>
-    <string name="reinput_pincode_message_new">Nhập lại mã PIN mới</string>
+    <string name="reinput_pincode_message_new">Nhập lại PIN mới</string>
     <string name="login_tittle">Đăng nhập </string>
     <string name="main_msg_2">Soft OTP là hệ thống xác thực giao dịch bảo mật được SecureMetric phát triển để đáp ứng tuân thủ theo quy định của Ngân hàng Nhà Nước Việt Nam. Để biết thêm chi tiết, vui lòng xem tại đây</string>
     <string name="notif_content">Xác thực giao dịch Soft OTP</string>
@@ -218,6 +218,7 @@
     <string name="qr_invalid">QR Code không hợp lệ!</string>
     <string name="transaction_qr_login_tittle">Xác thực giao dịch - QR code</string>
     <string name="huy">Hủy</string>
+    <string name="active_app_input_empty">Quý khách chưa nhập thông tin kích hoạt</string>
 </resources>
 
 

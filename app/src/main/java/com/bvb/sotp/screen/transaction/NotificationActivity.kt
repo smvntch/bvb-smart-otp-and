@@ -392,7 +392,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@NotificationActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.mobile_push_invalid_tittle),
                         true,
                         Runnable { })
                 }
