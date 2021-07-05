@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name" translatable="false">BAOVIET eToken</string>
     <string name="input_pincode_msg">Đặt PIN (Mã PIN gồm 06 ký tự số)</string>
     <string name="chuc_mung">Chúc mừng!</string>
@@ -46,29 +47,25 @@
     <string name="setting_app">Cài đặt</string>
 
     <!--    Test Environment-->
-    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
-    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>
-    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>
-    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>
-    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>
+<!--    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
+<!--    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>-->
+<!--    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>-->
+<!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>-->
+<!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>-->
 
     <!--    UAT Environment-->
-<!--    <string name="app_default_soft_cert_url" translatable="false">https://103.56.168.32/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
-<!--    <string name="app_default_web_service_url" translatable="false">https://103.56.168.32/CentagateMobileWS/webresources</string>-->
-<!--    <string name="app_default_auth_url" translatable="false">https://103.56.168.32/v2/CentagateWS/webresources</string>-->
-<!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQB7LADapTOdYci0PPtw2VNGs7mLHNdoA3EBcTLTNC8qg85TyIMNdNuZks8uH3NBPRrc3dsJf03AaOuxk7zE1jHaAsBc//glA4/hIuRW673eB9zk0GNt0XorSYJOXea0lmYiecKYRhj1For8su5ONmuMllv2gQpsSvukEslNicGS000MtA=</string>-->
-<!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBDLct5C/xfm9U4HFdh4Plq0PTQvSAYTRI8t/5f+GjrjF3Cg/wK4AwgYx7KsyGYGRu4xEUj671pY1ukYNWIMDtLswB9t1XzOEgg8nj02pPbMfJszxbYRrNslnYt27IdoH39goCyj6RjIVlLiCKWEY/lNGfMMco3nO6hgjbYzxn6qQ8nLo=</string>-->
+    <string name="app_default_soft_cert_url" translatable="false">https://103.56.168.32/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
+    <string name="app_default_web_service_url" translatable="false">https://103.56.168.32/CentagateMobileWS/webresources</string>
+    <string name="app_default_auth_url" translatable="false">https://103.56.168.32/v2/CentagateWS/webresources</string>
+    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQB7LADapTOdYci0PPtw2VNGs7mLHNdoA3EBcTLTNC8qg85TyIMNdNuZks8uH3NBPRrc3dsJf03AaOuxk7zE1jHaAsBc//glA4/hIuRW673eB9zk0GNt0XorSYJOXea0lmYiecKYRhj1For8su5ONmuMllv2gQpsSvukEslNicGS000MtA=</string>
+    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBDLct5C/xfm9U4HFdh4Plq0PTQvSAYTRI8t/5f+GjrjF3Cg/wK4AwgYx7KsyGYGRu4xEUj671pY1ukYNWIMDtLswB9t1XzOEgg8nj02pPbMfJszxbYRrNslnYt27IdoH39goCyj6RjIVlLiCKWEY/lNGfMMco3nO6hgjbYzxn6qQ8nLo=</string>
 
     <!--    Production-->
     <!--    <string name="app_default_soft_cert_url" translatable="false">https://103.56.168.30/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
     <!--    <string name="app_default_web_service_url" translatable="false">https://103.56.168.30/CentagateMobileWS/webresources</string>-->
     <!--    <string name="app_default_auth_url" translatable="false">https://103.56.168.32/v2/CentagateWS/webresources</string>-->
-    <!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>-->
-    <!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>-->
-
-    <!-- production -->
-    <string name="app_smartotp_external_url" translatable="false">https://smvn.centagate.com.vn/Service1.asmx</string>
-
+    <!--    <string name="app_default_server_verify_public_key" translatable="false"></string>-->
+    <!--    <string name="app_default_server_enc_public_key" translatable="false"></string>-->
 
     <string name="time_expired">Mã giao dịch đã hết hạn</string>
     <string name="error_undefine">Lỗi không xác định</string>
