@@ -157,7 +157,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "1")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch thành công", false,"OK", Runnable {
+                dialogHelper.showAlertDialog("Giao dịch thành công", false, "OK", Runnable {
                     finish()
 
                 })
@@ -222,9 +222,12 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 Utils.saveNoti(getDetail(), "", "2", "2")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch bị từ chối", false, Runnable {
-                    finish()
-                })
+                dialogHelper.showAlertDialog(
+                    getString(R.string.transaction_denied),
+                    true,
+                    Runnable {
+                        finish()
+                    })
 
             } else {
                 runOnUiThread {
@@ -233,9 +236,11 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.qr_invalid),
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }

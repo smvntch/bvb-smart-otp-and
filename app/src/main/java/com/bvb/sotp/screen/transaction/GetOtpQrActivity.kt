@@ -254,6 +254,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 intent.putExtra("detail", data?.details)
                 intent.putExtra("requestId", data?.requestId)
                 startActivity(intent)
+                finish()
 //                var dialogHelper = DialogHelper(this@GetOtpQrActivity)
 //                dialogHelper.showAlertDialogQrTransactionRequest(
 //                        data?.details!!,

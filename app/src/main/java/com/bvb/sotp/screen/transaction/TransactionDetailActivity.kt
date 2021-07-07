@@ -155,7 +155,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
             if (param == 1) {
                 Utils.saveNoti(getDetail(), "", "2", "1")
                 var dialogHelper = DialogHelper(this@TransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch thành công", false, Runnable {
+                dialogHelper.showAlertDialog(getString(R.string.transaction_successful), false, Runnable {
                     finish()
 
                 })
@@ -167,7 +167,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.invalid_mobile_push),
                         true,
                         Runnable { })
                 }
@@ -218,7 +218,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 Utils.saveNoti(getDetail(), "", "2", "2")
 
                 var dialogHelper = DialogHelper(this@TransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch bị từ chối", false, Runnable {
+                dialogHelper.showAlertDialog(getString(R.string.transaction_denied), true, Runnable {
                     finish()
                 })
 
@@ -229,7 +229,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.invalid_mobile_push),
                         true,
                         Runnable { })
                 }

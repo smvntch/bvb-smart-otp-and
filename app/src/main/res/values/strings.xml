@@ -211,11 +211,14 @@
     <string name="invalid_active_code_msg">Mã kích hoạt quý khách vừa nhập không đúng. Vui lòng kiểm tra lại</string>
     <string name="invalid_qr_tittle">Mã QR không hợp lệ</string>
     <string name="invalid_qr_msg">Mã QR không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
-    <string name="otp_qr_tittle">Xác thực bằng QR code</string>
+    <string name="otp_qr_tittle">Xác thực giao dịch - QR code</string>
     <string name="qr_invalid">QR Code không hợp lệ!</string>
     <string name="transaction_qr_login_tittle">Xác thực giao dịch - QR code</string>
     <string name="huy">Hủy</string>
     <string name="active_app_input_empty">Quý khách chưa nhập thông tin kích hoạt</string>
+    <string name="transaction_denied">Giao dịch bị từ chối</string>
+    <string name="transaction_successful">Giao dịch thành công</string>
+    <string name="invalid_mobile_push">Mobile Push không hợp lệ</string>
 </resources>
 
 
