@@ -538,4 +538,11 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     override fun onStartListen() {
         biometricInputLayout.visibility = View.VISIBLE
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mFingerprintConnector != null) {
+            mFingerprintConnector?.stopListening()
+        }
+    }
 }

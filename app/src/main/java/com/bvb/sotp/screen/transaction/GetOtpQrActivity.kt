@@ -129,18 +129,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         finish()
     }
 
-//    @OnClick(R.id.lnVn)
-//    fun OnVnClick() {
-//        changeLang("vi")
-//
-//    }
-//
-//    @OnClick(R.id.lnEng)
-//    fun OnEnClick() {
-//        changeLang("en")
-//
-//    }
-
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
         recreate()

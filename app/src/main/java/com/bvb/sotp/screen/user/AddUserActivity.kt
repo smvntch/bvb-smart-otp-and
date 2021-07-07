@@ -1,5 +1,6 @@
 package com.bvb.sotp.screen.user
 
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,8 @@ import android.os.AsyncTask
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -39,7 +42,6 @@ import com.bvb.sotp.view.RegularTextView
 import com.centagate.module.account.Account
 import com.centagate.module.account.AccountInfo
 import com.centagate.module.authentication.AuthenticationService
-import com.centagate.module.authentication.CrAuthentication
 import com.centagate.module.authentication.RequestInfo
 import com.centagate.module.common.CompleteEntity
 import com.centagate.module.common.Configuration
@@ -53,7 +55,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.List
 
 
 class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
@@ -135,122 +136,49 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         showNotification()
     }
 
+    var dialogMP: Dialog? = null
+
     private fun showNotification() {
         println("--showNotification--------------")
         if (isFinishing) {
             return
         }
-//        transLayout.visibility = View.VISIBLE
-//        transDisplayName.text = preferenceHelper.getName()
-        val dialogHelper = DialogHelper(this)
-        dialogHelper.showAlertDialogBiometric(
-            getString(R.string.msg_have_mobile_push),
-            {
 
-                getTokenProcess().execute()
+        if (dialogMP != null && dialogMP!!.isShowing) {
+            dialogMP!!.dismiss()
+        }
 
-            }, {
-//                Utils.saveNoti("Thông báo chuyển tiền", "", "2", "2")
+        dialogMP = Dialog(this)
+        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogMP!!.setCancelable(false)
+        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
 
-                preferenceHelper.setIsNotification(false)
+        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
+        dialogButton.setOnClickListener {
+            getTokenProcess().execute()
 
-//                getTokenProcess().execute()
+            dialogMP!!.dismiss()
+        }
 
-            }
+        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
+        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
+        msg.text = getString(R.string.msg_have_mobile_push)
+        close.setOnClickListener {
+            preferenceHelper.setIsNotification(false)
+
+            dialogMP!!.dismiss()
+        }
+
+        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialogMP!!.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
         )
-//        transLayout.setOnClickListener {
-//        }
+
+
+        dialogMP!!.show()
 
     }
-
-    fun showTransaction() {
-        var dialogHelper = DialogHelper(this)
-        dialogHelper.showAlertDialogQrTransactionRequest(
-            "data?.details!!",
-            {
-                acceptTransaction()
-
-            },
-            {
-                rejectTransaction()
-
-
-            })
-    }
-
-    fun acceptTransaction() {
-        try {
-            var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
-
-            var account =
-                AccountRepository.getInstance(this).findAccountById(preferenceHelper.getAccountId())
-            var crAuthentication = CrAuthentication()
-            var test = crAuthentication.approve(
-                hid,
-                getDeviceName().toString(),
-                true,
-                account!!,
-                requestInfo?.requestId!!,
-                "",
-                "",
-                securityDevice,
-                requestInfo?.randomString!!
-            )
-            System.out.println(test);
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            throw e
-        }
-
-    }
-
-
-    fun rejectTransaction() {
-        try {
-            var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
-            var account =
-                AccountRepository.getInstance(this).accounts.value?.get(0)
-
-            var authenticationService = AuthenticationService()
-            authenticationService.rejectRequest(
-                hid,
-                account?.accountInfo!!,
-                AccountRepository.getInstance(this).deviceInfoData.value!!,
-                requestInfo?.requestId!!,
-                "105.795672",
-                "21.029316",
-                true,
-                securityDevice
-            )
-
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            throw e
-        }
-
-    }
-
-    internal inner class UpdateToken : AsyncTask<Int, Void, Int>() {
-        override fun doInBackground(vararg params: Int?): Int {
-            var result = 0
-            try {
-                result = updateToken()
-            } catch (e: CentagateException) {
-                return e.errorCode
-            } catch (e: Exception) {
-                return 123
-            }
-
-            return result
-        }
-
-        override fun onPostExecute(param: Int?) {
-
-        }
-    }
-
 
     fun updateToken(): Int {
         var result = 0

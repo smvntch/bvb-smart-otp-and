@@ -23,6 +23,7 @@ import com.bvb.sotp.repository.CommonListener
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.setting.info.ContactActivity
 import com.bvb.sotp.screen.transaction.GetOtpQrActivity
+import com.bvb.sotp.screen.transaction.NotificationActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
@@ -244,13 +245,6 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
 //        bioClose.visibility = View.GONE
         var authentication = AccountRepository.getInstance(this).authentication
-
-        if (authentication is FingerprintAuthentication && Utils.isAvailable(this)) {
-            biometricZone.visibility = View.VISIBLE
-        } else {
-            biometricZone.visibility = View.GONE
-
-        }
 
         num1.setOnClickListener(this)
         num2.setOnClickListener(this)
@@ -547,6 +541,13 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             onResetInfo()
         })
 
+    }
+
+    @OnClick(R.id.noti)
+    fun onNotiClick() {
+        var intent = Intent(this, NotificationActivity::class.java)
+        intent.putExtra("type","other")
+        startActivity(intent)
     }
 
     @OnClick(R.id.lnVn)

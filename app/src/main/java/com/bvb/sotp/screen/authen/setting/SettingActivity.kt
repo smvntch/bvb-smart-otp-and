@@ -24,6 +24,7 @@ import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
 import com.bvb.sotp.screen.authen.security.SecurityActivity
 import com.bvb.sotp.screen.authen.setting.info.InfoActivity
 import com.bvb.sotp.screen.splash.SplashActivity
+import com.bvb.sotp.screen.transaction.NotificationActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LogUtils
 import com.bvb.sotp.view.RegularBoldTextView
@@ -50,8 +51,6 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @BindView(R.id.tv_support)
     lateinit var support: RegularTextView
 
-    @BindView(R.id.toolbar)
-    lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
 
     override fun initPresenter() {
@@ -67,6 +66,12 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @OnClick(R.id.menu)
     fun onBackClick() {
         finish()
+    }
+
+    @OnClick(R.id.noti)
+    fun onNotiClick() {
+        var intent = Intent(this, NotificationActivity::class.java)
+        startActivityForResult(intent, 3)
     }
 
     override fun onResume() {
