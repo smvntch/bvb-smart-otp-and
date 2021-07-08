@@ -281,7 +281,7 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @OnClick(R.id.logout)
     fun onLogoutClick() {
         var dialog = DialogHelper(this@SettingActivity)
-        dialog.showAlertDialogYN( getString(R.string.logout_confirm),getString(R.string.cancel),getString(R.string.ok), Runnable {
+        dialog.showAlertDialogYN( getString(R.string.logout_confirm),getString(R.string.ok),getString(R.string.cancel), Runnable {
             var intent = Intent(this@SettingActivity, SplashActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
