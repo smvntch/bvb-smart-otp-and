@@ -16,7 +16,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -71,7 +71,7 @@ dependencies {
 //    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 //    implementation project(':centagateSdk')
 //    implementation 'commons-codec:1.10'
-    implementation files('libs/centagate-release_20200817.aar')
+    implementation files('libs/centagate-release-20210706.aar')
 
             implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
     implementation 'org.greenrobot:eventbus:3.2.0'
