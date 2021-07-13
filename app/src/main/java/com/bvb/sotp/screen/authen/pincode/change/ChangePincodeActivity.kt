@@ -415,7 +415,11 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
 
     @OnClick(R.id.menu)
     fun onBack() {
-        finish()
+        if (count == 0){
+            finish()
+        }else{
+            reset0()
+        }
     }
 
 
@@ -430,7 +434,7 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
     }
 
     private fun reset0() {
-
+        tvLbl.text = getString(R.string.input_pin_code_new)
         initRandomKeyPad()
         count = 0
         pin1 = ""

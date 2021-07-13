@@ -19,7 +19,7 @@
     <!--</style>-->
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
-<!--        <item name="android:background">@mipmap/bg_bvb_splash</item>-->
+<!--        <item name="android:src">@mipmap/bg_bvb_splash</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">

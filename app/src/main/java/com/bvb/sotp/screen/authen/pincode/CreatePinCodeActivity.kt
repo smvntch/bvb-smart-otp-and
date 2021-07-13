@@ -251,6 +251,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
             bindView()
         }
         if (pincode.length == 6) {
+
             onNextClick()
         }
 
@@ -333,7 +334,6 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         if (count == 0) {
             tvLbl.text = getString(R.string.reinput_pincode_message)
             mBack.visibility = View.VISIBLE
-
             count++
             pin1 = pincode.toString()
             pincode.delete(0, pincode.length)
@@ -342,6 +342,8 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
             tvNext.isEnabled = false
 
         } else {
+            enableKeyboard(false)
+
             pin2 = pincode.toString()
             if (pin1 == pin2) {
                 var pinAuthentication = PinAuthentication()
@@ -367,7 +369,6 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
                         resetConfirmPin()
                     })
 
-                enableKeyboard(false)
             }
 
         }

@@ -309,7 +309,7 @@ class DialogHelper(private var context: Context) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dialog_biometric_layout)
+        dialog.setContentView(R.layout.dialog_confirm_layout)
 
         val dialogButton = dialog.findViewById(R.id.bio_next) as AppCompatButton
         if (!TextUtils.isEmpty(okText)){

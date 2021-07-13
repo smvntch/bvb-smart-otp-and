@@ -210,7 +210,7 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
 
     override fun initViews() {
         setAppBarHeight()
-        tvTittle.text = getString(R.string.security)
+        tvTittle.text = getString(R.string.tittle_change_pin)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
