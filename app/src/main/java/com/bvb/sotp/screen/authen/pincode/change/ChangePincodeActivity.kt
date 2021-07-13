@@ -16,6 +16,7 @@ import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
+import com.bvb.sotp.screen.authen.security.SecurityActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
@@ -375,10 +376,12 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
                 val dialog = DialogHelper(this)
                 dialog.showAlertDialog(getString(R.string.change_pin_success), false,
                     Runnable {
+                        var intent =
+                            Intent(this@ChangePincodeActivity, SecurityActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
                         finish()
-//                            var intent = Intent(this@ChangePincodeActivity, LoginActivity::class.java)
-//                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                            startActivity(intent)
                     })
             } else {
 
@@ -415,9 +418,9 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
 
     @OnClick(R.id.menu)
     fun onBack() {
-        if (count == 0){
+        if (count == 0) {
             finish()
-        }else{
+        } else {
             reset0()
         }
     }

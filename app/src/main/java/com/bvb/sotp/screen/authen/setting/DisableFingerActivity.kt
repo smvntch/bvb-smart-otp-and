@@ -272,11 +272,16 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
 
+        val dialog = DialogHelper(this)
+        dialog.showAlertDialog(getString(R.string.msg_disable_finger_success), false,
+            Runnable() {
+                (this.application as PeepApp).mLastPause = System.currentTimeMillis()
+                finish()
+            })
 //        if (!isValidate()) {
 //            val intent = Intent(this@DisableFingerActivity, AddUserActivity::class.java)
 //            startActivity(intent)
 //        }
-        finish()
     }
 
     override fun onBackPressed() {

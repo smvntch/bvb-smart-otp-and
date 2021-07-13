@@ -402,7 +402,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         }
     }
 
-    var requestInfo: RequestInfo? = null
+//    var requestInfo: RequestInfo? = null
 
     fun getTransactionDetail(sessionCode: String?): Boolean {
         println("----getTransactionDetail---------sessionCode------"+sessionCode)

@@ -195,4 +195,5 @@
     <string name="transaction_denied">Transaction denied</string>
     <string name="transaction_successful">Transaction successful</string>
     <string name="invalid_mobile_push">Invalid Mobile Push</string>
+    <string name="msg_disable_finger_success">Fingerprint/Face ID unregistered successfully</string>
 </resources>

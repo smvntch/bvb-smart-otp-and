@@ -316,11 +316,11 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         tvBioCancel.setOnClickListener {
             biometricInputLayout.visibility = View.GONE
-            isChangeToPin = true
-            var authentication = AccountRepository.getInstance(this).authentication
-            authentication.setTryLeft(Constant.tryLimit)
-            authentication.tryLimit = Constant.tryLimit
-            AccountRepository.getInstance(this).savePin(authentication)
+//            isChangeToPin = true
+//            var authentication = AccountRepository.getInstance(this).authentication
+//            authentication.setTryLeft(Constant.tryLimit)
+//            authentication.tryLimit = Constant.tryLimit
+//            AccountRepository.getInstance(this).savePin(authentication)
         }
 
         var accounts = AccountRepository.getInstance(this).accounts.value

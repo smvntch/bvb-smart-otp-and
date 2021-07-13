@@ -219,6 +219,7 @@
     <string name="transaction_denied">Giao dịch bị từ chối</string>
     <string name="transaction_successful">Giao dịch thành công</string>
     <string name="invalid_mobile_push">Mobile Push không hợp lệ</string>
+    <string name="msg_disable_finger_success">Đã hủy cài đặt vân tay/faceID thành công</string>
 </resources>
 
 

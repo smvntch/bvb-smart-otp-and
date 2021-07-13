@@ -129,14 +129,14 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: PushEvent) {
-        println("--onMessageEvent--------------")
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    fun onMessageEvent(event: PushEvent) {
+//        println("--onMessageEvent--------------")
+//
+//        showNotification()
+//    }
 
-        showNotification()
-    }
-
-    var dialogMP: Dialog? = null
+//    var dialogMP: Dialog? = null
 
     private fun showNotification() {
         println("--showNotification--------------")
@@ -508,52 +508,43 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     }
 
-    public override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
 
-    public override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
-
-    var requestInfo: RequestInfo? = null
-
-    fun getTransactionDetail(): Boolean {
-        var success = false
-        try {
-            var message = ""
-            var accountInfo: AccountInfo
-            var authenticationService = AuthenticationService()
-            val securityDevice = AccountRepository.getInstance(this).authentication
-
-
-            if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {
-                var account = AccountRepository.getInstance(this).onlineAccounts[0]
-                accountInfo = account.accountInfo
-
-                println("------------------getSession----" + preferenceHelper.getSession())
-                requestInfo = authenticationService.getRequestInfo(
-                    preferenceHelper.getHid(),
-                    preferenceHelper.getSession(),
-                    true,
-                    accountInfo,
-                    securityDevice
-                )
-                message = requestInfo?.details!!
-                println("----------------------" + message)
-            }
-
-            success = false
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            throw e
-        }
-
-
-        return success
-    }
+//    var requestInfo: RequestInfo? = null
+//
+//    fun getTransactionDetail(): Boolean {
+//        var success = false
+//        try {
+//            var message = ""
+//            var accountInfo: AccountInfo
+//            var authenticationService = AuthenticationService()
+//            val securityDevice = AccountRepository.getInstance(this).authentication
+//
+//
+//            if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {
+//                var account = AccountRepository.getInstance(this).onlineAccounts[0]
+//                accountInfo = account.accountInfo
+//
+//                println("------------------getSession----" + preferenceHelper.getSession())
+//                requestInfo = authenticationService.getRequestInfo(
+//                    preferenceHelper.getHid(),
+//                    preferenceHelper.getSession(),
+//                    true,
+//                    accountInfo,
+//                    securityDevice
+//                )
+//                message = requestInfo?.details!!
+//                println("----------------------" + message)
+//            }
+//
+//            success = false
+//        } catch (e: java.lang.Exception) {
+//            e.printStackTrace()
+//            throw e
+//        }
+//
+//
+//        return success
+//    }
 
     internal inner class getTokenProcess : AsyncTask<Int, Void, String?>() {
 
