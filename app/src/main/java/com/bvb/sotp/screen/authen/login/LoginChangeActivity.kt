@@ -259,7 +259,7 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
         val intent = Intent(this@LoginChangeActivity, ChangePincodeActivity::class.java)
         startActivity(intent)
 //        }
-//        finish()
+        finish()
     }
 
     override fun onBackPressed() {

@@ -507,7 +507,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@MvpActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.transaction_failed),
+                        getString(R.string.mobile_push_invalid_tittle),
                         true,
                         Runnable { })
                 }

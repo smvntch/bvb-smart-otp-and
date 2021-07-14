@@ -204,7 +204,7 @@
     <string name="fingerprint_not_set_msg">Quý khách chưa cài đặt đăng nhập bằng vân tay cho ứng dụng</string>
     <string name="mobile_push">Thông báo Mobile Push</string>
     <string name="mobile_push_msg">Bạn có 1 Mobile Push mới. Click để xem chi tiết</string>
-    <string name="mobile_push_invalid_tittle">Mobile push không hợp lệ</string>
+    <string name="mobile_push_invalid_tittle">Mobile Push không hợp lệ</string>
     <string name="mobile_push_invalid_msg">Mobile Push không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
     <string name="transaction_failed">Giao dịch không hợp lệ</string>
     <string name="invalid_active_code_tittle">Sai mã kích hoạt</string>
