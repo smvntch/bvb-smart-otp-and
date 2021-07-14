@@ -122,7 +122,7 @@
     <string name="msg_sync_error">An error occurred during processing.</string>
     <string name="msg_force_change_pin_final">Your PIN is expired. Please press Change PIN to continue</string>
     <string name="setting_biometric">Biometrics settings</string>
-    <string name="biometric_setup_fingerprint">Do you want to set up your biometrics for Soft OTP?</string>
+    <string name="biometric_setup_fingerprint">Do you want to set up your biometrics?</string>
     <string name="agree">Agree</string>
     <string name="disable_finger_msg">Do you want to disable biometric on Soft OTP app?</string>
     <string name="msg_finger_not_available">Device is not enable biometric. Please enable to continue your setting.</string>
