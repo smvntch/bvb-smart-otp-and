@@ -159,7 +159,7 @@ class Utils {
             }
         }
 
-        fun saveNotiOther(type: String) {
+        fun saveNotiOther(type: String, code: String?) {
             val realm = Realm.getDefaultInstance()
             val id = PeepApp.mobilePushPrimaryKey!!.getAndIncrement()
             realm.executeTransactionAsync { realm1: Realm ->
@@ -168,6 +168,7 @@ class Utils {
                 )
                 model.date = System.currentTimeMillis()
                 model.type = type
+                model.detail = code
             }
         }
 
@@ -319,15 +320,19 @@ class Utils {
                 }
 
                 if (jObject.has("f33")) {
-                    result += context.getString(R.string.total_amount_transaction) + " "+jObject.getString(
+                    result += context.getString(R.string.total_amount_transaction) + " " + jObject.getString(
                         "f33"
                     ) + "\n"
                 }
                 if (jObject.has("f34")) {
-                    result += context.getString(R.string.total_amount_money) + " "+ jObject.getString("f34") + "\n"
+                    result += context.getString(R.string.total_amount_money) + " " + jObject.getString(
+                        "f34"
+                    ) + "\n"
                 }
                 if (jObject.has("f35")) {
-                    result += context.getString(R.string.transaction_date) + " "+ jObject.getString("f35") + "\n"
+                    result += context.getString(R.string.transaction_date) + " " + jObject.getString(
+                        "f35"
+                    ) + "\n"
                 }
 
             } catch (e: Exception) {

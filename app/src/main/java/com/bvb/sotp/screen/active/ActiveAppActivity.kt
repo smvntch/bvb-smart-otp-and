@@ -484,7 +484,7 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
                         onActiveSuccess()
                     })
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE,"")
 
                 runOnUiThread {
                     ErrorUtils().activeErrorHandle(param!!, this@ActiveAppActivity)

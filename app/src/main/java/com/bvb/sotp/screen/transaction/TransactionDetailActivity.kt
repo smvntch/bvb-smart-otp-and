@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
+import com.bvb.sotp.Constant
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.helper.PreferenceHelper
@@ -162,8 +163,9 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 })
 
             } else {
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
 
-                Utils.saveNoti(getDetail(), "", "2", "3")
+//                Utils.saveNoti(getDetail(), "", "2", "3")
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
@@ -224,7 +226,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
             } else {
 //                saveNoti("","3")
-                Utils.saveNoti(getDetail(), "", "2", "3")
+//                Utils.saveNoti(getDetail(), "", "2", "3")
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)

@@ -213,7 +213,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
 
-
     internal inner class GetSessionProcess : AsyncTask<Int, Void, Int>() {
         override fun doInBackground(vararg params: Int?): Int {
             println("-----onPostExecute----------------")
@@ -256,22 +255,9 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 intent.putExtra("requestId", data?.requestId)
                 startActivity(intent)
                 finish()
-//                var dialogHelper = DialogHelper(this@GetOtpQrActivity)
-//                dialogHelper.showAlertDialogQrTransactionRequest(
-//                        data?.details!!,
-//                        Runnable {
-//                            AcceptTransactionProcess().execute()
-//                            resumeQrScan()
-////                            showBiometric()
-//                        },
-//                        Runnable {
-//                            RejectTransactionProcess().execute()
-//                            resumeQrScan()
-//
-//                        })
 
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)

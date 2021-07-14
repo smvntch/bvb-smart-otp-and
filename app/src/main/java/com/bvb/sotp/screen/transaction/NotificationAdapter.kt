@@ -46,8 +46,8 @@ class NotificationAdapter(
 
         if (holder is ItemViewHolder) {
             holder.bind(holder.itemView.context, movie)
-            println("---detail---------------"+movie.detail)
-            println("----sessionPending--------------"+sessionPending)
+            println("---detail---------------" + movie.detail)
+            println("----sessionPending--------------" + sessionPending)
 
             if (!TextUtils.isEmpty(movie.detail) && movie.detail.equals(sessionPending)) {
                 holder.itemView.setBackgroundColor(Color.parseColor("#FFD236"))
@@ -101,13 +101,24 @@ class ItemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             content?.text = context.getString(R.string.mobile_push_msg)
         } else if (model.type == Constant.NOTI_TYPE_INVALID_MOBILE_PUSH) {
             tittle?.text = context.getString(R.string.mobile_push_invalid_tittle)
-            content?.text = context.getString(R.string.mobile_push_invalid_msg)
+            if (!TextUtils.isEmpty(model.detail)) {
+                content?.text =
+                    context.getString(R.string.mobile_push_invalid_msg) + "(" + model.detail + ")"
+            } else {
+                content?.text = context.getString(R.string.mobile_push_invalid_msg)
+            }
         } else if (model.type == Constant.NOTI_TYPE_INVALID_ACTIVE_CODE) {
             tittle?.text = context.getString(R.string.invalid_active_code_tittle)
             content?.text = context.getString(R.string.invalid_active_code_msg)
         } else if (model.type == Constant.NOTI_TYPE_INVALID_QR) {
             tittle?.text = context.getString(R.string.invalid_qr_tittle)
-            content?.text = context.getString(R.string.invalid_qr_msg)
+            if (!TextUtils.isEmpty(model.detail)) {
+                content?.text =
+                    context.getString(R.string.invalid_qr_msg) + "(" + model.detail + ")"
+
+            } else {
+                content?.text = context.getString(R.string.invalid_qr_msg)
+            }
         }
 
 

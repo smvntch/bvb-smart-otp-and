@@ -508,7 +508,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 //
 //                    })
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH, param)
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@MvpActivity)

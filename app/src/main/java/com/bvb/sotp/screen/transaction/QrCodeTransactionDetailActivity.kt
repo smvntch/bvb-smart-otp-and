@@ -153,19 +153,22 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
             progressDialog!!.dismiss()
             if (param == 1) {
-//                saveNoti("","1")
                 Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "1")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog(getString(R.string.transaction_successful), false, "OK", Runnable {
-                    finish()
+                dialogHelper.showAlertDialog(
+                    getString(R.string.transaction_successful),
+                    false,
+                    "OK",
+                    Runnable {
+                        finish()
 
-                })
+                    })
 
             } else {
                 runOnUiThread {
-//                    saveNoti("","3")
-                    Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "3")
+//                    Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "3")
+                    Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
@@ -231,9 +234,11 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     })
 
             } else {
+
                 runOnUiThread {
 //                    saveNoti("","3")
-                    Utils.saveNoti(getDetail(), "", "2", "3")
+//                    Utils.saveNoti(getDetail(), "", "2", "3")
+                    Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(

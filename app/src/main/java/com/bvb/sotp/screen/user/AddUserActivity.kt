@@ -593,7 +593,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 //
 //                    })
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@AddUserActivity)
