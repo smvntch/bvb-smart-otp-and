@@ -76,7 +76,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 //
 //            //Set above layout params to your layout which was getting cut because of notch
 //            topbar.setLayoutParams(topbarlp)
-        }else{
+        } else {
             var height = getStatusBarHeight() + dpToPx(56)
             appBarLayout.layoutParams =
                 CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
@@ -110,15 +110,15 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
     }
 
     var sessionTimer = Observable.interval(1, TimeUnit.SECONDS)
-            .take(DISCONNECT_TIMEOUT)
-            .observeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                val app = application as PeepApp
-                if (System.currentTimeMillis() - app.mLastPause >= DISCONNECT_TIMEOUT) {
-                    showLogin()
-                }
+        .take(DISCONNECT_TIMEOUT)
+        .observeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+            val app = application as PeepApp
+            if (System.currentTimeMillis() - app.mLastPause >= DISCONNECT_TIMEOUT) {
+                showLogin()
             }
+        }
 
     fun resetSessionTimer() {
 //
@@ -172,8 +172,8 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
     fun dpToPx(dp: Int): Int {
         val density = resources
-                .displayMetrics
-                .density
+            .displayMetrics
+            .density
         return Math.round(dp.toFloat() * density)
     }
 
@@ -324,9 +324,11 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
     fun hideSoftKeyboard(activity: Activity) {
         if (currentFocus != null) {
             val inputMethodManager = getSystemService(
-                    Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                Activity.INPUT_METHOD_SERVICE
+            ) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
-                    currentFocus?.windowToken, 0)
+                currentFocus?.windowToken, 0
+            )
         }
 
     }
@@ -368,7 +370,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
         return false
     }
 
-     fun getDeviceName(): String? {
+    fun getDeviceName(): String? {
         val manufacturer = Build.MANUFACTURER
         val model = Build.MODEL
         return if (model.startsWith(manufacturer)) {
@@ -409,6 +411,12 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
         println("--onMessageEvent--------------")
 
         showNotification()
+
+        onNotification()
+    }
+
+    open fun onNotification() {
+
     }
 
     var dialogMP: Dialog? = null
@@ -456,7 +464,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
     }
 
     internal inner class getTokenProcess : AsyncTask<Int, Void, String?>() {
-
+        var mProgressDialog: ProgressDialog? = null
         override fun doInBackground(vararg params: Int?): String? {
             var result: Boolean? = false
             try {
@@ -470,20 +478,18 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
             return "1"
         }
 
-        var progressDialog: ProgressDialog? = null
-
 
         override fun onPreExecute() {
             super.onPreExecute()
-            progressDialog = ProgressDialog(this@MvpActivity)
-            progressDialog!!.setTitle("")
-            progressDialog!!.setCancelable(false)
-            progressDialog!!.show()
+            mProgressDialog = ProgressDialog(this@MvpActivity)
+            mProgressDialog!!.setTitle("")
+            mProgressDialog!!.setCancelable(false)
+            mProgressDialog!!.show()
         }
 
         override fun onPostExecute(param: String?) {
             preferenceHelper.setIsNotification(false)
-            progressDialog!!.dismiss()
+            mProgressDialog!!.dismiss()
             if (param == "1") {
                 var intent =
                     Intent(this@MvpActivity, TransactionDetailActivity::class.java)

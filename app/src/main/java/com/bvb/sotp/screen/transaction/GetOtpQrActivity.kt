@@ -2,6 +2,7 @@ package com.bvb.sotp.screen.transaction
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.AsyncTask
@@ -237,7 +238,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         override fun onPreExecute() {
             super.onPreExecute()
             println("-----onPreExecute----------------")
-            progressDialog = SpotsDialog.Builder().setContext(this@GetOtpQrActivity).build()
+            progressDialog = ProgressDialog(this@GetOtpQrActivity)
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()

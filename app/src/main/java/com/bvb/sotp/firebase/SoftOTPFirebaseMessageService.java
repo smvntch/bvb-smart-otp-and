@@ -95,6 +95,7 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
     }
 
     void saveNoti(String message) {
+        System.out.println("----saveNoti---------"+message);
         Realm realm = Realm.getDefaultInstance();
         long id = PeepApp.Companion.getMobilePushPrimaryKey().getAndIncrement();
 

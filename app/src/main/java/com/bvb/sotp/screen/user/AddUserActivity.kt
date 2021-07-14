@@ -598,7 +598,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@AddUserActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.transaction_failed),
+                        getString(R.string.mobile_push_invalid_tittle),
                         true,
                         Runnable { })
                 }

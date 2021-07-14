@@ -1,6 +1,7 @@
 package com.bvb.sotp.screen.transaction
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.text.TextUtils
@@ -10,6 +11,7 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
+import com.bvb.sotp.helper.PreferenceHelper
 import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginConfirmQrActivity
@@ -119,6 +121,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
 
     internal inner class AcceptTransactionProcess : AsyncTask<Int, Void, Int>() {
+        var progressDialog: AlertDialog? = null
+
         override fun doInBackground(vararg params: Int?): Int {
             println("-----onPostExecute----------------")
 
@@ -135,14 +139,10 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
             return 1
         }
 
-        var progressDialog: AlertDialog? = null
-
-
         override fun onPreExecute() {
             super.onPreExecute()
             println("-----onPreExecute----------------")
-            progressDialog =
-                SpotsDialog.Builder().setContext(this@TransactionDetailActivity).build()
+            progressDialog = ProgressDialog(this@TransactionDetailActivity)
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()
@@ -150,7 +150,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         override fun onPostExecute(param: Int?) {
             println("-----onPostExecute----------------")
-
+            val preferenceHelper = PreferenceHelper(applicationContext)
+            preferenceHelper.setSessionPending("")
             progressDialog!!.dismiss()
             if (param == 1) {
                 Utils.saveNoti(getDetail(), "", "2", "1")
@@ -180,6 +181,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
 
     internal inner class RejectTransactionProcess : AsyncTask<Int, Void, Int>() {
+        var progressDialog: AlertDialog? = null
+
         override fun doInBackground(vararg params: Int?): Int {
             println("-----onPostExecute----------------")
 
@@ -196,14 +199,10 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
             return 1
         }
 
-        var progressDialog: AlertDialog? = null
-
-
         override fun onPreExecute() {
             super.onPreExecute()
             println("-----onPreExecute----------------")
-            progressDialog =
-                SpotsDialog.Builder().setContext(this@TransactionDetailActivity).build()
+            progressDialog = ProgressDialog(this@TransactionDetailActivity)
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()
@@ -211,8 +210,9 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         override fun onPostExecute(param: Int?) {
             println("-----onPostExecute----------------")
-
-            progressDialog!!.dismiss()
+            val preferenceHelper = PreferenceHelper(applicationContext)
+            preferenceHelper.setSessionPending("")
+            progressDialog?.dismiss()
             if (param == 1) {
 //                saveNoti("","2")
                 Utils.saveNoti(getDetail(), "", "2", "2")
@@ -285,6 +285,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 securityDevice,
                 getRandomString()!!
             )
+
             System.out.println(test);
         } catch (e: java.lang.Exception) {
             e.printStackTrace()

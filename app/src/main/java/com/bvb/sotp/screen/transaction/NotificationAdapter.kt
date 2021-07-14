@@ -2,6 +2,8 @@ package com.bvb.sotp.screen.transaction
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ class NotificationAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var pos = 0
+    var sessionPending = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 1) {
             val inflater = LayoutInflater.from(parent.context)
@@ -43,7 +46,14 @@ class NotificationAdapter(
 
         if (holder is ItemViewHolder) {
             holder.bind(holder.itemView.context, movie)
+            println("---detail---------------"+movie.detail)
+            println("----sessionPending--------------"+sessionPending)
 
+            if (!TextUtils.isEmpty(movie.detail) && movie.detail.equals(sessionPending)) {
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFD236"))
+            } else {
+                holder.itemView.setBackgroundColor(Color.WHITE)
+            }
 
         } else if (holder is TransactionItemViewHolder) {
             holder.bind(holder.itemView.context, movie)

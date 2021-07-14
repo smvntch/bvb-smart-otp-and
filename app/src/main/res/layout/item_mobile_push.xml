@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="@dimen/_12sdp"
+    android:background="@color/white"
     android:paddingRight="@dimen/_12sdp">
 
     <androidx.appcompat.widget.AppCompatTextView
