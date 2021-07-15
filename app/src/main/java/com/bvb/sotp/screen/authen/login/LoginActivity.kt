@@ -628,7 +628,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     fun onCheckStatus() {
         var list = AccountRepository.getInstance(this).accounts.value
-        if (list?.size == 0) {
+        if (list?.isNullOrEmpty() == true) {
             return
         }
 
@@ -639,7 +639,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         val meMap = HashMap<Int, Int>()
 
-        for (i in 0 until list?.size!!) {
+        for (i in 0 until list.size) {
 
             AccountRepository.getInstance(application)
                 .syncOtp(hid, list[i], securityDevice, object :
