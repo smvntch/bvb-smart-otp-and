@@ -513,7 +513,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@MvpActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.mobile_push_invalid_tittle),
+                        getString(R.string.mobile_push_invalid_tittle)+ " (" + param.toString() + ")",
                         true,
                         Runnable { })
                 }

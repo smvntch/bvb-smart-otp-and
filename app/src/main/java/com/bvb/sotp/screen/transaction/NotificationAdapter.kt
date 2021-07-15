@@ -100,25 +100,30 @@ class ItemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             tittle?.text = context.getString(R.string.mobile_push)
             content?.text = context.getString(R.string.mobile_push_msg)
         } else if (model.type == Constant.NOTI_TYPE_INVALID_MOBILE_PUSH) {
-            tittle?.text = context.getString(R.string.mobile_push_invalid_tittle)
             if (!TextUtils.isEmpty(model.detail)) {
-                content?.text =
-                    context.getString(R.string.mobile_push_invalid_msg) + "(" + model.detail + ")"
+                tittle?.text =
+                    context.getString(R.string.mobile_push_invalid_tittle) + " (" + model.detail + ")"
             } else {
-                content?.text = context.getString(R.string.mobile_push_invalid_msg)
+                tittle?.text =
+                    context.getString(R.string.mobile_push_invalid_tittle)
             }
+            content?.text = context.getString(R.string.mobile_push_invalid_msg)
+
         } else if (model.type == Constant.NOTI_TYPE_INVALID_ACTIVE_CODE) {
             tittle?.text = context.getString(R.string.invalid_active_code_tittle)
             content?.text = context.getString(R.string.invalid_active_code_msg)
         } else if (model.type == Constant.NOTI_TYPE_INVALID_QR) {
-            tittle?.text = context.getString(R.string.invalid_qr_tittle)
+
             if (!TextUtils.isEmpty(model.detail)) {
-                content?.text =
-                    context.getString(R.string.invalid_qr_msg) + "(" + model.detail + ")"
+                tittle?.text =
+                    context.getString(R.string.invalid_qr_tittle) + " (" + model.detail + ")"
 
             } else {
-                content?.text = context.getString(R.string.invalid_qr_msg)
+                tittle?.text =
+                    context.getString(R.string.invalid_qr_tittle)
             }
+            content?.text = context.getString(R.string.invalid_qr_msg)
+
         }
 
 

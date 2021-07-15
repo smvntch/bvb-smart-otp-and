@@ -191,7 +191,7 @@
     <string name="qr_invalid">Invalid QR code!</string>
     <string name="transaction_qr_login_tittle">Confirm transaction – QR code</string>
     <string name="huy">Cancel</string>
-    <string name="active_app_input_empty">Quý khách chưa nhập thông tin kích hoạt</string>
+    <string name="active_app_input_empty">You must input all fields</string>
     <string name="transaction_denied">Transaction denied</string>
     <string name="transaction_successful">Transaction successful</string>
     <string name="invalid_mobile_push">Invalid Mobile Push</string>

@@ -262,7 +262,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.qr_invalid),
+                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
                         true,
                         Runnable {
                             resumeQrScan()

@@ -172,7 +172,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.invalid_qr_tittle),
+                        getString(R.string.invalid_qr_tittle)+ " (" + param.toString() + ")",
                         true,
                         getString(R.string.close),
                         Runnable {
@@ -242,7 +242,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.qr_invalid),
+                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
                         true,
                         Runnable {
                             finish()

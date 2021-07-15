@@ -170,7 +170,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.invalid_mobile_push),
+                        getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
                         Runnable { })
                 }
@@ -232,7 +232,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.invalid_mobile_push),
+                        getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
                         Runnable { })
                 }
