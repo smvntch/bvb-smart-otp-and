@@ -71,7 +71,7 @@ dependencies {
 //    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 //    implementation project(':centagateSdk')
 //    implementation 'commons-codec:1.10'
-    implementation files('libs/centagate-release-20210706.aar')
+    implementation files('libs/centagate-release-20210716.aar')
 
             implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
     implementation 'org.greenrobot:eventbus:3.2.0'
