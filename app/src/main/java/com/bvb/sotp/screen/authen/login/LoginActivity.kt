@@ -616,7 +616,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             biometricInputLayout.visibility = View.GONE
             disableFinger = true
         } else {
-//            Toast.makeText(this, errMsgId, Toast.LENGTH_SHORT).show()
+            biometricInputLayout.visibility = View.GONE
         }
 
 
