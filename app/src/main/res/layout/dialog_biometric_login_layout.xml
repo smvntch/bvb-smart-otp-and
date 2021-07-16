@@ -17,13 +17,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.bvb.sotp.view.RegularBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_radius_top_gradient"
+            android:gravity="center"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:text="@string/dialog_tittle"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/close" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_dialog_button_normal_rounded_bottom_yellow_16"
+            android:background="@drawable/bg_dialog_button_normal_rounded_bottom_16"
             android:gravity="center"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:src="@drawable/ic_warning"
+                android:text="@string/dialog_tittle"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
 
             <com.bvb.sotp.view.RegularTextView
                 android:id="@+id/message"
@@ -34,10 +58,23 @@
                 android:paddingLeft="@dimen/margin_16"
                 android:paddingEnd="@dimen/margin_16"
                 android:paddingRight="@dimen/margin_16"
-                android:text="Vui lòng sử dụng vân tay\nđể đăng nhập"
+                android:text="@string/msg_scan_biometric"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:src="@drawable/ic_van_tay"
+                android:text="@string/dialog_tittle"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <com.bvb.sotp.view.RegularTextView
                 android:id="@+id/bio_status"
                 android:layout_width="match_parent"
@@ -52,18 +89,21 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/close"
                 tools:ignore="RtlSymmetry" />
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bio_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_24sdp"
                 android:gravity="center"
-                android:background="@color/white"
-                android:text="Từ chối"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/refuse"
                 android:textAllCaps="false"
-                android:textSize="@dimen/_12ssp"
-               />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
 
             <!--            </LinearLayout>-->
