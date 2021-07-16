@@ -172,7 +172,9 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     dialogHelper.showAlertDialog(
                         getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
@@ -234,7 +236,9 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     dialogHelper.showAlertDialog(
                         getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
