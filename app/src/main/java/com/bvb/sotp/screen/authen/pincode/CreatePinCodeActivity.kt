@@ -169,6 +169,11 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         }
 
         bioCancel.setOnClickListener {
+            try {
+                mFingerprintConnector?.stopListening()
+            }catch (e:Exception){
+
+            }
             onIdentifySuccess()
         }
     }
@@ -449,16 +454,6 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     @OnClick(R.id.tv_next)
     fun onBtnNextClick() {
         onNextClick()
-    }
-
-    @OnClick(R.id.bio_cancel)
-    fun onBioCloseClick() {
-        try {
-            mFingerprintConnector?.stopListening()
-        }catch (e:Exception){
-
-        }
-        onIdentifySuccess()
     }
 
     private fun reset() {
