@@ -258,6 +258,11 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
         }
 
         bioClose.setOnClickListener {
+            try {
+                mFingerprintConnector?.stopListening()
+            }catch (e:Exception){
+
+            }
             finish()
 //            biometricInputLayout.visibility = View.GONE
 //            var authentication = AccountRepository.getInstance(this).authentication
@@ -531,11 +536,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
                     finish()
                 })
         } else {
-            try {
-                mFingerprintConnector?.stopListening()
-            }catch (e:Exception){
 
-            }
             finish()
 //            biometricInputLayout.visibility = View.GONE
         }

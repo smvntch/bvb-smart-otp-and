@@ -377,6 +377,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     }
 
     fun onIdentifySuccess() {
+
         println("--onIdentifySuccess-----------------")
         preferenceHelper.setPincodeLoginLastTime(System.currentTimeMillis())
 
@@ -452,6 +453,11 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
     @OnClick(R.id.bio_cancel)
     fun onBioCloseClick() {
+        try {
+            mFingerprintConnector?.stopListening()
+        }catch (e:Exception){
+
+        }
         onIdentifySuccess()
     }
 
@@ -531,11 +537,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
                     finish()
                 })
         } else {
-            try {
-                mFingerprintConnector?.stopListening()
-            }catch (e:Exception){
 
-            }
             onIdentifySuccess()
 
 //            finish()
