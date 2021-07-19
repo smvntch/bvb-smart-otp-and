@@ -531,6 +531,11 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
                     finish()
                 })
         } else {
+            try {
+                mFingerprintConnector?.stopListening()
+            }catch (e:Exception){
+
+            }
             finish()
 //            biometricInputLayout.visibility = View.GONE
         }

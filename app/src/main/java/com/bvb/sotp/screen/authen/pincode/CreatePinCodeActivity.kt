@@ -24,6 +24,7 @@ import com.bvb.sotp.util.Utils.Companion.isAvailable
 import com.bvb.sotp.util.Utils.Companion.isAvailableFinger
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
+import com.centagate.module.fingerprint.FingerprintConnector
 import java.util.*
 
 
@@ -508,10 +509,39 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
     override fun onAuthenticatedError(
         fprint: FingerprintAuthentication?,
-        p0: Int,
+        errMsgId: Int,
         p1: CharSequence?
     ) {
         tvBioStatus.text = getString(R.string.try_again)
+        if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_FAILED_AUTHENTICATION) {
+            tvBioStatus.text =
+                getString(R.string.try_again)
+
+        } else if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_LOCKOUT) {
+
+            var authentication = AccountRepository.getInstance(this).authentication
+            authentication.setTryLeft(Constant.tryLimit)
+            authentication.tryLimit = Constant.tryLimit
+            AccountRepository.getInstance(this).savePin(authentication)
+
+            biometricInputLayout.visibility = View.GONE
+
+            var dialogHelper = DialogHelper(this)
+            dialogHelper.showAlertDialog(getString(R.string.lock_fingerprint_msg), true,
+                Runnable {
+                    finish()
+                })
+        } else {
+            try {
+                mFingerprintConnector?.stopListening()
+            }catch (e:Exception){
+
+            }
+            onIdentifySuccess()
+
+//            finish()
+//            biometricInputLayout.visibility = View.GONE
+        }
     }
 
     override fun onStartListen() {
