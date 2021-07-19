@@ -512,7 +512,6 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         errMsgId: Int,
         p1: CharSequence?
     ) {
-        tvBioStatus.text = getString(R.string.try_again)
         if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_FAILED_AUTHENTICATION) {
             tvBioStatus.text =
                 getString(R.string.try_again)
