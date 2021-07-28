@@ -1,77 +1,34 @@
 {
   "project_info": {
-    "project_number": "696230237133",
-    "project_id": "baovietbank-96b90",
-    "storage_bucket": "baovietbank-96b90.appspot.com"
+    "project_number": "325241030126",
+    "project_id": "com-bvb-sotp",
+    "storage_bucket": "com-bvb-sotp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:696230237133:android:831b1d8bfc6409a47cea84",
+        "mobilesdk_app_id": "1:325241030126:android:43a36b8737f88948f0faff",
         "android_client_info": {
           "package_name": "com.bvb.sotp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "696230237133-emfsd58m2n5a0ah2afqs1jmgqoqo61nt.apps.googleusercontent.com",
+          "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA2FLamUbNh-5hrcSVzX7FhVXkQXLXh0DA"
+          "current_key": "AIzaSyARzqDV8sQ6oA-l2mgbq6tPTrKgiUQV6HM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "696230237133-emfsd58m2n5a0ah2afqs1jmgqoqo61nt.apps.googleusercontent.com",
+              "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "696230237133-lb1l7o4nmbelkcpg44cve8jdjdcql471.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "bvb.bank.smart.otp.app"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:696230237133:android:ad3460fff40ff8cb7cea84",
-        "android_client_info": {
-          "package_name": "com.bvb.sotp.uat"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "696230237133-emfsd58m2n5a0ah2afqs1jmgqoqo61nt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA2FLamUbNh-5hrcSVzX7FhVXkQXLXh0DA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "696230237133-emfsd58m2n5a0ah2afqs1jmgqoqo61nt.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "696230237133-lb1l7o4nmbelkcpg44cve8jdjdcql471.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "bvb.bank.smart.otp.app"
-              }
             }
           ]
         }
