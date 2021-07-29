@@ -319,7 +319,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
     }
 
     fun onChangePin(isFinal: Boolean, days: Int) {
-        var temp = 180 - days
+        var temp = 90 - days
         if (temp < 0) {
             temp = 0
         }
