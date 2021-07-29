@@ -309,11 +309,11 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     fun checkChangePin() {
         var diff = DateUtils().calculateDiffDay(preferenceHelper.getLastChangePin())
-        if (diff >= 180) {
+        if (diff >= 90) {
             onChangePin(true, diff)
             return
         }
-        if (diff > 165) {
+        if (diff > 86) {
             onChangePin(false, diff)
         }
     }
