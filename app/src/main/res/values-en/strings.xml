@@ -58,14 +58,14 @@
     <string name="input_pin_code_new">Enter your new PIN code</string>
     <string name="input_pincode_policy_new">"Re-enter your new PIN "</string>
     <string name="reinput_pincode_message_new">"Re-enter your new PIN "</string>
-    <string name="msg_lock_1">You’ve entered the wrong PIN for 5 consecutive times. BAOVIET eToken is locked. Please contact BAOVIET Bank for assistance</string>
+    <string name="msg_lock_1">You’ve entered the wrong PIN for 5 consecutive times. BVB eToken is locked.</string>
     <string name="msg_lock_2">Please reactivate.</string>
-    <string name="msg_login_error">You’ve entered the wrong PIN %1$s time(s). BAOVIET eToken will be locked if you enter the wrong PIN for 5 consecutive times</string>
+    <string name="msg_login_error">You’ve entered the wrong PIN %1$s time(s). BVB eToken will be locked if you enter the wrong PIN for 5 consecutive times</string>
     <string name="otp_time">The <b><font color="#3a5e4c"> OTP </font></b>code is valid within </string>
     <string name="text_active_code_info">Activation code is 6-digits sequence sent to the phone number that registered for Soft OTP.</string>
     <string name="text_active_warning">Username is the username of BAOVIET Bank Internet Banking\n\nActivation Code includes 06 digits sent via SMS to your phone number which registered for BAOVIET Bank Internet Banking.</string>
 
-    <string name="text_tutorial_1">BAOVIET eToken is activated successfully</string>
+    <string name="text_tutorial_1">BVB eToken is activated successfully</string>
     <string name="text_tutorial_2">To authenticate transactions: Select the account, enter Transaction code and press "<b><font color="#3a5e4c"> Get the OTP </font></b> code"</string>
     <string name="text_tutorial_3">The application will be locked after entering 5 wrong <b><font color="#3a5e4c">PIN</font></b> consecutively.</string>
     <string name="text_tutorial_4">To set new PIN, press [img src=ic_menu_tutorial/], select \"<b><font color=" #3a5e4c ">Security</font></b>”</string>
@@ -85,7 +85,7 @@
     <string name="sync_complete">Sync complete</string>
     <string name="logout_confirm">Are you sure to log out?</string>
     <string name="delete_confirm_tit">Delete Confirm</string>
-    <string name="delete_confirm_msg">Are you sure you want to unregister BAOVIET eToken for %s?</string>
+    <string name="delete_confirm_msg">Are you sure you want to unregister BVB eToken for %s?</string>
     <string name="transaction_null">You need to enter the transaction code to perform this function!</string>
     <string name="ok">OK</string>
     <string name="update_account">Account already existed on Soft OTP, do you want to update?</string>
@@ -122,7 +122,7 @@
     <string name="msg_sync_error">An error occurred during processing.</string>
     <string name="msg_force_change_pin_final">Your PIN is expired. Please press Change PIN to continue</string>
     <string name="setting_biometric">Login with fingerprint</string>
-    <string name="biometric_setup_fingerprint">Are you sure you want to register fingerprint  to log into BAOVIET eToken?</string>
+    <string name="biometric_setup_fingerprint">Are you sure you want to register fingerprint  to log into BVB eToken?</string>
     <string name="agree">Agree</string>
     <string name="disable_finger_msg">Do you want to disable biometric on Soft OTP app?</string>
     <string name="msg_finger_not_available">Device is not enable biometric. Please enable to continue your setting.</string>
@@ -146,7 +146,7 @@
     <string name="all">All</string>
     <string name="transaction">Transaction</string>
     <string name="other">Others</string>
-    <string name="delete_success">Unregister BAOVIET eToken for %s successfully!</string>
+    <string name="delete_success">Unregister BVB eToken for %s successfully!</string>
     <string name="refuse">Cancel</string>
     <string name="msg_scan_biometric">Please place your fingerprint on the sensor</string>
     <string name="msg_setup_finger_print_success">Fingerprint registered successfully</string>

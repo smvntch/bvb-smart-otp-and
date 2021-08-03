@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name" translatable="false">BAOVIET eToken</string>
+    <string name="app_name" translatable="false">BVB eToken</string>
     <string name="input_pincode_msg">Đặt PIN (Mã PIN gồm 06 ký tự số)</string>
     <string name="chuc_mung">Chúc mừng!</string>
     <string name="set_pincode_success">Quý khách đã cài đặt PIN thành công!</string>
@@ -90,7 +90,7 @@
     <string name="skip">Bỏ qua</string>
     <string name="text_tutorial_4">Để cài đặt mã PIN, Quý khách bấm [img src=ic_menu_tutorial/] , chọn “<b><font color='#3a5e4c'>Bảo mật</font></b>”</string>
     <string name="text_copy">Đã lưu vào bộ nhớ tạm</string>
-    <string name="text_tutorial_1">Quý khách đã kích hoạt BAOVIET eToken thành công.</string>
+    <string name="text_tutorial_1">Quý khách đã kích hoạt thành công.</string>
     <!--    <string name="text_tutorial_1">Quý khách đã kích hoạt Ứng dụng <b><font color='#3a5e4c'>Soft OTP</font></b> thành công trên thiết bị này</string>-->
     <string name="text_tutorial_2">Để xác thực giao dịch: Quý khách lựa chọn tài khoản tương ứng, nhập Mã giao dịch và bấm "<b><font color='#3a5e4c'>Lấy mã OTP</font></b>"</string>
     <string name="text_tutorial_3">Trường hợp Quý khách nhập sai PIN 5 lần liên tiếp, ứng dụng <b><font color='#3a5e4c'>Soft OTP</font></b> sẽ bị khóa. Quý khách vui lòng liên hệ SecureMetric để kích hoạt lại tài khoản</string>
@@ -150,7 +150,7 @@
     <string name="setting_biometric">Cài đặt vân tay</string>
     <string name="biometric_setup_fingerprint">Quý khách có muốn cài đặt vân tay cho ứng dụng?</string>
     <string name="agree">Đồng ý</string>
-    <string name="disable_finger_msg">Bạn có muốn hủy cài đặt vân tay trên ứng dụng BAOVIET eToken?</string>
+    <string name="disable_finger_msg">Bạn có muốn hủy cài đặt vân tay trên ứng dụng?</string>
 
     <string name="msg_finger_not_available">Thiết bị chưa cho phép sử dụng sinh trắc học. Quý khách vui lòng cài đặt để tiếp tục sử dụng</string>
     <string name="bio_input_fingerprint">Touch ID cho Soft OTP</string>
