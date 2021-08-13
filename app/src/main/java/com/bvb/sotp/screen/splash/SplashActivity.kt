@@ -1,5 +1,6 @@
 package com.bvb.sotp.screen.splash
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
@@ -23,6 +24,14 @@ import java.security.KeyStore
 import java.security.cert.CertificateFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
+import android.content.pm.PackageManager
+
+import android.os.Build
+import androidx.fragment.app.FragmentActivity
+import android.widget.Toast
+
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 
 
 class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewContract {
@@ -55,12 +64,33 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
     }
 
     override fun setupViews() {
-        Logger.setDebugEnable(true)
-        Logger.log(1, this.javaClass, "Starting application by ndthanh")
 
         initSDK()
         AccountRepository.getInstance(this)
-        startCount()
+        val permissionlistener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                startCount()
+
+                Toast.makeText(this@SplashActivity, "Permission Granted", Toast.LENGTH_SHORT).show()
+                Logger.setDebugEnable(true)
+                Logger.log(1, this.javaClass, "Starting application by ndthanh")
+
+            }
+
+            override fun onPermissionDenied(deniedPermissions: List<String>) {
+                Toast.makeText(
+                    this@SplashActivity,
+                    "Permission Denied\n$deniedPermissions",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        TedPermission.with(this@SplashActivity)
+            .setPermissionListener(permissionlistener)
+            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+            .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .check();
 
         if (TextUtils.isEmpty(preferenceHelper.getHid())) {
             val uniqueID = UUID.randomUUID().toString()
@@ -70,6 +100,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
     }
 
     fun startCount() {
+
         compositeDisposable.add(showPeepSubject.debounce(1000, TimeUnit.MILLISECONDS)
             .observeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -226,6 +257,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
 
 
     override fun gotoNext() {
+
         val authentication = AccountRepository.getInstance(this).authentication
         val account = AccountRepository.getInstance(this).accounts
         if (authentication != null && account.value != null && account.value?.size!! > 0) {
