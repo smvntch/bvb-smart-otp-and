@@ -2,6 +2,7 @@ package com.bvb.sotp.screen.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.text.TextUtils
 import android.util.Base64
 import com.bvb.sotp.R
@@ -12,10 +13,12 @@ import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.util.showRetryDialog
 import com.centagate.module.common.Configuration
 import com.centagate.module.device.FingerprintAuthentication
+import com.centagate.module.log.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.security.KeyStore
 import java.security.cert.CertificateFactory
 import java.util.*
@@ -52,6 +55,8 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
     }
 
     override fun setupViews() {
+        Logger.setDebugEnable(true)
+        Logger.log(1, this.javaClass, "Starting application by ndthanh")
 
         initSDK()
         AccountRepository.getInstance(this)
@@ -90,7 +95,8 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
             applicationContext.resources.getString(R.string.app_default_server_enc_public_key)
         Configuration.getInstance().serverSignPublicKey =
             applicationContext.resources.getString(R.string.app_default_server_verify_public_key)
-        Configuration.getInstance().integrationKey=applicationContext.resources.getString(R.string.app_integration_key)
+        Configuration.getInstance().integrationKey =
+            applicationContext.resources.getString(R.string.app_integration_key)
         //trusted chain from BVB Production - update production value
 
 //        val bvbProdI =
@@ -204,8 +210,6 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                 )
             )
             keyStore.setCertificateEntry("go_Daddy_Secure_CA", bvbProdRCA)
-
-
 
 
         } catch (e: Exception) {
