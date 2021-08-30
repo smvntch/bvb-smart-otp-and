@@ -39,6 +39,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 androidExtensions {
@@ -73,7 +76,7 @@ dependencies {
 //    implementation 'commons-codec:1.10'
     implementation files('libs/centagate-release-20210716.aar')
 
-            implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
+    implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
@@ -91,6 +94,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
 
 }
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
