@@ -190,9 +190,9 @@
     <string name="msg_unregistered">Người dùng %s đã hủy dịch vụ/ đã kích hoạt trên thiết bị khác.</string>
     <string name="detail_trans_tittle">Chi tiết giao dịch như sau:</string>
     <string name="result">Trạng thái:</string>
-    <string name="transaction_tittle_success">Quý khách đã thực hiện thành công giao dịch chuyển tiền.</string>
-    <string name="transaction_tittle_denied">Quý khách đã hủy bỏ giao dịch chuyển tiền.</string>
-    <string name="transaction_tittle_failed">Giao dịch chuyển tiền thất bại.</string>
+    <string name="transaction_tittle_success">Quý khách đã thực hiện xác thực thành công giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_denied">Quý khách đã từ chối xác thực giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_failed">Xác thực giao dịch chuyển tiền thất bại.</string>
     <string name="success">Thành công</string>
     <string name="denied">Hủy bỏ</string>
     <string name="failed">Thất bại</string>
