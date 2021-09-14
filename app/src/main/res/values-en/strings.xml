@@ -179,7 +179,8 @@
     <string name="finger_print">Fingerprint</string>
     <string name="fingerprint_not_set_msg">Fingerprint is temporarily disabled</string>
     <string name="mobile_push">Mobile Push</string>
-    <string name="mobile_push_msg">You have new Mobile Push. Click for details</string>
+    <string name="mobile_push_msg">You have new Mobile Push.</string>
+    <string name="mobile_push_msg_active">You have new Mobile Push. Click for details</string>
     <string name="mobile_push_invalid_tittle">Invalid Mobile Push</string>
     <string name="mobile_push_invalid_msg">Invalid Mobile Push. Transaction failed.</string>
     <string name="transaction_failed">Transaction failed</string>

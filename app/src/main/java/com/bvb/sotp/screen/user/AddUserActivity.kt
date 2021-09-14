@@ -112,6 +112,12 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         qrCode.setOnClickListener {
             onQrClick(0)
         }
+
+        if (preferenceHelper.getIsNotification()) {
+            showNotification()
+        } else {
+            PendingRequest().execute()
+        }
     }
 
     override fun onResume() {
@@ -122,11 +128,6 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         transLayout.visibility = View.GONE
         println("--onResume--------getIsNotification------" + preferenceHelper.getIsNotification())
 
-        if (preferenceHelper.getIsNotification()) {
-            showNotification()
-        } else {
-            PendingRequest().execute()
-        }
     }
 
 //    @Subscribe(threadMode = ThreadMode.MAIN)
@@ -137,48 +138,48 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 //    }
 
 //    var dialogMP: Dialog? = null
-
-    private fun showNotification() {
-        println("--showNotification--------------")
-        if (isFinishing) {
-            return
-        }
-
-        if (dialogMP != null && dialogMP!!.isShowing) {
-            dialogMP!!.dismiss()
-        }
-
-        dialogMP = Dialog(this)
-        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialogMP!!.setCancelable(false)
-        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
-
-        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
-        dialogButton.setOnClickListener {
-            getTokenProcess().execute()
-
-            dialogMP!!.dismiss()
-        }
-
-        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
-        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
-        msg.text = getString(R.string.msg_have_mobile_push)
-        close.setOnClickListener {
-            preferenceHelper.setIsNotification(false)
-
-            dialogMP!!.dismiss()
-        }
-
-        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialogMP!!.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT
-        )
-
-
-        dialogMP!!.show()
-
-    }
+//
+//    private fun showNotification() {
+//        println("--showNotification--------------")
+//        if (isFinishing) {
+//            return
+//        }
+//
+//        if (dialogMP != null && dialogMP!!.isShowing) {
+//            dialogMP!!.dismiss()
+//        }
+//
+//        dialogMP = Dialog(this)
+//        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialogMP!!.setCancelable(false)
+//        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
+//
+//        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
+//        dialogButton.setOnClickListener {
+//            getTokenProcess().execute()
+//
+//            dialogMP!!.dismiss()
+//        }
+//
+//        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
+//        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
+//        msg.text = getString(R.string.msg_have_mobile_push)
+//        close.setOnClickListener {
+//            preferenceHelper.setIsNotification(false)
+//
+//            dialogMP!!.dismiss()
+//        }
+//
+//        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
+//        dialogMP!!.window?.setLayout(
+//            WindowManager.LayoutParams.MATCH_PARENT,
+//            WindowManager.LayoutParams.MATCH_PARENT
+//        )
+//
+//
+//        dialogMP!!.show()
+//
+//    }
 
     fun updateToken(): Int {
         var result = 0
@@ -244,7 +245,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         override fun doInBackground(vararg params: Int?): Int {
             var result = 0
             try {
-                result = getPendingRequest()!!
+                result = getPendingRequest()
             } catch (e: CentagateException) {
                 return e.errorCode
             } catch (e: Exception) {
@@ -273,28 +274,32 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
         try {
 
-            val completeEntity = getAllData(applicationContext)
-            if (completeEntity != null) {
-                if (completeEntity.accounts != null && completeEntity.accounts[0] != null) {
-                    val authenticationRequest = AuthenticationService()
-                    val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
-                        preferenceHelper.getHid(),
-                        completeEntity.accounts[0].accountInfo,
-                        securityDevice
-                    )
-                    if (pendingRequestExist != null && !pendingRequestExist.isEmpty()) {
-                        val preferenceHelper = PreferenceHelper(applicationContext)
-                        preferenceHelper.setSession(pendingRequestExist.get(0).requestId)
-                        val message = getString(R.string.transaction_message)
-                        preferenceHelper.setName(message)
-                        preferenceHelper.setIsNotification(true)
+            var accounts = AccountRepository.getInstance(this).accounts.value
+//            if (completeEntity != null) {
+            if (accounts != null && accounts[0] != null) {
+                val authenticationRequest = AuthenticationService()
+                val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
+                    preferenceHelper.getHid(),
+                    accounts[0].accountInfo,
+                    true,
+                    securityDevice
+                )
+                if (pendingRequestExist != null && !pendingRequestExist.isEmpty()) {
 
-                        result = 2
-                    } else {
-                        result = 1
-                    }
+                    val preferenceHelper = PreferenceHelper(applicationContext)
+                    preferenceHelper.setSession(pendingRequestExist.get(0).requestId)
+//                    val message = getString(R.string.transaction_message)
+//                    preferenceHelper.setName(message)
+//                    preferenceHelper.setIsNotification(true)
+                    println("---getPendingRequest--------------------" + pendingRequestExist.get(0).requestId)
+
+                    result = 2
+                } else {
+                    result = 1
                 }
             }
+//            }
+            println("---getPendingRequest---------------result-----" + result)
 
 
         } catch (e: Exception) {
@@ -593,12 +598,12 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 //
 //                    })
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH, param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@AddUserActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.mobile_push_invalid_tittle)+ " (" + param.toString() + ")",
+                        getString(R.string.mobile_push_invalid_tittle) + " (" + param.toString() + ")",
                         true,
                         Runnable { })
                 }
@@ -672,19 +677,4 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     }
 
-    fun saveNoti(message: String?, status: String) {
-        val realm = Realm.getDefaultInstance()
-        val id = PeepApp.mobilePushPrimaryKey!!.getAndIncrement()
-        realm.executeTransactionAsync { realm1: Realm ->
-            val model = realm1.createObject(
-                MobilePushRealmModel::class.java, id
-            )
-            model.date = System.currentTimeMillis()
-            model.tittle = "Thông báo chuyển tiền"
-            model.content = ""
-            model.detail = message
-            model.type = "2"
-            model.status = status
-        }
-    }
 }
