@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.Constant
+import com.bvb.sotp.PeepApp
+import com.bvb.sotp.PeepApp.Companion.mobilePushPrimaryKey
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.helper.PreferenceHelper
@@ -127,18 +129,15 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     }
 
     fun loadData() {
-        println("--loadData-------")
         rawData.clear()
         rawData.addAll(getAllNotif())
-        println("--loadData-----addAll--" + rawData.size)
-
         rawData.sortByDescending { it.date }
         onChangeTab(currentTab)
-        println("--loadData-----onChangeTab--")
 
     }
 
-    fun getPendingToShowOnList(){
+
+    fun getPendingToShowOnList() {
         PendingRequest().execute()
     }
 
@@ -171,7 +170,6 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         var realm = Realm.getDefaultInstance()
 
         return realm.where(MobilePushRealmModel::class.java)
-//            .limit(10)
             .findAll()
     }
 
@@ -267,7 +265,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         }
 
         override fun onPostExecute(param: Int?) {
-            println("--getPendingRequest-----onPostExecute---------"+param)
+            println("--getPendingRequest-----onPostExecute---------" + param)
 
             if (param == 2) {
                 val preferenceHelper = PreferenceHelper(applicationContext)
@@ -300,14 +298,24 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         }
 
         override fun onPostExecute(param: Int?) {
-            println("--getPendingRequest-----onPostExecute---------"+param)
+            println("--getPendingRequest-----onPostExecute---------" + param)
 
             if (param == 2) {
                 val preferenceHelper = PreferenceHelper(applicationContext)
                 var sessionCode = preferenceHelper.getSessionPending()
                 adapter.sessionPending = sessionCode
-                adapter.notifyDataSetChanged()
-                showNotification()
+                if (getNotifByCode(sessionCode).isEmpty()) {
+                    saveNoti(sessionCode)
+                    val handler = Handler()
+                    handler.postDelayed(Runnable { //Write whatever to want to do after delay specified (1 sec)
+                        loadData()
+                        adapter.notifyDataSetChanged()
+                    }, 500)
+
+                }else{
+                    adapter.notifyDataSetChanged()
+                }
+//                showNotification()
             } else {
                 val preferenceHelper = PreferenceHelper(applicationContext)
                 preferenceHelper.setSessionPending("")
@@ -399,7 +407,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@NotificationActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.mobile_push_invalid_tittle)+ " (" + param.toString() + ")",
+                        getString(R.string.mobile_push_invalid_tittle) + " (" + param.toString() + ")",
                         true,
                         Runnable {
                             val preferenceHelper = PreferenceHelper(applicationContext)
@@ -462,5 +470,26 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
             getPendingToShowOnList()
         }, 500)
 
+    }
+
+    fun getNotifByCode(code: String): Collection<MobilePushRealmModel> {
+        var realm = Realm.getDefaultInstance()
+        return realm.where(MobilePushRealmModel::class.java)
+            .contains("detail", code)
+            .findAll()
+    }
+
+    fun saveNoti(message: String) {
+        println("----saveNoti---------$message")
+        val realm = Realm.getDefaultInstance()
+        val id = mobilePushPrimaryKey!!.getAndIncrement()
+        realm.executeTransactionAsync { realm1: Realm ->
+            val model = realm1.createObject(
+                MobilePushRealmModel::class.java, id
+            )
+            model.date = System.currentTimeMillis()
+            model.detail = message
+            model.type = Constant.NOTI_TYPE_MOBILE_PUSH
+        }
     }
 }
