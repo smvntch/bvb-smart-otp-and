@@ -65,7 +65,7 @@
     <!--    Production-->
 <!--    <string name="app_default_soft_cert_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
 <!--    <string name="app_default_web_service_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>-->
-<!--    <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>-->
+<!--    <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/v2/CentagateWS/webresources</string>-->
 <!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQA2m+yCayh5y6QjaOHjN/cGPEecOUQmkAQBQXk5OR9RoxF3MlFXJ1n6y51AIGX+yErL2cFUwUlTzR0haqUov5WrH8ATrpIW1df6Cjm6zTQkJInkyCdztHcOYmvsVSw5ZsFgHdqZxLJsP1KEGtco2343pgC2LS8DX1VBvX1y+CvPz+TOvQ=</string>-->
 <!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAa1GYzFk6XmFbyiJHAj3J5PfOzbcH2cbb8Jb+xwlE47x+htfqHDbMTdCVl++s1s9q+itFbeKrJ43Lhnn45yMwUWUB6Wr+8dz7mtLYLze11FQebBcucYUxjQahThHBnC8iz1dIF2YzKQQ2tWkMOGElxpl2q3PLOwUV52asAROsg+zH/i8=</string>-->
 <!--    <string name="app_integration_key" translatable="false">3de48ef29018e76e50b70238bda814635163ab12fbbd0d31323a6e91a80883fd</string>-->
@@ -193,9 +193,9 @@
     <string name="transaction_tittle_success">Quý khách đã thực hiện xác thực thành công giao dịch chuyển tiền.</string>
     <string name="transaction_tittle_denied">Quý khách đã từ chối xác thực giao dịch chuyển tiền.</string>
     <string name="transaction_tittle_failed">Xác thực giao dịch chuyển tiền thất bại.</string>
-    <string name="success">Thành công</string>
-    <string name="denied">Hủy bỏ</string>
-    <string name="failed">Thất bại</string>
+    <string name="success">Xác thực thành công</string>
+    <string name="denied">Xác thực bị từ chối</string>
+    <string name="failed">Xác thực thất bại</string>
     <string name="transaction_push_tittle">Thông báo chuyển tiền</string>
     <string name="contact">Liên hệ</string>
     <string name="location">Tầng 5, tòa nhà Corner Stone,\nsố 16 Phan Chu Trinh, P. Phan Chu Trinh,\nQuận Hoàn Kiếm, Hà Nội</string>
@@ -220,8 +220,8 @@
     <string name="transaction_qr_login_tittle">Xác thực giao dịch - QR code</string>
     <string name="huy">Hủy</string>
     <string name="active_app_input_empty">Quý khách chưa nhập thông tin kích hoạt</string>
-    <string name="transaction_denied">Giao dịch xác thực bị từ chối</string>
-    <string name="transaction_successful">Giao dịch xác thực thành công</string>
+    <string name="transaction_denied">Giao dịch xác thực bị từ chối. Vui lòng kiểm tra kết quả giao dịch trên BAOVIET i-Banking.</string>
+    <string name="transaction_successful">Xác thực giao dịch thành công. Vui lòng kiểm tra kết quả giao dịch trên BAOVIET i-Banking.</string>
     <string name="invalid_mobile_push">Mobile Push không hợp lệ</string>
     <string name="msg_disable_finger_success">Đã hủy cài đặt vân tay thành công</string>
 </resources>
