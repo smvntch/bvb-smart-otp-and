@@ -90,7 +90,6 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         btnTransaction.setOnClickListener(this)
         btnOther.setOnClickListener(this)
 
-        println("-listUser------------" + listUser.size)
         recycleView.layoutManager = LinearLayoutManager(this)
 
         adapter = NotificationAdapter(this, listUser, object : RecycleViewItemClickListener {
@@ -100,8 +99,6 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                     if (data.type == "1") {
                         if (!TextUtils.isEmpty(data.detail) && data.detail.equals(adapter.sessionPending)) {
                             var sessionCode = data.detail
-                            println("----onItemClick---------sessionCode------" + data.detail)
-//                        println("----onItemClick---------detail------"+data.detail)
                             getTokenProcess().execute(sessionCode)
                         }
                     }
@@ -126,6 +123,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     override fun onResume() {
         super.onResume()
         loadData()
+        PendingRequestToShowNotification().execute()
     }
 
     fun loadData() {
@@ -138,6 +136,9 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         onChangeTab(currentTab)
         println("--loadData-----onChangeTab--")
 
+    }
+
+    fun getPendingToShowOnList(){
         PendingRequest().execute()
     }
 
@@ -255,7 +256,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         override fun doInBackground(vararg params: Int?): Int {
             var result = 0
             try {
-                result = getPendingRequest()!!
+                result = getPendingRequest()
             } catch (e: CentagateException) {
                 return e.errorCode
             } catch (e: Exception) {
@@ -284,19 +285,45 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         }
     }
 
+    internal inner class PendingRequestToShowNotification : AsyncTask<Int, Void, Int>() {
+        override fun doInBackground(vararg params: Int?): Int {
+            var result = 0
+            try {
+                result = getPendingRequest()
+            } catch (e: CentagateException) {
+                return e.errorCode
+            } catch (e: Exception) {
+                return 123
+            }
+
+            return result
+        }
+
+        override fun onPostExecute(param: Int?) {
+            println("--getPendingRequest-----onPostExecute---------"+param)
+
+            if (param == 2) {
+                val preferenceHelper = PreferenceHelper(applicationContext)
+                var sessionCode = preferenceHelper.getSessionPending()
+                adapter.sessionPending = sessionCode
+                adapter.notifyDataSetChanged()
+                showNotification()
+            } else {
+                val preferenceHelper = PreferenceHelper(applicationContext)
+                preferenceHelper.setSessionPending("")
+                adapter.sessionPending = ""
+                adapter.notifyDataSetChanged()
+
+            }
+        }
+    }
+
     fun getPendingRequest(): Int {
         var result = 0
-        println("--getPendingRequest--------------")
-
-        //this will be the security key of every important data in the SDK
         val securityDevice = AccountRepository.getInstance(this).authentication
-        //set Pin or Password
-//        securityDevice.setPin(preferenceHelper.getPincode())
-
         try {
 
             var accounts = AccountRepository.getInstance(this).accounts.value
-//            if (completeEntity != null) {
             if (accounts != null && accounts[0] != null) {
                 val authenticationRequest = AuthenticationService()
                 val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
@@ -309,22 +336,14 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
                     val preferenceHelper = PreferenceHelper(applicationContext)
                     preferenceHelper.setSessionPending(pendingRequestExist.get(0).requestId)
-//                    val message = getString(R.string.transaction_message)
-//                    preferenceHelper.setName(message)
-//                    preferenceHelper.setIsNotification(true)
-                    println("---getPendingRequest--------------------" + pendingRequestExist.get(0).requestId)
-
+                    preferenceHelper.setSession(pendingRequestExist.get(0).requestId)
                     result = 2
                 } else {
                     result = 1
                 }
             }
-//            }
             println("---getPendingRequest---------------result-----" + result)
-
-
         } catch (e: Exception) {
-
             println("---getPendingRequest--------------------" + e.message)
             e.printStackTrace()
             throw e
@@ -377,8 +396,6 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                 intent.putExtra("requestId", requestInfo?.requestId)
                 startActivity(intent)
             } else {
-//                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH)
-
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@NotificationActivity)
                     dialogHelper.showAlertDialog(
@@ -437,10 +454,12 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     }
 
     override fun onNotification() {
+        println("-------onNotification--")
+
         val handler = Handler()
         handler.postDelayed(Runnable { //Write whatever to want to do after delay specified (1 sec)
             loadData()
-
+            getPendingToShowOnList()
         }, 500)
 
     }

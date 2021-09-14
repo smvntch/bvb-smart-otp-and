@@ -421,7 +421,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
     var dialogMP: Dialog? = null
 
-    private fun showNotification() {
+    fun showNotification() {
         println("--showNotification--------------")
         if (isFinishing) {
             return

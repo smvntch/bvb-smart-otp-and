@@ -47,12 +47,12 @@
     <string name="setting_app">Cài đặt</string>
 
     <!--    Test Environment-->
-    <!--    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
-    <!--    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>-->
-    <!--    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>-->
-    <!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>-->
-    <!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>-->
-    <!--    <string name="app_integration_key" translatable="false">5d955c68df631e88e29d470f98c4dc79af2fee0ffa457e5a01a5f8f685ef0706</string>-->
+    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
+    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>
+    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>
+    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>
+    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>
+    <string name="app_integration_key" translatable="false">5d955c68df631e88e29d470f98c4dc79af2fee0ffa457e5a01a5f8f685ef0706</string>
 
     <!--    UAT Environment-->
     <!--    <string name="app_default_soft_cert_url" translatable="false">https://103.56.168.32/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
@@ -63,12 +63,12 @@
     <!--    <string name="app_integration_key" translatable="false">de5d2d7255963dd72a360a6deb8aefe0f3092e97c085e541afcdeceade21080f</string>-->
 
     <!--    Production-->
-    <string name="app_default_soft_cert_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
-    <string name="app_default_web_service_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>
-    <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/v2/CentagateWS/webresources</string>
-    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQA2m+yCayh5y6QjaOHjN/cGPEecOUQmkAQBQXk5OR9RoxF3MlFXJ1n6y51AIGX+yErL2cFUwUlTzR0haqUov5WrH8ATrpIW1df6Cjm6zTQkJInkyCdztHcOYmvsVSw5ZsFgHdqZxLJsP1KEGtco2343pgC2LS8DX1VBvX1y+CvPz+TOvQ=</string>
-    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAa1GYzFk6XmFbyiJHAj3J5PfOzbcH2cbb8Jb+xwlE47x+htfqHDbMTdCVl++s1s9q+itFbeKrJ43Lhnn45yMwUWUB6Wr+8dz7mtLYLze11FQebBcucYUxjQahThHBnC8iz1dIF2YzKQQ2tWkMOGElxpl2q3PLOwUV52asAROsg+zH/i8=</string>
-    <string name="app_integration_key" translatable="false">3de48ef29018e76e50b70238bda814635163ab12fbbd0d31323a6e91a80883fd</string>
+    <!--    <string name="app_default_soft_cert_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
+    <!--    <string name="app_default_web_service_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>-->
+    <!--    <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/v2/CentagateWS/webresources</string>-->
+    <!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQA2m+yCayh5y6QjaOHjN/cGPEecOUQmkAQBQXk5OR9RoxF3MlFXJ1n6y51AIGX+yErL2cFUwUlTzR0haqUov5WrH8ATrpIW1df6Cjm6zTQkJInkyCdztHcOYmvsVSw5ZsFgHdqZxLJsP1KEGtco2343pgC2LS8DX1VBvX1y+CvPz+TOvQ=</string>-->
+    <!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAa1GYzFk6XmFbyiJHAj3J5PfOzbcH2cbb8Jb+xwlE47x+htfqHDbMTdCVl++s1s9q+itFbeKrJ43Lhnn45yMwUWUB6Wr+8dz7mtLYLze11FQebBcucYUxjQahThHBnC8iz1dIF2YzKQQ2tWkMOGElxpl2q3PLOwUV52asAROsg+zH/i8=</string>-->
+    <!--    <string name="app_integration_key" translatable="false">3de48ef29018e76e50b70238bda814635163ab12fbbd0d31323a6e91a80883fd</string>-->
 
     <string name="time_expired">Mã giao dịch đã hết hạn</string>
     <string name="error_undefine">Lỗi không xác định</string>
@@ -190,12 +190,12 @@
     <string name="msg_unregistered">Người dùng %s đã hủy dịch vụ/ đã kích hoạt trên thiết bị khác.</string>
     <string name="detail_trans_tittle">Chi tiết giao dịch như sau:</string>
     <string name="result">Trạng thái:</string>
-    <string name="transaction_tittle_success">Quý khách đã thực hiện thành công giao dịch chuyển tiền.</string>
-    <string name="transaction_tittle_denied">Quý khách đã hủy bỏ giao dịch chuyển tiền.</string>
-    <string name="transaction_tittle_failed">Giao dịch chuyển tiền thất bại.</string>
-    <string name="success">Thành công</string>
-    <string name="denied">Hủy bỏ</string>
-    <string name="failed">Thất bại</string>
+    <string name="transaction_tittle_success">Quý khách đã thực hiện xác thực thành công giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_denied">Quý khách đã từ chối xác thực giao dịch chuyển tiền.</string>
+    <string name="transaction_tittle_failed">Xác thực giao dịch chuyển tiền thất bại.</string>
+    <string name="success">Xác thực thành công</string>
+    <string name="denied">Xác thực bị từ chối</string>
+    <string name="failed">Xác thực thất bại</string>
     <string name="transaction_push_tittle">Thông báo chuyển tiền</string>
     <string name="contact">Liên hệ</string>
     <string name="location">Tầng 5, tòa nhà Corner Stone,\nsố 16 Phan Chu Trinh, P. Phan Chu Trinh,\nQuận Hoàn Kiếm, Hà Nội</string>
@@ -206,7 +206,8 @@
     <string name="finger_print">Vân tay</string>
     <string name="fingerprint_not_set_msg">Quý khách chưa cài đặt đăng nhập bằng vân tay cho ứng dụng</string>
     <string name="mobile_push">Thông báo Mobile Push</string>
-    <string name="mobile_push_msg">Bạn có 1 Mobile Push mới. Click để xem chi tiết</string>
+    <string name="mobile_push_msg">Bạn có 1 Mobile Push mới.</string>
+    <string name="mobile_push_msg_active">Bạn có 1 Mobile Push mới. Click để xem chi tiết</string>
     <string name="mobile_push_invalid_tittle">Mobile Push không hợp lệ</string>
     <string name="mobile_push_invalid_msg">Mobile Push không hợp lệ. Giao dịch của quý khách chưa được thực hiện.</string>
     <string name="transaction_failed">Giao dịch không hợp lệ</string>
@@ -219,8 +220,8 @@
     <string name="transaction_qr_login_tittle">Xác thực giao dịch - QR code</string>
     <string name="huy">Hủy</string>
     <string name="active_app_input_empty">Quý khách chưa nhập thông tin kích hoạt</string>
-    <string name="transaction_denied">Giao dịch bị từ chối</string>
-    <string name="transaction_successful">Giao dịch thành công</string>
+    <string name="transaction_denied">Giao dịch xác thực bị từ chối. Vui lòng kiểm tra kết quả giao dịch trên BAOVIET i-Banking.</string>
+    <string name="transaction_successful">Xác thực giao dịch thành công. Vui lòng kiểm tra kết quả giao dịch trên BAOVIET i-Banking.</string>
     <string name="invalid_mobile_push">Mobile Push không hợp lệ</string>
     <string name="msg_disable_finger_success">Đã hủy cài đặt vân tay thành công</string>
 </resources>
