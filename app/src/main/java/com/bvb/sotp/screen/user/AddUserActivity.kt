@@ -113,11 +113,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
             onQrClick(0)
         }
 
-        if (preferenceHelper.getIsNotification()) {
-            showNotification()
-        } else {
-            PendingRequest().execute()
-        }
+
     }
 
     override fun onResume() {
@@ -127,7 +123,11 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         checkChangePin()
         transLayout.visibility = View.GONE
         println("--onResume--------getIsNotification------" + preferenceHelper.getIsNotification())
-
+        if (preferenceHelper.getIsNotification()) {
+            showNotification()
+        } else {
+            PendingRequest().execute()
+        }
     }
 
 //    @Subscribe(threadMode = ThreadMode.MAIN)
