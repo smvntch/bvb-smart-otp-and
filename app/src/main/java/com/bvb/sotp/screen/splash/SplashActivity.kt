@@ -67,30 +67,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
 
         initSDK()
         AccountRepository.getInstance(this)
-        val permissionlistener: PermissionListener = object : PermissionListener {
-            override fun onPermissionGranted() {
-                startCount()
-
-                Toast.makeText(this@SplashActivity, "Permission Granted", Toast.LENGTH_SHORT).show()
-                Logger.setDebugEnable(true)
-                Logger.log(1, this.javaClass, "Starting application by ndthanh")
-
-            }
-
-            override fun onPermissionDenied(deniedPermissions: List<String>) {
-                Toast.makeText(
-                    this@SplashActivity,
-                    "Permission Denied\n$deniedPermissions",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-        TedPermission.with(this@SplashActivity)
-            .setPermissionListener(permissionlistener)
-            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-            .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .check();
+        startCount()
 
         if (TextUtils.isEmpty(preferenceHelper.getHid())) {
             val uniqueID = UUID.randomUUID().toString()
