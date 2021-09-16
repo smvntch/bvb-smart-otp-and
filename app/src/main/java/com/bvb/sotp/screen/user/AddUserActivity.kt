@@ -113,7 +113,11 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
             onQrClick(0)
         }
 
-
+        if (preferenceHelper.getIsNotification()) {
+            showNotification()
+        } else {
+            PendingRequest().execute()
+        }
     }
 
     override fun onResume() {
