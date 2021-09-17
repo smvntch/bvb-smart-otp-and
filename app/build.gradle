@@ -12,7 +12,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.bvb.sotp.uat"
+        applicationId "com.bvb.sotp"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
