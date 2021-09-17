@@ -219,18 +219,17 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
         super.onPause()
         stopDisconnectTimer()
-//        (this.application as PeepApp).mLastPause = System.currentTimeMillis()
+        (this.application as PeepApp).mLastPause = System.currentTimeMillis()
     }
 
     override fun onResume() {
-//        val app = application as PeepApp
-//        if (System.currentTimeMillis() - app.mLastPause > 600000) {
-//            showLogin()
-//        } else {
-        resetDisconnectTimer()
-        resetSessionTimer()
-
-//        }
+        val app = application as PeepApp
+        if (System.currentTimeMillis() - app.mLastPause > DISCONNECT_TIMEOUT) {
+            showLogin()
+        } else {
+            resetDisconnectTimer()
+            resetSessionTimer()
+        }
 
         super.onResume()
 
@@ -513,7 +512,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@MvpActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.mobile_push_invalid_tittle)+ " (" + param.toString() + ")",
+                        getString(R.string.mobile_push_invalid_tittle) + " (" + param.toString() + ")",
                         true,
                         Runnable { })
                 }
