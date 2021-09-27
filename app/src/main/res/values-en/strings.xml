@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="setting_pincode_tittle">Set PIN Code</string>
-    <string name="input_pincode_policy">Re enter your PIN Code</string>
     <string name="input_pin_code">Create PIN Code</string>
     <string name="next">Continue</string>
     <string name="pincode_policy">Note:\nPosition of numbers on keyboard will be changed each time.</string>
