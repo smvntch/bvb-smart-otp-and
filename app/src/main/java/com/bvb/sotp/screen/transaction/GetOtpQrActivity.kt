@@ -68,15 +68,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     @BindView(R.id.content_frame)
     lateinit var contentFrame: FrameLayout
 
-    @BindView(R.id.inputActiveCode)
-    lateinit var inputActiveCode: View
-
-    @BindView(R.id.edtPincode)
-    lateinit var edtPincode: EditText
-
     @BindView(R.id.root)
     lateinit var mRoot: View
-
 
     private var mScannerView: ZXingScannerView? = null
     var username = ""
@@ -129,18 +122,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         finish()
     }
 
-//    @OnClick(R.id.lnVn)
-//    fun OnVnClick() {
-//        changeLang("vi")
-//
-//    }
-//
-//    @OnClick(R.id.lnEng)
-//    fun OnEnClick() {
-//        changeLang("en")
-//
-//    }
-
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
         recreate()
@@ -175,16 +156,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     var qrCode = ""
 
     override fun handleResult(rawResult: Result?) {
-//        Toast.makeText(
-//                this, "Contents = " + rawResult!!.text +
-//                ", Format = " + rawResult!!.barcodeFormat.toString(), Toast.LENGTH_SHORT
-//        ).show()
-
         qrCode = rawResult?.text!!
-        println("--qrCode--------" + qrCode)
         GetSessionProcess().execute()
-
-
     }
 
     var data: RequestInfo? = null
@@ -205,10 +178,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 account!!.accountInfo,
                 securityDevice
             )
-            println("--------details-------" + requestInfo.details)
-            println("--------location-------" + requestInfo.location)
-            println("--------qrchallenge-------" + requestInfo.qrchallenge)
-            println("--------username-------" + requestInfo.username)
             data = requestInfo
 
             result = true
@@ -227,8 +196,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
     internal inner class GetSessionProcess : AsyncTask<Int, Void, Int>() {
         override fun doInBackground(vararg params: Int?): Int {
-            println("-----onPostExecute----------------")
-
             var result: Boolean? = false
             try {
                 result = getSessionCode()
@@ -248,7 +215,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
         override fun onPreExecute() {
             super.onPreExecute()
-            println("-----onPreExecute----------------")
             progressDialog = SpotsDialog.Builder().setContext(this@GetOtpQrActivity).build()
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
@@ -256,8 +222,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         }
 
         override fun onPostExecute(param: Int?) {
-            println("-----onPostExecute----------------")
-
             progressDialog!!.dismiss()
             if (param == 1) {
                 var intent =
@@ -266,19 +230,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 intent.putExtra("detail", data?.details)
                 intent.putExtra("requestId", data?.requestId)
                 startActivity(intent)
-//                var dialogHelper = DialogHelper(this@GetOtpQrActivity)
-//                dialogHelper.showAlertDialogQrTransactionRequest(
-//                        data?.details!!,
-//                        Runnable {
-//                            AcceptTransactionProcess().execute()
-//                            resumeQrScan()
-////                            showBiometric()
-//                        },
-//                        Runnable {
-//                            RejectTransactionProcess().execute()
-//                            resumeQrScan()
-//
-//                        })
 
             } else {
                 Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR)

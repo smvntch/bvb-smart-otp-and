@@ -95,11 +95,6 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
 
     override fun initViews() {
-        var hid: String = preferenceHelper.getHid()
-        println("--hid---------------" + hid)
-        val tokenDevice = preferenceHelper.getDeviceToken()
-        println("--tokenDevice---------------" + tokenDevice)
-
         loadLang()
         setAppBarHeight()
         recycleView.layoutManager = LinearLayoutManager(this)
@@ -119,7 +114,6 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         loadLang()
         checkChangePin()
         transLayout.visibility = View.GONE
-        println("--onResume--------getIsNotification------" + preferenceHelper.getIsNotification())
 
         if (preferenceHelper.getIsNotification()) {
             showNotification()
@@ -130,18 +124,13 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: PushEvent) {
-        println("--onMessageEvent--------------")
-
         showNotification()
     }
 
     private fun showNotification() {
-        println("--showNotification--------------")
         if (isFinishing) {
             return
         }
-//        transLayout.visibility = View.VISIBLE
-//        transDisplayName.text = preferenceHelper.getName()
         val dialogHelper = DialogHelper(this)
         dialogHelper.showAlertDialogBiometric(
             getString(R.string.msg_have_mobile_push),
@@ -150,17 +139,10 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
                 getTokenProcess().execute()
 
             }, {
-//                Utils.saveNoti("Thông báo chuyển tiền", "", "2", "2")
-
                 preferenceHelper.setIsNotification(false)
-
-//                getTokenProcess().execute()
 
             }
         )
-//        transLayout.setOnClickListener {
-//        }
-
     }
 
     fun showTransaction() {

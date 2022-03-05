@@ -38,6 +38,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:ignore="RtlSymmetry" />
+
             <com.bvb.sotp.view.RegularTextView
                 android:id="@+id/bio_status"
                 android:layout_width="match_parent"
@@ -52,18 +53,19 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/close"
                 tools:ignore="RtlSymmetry" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bio_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_marginBottom="@dimen/_24sdp"
-                android:gravity="center"
                 android:background="@color/white"
+                android:filterTouchesWhenObscured="true"
+                android:gravity="center"
                 android:text="Từ chối"
                 android:textAllCaps="false"
-                android:textSize="@dimen/_12ssp"
-               />
+                android:textSize="@dimen/_12ssp" />
 
 
             <!--            </LinearLayout>-->

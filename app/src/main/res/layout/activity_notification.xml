@@ -37,6 +37,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/btn_all"
+
                     style="@style/NotificationButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

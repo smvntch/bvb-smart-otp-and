@@ -353,10 +353,6 @@
         </LinearLayout>
 
         <include
-            layout="@layout/dialog_migrate_layout"
-            android:visibility="gone" />
-
-        <include
             android:id="@+id/langLayout"
             layout="@layout/include_lang_none"
             android:layout_width="match_parent"

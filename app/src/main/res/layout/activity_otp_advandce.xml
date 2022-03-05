@@ -38,9 +38,9 @@
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_normal"
-            android:layout_marginTop="@dimen/margin_16"
             app:fonts="Kuro_Bold.ttf"
             tools:text="combank 123" />
 
@@ -48,9 +48,9 @@
             android:id="@+id/display_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorUnselectedIndicator"
             android:textSize="18sp"
             app:fonts="Kuro_Regular.ttf"
-            android:textColor="@color/colorUnselectedIndicator"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username"
@@ -59,23 +59,22 @@
         <com.bvb.sotp.view.RegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
             android:layout_marginTop="@dimen/margin_tutorial_profile_32"
-            app:fonts="Kuro_Regular.ttf"
             android:text="@string/trans_code"
+            android:textSize="@dimen/text_size_normal"
+            app:fonts="Kuro_Regular.ttf"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username"
-             />
+            app:layout_constraintTop_toBottomOf="@id/username" />
 
         <com.bvb.sotp.view.RegularTextView
             android:id="@+id/trans_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@color/white"
             android:gravity="center"
             android:paddingTop="10dp"
-            android:layout_marginTop="8dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
             app:fonts="Kuro_Regular.ttf"
@@ -98,8 +97,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            >
+            android:layout_marginTop="24dp">
 
             <include
                 layout="@layout/include_otp_view"
@@ -130,10 +128,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_tutorial_profile_32"
-            android:layout_height="wrap_content">
+            android:layout_marginBottom="@dimen/margin_16"
+            android:gravity="center">
 
             <com.bvb.sotp.view.RegularTextView
                 android:layout_width="wrap_content"
@@ -152,18 +150,18 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:maxLines="1"
-                tools:text="60"
                 android:textColor="@color/colorRed"
                 android:textSize="17sp"
-                app:fonts="Kuro_Bold.ttf" />
+                app:fonts="Kuro_Bold.ttf"
+                tools:text="60" />
 
             <com.bvb.sotp.view.RegularTextView
                 android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
                 android:gravity="center"
                 android:maxLines="1"
-                android:layout_marginStart="3dp"
                 android:text="@string/second"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -181,6 +179,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginBottom="@dimen/margin_16"
             android:background="@drawable/bg_gradient_add_user"
+            android:filterTouchesWhenObscured="true"
             android:gravity="center"
             android:paddingTop="@dimen/margin_16"
             android:paddingBottom="@dimen/margin_16"
@@ -189,6 +188,7 @@
             android:textSize="18sp"
             app:fonts="Kuro_Regular.ttf" />
     </LinearLayout>
+
     <include layout="@layout/include_lang" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -109,11 +108,12 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:text="@string/confirm"
-            android:visibility="gone"
-            app:fonts="Kuro_Bold.ttf"
             android:textColor="@color/white"
+            android:filterTouchesWhenObscured="true"
             android:textSize="17sp"
             android:textStyle="bold"
+            android:visibility="gone"
+            app:fonts="Kuro_Bold.ttf"
             app:layout_constraintBottom_toTopOf="@id/num" />
 
 
@@ -126,10 +126,10 @@
             android:gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            app:fonts="Kuro_Regular.ttf"
             android:text="@string/pincode_policy"
             android:textColor="#0e0e0e"
             android:textSize="16sp"
+            app:fonts="Kuro_Regular.ttf"
             app:layout_constraintBottom_toTopOf="@id/tv_next" />
 
         <LinearLayout
@@ -153,7 +153,6 @@
 
                     android:id="@+id/num_2"
                     style="@style/PadNum"
-
                     android:text="2" />
 
                 <com.bvb.sotp.view.RegularTextView
@@ -173,7 +172,6 @@
 
                     android:id="@+id/num_4"
                     style="@style/PadNum"
-
                     android:text="4" />
 
                 <com.bvb.sotp.view.RegularTextView
@@ -232,6 +230,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
+                    android:filterTouchesWhenObscured="true"
                     android:gravity="center"
                     android:text="@string/delete"
                     android:textAllCaps="true"
@@ -250,6 +249,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
+                    android:filterTouchesWhenObscured="true"
                     android:padding="@dimen/margin_16"
                     android:src="@drawable/ic_backspace" />
             </LinearLayout>

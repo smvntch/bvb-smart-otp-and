@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -28,25 +27,6 @@
         android:layout_marginTop="@dimen/margin_toolbar"
         android:animateLayoutChanges="true"
         android:fitsSystemWindows="true">
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:id="@+id/ln_lbl"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/margin_16"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="horizontal"-->
-        <!--                android:paddingStart="@dimen/margin_16"-->
-        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                app:layout_constraintTop_toTopOf="parent"-->
-        <!--                tools:ignore="RtlSymmetry">-->
-
         <com.bvb.sotp.view.RegularTextView
             android:id="@+id/tv_lbl2"
             android:layout_width="match_parent"
@@ -60,12 +40,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!--            </LinearLayout>-->
-
-
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
 
         <LinearLayout
             android:id="@+id/ln_pincode"
@@ -256,6 +230,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:text="@string/delete"
+                    android:filterTouchesWhenObscured="true"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -271,20 +246,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:filterTouchesWhenObscured="true"
                     android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_16"
                     android:src="@drawable/ic_backspace" />
             </LinearLayout>
         </LinearLayout>
-
-        <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-        <!--            android:id="@+id/bottom"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/white"-->
-        <!--            android:gravity="end"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent">-->
 
 
         <include
@@ -293,7 +260,6 @@
             android:layout_height="wrap_content"
             layout="@layout/include_lang_none"
             app:layout_constraintBottom_toBottomOf="parent" />
-        <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

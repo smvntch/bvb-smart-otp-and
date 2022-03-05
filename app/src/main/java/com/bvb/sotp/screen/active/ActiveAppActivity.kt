@@ -47,10 +47,6 @@ import java.util.concurrent.atomic.AtomicReference
 
 class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
 
-
-//    @BindView(R.id.tv_tittle)
-//    lateinit var tvTittle: RegularBoldTextView
-
     @BindView(R.id.edt_username)
     lateinit var edtUsername: EditText
 
@@ -211,33 +207,6 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
 
     }
 
-
-//    @OnClick(R.id.menu)
-//    fun onBackClick() {
-//        val intent = Intent(this, AddUserActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//        startActivity(intent)
-//        finish()
-//    }
-
-//    @OnClick(R.id.usernameInfo)
-//    fun onUserNameInfoClick() {
-//        var dialog = DialogHelper(this)
-//        dialog.showAlertDialog(getString(R.string.text_user_name_info), false, Runnable {
-//
-//        })
-//    }
-//
-//    @OnClick(R.id.activeCodeInfo)
-//    fun onActiveCodeInfoClick() {
-//        var dialog = DialogHelper(this)
-//        dialog.showAlertDialog(getString(R.string.text_active_code_info), false, Runnable {
-//
-//        })
-//    }
-
-
     fun activateSample(): Boolean? {
 
         var result: Boolean? = false
@@ -266,35 +235,17 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
             val semaphore = Semaphore(0)
             val atomicString = AtomicReference<String>()
             atomicString.set("")
-
-//            FirebaseInstanceId.getInstance().instanceId
-//                .addOnCompleteListener(OnCompleteListener { task ->
-//                    if (!task.isSuccessful) {
-//                        semaphore.release()
-//                        return@OnCompleteListener
-//                    }
-//                    // Get new Instance ID token
-//                    val tokenFirebase = task.result?.token
-//                    atomicString.set(tokenFirebase)
-//                    semaphore.release()
-//                })
             FirebaseMessaging.getInstance().token
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
                         semaphore.release()
-//                        Log.w(TAG, "Fetching FCM registration token failed", task.exception)
                         return@OnCompleteListener
                     }
 
                     // Get new FCM registration token
                     val token: String? = task.getResult()
-//                    val tokenFirebase = task.result?.token
                     atomicString.set(token)
                     semaphore.release()
-                    // Log and toast
-//                    val msg = getString(R.string.msg_token_fmt, token)
-//                    Log.d(TAG, msg)
-//                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
                 })
             semaphore.acquire()
             TOKEN = atomicString.get()
@@ -474,33 +425,11 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
             progressDialog!!.dismiss()
 
             if (param == 1) {
-//                if (otpStatus == 1) {
-//                    var temp = StringBuilder()
-//                    temp.append("otpStatus :" + otpStatus + "\n")
-//                    temp.append("param :" + param + "\n")
-//                    LogUtils.printLog("ActiveApp onSuccess ", temp.toString())
-////                    showDialogActiveSuccess()
                 val dialog = DialogHelper(this@ActiveAppActivity)
                 dialog.showAlertDialog(getString(R.string.text_tutorial_1), false,
                     Runnable() {
                         onActiveSuccess()
                     })
-//                    preferenceHelper.setMigrate(true)
-//
-//                } else {
-//                    var temp = StringBuilder()
-//                    temp.append("otpStatus :" + otpStatus + "\n")
-//                    temp.append("param :" + param + "\n")
-//                    LogUtils.printLog("ActiveApp onError Otp Status ", temp.toString())
-//                    val dialogHelper = DialogHelper(this@ActiveAppActivity)
-//                    dialogHelper.showAlertDialog(
-//                        getString(R.string.active_otp_status_failed),
-//                        true,
-//                        object : Runnable {
-//                            override fun run() {
-//                            }
-//                        })
-//                }
 
             } else {
                 Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE)
@@ -539,7 +468,6 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
         return myAndroidDeviceId
     }
 
-    //    @Subscribe(threadMode = ThreadMode.MAIN)
     fun onActiveSuccess() {
         if (isFirst()) {
             val intent = Intent(this, AddUserActivity::class.java)
@@ -547,23 +475,5 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
         }
         finish()
     }
-
-//    public override fun onStart() {
-//        super.onStart()
-//        EventBus.getDefault().register(this)
-//    }
-//
-//    public override fun onStop() {
-//        super.onStop()
-//        EventBus.getDefault().unregister(this)
-//    }
-
-//    fun showDialogActiveSuccess() {
-//        var dialog = PagerDialog()
-//        dialog.isCancelable = false
-//        dialog.show(supportFragmentManager, "")
-//
-//
-//    }
 
 }

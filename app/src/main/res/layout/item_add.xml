@@ -8,8 +8,9 @@
     <LinearLayout
         android:id="@+id/add_user_online"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:filterTouchesWhenObscured="true"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/margin_16">
@@ -24,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8"
-            android:lineSpacingExtra="@dimen/_3sdp"
             android:gravity="center"
+            android:lineSpacingExtra="@dimen/_3sdp"
             android:text="@string/add_user_online"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
@@ -34,8 +35,9 @@
     <LinearLayout
         android:id="@+id/add_user_offline"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:filterTouchesWhenObscured="true"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/margin_16">
@@ -47,11 +49,11 @@
 
         <com.bvb.sotp.view.RegularTextView
             android:id="@+id/txt_add_user_offline"
-            android:lineSpacingExtra="@dimen/_3sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="@dimen/margin_8"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/_3sdp"
             android:text="@string/add_user_offline"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
