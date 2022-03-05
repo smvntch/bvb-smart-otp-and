@@ -68,9 +68,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.eightbitlab:blurview:1.5.0'
     implementation 'com.github.bhargavms:DotLoader:1.1.1'
-//    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
-//    implementation project(':centagateSdk')
-//    implementation 'commons-codec:1.10'
     implementation files('libs/centagate-release_20200817.aar')
 
             implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
@@ -80,7 +77,6 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
-//    implementation 'com.alexgilleran:icesoap:1.1.1'
     implementation "androidx.biometric:biometric:1.1.0"
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.wei.android.lib:fingerprintidentify:1.2.6'

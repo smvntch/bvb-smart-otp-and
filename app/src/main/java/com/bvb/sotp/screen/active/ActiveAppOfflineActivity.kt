@@ -212,21 +212,21 @@ class ActiveAppOfflineActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppCon
         finish()
     }
 
-    @OnClick(R.id.usernameInfo)
-    fun onUserNameInfoClick() {
-        var dialog = DialogHelper(this)
-        dialog.showAlertDialog(getString(R.string.text_user_name_info), false, Runnable {
-
-        })
-    }
-
-    @OnClick(R.id.activeCodeInfo)
-    fun onActiveCodeInfoClick() {
-        var dialog = DialogHelper(this)
-        dialog.showAlertDialog(getString(R.string.text_active_code_info), false, Runnable {
-
-        })
-    }
+//    @OnClick(R.id.usernameInfo)
+//    fun onUserNameInfoClick() {
+//        var dialog = DialogHelper(this)
+//        dialog.showAlertDialog(getString(R.string.text_user_name_info), false, Runnable {
+//
+//        })
+//    }
+//
+//    @OnClick(R.id.activeCodeInfo)
+//    fun onActiveCodeInfoClick() {
+//        var dialog = DialogHelper(this)
+//        dialog.showAlertDialog(getString(R.string.text_active_code_info), false, Runnable {
+//
+//        })
+//    }
 
 
     @SuppressLint("HardwareIds", "MissingPermission")

@@ -71,7 +71,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/bio_close"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:padding="12dp"

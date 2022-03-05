@@ -31,28 +31,11 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowFullscreen">true</item>
-    </style>
-
     <style name="AppTheme.NoActionBar.TransparentStatusBar" parent="AppTheme.NoActionBar">
         <!--<item name="android:windowTranslucentStatus">true</item>-->
 
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/colorDim</item>
-    </style>
-
-    <style name="Tranlucent" parent="AppTheme.NoActionBar.TransparentStatusBar">
-        <!--<item name="android:windowBackground">@color/colorWhiteTransparent</item>-->
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!--<item name="android:windowContentOverlay">@null</item>-->
-        <item name="android:windowNoTitle">true</item>
-        <!--<item name="android:windowIsFloating">true</item>-->
-        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
     <style name="LoadingView">
@@ -64,17 +47,6 @@
     </style>
 
     <!-- Button styles -->
-    <style name="Button" parent="@android:style/Widget.Button">
-        <item name="android:textSize">@dimen/text_size_default</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:paddingStart">@dimen/padding_default</item>
-        <item name="android:paddingEnd">@dimen/padding_default</item>
-        <item name="android:paddingTop">@dimen/padding_15</item>
-        <item name="android:paddingBottom">@dimen/padding_15</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="textAllCaps">true</item>
-        <item name="android:gravity">center</item>
-    </style>
 
     <!-- End of button -->
 
@@ -120,24 +92,6 @@
 
     </style>
 
-    <style name="textViewOtpAdvance">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">5</item>
-        <item name="android:textSize">12sp</item>
-
-    </style>
-
-    <style name="textViewValueOtpAdvance">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">5</item>
-        <item name="android:textColor">@color/colorOrange</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">12sp</item>
-
-    </style>
-
     <style name="settingLinearLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -170,12 +124,6 @@
 
     </style>
 
-
-    <style name="FullScreenDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
 
     <style name="NotificationButton" >
 

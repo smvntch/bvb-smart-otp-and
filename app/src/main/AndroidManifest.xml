@@ -69,17 +69,12 @@
             android:configChanges="locale"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
-        <activity
-            android:name=".screen.selectlanguage.SelectLanguageActivity"
-            android:configChanges="locale"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
 
         <activity
             android:name=".screen.transaction.OtpAdvanceActivity"
             android:configChanges="locale"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
         <activity
             android:name=".screen.authen.setting.SettingActivity"
             android:configChanges="locale"
@@ -200,8 +195,7 @@
 
         <service
             android:name=".firebase.SoftOTPFirebaseMessageService"
-            android:enabled="true"
-            android:exported="true">
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

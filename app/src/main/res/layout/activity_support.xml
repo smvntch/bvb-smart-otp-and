@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -18,7 +17,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sw_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/margin_toolbar">
@@ -39,7 +37,6 @@
                     android:src="@drawable/ic_faq" />
 
                 <com.bvb.sotp.view.RegularTextView
-                    android:id="@+id/tv_faq"
                     style="@style/settingTextView"
                     android:text="@string/qa"
                     app:fonts="Kuro_Regular.ttf" />
@@ -60,7 +57,6 @@
                     android:src="@drawable/ic_guide_line" />
 
                 <com.bvb.sotp.view.RegularTextView
-                    android:id="@+id/tv_guideline"
                     style="@style/settingTextView"
                     android:text="@string/manual"
                     app:fonts="Kuro_Regular.ttf" />
@@ -81,7 +77,6 @@
                     android:src="@drawable/ic_policy" />
 
                 <com.bvb.sotp.view.RegularTextView
-                    android:id="@+id/tv_policy"
                     style="@style/settingTextView"
                     android:text="@string/term"
                     app:fonts="Kuro_Regular.ttf" />
