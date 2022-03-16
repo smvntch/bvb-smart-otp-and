@@ -104,8 +104,8 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 //    @BindView(R.id.cstr_fail)
 //    lateinit var cstrFail: CardView
 
-    @BindView(R.id.popup)
-    lateinit var popup: View
+//    @BindView(R.id.popup)
+//    lateinit var popup: View
 
     var count: Int = 0
 

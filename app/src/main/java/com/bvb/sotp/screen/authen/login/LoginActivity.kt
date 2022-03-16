@@ -90,9 +90,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     @BindView(R.id.num_back)
     lateinit var numBack: ImageView
-
-    @BindView(R.id.popup)
-    lateinit var popup: View
+//
+//    @BindView(R.id.popup)
+//    lateinit var popup: View
 
     @BindView(R.id.biometricInputLayout)
     lateinit var biometricInputLayout: View

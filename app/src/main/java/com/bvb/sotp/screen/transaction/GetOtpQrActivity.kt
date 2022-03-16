@@ -2,7 +2,6 @@ package com.bvb.sotp.screen.transaction
 
 import android.Manifest
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.AsyncTask
@@ -69,15 +68,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     @BindView(R.id.content_frame)
     lateinit var contentFrame: FrameLayout
 
-    @BindView(R.id.inputActiveCode)
-    lateinit var inputActiveCode: View
-
-    @BindView(R.id.edtPincode)
-    lateinit var edtPincode: EditText
-
     @BindView(R.id.root)
     lateinit var mRoot: View
-
 
     private var mScannerView: ZXingScannerView? = null
     var username = ""
@@ -102,7 +94,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
     fun reloadUI() {
-        tvTittle.text = getString(R.string.otp_qr_tittle)
+        tvTittle.text = getString(R.string.get_otp)
 
         mNext.text = getString(R.string.transaction_qr)
         notScan.text = getString(R.string.not_scan_qr)
@@ -164,16 +156,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     var qrCode = ""
 
     override fun handleResult(rawResult: Result?) {
-//        Toast.makeText(
-//                this, "Contents = " + rawResult!!.text +
-//                ", Format = " + rawResult!!.barcodeFormat.toString(), Toast.LENGTH_SHORT
-//        ).show()
-
         qrCode = rawResult?.text!!
-        println("--qrCode--------" + qrCode)
         GetSessionProcess().execute()
-
-
     }
 
     var data: RequestInfo? = null
@@ -194,10 +178,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 account!!.accountInfo,
                 securityDevice
             )
-            println("--------details-------" + requestInfo.details)
-            println("--------location-------" + requestInfo.location)
-            println("--------qrchallenge-------" + requestInfo.qrchallenge)
-            println("--------username-------" + requestInfo.username)
             data = requestInfo
 
             result = true
@@ -213,10 +193,9 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
 
+
     internal inner class GetSessionProcess : AsyncTask<Int, Void, Int>() {
         override fun doInBackground(vararg params: Int?): Int {
-            println("-----onPostExecute----------------")
-
             var result: Boolean? = false
             try {
                 result = getSessionCode()
@@ -236,16 +215,13 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
         override fun onPreExecute() {
             super.onPreExecute()
-            println("-----onPreExecute----------------")
-            progressDialog = ProgressDialog(this@GetOtpQrActivity)
+            progressDialog = SpotsDialog.Builder().setContext(this@GetOtpQrActivity).build()
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()
         }
 
         override fun onPostExecute(param: Int?) {
-            println("-----onPostExecute----------------")
-
             progressDialog!!.dismiss()
             if (param == 1) {
                 var intent =
@@ -254,15 +230,14 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 intent.putExtra("detail", data?.details)
                 intent.putExtra("requestId", data?.requestId)
                 startActivity(intent)
-                finish()
 
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
+//                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR)
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
+                        "Không thể lấy thông tin giao dịch",
                         true,
                         Runnable {
                             resumeQrScan()

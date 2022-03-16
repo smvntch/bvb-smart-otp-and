@@ -106,7 +106,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.bio_cancel)
-    lateinit var bioCancel: AppCompatTextView
+    lateinit var bioCancel: AppCompatButton
 
     var count: Int = 0
 

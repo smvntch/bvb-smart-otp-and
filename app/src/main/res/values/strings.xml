@@ -232,6 +232,9 @@
     <string name="transaction_successful">Xác thực giao dịch thành công. Vui lòng kiểm tra kết quả giao dịch trên BAOVIET i-Banking.</string>
     <string name="invalid_mobile_push">Mobile Push không hợp lệ</string>
     <string name="msg_disable_finger_success">Đã hủy cài đặt vân tay thành công</string>
+    <string name="faq_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/cau-hoi-thuong-gap</string>
+    <string name="guide_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/huong-dan-su-dung</string>
+    <string name="policy_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/dieu-khoan-dieu-kien-su-dung</string>
 </resources>
 
 

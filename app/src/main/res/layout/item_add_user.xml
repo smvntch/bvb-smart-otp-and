@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:filterTouchesWhenObscured="true"
     android:layout_height="wrap_content">
 
     <!--        <androidx.cardview.widget.CardView-->
@@ -86,6 +87,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="18dp"
+                android:filterTouchesWhenObscured="true"
                 android:paddingTop="8dp"
                 android:paddingRight="18dp"
                 android:paddingBottom="8dp"

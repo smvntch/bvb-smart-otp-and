@@ -58,15 +58,15 @@ class WebviewActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
         if (Constant.TYPE_QA == type){
             tvTittle.text = getString(R.string.qa)
 
-            webview.loadUrl("https://www.baovietbank.vn/vn/sotp/chi-tiet/cau-hoi-thuong-gap")
+            webview.loadUrl(getString(R.string.faq_url))
         }else if (Constant.TYPE_MANUAL == type){
             tvTittle.text = getString(R.string.manual)
 
-            webview.loadUrl("https://www.baovietbank.vn/vn/sotp/chi-tiet/huong-dan-su-dung")
+            webview.loadUrl(getString(R.string.guide_url))
         }else{
             tvTittle.text = getString(R.string.term)
 
-            webview.loadUrl("https://www.baovietbank.vn/vn/sotp/chi-tiet/dieu-khoan-dieu-kien-su-dung")
+            webview.loadUrl(getString(R.string.policy_url))
 
         }
     }
