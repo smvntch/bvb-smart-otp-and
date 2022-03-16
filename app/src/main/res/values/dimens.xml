@@ -1,46 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
-    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
     <dimen name="free_size">0dp</dimen>
-    <dimen name="divider_height_default">1dp</dimen>
-    <dimen name="header_height_default">50dp</dimen>
     <dimen name="margin_default">10dp</dimen>
-    <dimen name="half_margin_default">5dp</dimen>
     <dimen name="margin_30">30dp</dimen>
-    <dimen name="padding_default">10dp</dimen>
-    <dimen name="padding_15">15dp</dimen>
-    <dimen name="dialog_corner_radius">10dp</dimen>
 
     <!-- #33824 - Top Page -->
-    <dimen name="text_size_header_story">16sp</dimen>
     <!-- End of #33824 -->
 
     <dimen name="margin_tutorial_profile_32">32dp</dimen>
-    <dimen name="text_size_tutorial_profile_header1">17sp</dimen>
-    <dimen name="text_size_tutorial_profile_header_2">15sp</dimen>
-    <dimen name="margin_tutorial_profile_space_content">40dp</dimen>
-    <dimen name="text_size_peep_header">23sp</dimen>
-    <dimen name="text_size_default">14sp</dimen>
     <!-- End of #33824 -->
 
 
     <!-- #33980 - Account Profile -->
-    <dimen name="margin_tutorial_profile_half">16dp</dimen>
     <!-- End of #33980 -->
 
     <!-- #34196 - Invite friend -->
     <!-- End of #34196 -->
 
     <!--PURCHASE-->
-    <dimen name="purchase_button_width">300dp</dimen>
     <!--PURCHASE-->
 
     <!-- Chapter -->
 
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_16">16dp</dimen>
-    <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_toolbar">75dp</dimen>
     <dimen name="size_icon_normal">20dp</dimen>
     <dimen name="text_size_normal">20sp</dimen>
