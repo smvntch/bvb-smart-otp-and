@@ -44,23 +44,23 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     @BindView(R.id.tv_next)
     lateinit var mNext: RegularBoldTextView
 
-    @BindView(R.id.tv_code_1)
-    lateinit var tvCode1: RegularTextView
-
-    @BindView(R.id.tv_code_2)
-    lateinit var tvCode2: RegularTextView
-
-    @BindView(R.id.tv_code_3)
-    lateinit var tvCode3: RegularTextView
-
-    @BindView(R.id.tv_code_4)
-    lateinit var tvCode4: RegularTextView
-
-    @BindView(R.id.tv_code_5)
-    lateinit var tvCode5: RegularTextView
-
-    @BindView(R.id.tv_code_6)
-    lateinit var tvCode6: RegularTextView
+//    @BindView(R.id.tv_code_1)
+//    lateinit var tvCode1: RegularTextView
+//
+//    @BindView(R.id.tv_code_2)
+//    lateinit var tvCode2: RegularTextView
+//
+//    @BindView(R.id.tv_code_3)
+//    lateinit var tvCode3: RegularTextView
+//
+//    @BindView(R.id.tv_code_4)
+//    lateinit var tvCode4: RegularTextView
+//
+//    @BindView(R.id.tv_code_5)
+//    lateinit var tvCode5: RegularTextView
+//
+//    @BindView(R.id.tv_code_6)
+//    lateinit var tvCode6: RegularTextView
 
     @BindView(R.id.can_not_scan)
     lateinit var notScan: RegularTextView
