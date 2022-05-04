@@ -1,5 +1,6 @@
 package com.bvb.sotp.screen.user
 
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,8 @@ import android.os.AsyncTask
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -39,7 +42,6 @@ import com.bvb.sotp.view.RegularTextView
 import com.centagate.module.account.Account
 import com.centagate.module.account.AccountInfo
 import com.centagate.module.authentication.AuthenticationService
-import com.centagate.module.authentication.CrAuthentication
 import com.centagate.module.authentication.RequestInfo
 import com.centagate.module.common.CompleteEntity
 import com.centagate.module.common.Configuration
@@ -53,7 +55,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.List
 
 
 class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
@@ -95,6 +96,11 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
 
     override fun initViews() {
+        var hid: String = preferenceHelper.getHid()
+        println("--hid---------------" + hid)
+        val tokenDevice = preferenceHelper.getDeviceToken()
+        println("--tokenDevice---------------" + tokenDevice)
+
         loadLang()
         setAppBarHeight()
         recycleView.layoutManager = LinearLayoutManager(this)
@@ -106,6 +112,12 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         qrCode.setOnClickListener {
             onQrClick(0)
         }
+
+        if (preferenceHelper.getIsNotification()) {
+            showNotification()
+        } else {
+            PendingRequest().execute()
+        }
     }
 
     override fun onResume() {
@@ -114,7 +126,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         loadLang()
         checkChangePin()
         transLayout.visibility = View.GONE
-
+        println("--onResume--------getIsNotification------" + preferenceHelper.getIsNotification())
         if (preferenceHelper.getIsNotification()) {
             showNotification()
         } else {
@@ -124,115 +136,54 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //    fun onMessageEvent(event: PushEvent) {
+//        println("--onMessageEvent--------------")
+//
 //        showNotification()
 //    }
+
+//    var dialogMP: Dialog? = null
 //
 //    private fun showNotification() {
+//        println("--showNotification--------------")
 //        if (isFinishing) {
 //            return
 //        }
-//        val dialogHelper = DialogHelper(this)
-//        dialogHelper.showAlertDialogBiometric(
-//            getString(R.string.msg_have_mobile_push),
-//            {
 //
-//                getTokenProcess().execute()
+//        if (dialogMP != null && dialogMP!!.isShowing) {
+//            dialogMP!!.dismiss()
+//        }
 //
-//            }, {
-//                preferenceHelper.setIsNotification(false)
+//        dialogMP = Dialog(this)
+//        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialogMP!!.setCancelable(false)
+//        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
 //
-//            }
+//        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
+//        dialogButton.setOnClickListener {
+//            getTokenProcess().execute()
+//
+//            dialogMP!!.dismiss()
+//        }
+//
+//        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
+//        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
+//        msg.text = getString(R.string.msg_have_mobile_push)
+//        close.setOnClickListener {
+//            preferenceHelper.setIsNotification(false)
+//
+//            dialogMP!!.dismiss()
+//        }
+//
+//        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
+//        dialogMP!!.window?.setLayout(
+//            WindowManager.LayoutParams.MATCH_PARENT,
+//            WindowManager.LayoutParams.MATCH_PARENT
 //        )
+//
+//
+//        dialogMP!!.show()
+//
 //    }
-
-    fun showTransaction() {
-        var dialogHelper = DialogHelper(this)
-        dialogHelper.showAlertDialogQrTransactionRequest(
-            "data?.details!!",
-            {
-                acceptTransaction()
-
-            },
-            {
-                rejectTransaction()
-
-
-            })
-    }
-
-    fun acceptTransaction() {
-        try {
-            var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
-
-            var account =
-                AccountRepository.getInstance(this).findAccountById(preferenceHelper.getAccountId())
-            var crAuthentication = CrAuthentication()
-            var test = crAuthentication.approve(
-                hid,
-                getDeviceName().toString(),
-                true,
-                account!!,
-                requestInfo?.requestId!!,
-                "",
-                "",
-                securityDevice,
-                requestInfo?.randomString!!
-            )
-            System.out.println(test);
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            throw e
-        }
-
-    }
-
-
-    fun rejectTransaction() {
-        try {
-            var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
-            var account =
-                AccountRepository.getInstance(this).accounts.value?.get(0)
-
-            var authenticationService = AuthenticationService()
-            authenticationService.rejectRequest(
-                hid,
-                account?.accountInfo!!,
-                AccountRepository.getInstance(this).deviceInfoData.value!!,
-                requestInfo?.requestId!!,
-                "105.795672",
-                "21.029316",
-                true,
-                securityDevice
-            )
-
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            throw e
-        }
-
-    }
-
-    internal inner class UpdateToken : AsyncTask<Int, Void, Int>() {
-        override fun doInBackground(vararg params: Int?): Int {
-            var result = 0
-            try {
-                result = updateToken()
-            } catch (e: CentagateException) {
-                return e.errorCode
-            } catch (e: Exception) {
-                return 123
-            }
-
-            return result
-        }
-
-        override fun onPostExecute(param: Int?) {
-
-        }
-    }
-
 
     fun updateToken(): Int {
         var result = 0
@@ -298,7 +249,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         override fun doInBackground(vararg params: Int?): Int {
             var result = 0
             try {
-                result = getPendingRequest()!!
+                result = getPendingRequest()
             } catch (e: CentagateException) {
                 return e.errorCode
             } catch (e: Exception) {
@@ -327,28 +278,32 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
         try {
 
-            val completeEntity = getAllData(applicationContext)
-            if (completeEntity != null) {
-                if (completeEntity.accounts != null && completeEntity.accounts[0] != null) {
-                    val authenticationRequest = AuthenticationService()
-                    val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
-                        preferenceHelper.getHid(),
-                        completeEntity.accounts[0].accountInfo,
-                        securityDevice
-                    )
-                    if (pendingRequestExist != null && !pendingRequestExist.isEmpty()) {
-                        val preferenceHelper = PreferenceHelper(applicationContext)
-                        preferenceHelper.setSession(pendingRequestExist.get(0).requestId)
-                        val message = getString(R.string.transaction_message)
-                        preferenceHelper.setName(message)
-                        preferenceHelper.setIsNotification(true)
+            var accounts = AccountRepository.getInstance(this).accounts.value
+//            if (completeEntity != null) {
+            if (accounts != null && accounts[0] != null) {
+                val authenticationRequest = AuthenticationService()
+                val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
+                    preferenceHelper.getHid(),
+                    accounts[0].accountInfo,
+                    true,
+                    securityDevice
+                )
+                if (pendingRequestExist != null && !pendingRequestExist.isEmpty()) {
 
-                        result = 2
-                    } else {
-                        result = 1
-                    }
+                    val preferenceHelper = PreferenceHelper(applicationContext)
+                    preferenceHelper.setSession(pendingRequestExist.get(0).requestId)
+//                    val message = getString(R.string.transaction_message)
+//                    preferenceHelper.setName(message)
+//                    preferenceHelper.setIsNotification(true)
+                    println("---getPendingRequest--------------------" + pendingRequestExist.get(0).requestId)
+
+                    result = 2
+                } else {
+                    result = 1
                 }
             }
+//            }
+            println("---getPendingRequest---------------result-----" + result)
 
 
         } catch (e: Exception) {
@@ -363,17 +318,17 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     fun checkChangePin() {
         var diff = DateUtils().calculateDiffDay(preferenceHelper.getLastChangePin())
-        if (diff >= 180) {
+        if (diff >= 90) {
             onChangePin(true, diff)
             return
         }
-        if (diff > 165) {
+        if (diff > 86) {
             onChangePin(false, diff)
         }
     }
 
     fun onChangePin(isFinal: Boolean, days: Int) {
-        var temp = 180 - days
+        var temp = 90 - days
         if (temp < 0) {
             temp = 0
         }
@@ -562,6 +517,107 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     }
 
+
+//    var requestInfo: RequestInfo? = null
+//
+//    fun getTransactionDetail(): Boolean {
+//        var success = false
+//        try {
+//            var message = ""
+//            var accountInfo: AccountInfo
+//            var authenticationService = AuthenticationService()
+//            val securityDevice = AccountRepository.getInstance(this).authentication
+//
+//
+//            if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {
+//                var account = AccountRepository.getInstance(this).onlineAccounts[0]
+//                accountInfo = account.accountInfo
+//
+//                println("------------------getSession----" + preferenceHelper.getSession())
+//                requestInfo = authenticationService.getRequestInfo(
+//                    preferenceHelper.getHid(),
+//                    preferenceHelper.getSession(),
+//                    true,
+//                    accountInfo,
+//                    securityDevice
+//                )
+//                message = requestInfo?.details!!
+//                println("----------------------" + message)
+//            }
+//
+//            success = false
+//        } catch (e: java.lang.Exception) {
+//            e.printStackTrace()
+//            throw e
+//        }
+//
+//
+//        return success
+//    }
+
+    internal inner class getTokenProcess : AsyncTask<Int, Void, String?>() {
+
+        override fun doInBackground(vararg params: Int?): String? {
+            var result: Boolean? = false
+            try {
+                result = getTransactionDetail()
+            } catch (e: CentagateException) {
+                return e.errorCode.toString()
+            } catch (e: Exception) {
+                return "123"
+            }
+
+            return "1"
+        }
+
+        var progressDialog: ProgressDialog? = null
+
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            progressDialog = ProgressDialog(this@AddUserActivity)
+            progressDialog!!.setTitle("")
+            progressDialog!!.setCancelable(false)
+            progressDialog!!.show()
+        }
+
+        override fun onPostExecute(param: String?) {
+            preferenceHelper.setIsNotification(false)
+            progressDialog!!.dismiss()
+            if (param == "1") {
+                var intent =
+                    Intent(this@AddUserActivity, TransactionDetailActivity::class.java)
+                intent.putExtra("randomString", requestInfo?.randomString)
+                intent.putExtra("detail", requestInfo?.details)
+                intent.putExtra("requestId", requestInfo?.requestId)
+                startActivity(intent)
+//                var dialogHelper = DialogHelper(this@AddUserActivity)
+//                dialogHelper.showAlertDialogQrTransactionRequest(
+//                    requestInfo?.details!!,
+//                    {
+//                        AcceptTransactionProcess().execute()
+//                    },
+//                    {
+//                        RejectTransactionProcess().execute()
+//
+//                    })
+            } else {
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH, param.toString())
+
+                runOnUiThread {
+                    val dialogHelper = DialogHelper(this@AddUserActivity)
+                    dialogHelper.showAlertDialog(
+                        getString(R.string.mobile_push_invalid_tittle) + " (" + param.toString() + ")",
+                        true,
+                        Runnable { })
+                }
+
+            }
+//            onGetRequestInfoSuccess()
+
+        }
+    }
+
     fun onCheckStatus() {
         var list = AccountRepository.getInstance(this).accounts.value
         if (list?.size == 0) {
@@ -625,19 +681,4 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     }
 
-    fun saveNoti(message: String?, status: String) {
-        val realm = Realm.getDefaultInstance()
-        val id = PeepApp.mobilePushPrimaryKey!!.getAndIncrement()
-        realm.executeTransactionAsync { realm1: Realm ->
-            val model = realm1.createObject(
-                MobilePushRealmModel::class.java, id
-            )
-            model.date = System.currentTimeMillis()
-            model.tittle = "Thông báo chuyển tiền"
-            model.content = ""
-            model.detail = message
-            model.type = "2"
-            model.status = status
-        }
-    }
 }

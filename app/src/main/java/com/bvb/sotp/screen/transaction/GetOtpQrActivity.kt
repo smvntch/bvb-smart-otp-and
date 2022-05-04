@@ -94,7 +94,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
     fun reloadUI() {
-        tvTittle.text = getString(R.string.get_otp)
+        tvTittle.text = getString(R.string.otp_qr_tittle)
 
         mNext.text = getString(R.string.transaction_qr)
         notScan.text = getString(R.string.not_scan_qr)
@@ -232,12 +232,12 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 startActivity(intent)
 
             } else {
-//                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        "Không thể lấy thông tin giao dịch",
+                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
                         true,
                         Runnable {
                             resumeQrScan()

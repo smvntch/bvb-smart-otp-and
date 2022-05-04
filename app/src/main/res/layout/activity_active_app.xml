@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -56,10 +57,10 @@
                     android:id="@+id/edt_username"
                     android:layout_width="@dimen/_210sdp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_border_gray"
                     android:cursorVisible="true"
                     android:maxLines="1"
                     android:padding="@dimen/_8sdp"
+                    android:background="@drawable/bg_border_gray"
                     android:singleLine="true"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_lbl1" />
@@ -89,11 +90,11 @@
                     android:id="@+id/edt_active_code"
                     android:layout_width="@dimen/_210sdp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_border_gray"
                     android:cursorVisible="true"
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="@dimen/_8sdp"
+                    android:background="@drawable/bg_border_gray"
                     android:singleLine="true"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_lbl1" />
@@ -114,6 +115,7 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <FrameLayout
+                android:layout_marginTop="@dimen/margin_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -121,10 +123,7 @@
                     android:id="@+id/btn_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/margin_30"
-                    android:layout_marginEnd="@dimen/_50sdp"
-                    android:filterTouchesWhenObscured="true"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:paddingTop="@dimen/margin_16"
                     android:paddingBottom="@dimen/margin_16"
@@ -139,9 +138,9 @@
 
         <include
             android:id="@+id/langLayout"
-            layout="@layout/include_lang_none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            layout="@layout/include_lang_none"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

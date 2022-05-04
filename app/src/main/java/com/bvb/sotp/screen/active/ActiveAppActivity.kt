@@ -198,7 +198,9 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
         mLastClickTime = SystemClock.elapsedRealtime()
 
         if (TextUtils.isEmpty(edtUsername.text) || TextUtils.isEmpty(edtActiveCode.text)) {
-
+            var dialog = DialogHelper(this)
+            dialog.showAlertDialog(getString(R.string.active_app_input_empty), true, Runnable {
+            })
         } else {
             edtUsername.setText(edtUsername.text.toString().replace(" ", ""))
             edtActiveCode.setText(edtActiveCode.text.toString().replace(" ", ""))
@@ -432,7 +434,7 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
                     })
 
             } else {
-//                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE,"")
 
                 runOnUiThread {
                     ErrorUtils().activeErrorHandle(param!!, this@ActiveAppActivity)

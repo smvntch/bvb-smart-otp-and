@@ -56,8 +56,8 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
     @BindView(R.id.btn_other)
     lateinit var btnOther: AppCompatTextView
 //
-//    @BindView(R.id.btnLayout)
-//    lateinit var btnLayout: View
+    @BindView(R.id.btnLayout)
+    lateinit var btnLayout: View
 
     lateinit var adapter: NotificationAdapter
 
@@ -114,7 +114,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
         recycleView.adapter = adapter
         var type = getType()
         if (!TextUtils.isEmpty(type) && type == "other") {
-//            btnLayout.visibility = View.GONE
+            btnLayout.visibility = View.GONE
             currentTab = 4
             onChangeTab(currentTab)
 
