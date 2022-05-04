@@ -47,12 +47,12 @@
     <string name="setting_app">Cài đặt</string>
 
     <!--    Test Environment-->
-<!--    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
-<!--    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>-->
-<!--    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>-->
-<!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>-->
-<!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>-->
-<!--    <string name="app_integration_key" translatable="false">5d955c68df631e88e29d470f98c4dc79af2fee0ffa457e5a01a5f8f685ef0706</string>-->
+    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
+    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>
+    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>
+    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>
+    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>
+    <string name="app_integration_key" translatable="false">8e5afa68042e544daba8676b3e6d446e9c10e7e66abc13d7d15939df1778a640</string>
 
     <!--    BVB Test    -->
 <!--        <string name="app_default_soft_cert_url" translatable="false">https://103.56.168.30/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
@@ -71,12 +71,12 @@
 <!--        <string name="app_integration_key" translatable="false">de5d2d7255963dd72a360a6deb8aefe0f3092e97c085e541afcdeceade21080f</string>-->
 
     <!--    Production-->
-        <string name="app_default_soft_cert_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
-        <string name="app_default_web_service_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>
-        <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/v2/CentagateWS/webresources</string>
-        <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQA2m+yCayh5y6QjaOHjN/cGPEecOUQmkAQBQXk5OR9RoxF3MlFXJ1n6y51AIGX+yErL2cFUwUlTzR0haqUov5WrH8ATrpIW1df6Cjm6zTQkJInkyCdztHcOYmvsVSw5ZsFgHdqZxLJsP1KEGtco2343pgC2LS8DX1VBvX1y+CvPz+TOvQ=</string>
-        <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAa1GYzFk6XmFbyiJHAj3J5PfOzbcH2cbb8Jb+xwlE47x+htfqHDbMTdCVl++s1s9q+itFbeKrJ43Lhnn45yMwUWUB6Wr+8dz7mtLYLze11FQebBcucYUxjQahThHBnC8iz1dIF2YzKQQ2tWkMOGElxpl2q3PLOwUV52asAROsg+zH/i8=</string>
-        <string name="app_integration_key" translatable="false">3de48ef29018e76e50b70238bda814635163ab12fbbd0d31323a6e91a80883fd</string>
+<!--        <string name="app_default_soft_cert_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
+<!--        <string name="app_default_web_service_url" translatable="false">https://softotp.baovietbank.vn/CentagateMobileWS/webresources</string>-->
+<!--        <string name="app_default_auth_url" translatable="false">https://softotp.baovietbank.vn/v2/CentagateWS/webresources</string>-->
+<!--        <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQA2m+yCayh5y6QjaOHjN/cGPEecOUQmkAQBQXk5OR9RoxF3MlFXJ1n6y51AIGX+yErL2cFUwUlTzR0haqUov5WrH8ATrpIW1df6Cjm6zTQkJInkyCdztHcOYmvsVSw5ZsFgHdqZxLJsP1KEGtco2343pgC2LS8DX1VBvX1y+CvPz+TOvQ=</string>-->
+<!--        <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAa1GYzFk6XmFbyiJHAj3J5PfOzbcH2cbb8Jb+xwlE47x+htfqHDbMTdCVl++s1s9q+itFbeKrJ43Lhnn45yMwUWUB6Wr+8dz7mtLYLze11FQebBcucYUxjQahThHBnC8iz1dIF2YzKQQ2tWkMOGElxpl2q3PLOwUV52asAROsg+zH/i8=</string>-->
+<!--        <string name="app_integration_key" translatable="false">3de48ef29018e76e50b70238bda814635163ab12fbbd0d31323a6e91a80883fd</string>-->
 
     <string name="time_expired">Mã giao dịch đã hết hạn</string>
     <string name="error_undefine">Lỗi không xác định</string>
