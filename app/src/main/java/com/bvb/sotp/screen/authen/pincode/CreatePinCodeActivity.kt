@@ -104,7 +104,6 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     @BindView(R.id.back)
     lateinit var mBack: ImageView
 
-    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.bio_cancel)
     lateinit var bioCancel: AppCompatButton
 
@@ -169,13 +168,17 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
         }
 
         bioCancel.setOnClickListener {
-            try {
-                mFingerprintConnector?.stopListening()
-            }catch (e:Exception){
-
-            }
-            onIdentifySuccess()
+            onCancelBioMetric()
         }
+    }
+
+    private fun onCancelBioMetric(){
+        try {
+            mFingerprintConnector?.stopListening()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        onIdentifySuccess()
     }
 
     override fun initLocale() {
@@ -454,6 +457,11 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
     @OnClick(R.id.tv_next)
     fun onBtnNextClick() {
         onNextClick()
+    }
+
+    @OnClick(R.id.btnBioCancel)
+    fun onCancelClick() {
+        onCancelBioMetric()
     }
 
     private fun reset() {
