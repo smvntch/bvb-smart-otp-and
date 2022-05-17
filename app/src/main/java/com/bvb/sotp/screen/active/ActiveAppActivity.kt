@@ -181,12 +181,13 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
     @OnClick(R.id.lnEng)
     fun OnEnClick() {
         changeLang("en")
-
     }
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(intent);
+        finish()
+        overridePendingTransition(0, 0);
 
     }
 
@@ -199,8 +200,12 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
 
         if (TextUtils.isEmpty(edtUsername.text) || TextUtils.isEmpty(edtActiveCode.text)) {
             var dialog = DialogHelper(this)
-            dialog.showAlertDialog(getString(R.string.active_app_input_empty), true, Runnable {
-            })
+            dialog.showAlertDialog(
+                getString(R.string.active_app_input_empty),
+                true,
+                getString(R.string.btn_close),
+                Runnable {
+                })
         } else {
             edtUsername.setText(edtUsername.text.toString().replace(" ", ""))
             edtActiveCode.setText(edtActiveCode.text.toString().replace(" ", ""))
@@ -434,7 +439,7 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
                     })
 
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE,"")
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_ACTIVE_CODE, "")
 
                 runOnUiThread {
                     ErrorUtils().activeErrorHandle(param!!, this@ActiveAppActivity)

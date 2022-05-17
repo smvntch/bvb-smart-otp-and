@@ -124,7 +124,9 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
 
     }
 
@@ -193,7 +195,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
 
-
     internal inner class GetSessionProcess : AsyncTask<Int, Void, Int>() {
         override fun doInBackground(vararg params: Int?): Int {
             var result: Boolean? = false
@@ -237,7 +238,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
+                        getString(R.string.qr_invalid) + " (" + param.toString() + ")",
                         true,
                         Runnable {
                             resumeQrScan()

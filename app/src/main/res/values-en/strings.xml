@@ -6,12 +6,12 @@
     <string name="pincode_policy">Note:\nPosition of numbers on keyboard will be changed each time.</string>
     <string name="delete">Remove</string>
     <string name="reinput_pincode">Enter your PIN Code</string>
-    <string name="reinput_pincode_message">Re-enter PIN (06 digit number)/</string>
+    <string name="reinput_pincode_message">Re-enter PIN</string>
     <string name="set_pincode_success">Create PIN successfully</string>
     <string name="chuc_mung">Congratulation!</string>
     <string name="incorrect">Failed!</string>
     <string name="username">Username</string>
-    <string name="input_code_active_app">Enter Activation Code</string>
+    <string name="input_code_active_app">Activation Code</string>
     <string name="setting_pincode_success">You have activated your account successfully</string>
     <string name="active">Activate</string>
     <string name="active_app">Add User</string>
@@ -196,4 +196,6 @@
     <string name="transaction_successful">Transaction successful</string>
     <string name="invalid_mobile_push">Invalid Mobile Push</string>
     <string name="msg_disable_finger_success">Fingerprint/Face ID unregistered successfully</string>
+    <string name="btn_close">Close</string>
+
 </resources>

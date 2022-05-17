@@ -285,6 +285,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         qrCode.setOnClickListener {
             var intent = Intent(this, LoginConfirmQrActivity::class.java)
+            intent.putExtra("cancelable", true)
             startActivityForResult(intent, 1)
         }
 
@@ -564,7 +565,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     var disableFinger = false

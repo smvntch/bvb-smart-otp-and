@@ -196,21 +196,8 @@ class DialogHelper(private var context: Context) {
         text.text = msg
         if (isError) {
             imgStatus.setImageResource(R.drawable.ic_warning)
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                text.setTextColor(context.resources.getColor(R.color.colorRed, null))
-//            } else {
-//                text.setTextColor(context.resources.getColor(R.color.colorRed))
-//
-//            }
         } else {
             imgStatus.setImageResource(R.drawable.ic_check_active)
-
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                text.setTextColor(context.resources.getColor(R.color.black, null))
-//            } else {
-//                text.setTextColor(context.resources.getColor(R.color.black))
-//
-//            }
         }
         val dialogButton = dialog.findViewById(R.id.close) as AppCompatButton
         dialogButton.setOnClickListener {

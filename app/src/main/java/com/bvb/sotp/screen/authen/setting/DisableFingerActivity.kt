@@ -484,7 +484,9 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
         biometricInputLayout.visibility = View.GONE

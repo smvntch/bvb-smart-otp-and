@@ -447,7 +447,9 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     fun changeKeypad() {

@@ -16,13 +16,13 @@ import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginConfirmQrActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
+import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.Utils
 import com.centagate.module.account.Account
 import com.centagate.module.authentication.AuthenticationService
 import com.centagate.module.authentication.QrAuthentication
 import com.centagate.module.exception.CentagateException
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
@@ -161,8 +161,14 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     false,
                     "OK",
                     Runnable {
+                        val a = Intent(this@QrCodeTransactionDetailActivity, AddUserActivity::class.java)
+                        a.addFlags(
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
+                        )
+                        startActivity(a)
                         finish()
-
                     })
 
             } else {
@@ -172,7 +178,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.invalid_qr_tittle)+ " (" + param.toString() + ")",
+                        getString(R.string.invalid_qr_tittle) + " (" + param.toString() + ")",
                         true,
                         getString(R.string.close),
                         Runnable {
@@ -230,6 +236,16 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                     getString(R.string.transaction_denied),
                     true,
                     Runnable {
+                        val a = Intent(
+                            this@QrCodeTransactionDetailActivity,
+                            AddUserActivity::class.java
+                        )
+                        a.addFlags(
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
+                        )
+                        startActivity(a)
                         finish()
                     })
 
@@ -242,7 +258,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        getString(R.string.qr_invalid)+ " (" + param.toString() + ")",
+                        getString(R.string.qr_invalid) + " (" + param.toString() + ")",
                         true,
                         Runnable {
                             finish()
@@ -275,7 +291,9 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
 
     }
 

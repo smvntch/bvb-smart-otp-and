@@ -55,7 +55,8 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
     @BindView(R.id.btn_other)
     lateinit var btnOther: AppCompatTextView
-//
+
+    //
     @BindView(R.id.btnLayout)
     lateinit var btnLayout: View
 
@@ -188,7 +189,9 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
     }
 
 
@@ -312,7 +315,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
                         adapter.notifyDataSetChanged()
                     }, 500)
 
-                }else{
+                } else {
                     adapter.notifyDataSetChanged()
                 }
 //                showNotification()

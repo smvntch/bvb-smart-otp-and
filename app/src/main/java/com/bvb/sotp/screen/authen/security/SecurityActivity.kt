@@ -132,7 +132,9 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     fun isAvailable(context: Context): Boolean {

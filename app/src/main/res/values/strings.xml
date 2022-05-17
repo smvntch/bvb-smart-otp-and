@@ -103,7 +103,7 @@
     <string name="text_tutorial_2">Để xác thực giao dịch: Quý khách lựa chọn tài khoản tương ứng, nhập Mã giao dịch và bấm "<b><font color='#3a5e4c'>Lấy mã OTP</font></b>"</string>
     <string name="text_tutorial_3">Trường hợp Quý khách nhập sai PIN 5 lần liên tiếp, ứng dụng <b><font color='#3a5e4c'>Soft OTP</font></b> sẽ bị khóa. Quý khách vui lòng liên hệ SecureMetric để kích hoạt lại tài khoản</string>
     <string name="security">Bảo mật</string>
-    <string name="text_active_warning">Tên người dùng là user dịch vụ Internet Banking của BAOVIET Bank\n\nMã kích hoạt bao gồm 08 ký tự số đã được gửi đến số điện thoại đăng ký dịch vụ Internet Banking của BAOVIET Bank</string>
+    <string name="text_active_warning">Tên người dùng là user dịch vụ Internet Banking của BAOVIET Bank\n\nMã kích hoạt bao gồm 06 ký tự số đã được gửi đến số điện thoại đăng ký dịch vụ Internet Banking của BAOVIET Bank</string>
     <string name="add_user_online">Thêm tài khoản Online</string>
     <string name="login_input_pin">Vui lòng nhập PIN</string>
     <string name="confirm">Xác nhận</string>
@@ -235,6 +235,8 @@
     <string name="faq_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/cau-hoi-thuong-gap</string>
     <string name="guide_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/huong-dan-su-dung</string>
     <string name="policy_url">https://www.baovietbank.vn/vn/sotp/chi-tiet/dieu-khoan-dieu-kien-su-dung</string>
+    <string name="btn_close">Đóng</string>
+
 </resources>
 
 

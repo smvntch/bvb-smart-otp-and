@@ -90,7 +90,9 @@ class WebviewActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
 
     }
 }
