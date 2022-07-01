@@ -17,6 +17,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -70,18 +71,9 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
     fun setAppBarHeight() {
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-        if (getStatusBarHeight() > dpToPx(24)) {
-//            var topbarLp =  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            topbarLp.setMargins(0, getStatusBarHeight(), 0, 0);
-//
-//            //Set above layout params to your layout which was getting cut because of notch
-//            topbar.setLayoutParams(topbarlp)
-        } else {
             var height = getStatusBarHeight() + dpToPx(56)
             appBarLayout.layoutParams =
                 CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
-
-        }
     }
 
     private val disconnectCallback = Runnable {

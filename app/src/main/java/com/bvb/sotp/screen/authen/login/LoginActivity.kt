@@ -20,6 +20,7 @@ import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.repository.CommonListener
+import com.bvb.sotp.screen.active.ActiveAppActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.setting.info.ContactActivity
 import com.bvb.sotp.screen.transaction.GetOtpQrActivity
@@ -319,7 +320,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             biometricInputLayout.visibility = View.GONE
             try {
                 mFingerprintConnector?.stopListening()
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
         }
@@ -360,10 +361,18 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     fun onIdentifySuccess() {
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
-
-        if (!isValidate()) {
-            val intent = Intent(this@LoginActivity, AddUserActivity::class.java)
-            startActivity(intent)
+        if (isValidate()) {
+            val authentication = AccountRepository.getInstance(this).authentication
+            val account = AccountRepository.getInstance(this).accounts
+            if (authentication != null && account.value != null && account.value?.size!! > 0) {
+                val intent = Intent(this@LoginActivity, AddUserActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this@LoginActivity, ActiveAppActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
         }
         finish()
     }
@@ -547,7 +556,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     @OnClick(R.id.noti)
     fun onNotiClick() {
         var intent = Intent(this, NotificationActivity::class.java)
-        intent.putExtra("type","other")
+        intent.putExtra("type", "other")
         startActivity(intent)
     }
 
@@ -566,8 +575,8 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
         startActivity(getIntent());
-finish();
-overridePendingTransition(0, 0);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     var disableFinger = false
@@ -632,7 +641,7 @@ overridePendingTransition(0, 0);
 
     fun onCheckStatus() {
         var list = AccountRepository.getInstance(this).accounts.value
-        if (list?.isNullOrEmpty() == true) {
+        if (list.isNullOrEmpty()) {
             return
         }
 

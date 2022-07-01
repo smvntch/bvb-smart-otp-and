@@ -233,7 +233,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         val authentication = AccountRepository.getInstance(this).authentication
         val account = AccountRepository.getInstance(this).accounts
         if (authentication != null && account.value != null && account.value?.size!! > 0) {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = LoginActivity.newValidateIntent(this)
             startActivity(intent)
             finish()
             return

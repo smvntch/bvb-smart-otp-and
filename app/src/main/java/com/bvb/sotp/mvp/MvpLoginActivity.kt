@@ -73,22 +73,18 @@ abstract class MvpLoginActivity<P : AndroidPresenter<*>> : AppCompatActivity(), 
     }
 
     fun setAppBarHeight() {
-
-
-
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-        if (getStatusBarHeight() > dpToPx(24)) {
-//            var topbarLp =  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        if (getStatusBarHeight() > dpToPx(24)) {
+//            var topbarLp =  CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //            topbarLp.setMargins(0, getStatusBarHeight(), 0, 0);
-//
-//            //Set above layout params to your layout which was getting cut because of notch
-//            topbar.setLayoutParams(topbarlp)
-        }else{
+////
+////            //Set above layout params to your layout which was getting cut because of notch
+//            appBarLayout.setLayoutParams(topbarLp)
+//        }else{
             var height = getStatusBarHeight() + dpToPx(56)
             appBarLayout.layoutParams =
                 CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
-
-        }
+//        }
 
     }
 

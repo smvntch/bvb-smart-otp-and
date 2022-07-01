@@ -622,7 +622,7 @@ overridePendingTransition(0, 0);
 
     fun onCheckStatus() {
         var list = AccountRepository.getInstance(this).accounts.value
-        if (list?.size == 0) {
+        if (list.isNullOrEmpty()) {
             return
         }
 

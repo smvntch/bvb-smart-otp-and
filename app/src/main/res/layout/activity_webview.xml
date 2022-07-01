@@ -14,7 +14,6 @@
         android:scaleType="centerCrop" />
 
     <com.google.android.material.appbar.AppBarLayout
-
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,8 +27,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sw_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_toolbar">
+        android:layout_height="match_parent">
 
         <WebView
             android:id="@+id/webview"

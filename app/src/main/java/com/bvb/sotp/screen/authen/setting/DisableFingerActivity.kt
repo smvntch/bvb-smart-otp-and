@@ -1,40 +1,25 @@
 package com.bvb.sotp.screen.authen.setting
 
-import android.app.Activity
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.text.TextUtils
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import butterknife.BindView
 import butterknife.OnClick
-import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
-import com.easyfingerprint.EasyFingerPrint
-import com.samsung.android.sdk.pass.Spass
-import com.samsung.android.sdk.pass.SpassFingerprint
 import com.bvb.sotp.Constant
 import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.repository.CommonListener
-import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.login.LoginPresenter
 import com.bvb.sotp.screen.authen.login.LoginViewContract
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
-import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
+import com.centagate.module.device.FingerprintAuthentication
+import com.centagate.module.device.PinAuthentication
 import java.util.*
 
 
@@ -120,23 +105,6 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     @BindView(R.id.tv_tittle)
     lateinit var tvTittle: RegularBoldTextView
-
-    companion object {
-        fun newValidateIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", true)
-            intent.putExtra("cancelable", false)
-            return intent
-        }
-
-        fun newCancelAbleIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", false)
-            intent.putExtra("cancelable", true)
-            return intent
-        }
-    }
-
 
     private fun isValidate(): Boolean {
         return intent.getBooleanExtra("is_validate", false)

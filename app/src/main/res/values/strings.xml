@@ -158,14 +158,13 @@
     <string name="setting_biometric">Cài đặt vân tay</string>
     <string name="biometric_setup_fingerprint">Quý khách có muốn cài đặt vân tay cho ứng dụng?</string>
     <string name="agree">Đồng ý</string>
-    <string name="disable_finger_msg">Bạn có muốn hủy cài đặt vân tay trên ứng dụng?</string>
-
+    <string name="disable_finger_msg">Quý khách có muốn hủy cài đặt vân tay trên ứng dụng?</string>
     <string name="msg_finger_not_available">Thiết bị chưa cho phép sử dụng sinh trắc học. Quý khách vui lòng cài đặt để tiếp tục sử dụng</string>
     <string name="bio_input_fingerprint">Touch ID cho Soft OTP</string>
     <string name="bio_input_desc">Quý khách vui lòng xác nhận vân tay để tiếp tục</string>
     <string name="try_again">Xin thử lại</string>
     <string name="lock_fingerprint_msg">Thiết bị chưa cho phép sử dụng sinh trắc học. Quý khách vui lòng cài đặt để tiếp tục sử dụng</string>
-    <string name="msg_disable_finger_first">Quá trình đổi PIN sẽ tắt vân tay. Quý khách có thực hiện tiếp?</string>
+    <string name="msg_disable_finger_first">Quá trình đổi PIN sẽ tắt đăng nhập bằng vân tay. Quý khách có muốn tiếp tục?</string>
     <string name="not_scan_qr">Không quét được QR?</string>
     <string name="transaction_qr">Tạo OTP bằng số tham chiếu giao dịch</string>
     <string name="active_by_username">Kích hoạt bằng số tham chiếu</string>

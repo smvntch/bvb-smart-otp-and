@@ -97,18 +97,6 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     @BindView(R.id.num_back)
     lateinit var numBack: ImageView
 
-//    @BindView(R.id.img_close_fail)
-//    lateinit var imgCloseFail: ImageView
-
-//    @BindView(R.id.cstr_success)
-//    lateinit var cstrSuccess: CardView
-
-//    @BindView(R.id.cstr_fail)
-//    lateinit var cstrFail: CardView
-
-//    @BindView(R.id.popup)
-//    lateinit var popup: View
-
     @BindView(R.id.biometricInputLayout)
     lateinit var biometricInputLayout: View
 
@@ -124,26 +112,6 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
 
     var count: Int = 0
 
-    companion object {
-        fun newValidateIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", true)
-            intent.putExtra("cancelable", false)
-            return intent
-        }
-
-        fun newCancelAbleIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", false)
-            intent.putExtra("cancelable", true)
-            return intent
-        }
-    }
-
-
-    private fun isValidate(): Boolean {
-        return intent.getBooleanExtra("is_validate", false)
-    }
 
     private fun isCancelable(): Boolean {
         return intent.getBooleanExtra("cancelable", false)

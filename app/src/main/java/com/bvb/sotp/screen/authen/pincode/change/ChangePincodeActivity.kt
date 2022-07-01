@@ -13,7 +13,6 @@ import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
 import com.bvb.sotp.screen.authen.security.SecurityActivity
