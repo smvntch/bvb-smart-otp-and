@@ -113,11 +113,11 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
             onQrClick(0)
         }
 
-        if (preferenceHelper.getIsNotification()) {
-            showNotification()
-        } else {
-            PendingRequest().execute()
-        }
+//        if (preferenceHelper.getIsNotification()) {
+//            showNotification()
+//        } else {
+//            PendingRequest().execute()
+//        }
     }
 
     override fun onResume() {
@@ -126,64 +126,12 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         loadLang()
         checkChangePin()
         transLayout.visibility = View.GONE
-        println("--onResume--------getIsNotification------" + preferenceHelper.getIsNotification())
         if (preferenceHelper.getIsNotification()) {
             showNotification()
         } else {
             PendingRequest().execute()
         }
     }
-
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    fun onMessageEvent(event: PushEvent) {
-//        println("--onMessageEvent--------------")
-//
-//        showNotification()
-//    }
-
-//    var dialogMP: Dialog? = null
-//
-//    private fun showNotification() {
-//        println("--showNotification--------------")
-//        if (isFinishing) {
-//            return
-//        }
-//
-//        if (dialogMP != null && dialogMP!!.isShowing) {
-//            dialogMP!!.dismiss()
-//        }
-//
-//        dialogMP = Dialog(this)
-//        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        dialogMP!!.setCancelable(false)
-//        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
-//
-//        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
-//        dialogButton.setOnClickListener {
-//            getTokenProcess().execute()
-//
-//            dialogMP!!.dismiss()
-//        }
-//
-//        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
-//        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
-//        msg.text = getString(R.string.msg_have_mobile_push)
-//        close.setOnClickListener {
-//            preferenceHelper.setIsNotification(false)
-//
-//            dialogMP!!.dismiss()
-//        }
-//
-//        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
-//        dialogMP!!.window?.setLayout(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.MATCH_PARENT
-//        )
-//
-//
-//        dialogMP!!.show()
-//
-//    }
 
     fun updateToken(): Int {
         var result = 0
