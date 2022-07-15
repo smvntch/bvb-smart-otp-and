@@ -26,6 +26,19 @@ target/
 # JetBrains IDE
 .idea/
 
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Android Studio
+*.iml
+# .idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+.navigation
+captures/
+output.json
+
 # Unit test reports
 TEST*.xml
 
@@ -47,6 +60,3 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-
-# Local configuration file (sdk path, etc)
-local.properties
