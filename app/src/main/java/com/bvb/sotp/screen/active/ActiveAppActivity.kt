@@ -119,6 +119,19 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
                 )
 
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+
+                    requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1);
+
+                } else {
+
+                }
+            }
         }
     }
 

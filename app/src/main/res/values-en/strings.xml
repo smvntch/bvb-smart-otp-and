@@ -157,7 +157,7 @@
     <string name="transaction_date">Transaction date:</string>
     <string name="transaction_info">Transaction information</string>
     <string name="msg_have_mobile_push">You have new Mobile Push</string>
-    <string name="msg_reset_pin">Are you sure you want to reset your PIN?</string>
+    <string name="msg_reset_pin">Are you sure you want to reset your PIN?\n(If you agree, please visit BAOVIET Bank branches to re-activate BVB eToken).</string>
     <string name="confirm_transaction_mobile">Confirm transaction - Mobile Push</string>
     <string name="msg_unregistered">User %s has unregistered/activated on other mobile divide successfully.</string>
     <string name="detail_trans_tittle">This is the detail of tranfer:</string>
