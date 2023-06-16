@@ -4,8 +4,10 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.AsyncTask
+import android.os.Build
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
@@ -14,6 +16,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -118,6 +121,19 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 //        } else {
 //            PendingRequest().execute()
 //        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1);
+
+            } else {
+
+            }
+        }
     }
 
     override fun onResume() {

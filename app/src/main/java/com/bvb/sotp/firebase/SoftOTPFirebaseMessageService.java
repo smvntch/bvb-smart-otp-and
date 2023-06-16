@@ -10,6 +10,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.bvb.sotp.Constant;
 import com.bvb.sotp.PeepApp;
@@ -95,7 +96,7 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
     }
 
     void saveNoti(String message) {
-        System.out.println("----saveNoti---------"+message);
+        System.out.println("----saveNoti---------" + message);
         Realm realm = Realm.getDefaultInstance();
         long id = PeepApp.Companion.getMobilePushPrimaryKey().getAndIncrement();
 
@@ -108,10 +109,11 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
     }
 
     private void setupNotification(Map<String, String> dataObj) {
+        System.out.println("---setupNotification-------------------------");
         try {
             JSONObject jsonObject = new JSONObject(dataObj);
             String message = jsonObject.getString("message");
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             String channel_id = createNotificationChannel(getApplicationContext());
 
             String appName = getString(R.string.app_name);
@@ -132,15 +134,24 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            PendingIntent intent = PendingIntent.getActivity(getApplicationContext(), 0,
-                    notificationIntent, 0);
+            PendingIntent pendingIntent;
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                pendingIntent = PendingIntent.getActivity
+                        (this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+            } else {
+                pendingIntent = PendingIntent.getActivity
+                        (this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            }
+
 
             mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
 
-            mBuilder.setContentIntent(intent);
-            if (notificationManager != null) {
-                notificationManager.notify(1, mBuilder.build());
-            }
+            mBuilder.setContentIntent(pendingIntent);
+            NotificationManagerCompat.from(this).notify(1, mBuilder.build());
+//            if (notificationManager != null) {
+//                notificationManager.notify(1, mBuilder.build());
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,6 +180,8 @@ public class SoftOTPFirebaseMessageService extends FirebaseMessagingService {
 //            mBuilder.setContentIntent(intent);
 //            notificationManager.notify(1, mBuilder.build());
         }
+        System.out.println("---setupNotification-----------------end--------");
+
     }
 
     private boolean isAppIsInBackground(Context context) {
