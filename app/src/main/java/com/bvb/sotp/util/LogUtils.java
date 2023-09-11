@@ -3,6 +3,7 @@ package com.bvb.sotp.util;
 import android.os.Environment;
 import android.util.Log;
 
+import com.centagate.module.BuildConfig;
 import com.centagate.module.common.Utils;
 
 import java.io.BufferedOutputStream;
@@ -16,12 +17,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class LogUtils {
-
+    /*
+    * only for development mode
+    * */
     public static void printLog(String method, String log) {
 
-//        if (!log.isEmpty()) {
-//            return;
-//        }
+        if (!BuildConfig.DEBUG) {
+            return;
+        }
         try {
             File externalStorageDir = Environment.getExternalStorageDirectory();
             File myFile = new File(externalStorageDir, "log_smvn.txt");

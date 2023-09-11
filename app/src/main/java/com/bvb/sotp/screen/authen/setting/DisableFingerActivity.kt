@@ -1,39 +1,25 @@
 package com.bvb.sotp.screen.authen.setting
 
-import android.app.Activity
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.text.TextUtils
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import butterknife.BindView
 import butterknife.OnClick
-import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
-import com.easyfingerprint.EasyFingerPrint
-import com.samsung.android.sdk.pass.Spass
-import com.samsung.android.sdk.pass.SpassFingerprint
 import com.bvb.sotp.Constant
 import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.repository.CommonListener
-import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.login.LoginPresenter
 import com.bvb.sotp.screen.authen.login.LoginViewContract
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
-import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
+import com.centagate.module.device.FingerprintAuthentication
+import com.centagate.module.device.PinAuthentication
 import java.util.*
 
 
@@ -103,8 +89,8 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 //    @BindView(R.id.cstr_fail)
 //    lateinit var cstrFail: CardView
 
-    @BindView(R.id.popup)
-    lateinit var popup: View
+//    @BindView(R.id.popup)
+//    lateinit var popup: View
 
     var count: Int = 0
 
@@ -117,22 +103,8 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
     @BindView(R.id.bio_status)
     lateinit var tvBioStatus: RegularTextView
 
-    companion object {
-        fun newValidateIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", true)
-            intent.putExtra("cancelable", false)
-            return intent
-        }
-
-        fun newCancelAbleIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", false)
-            intent.putExtra("cancelable", true)
-            return intent
-        }
-    }
-
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
 
     private fun isValidate(): Boolean {
         return intent.getBooleanExtra("is_validate", false)
@@ -215,6 +187,7 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     override fun initViews() {
         setAppBarHeight()
+        tvTittle.text = getString(R.string.security)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
@@ -267,11 +240,16 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
 
-        if (!isValidate()) {
-            val intent = Intent(this@DisableFingerActivity, AddUserActivity::class.java)
-            startActivity(intent)
-        }
-        finish()
+        val dialog = DialogHelper(this)
+        dialog.showAlertDialog(getString(R.string.msg_disable_finger_success), false,
+            Runnable() {
+                (this.application as PeepApp).mLastPause = System.currentTimeMillis()
+                finish()
+            })
+//        if (!isValidate()) {
+//            val intent = Intent(this@DisableFingerActivity, AddUserActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     override fun onBackPressed() {
@@ -328,7 +306,7 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -455,6 +433,11 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     }
 
+    @OnClick(R.id.menu)
+    fun onBack() {
+        finish()
+    }
+
     @OnClick(R.id.lnVn)
     fun OnVnClick() {
         changeLang("vi")
@@ -469,7 +452,9 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
         biometricInputLayout.visibility = View.GONE

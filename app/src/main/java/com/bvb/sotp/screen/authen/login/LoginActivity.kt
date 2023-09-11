@@ -19,9 +19,12 @@ import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
+import com.bvb.sotp.repository.CommonListener
+import com.bvb.sotp.screen.active.ActiveAppActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.setting.info.ContactActivity
 import com.bvb.sotp.screen.transaction.GetOtpQrActivity
+import com.bvb.sotp.screen.transaction.NotificationActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
@@ -88,9 +91,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     @BindView(R.id.num_back)
     lateinit var numBack: ImageView
-
-    @BindView(R.id.popup)
-    lateinit var popup: View
+//
+//    @BindView(R.id.popup)
+//    lateinit var popup: View
 
     @BindView(R.id.biometricInputLayout)
     lateinit var biometricInputLayout: View
@@ -115,6 +118,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     @BindView(R.id.fingerLayout)
     lateinit var fingerLayout: View
+
+    @BindView(R.id.biometricZone)
+    lateinit var biometricZone: View
 
     var count: Int = 0
 
@@ -232,10 +238,14 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         }
         initKeyPad()
         loadLang()
+        getUsers()
+
+        onCheckStatus()
 
         tvTittle.setText(getString(R.string.login_tittle))
 
 //        bioClose.visibility = View.GONE
+        var authentication = AccountRepository.getInstance(this).authentication
 
         num1.setOnClickListener(this)
         num2.setOnClickListener(this)
@@ -276,6 +286,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         qrCode.setOnClickListener {
             var intent = Intent(this, LoginConfirmQrActivity::class.java)
+            intent.putExtra("cancelable", true)
             startActivityForResult(intent, 1)
         }
 
@@ -307,11 +318,11 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         tvBioCancel.setOnClickListener {
             biometricInputLayout.visibility = View.GONE
-            isChangeToPin = true
-            var authentication = AccountRepository.getInstance(this).authentication
-            authentication.setTryLeft(Constant.tryLimit)
-            authentication.tryLimit = Constant.tryLimit
-            AccountRepository.getInstance(this).savePin(authentication)
+            try {
+                mFingerprintConnector?.stopListening()
+            } catch (e: Exception) {
+
+            }
         }
 
         var accounts = AccountRepository.getInstance(this).accounts.value
@@ -337,8 +348,8 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             if (requestCode == 1) {
                 var intent = Intent(this@LoginActivity, GetOtpQrActivity::class.java)
                 intent.putExtra("id", account?.accountInfo?.accountId)
-                startActivityForResult(intent, 1)
-                finish()
+                startActivity(intent)
+//                finish()
             }
         }
     }
@@ -350,10 +361,18 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     fun onIdentifySuccess() {
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
-
-        if (!isValidate()) {
-            val intent = Intent(this@LoginActivity, AddUserActivity::class.java)
-            startActivity(intent)
+        if (isValidate()) {
+            val authentication = AccountRepository.getInstance(this).authentication
+            val account = AccountRepository.getInstance(this).accounts
+            if (authentication != null && account.value != null && account.value?.size!! > 0) {
+                val intent = Intent(this@LoginActivity, AddUserActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this@LoginActivity, ActiveAppActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
         }
         finish()
     }
@@ -420,7 +439,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
 
-                if (authentication.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -534,6 +553,13 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     }
 
+    @OnClick(R.id.noti)
+    fun onNotiClick() {
+        var intent = Intent(this, NotificationActivity::class.java)
+        intent.putExtra("type", "other")
+        startActivity(intent)
+    }
+
     @OnClick(R.id.lnVn)
     fun OnVnClick() {
         changeLang("vi")
@@ -548,7 +574,9 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     var disableFinger = false
@@ -600,7 +628,8 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             biometricInputLayout.visibility = View.GONE
             disableFinger = true
         } else {
-//            Toast.makeText(this, errMsgId, Toast.LENGTH_SHORT).show()
+
+            biometricInputLayout.visibility = View.GONE
         }
 
 
@@ -608,5 +637,81 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     override fun onStartListen() {
         biometricInputLayout.visibility = View.VISIBLE
+    }
+
+    fun onCheckStatus() {
+        var list = AccountRepository.getInstance(this).accounts.value
+        if (list.isNullOrEmpty()) {
+            return
+        }
+
+        val securityDevice = AccountRepository.getInstance(application).authentication
+        var count = 0
+        val hid: String
+        hid = preferenceHelper.getHid()
+
+        val meMap = HashMap<Int, Int>()
+
+        for (i in 0 until list.size) {
+
+            AccountRepository.getInstance(application)
+                .syncOtp(hid, list[i], securityDevice, object :
+                    CommonListener {
+
+                    override fun onSuccess() {
+                        count++
+                        if (count == list.size) {
+                            if (meMap.size > 0) {
+                                onUnregistered()
+
+                            }
+                        }
+                    }
+
+                    override fun onError(code: Int?) {
+                        code?.let {
+                            if (it == 1001 || it == 1002 || it == 3000 || it == 6000)
+                                meMap.put(i, it)
+                        }
+                        count++
+                        if (count == list.size) {
+                            if (meMap.size > 0) {
+                                onUnregistered()
+                            }
+                        }
+                    }
+                })
+        }
+    }
+
+    var listUser: ArrayList<Account> = ArrayList()
+    fun getUsers() {
+        var list = AccountRepository.getInstance(this).accounts.value
+        if (list != null) {
+//            accountName.text = list[0].accountInfo.displayName
+            listUser.clear()
+//        adapter.notifyDataSetChanged()
+            listUser.addAll(list)
+
+        }
+
+    }
+
+    fun onUnregistered() {
+        var name = ""
+        try {
+            name = listUser[0].accountInfo.displayName
+
+        } catch (e: Exception) {
+
+        }
+        val dialog = DialogHelper(this)
+        dialog.showAlertDialog(
+            getString(R.string.msg_unregistered, name), true
+        ) {
+            AccountRepository.getInstance(this).resetData()
+            onResetInfo()
+        }
+
     }
 }

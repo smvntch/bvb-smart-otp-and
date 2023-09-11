@@ -100,15 +100,15 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         var dialogHelper = DialogHelper(this)
 
         dialogHelper.showAlertDialogBiometric(
-                getString(R.string.msg_disable_finger_first),
-                Runnable {
-                    var intent = Intent(this, LoginChangeActivity::class.java)
-                    startActivity(intent)
+            getString(R.string.msg_disable_finger_first),
+            Runnable {
+                var intent = Intent(this, LoginChangeActivity::class.java)
+                startActivity(intent)
 
-                },
-                Runnable {
+            },
+            Runnable {
 
-                })
+            })
     }
 
 
@@ -132,7 +132,9 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     fun isAvailable(context: Context): Boolean {
@@ -158,11 +160,11 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
             if (isAvailable(this) && !mFingerprintIdentify.isFingerprintEnable) {
                 var dialogHelper = DialogHelper(this)
                 dialogHelper.showAlertDialog(
-                        getString(R.string.msg_finger_not_available),
-                        true,
-                        Runnable {
+                    getString(R.string.msg_finger_not_available),
+                    true,
+                    Runnable {
 
-                        })
+                    })
                 return
             }
         }
@@ -172,29 +174,29 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         var dialogHelper = DialogHelper(this)
 
         dialogHelper.showAlertDialogBiometric(
-                getString(R.string.biometric_setup_fingerprint),
-                Runnable {
-                    val intent = Intent(this, EnableFingerActivity::class.java)
-                    startActivity(intent)
-                },
-                Runnable {
-                    bindBiometric()
-                })
+            getString(R.string.biometric_setup_fingerprint),
+            Runnable {
+                val intent = Intent(this, EnableFingerActivity::class.java)
+                startActivity(intent)
+            },
+            Runnable {
+                bindBiometric()
+            })
     }
 
     fun onDisableFinger() {
         var dialogHelper = DialogHelper(this)
 
         dialogHelper.showAlertDialogBiometric(
-                getString(R.string.disable_finger_msg),
-                Runnable {
-                    val intent = Intent(this, DisableFingerActivity::class.java)
-                    startActivity(intent)
+            getString(R.string.disable_finger_msg),
+            Runnable {
+                val intent = Intent(this, DisableFingerActivity::class.java)
+                startActivity(intent)
 
-                },
-                Runnable {
-                    bindBiometric()
+            },
+            Runnable {
+                bindBiometric()
 
-                })
+            })
     }
 }

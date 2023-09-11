@@ -63,7 +63,9 @@ class GetOtpActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeContr
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     @OnClick(R.id.lnVn)
@@ -117,7 +119,9 @@ class GetOtpActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeContr
             return null
         }
 
-    }   @SuppressLint("SetTextI18n")
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun getDisplayName(context: Context): String? {
 
         try {

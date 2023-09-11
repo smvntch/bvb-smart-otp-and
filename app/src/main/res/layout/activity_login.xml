@@ -15,7 +15,7 @@
         android:background="@drawable/bg_header_new"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/include_toolbar_pincode" />
+        <include layout="@layout/include_toolbar_pincode_notification" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:card_view="http://schemas.android.com/tools"
@@ -79,7 +79,6 @@
                 android:textSize="16sp"
                 app:fonts="Kuro_Regular.ttf" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
         <com.bvb.sotp.view.RegularTextView
             android:id="@+id/tv_lbl2"
@@ -170,6 +169,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/biometricZone"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/tvForgotPass">
@@ -334,10 +334,6 @@
                     android:src="@drawable/ic_backspace" />
             </LinearLayout>
         </LinearLayout>
-
-        <include
-            layout="@layout/dialog_migrate_layout"
-            android:visibility="gone" />
 
         <include
             android:id="@+id/langLayout"

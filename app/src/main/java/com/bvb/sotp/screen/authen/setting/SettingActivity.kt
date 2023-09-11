@@ -24,6 +24,7 @@ import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
 import com.bvb.sotp.screen.authen.security.SecurityActivity
 import com.bvb.sotp.screen.authen.setting.info.InfoActivity
 import com.bvb.sotp.screen.splash.SplashActivity
+import com.bvb.sotp.screen.transaction.NotificationActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LogUtils
 import com.bvb.sotp.view.RegularBoldTextView
@@ -50,8 +51,6 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @BindView(R.id.tv_support)
     lateinit var support: RegularTextView
 
-    @BindView(R.id.toolbar)
-    lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
 
     override fun initPresenter() {
@@ -67,6 +66,12 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @OnClick(R.id.menu)
     fun onBackClick() {
         finish()
+    }
+
+    @OnClick(R.id.noti)
+    fun onNotiClick() {
+        var intent = Intent(this, NotificationActivity::class.java)
+        startActivityForResult(intent, 3)
     }
 
     override fun onResume() {
@@ -108,7 +113,9 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     @OnClick(R.id.security)
@@ -276,33 +283,11 @@ class SettingActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     @OnClick(R.id.logout)
     fun onLogoutClick() {
         var dialog = DialogHelper(this@SettingActivity)
-        dialog.showAlertDialogYesNo(getString(R.string.logout_confirm_tit), getString(R.string.logout_confirm), Runnable {
+        dialog.showAlertDialogYN( getString(R.string.logout_confirm),getString(R.string.ok),getString(R.string.cancel), Runnable {
             var intent = Intent(this@SettingActivity, SplashActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
-//            val securityDevice = PinAuthentication()
-//            //set Pin or Password
-//            securityDevice.setPin(preferenceHelper.getPincode())
-//            AccountRepository.getInstance(this).deleteAllAccount(securityDevice, object : CommonListener {
-//                override fun onSuccess() {
-//                    preferenceHelper.setPincode("")
-//                    preferenceHelper.setPincodeFail(0)
-//                    var intent = Intent(this@SettingActivity, SplashActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                }
-//
-//                override fun onError(code: Int?) {
-//                    preferenceHelper.setPincode("")
-//                    preferenceHelper.setPincodeFail(0)
-//                    var intent = Intent(this@SettingActivity, SplashActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                }
-//            })
-
-        }, Runnable {
 
         })
 

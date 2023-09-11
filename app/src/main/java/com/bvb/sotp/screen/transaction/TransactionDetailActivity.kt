@@ -1,6 +1,7 @@
 package com.bvb.sotp.screen.transaction
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.text.TextUtils
@@ -8,8 +9,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
+import com.bvb.sotp.Constant
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
+import com.bvb.sotp.helper.PreferenceHelper
 import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginConfirmQrActivity
@@ -98,7 +101,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
     override fun setupViews() {
         loadLang()
         btnApprove.setOnClickListener {
-            var intent = Intent(this, LoginConfirmQrActivity::class.java)
+            var intent = LoginConfirmQrActivity.newMobilePushIntent(this)
             startActivityForResult(intent, 1)
         }
         btnReject.setOnClickListener {
@@ -119,6 +122,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
 
     internal inner class AcceptTransactionProcess : AsyncTask<Int, Void, Int>() {
+        var progressDialog: AlertDialog? = null
+
         override fun doInBackground(vararg params: Int?): Int {
             println("-----onPostExecute----------------")
 
@@ -135,14 +140,10 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
             return 1
         }
 
-        var progressDialog: AlertDialog? = null
-
-
         override fun onPreExecute() {
             super.onPreExecute()
             println("-----onPreExecute----------------")
-            progressDialog =
-                SpotsDialog.Builder().setContext(this@TransactionDetailActivity).build()
+            progressDialog = ProgressDialog(this@TransactionDetailActivity)
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()
@@ -150,26 +151,30 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         override fun onPostExecute(param: Int?) {
             println("-----onPostExecute----------------")
-
+            val preferenceHelper = PreferenceHelper(applicationContext)
+            preferenceHelper.setSessionPending("")
             progressDialog!!.dismiss()
             if (param == 1) {
                 Utils.saveNoti(getDetail(), "", "2", "1")
                 var dialogHelper = DialogHelper(this@TransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch thành công", false, Runnable {
+                dialogHelper.showAlertDialog(getString(R.string.transaction_successful), false, Runnable {
                     finish()
 
                 })
 
             } else {
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
 
-                Utils.saveNoti(getDetail(), "", "2", "3")
+//                Utils.saveNoti(getDetail(), "", "2", "3")
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
@@ -180,6 +185,8 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
 
     internal inner class RejectTransactionProcess : AsyncTask<Int, Void, Int>() {
+        var progressDialog: AlertDialog? = null
+
         override fun doInBackground(vararg params: Int?): Int {
             println("-----onPostExecute----------------")
 
@@ -196,14 +203,10 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
             return 1
         }
 
-        var progressDialog: AlertDialog? = null
-
-
         override fun onPreExecute() {
             super.onPreExecute()
             println("-----onPreExecute----------------")
-            progressDialog =
-                SpotsDialog.Builder().setContext(this@TransactionDetailActivity).build()
+            progressDialog = ProgressDialog(this@TransactionDetailActivity)
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
             progressDialog!!.show()
@@ -211,27 +214,31 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         override fun onPostExecute(param: Int?) {
             println("-----onPostExecute----------------")
-
-            progressDialog!!.dismiss()
+            val preferenceHelper = PreferenceHelper(applicationContext)
+            preferenceHelper.setSessionPending("")
+            progressDialog?.dismiss()
             if (param == 1) {
 //                saveNoti("","2")
                 Utils.saveNoti(getDetail(), "", "2", "2")
 
                 var dialogHelper = DialogHelper(this@TransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch bị từ chối", false, Runnable {
+                dialogHelper.showAlertDialog(getString(R.string.transaction_denied), true, Runnable {
                     finish()
                 })
 
             } else {
 //                saveNoti("","3")
-                Utils.saveNoti(getDetail(), "", "2", "3")
+//                Utils.saveNoti(getDetail(), "", "2", "3")
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH,param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@TransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.invalid_mobile_push)+ " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
@@ -260,7 +267,9 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
 
     }
 
@@ -285,6 +294,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 securityDevice,
                 getRandomString()!!
             )
+
             System.out.println(test);
         } catch (e: java.lang.Exception) {
             e.printStackTrace()

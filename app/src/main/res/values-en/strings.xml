@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="setting_pincode_tittle">Set PIN Code</string>
-    <string name="input_pincode_policy">Re enter your PIN Code</string>
     <string name="input_pin_code">Create PIN Code</string>
     <string name="next">Continue</string>
-    <string name="pincode_policy">The numpad layout is randomized</string>
+    <string name="pincode_policy">Note:\nPosition of numbers on keyboard will be changed each time.</string>
     <string name="delete">Remove</string>
     <string name="reinput_pincode">Enter your PIN Code</string>
-    <string name="reinput_pincode_message">Re enter PIN Code</string>
-    <string name="set_pincode_success">Create PIN code successfully</string>
+    <string name="reinput_pincode_message">Re-enter PIN</string>
+    <string name="set_pincode_success">Create PIN successfully</string>
     <string name="chuc_mung">Congratulation!</string>
     <string name="incorrect">Failed!</string>
     <string name="username">Username</string>
-    <string name="input_code_active_app">Enter Activation Code</string>
+    <string name="input_code_active_app">Activation Code</string>
     <string name="setting_pincode_success">You have activated your account successfully</string>
     <string name="active">Activate</string>
     <string name="active_app">Add User</string>
-    <string name="input_pincode_msg">Please, enter your PIN Code</string>
+    <string name="input_pincode_msg">Create PIN (06 digit number)</string>
     <string name="login_tittle">Login</string>
     <string name="main_msg_2">"Soft OTP was built by SecureMetric for secure your transaction based on the Policy of The State Bank of Viet Nam. For more detail, Please click here"</string>
     <string name="notif_content">Transaction approval needed</string>
@@ -43,7 +42,7 @@
     <string name="time_expired">Time has expired</string>
     <string name="lock_5_min">Your application will be locked within 5 minutes because you tried enter incorrect PIN 3 times.</string>
     <string name="locked">Your account has locked on Soft OTP.</string>
-    <string name="active_message_failed">Invalid information.</string>
+    <string name="active_message_failed">Incorrect activation information. Please re-enter information</string>
     <string name="login_failed">You have entered incorrect PIN code. Please try again</string>
     <string name="login_success">You have logged in successfully</string>
     <string name="app_verify">Application verification</string>
@@ -58,14 +57,14 @@
     <string name="input_pin_code_new">Enter your new PIN code</string>
     <string name="input_pincode_policy_new">"Re-enter your new PIN "</string>
     <string name="reinput_pincode_message_new">"Re-enter your new PIN "</string>
-    <string name="msg_lock_1">You have entered your PIN incorrectly 5 times. The application has been locked.</string>
+    <string name="msg_lock_1">You’ve entered the wrong PIN for 5 consecutive times. BVB eToken is locked.</string>
     <string name="msg_lock_2">Please reactivate.</string>
-    <string name="msg_login_error">You have entered your PIN incorrectly %1$s times. The application will be locked after 5 incorrect PIN entries.</string>
+    <string name="msg_login_error">You’ve entered the wrong PIN %1$s time(s). BVB eToken will be locked if you enter the wrong PIN for 5 consecutive times</string>
     <string name="otp_time">The <b><font color="#3a5e4c"> OTP </font></b>code is valid within </string>
     <string name="text_active_code_info">Activation code is 6-digits sequence sent to the phone number that registered for Soft OTP.</string>
-    <string name="text_active_warning">Please note: The activation code (6 digits) has been sent to the phone number registered with <b><font color="#3a5e4c">Soft OTP</font></b> service</string>
+    <string name="text_active_warning">Username is the username of BAOVIET Bank Internet Banking\n\nActivation Code includes 06 digits sent via SMS to your phone number which registered for BAOVIET Bank Internet Banking.</string>
 
-    <string name="text_tutorial_1">Congratulations! You have activated SOTP successfully.</string>
+    <string name="text_tutorial_1">BVB eToken is activated successfully</string>
     <string name="text_tutorial_2">To authenticate transactions: Select the account, enter Transaction code and press "<b><font color="#3a5e4c"> Get the OTP </font></b> code"</string>
     <string name="text_tutorial_3">The application will be locked after entering 5 wrong <b><font color="#3a5e4c">PIN</font></b> consecutively.</string>
     <string name="text_tutorial_4">To set new PIN, press [img src=ic_menu_tutorial/], select \"<b><font color=" #3a5e4c ">Security</font></b>”</string>
@@ -77,15 +76,15 @@
     <string name="second"> seconds</string>
     <string name="app_info">Application information</string>
     <string name="logout">Logout</string>
-    <string name="sync">Sync</string>
+    <string name="sync">Synchronization</string>
     <string name="pincode_match">The New PIN code cannot match the existing PIN code</string>
-    <string name="change_pin_success">Change PIN successfully. Please login again!</string>
+    <string name="change_pin_success">Change PIN successfully</string>
     <string name="tittle_finger_print">FingerPrint</string>
     <string name="tittle_change_pin">Change PIN</string>
     <string name="sync_complete">Sync complete</string>
     <string name="logout_confirm">Are you sure to log out?</string>
     <string name="delete_confirm_tit">Delete Confirm</string>
-    <string name="delete_confirm_msg">Are you sure you want to unregister SOTP for %s?</string>
+    <string name="delete_confirm_msg">Are you sure you want to unregister BVB eToken for %s?</string>
     <string name="transaction_null">You need to enter the transaction code to perform this function!</string>
     <string name="ok">OK</string>
     <string name="update_account">Account already existed on Soft OTP, do you want to update?</string>
@@ -121,13 +120,13 @@
     <string name="logout_confirm_tit">Logout Confirm</string>
     <string name="msg_sync_error">An error occurred during processing.</string>
     <string name="msg_force_change_pin_final">Your PIN is expired. Please press Change PIN to continue</string>
-    <string name="setting_biometric">Biometrics settings</string>
-    <string name="biometric_setup_fingerprint">Do you want to set up your biometrics for Soft OTP?</string>
+    <string name="setting_biometric">Login with fingerprint</string>
+    <string name="biometric_setup_fingerprint">Are you sure you want to register fingerprint  to log into BVB eToken?</string>
     <string name="agree">Agree</string>
     <string name="disable_finger_msg">Do you want to disable biometric on Soft OTP app?</string>
     <string name="msg_finger_not_available">Device is not enable biometric. Please enable to continue your setting.</string>
     <string name="bio_input_fingerprint">Touch ID for Soft OTP </string>
-    <string name="bio_input_desc">Please scan you fingerprint to login</string>
+    <string name="bio_input_desc">Please confirm your fingerprint to login</string>
     <string name="try_again">Please try again</string>
     <string name="lock_fingerprint_msg">Device is not enable biometric. Please enable to continue your setting</string>
     <string name="msg_disable_finger_first">Changing PIN will disable biometric. Do you want to continue?</string>
@@ -136,8 +135,8 @@
     <string name="active_by_username">Activate by reference number</string>
     <string name="enter_active_code">Please enter the Activation Code</string>
     <string name="add_user_offline">Add User Offline</string>
-    <string name="add_user">Add User</string>
-    <string name="active_biometric_msg">Fingerprint registered successfully!/</string>
+    <string name="add_user">List of user</string>
+    <string name="active_biometric_msg">Fingerprint registered successfully!</string>
     <string name="confirm_transaction_qrcode">Confirm transaction – QR code</string>
     <string name="continues_transaction">Are you sure you want to continue this transaction?</string>
     <string name="reject">Cancel</string>
@@ -146,7 +145,7 @@
     <string name="all">All</string>
     <string name="transaction">Transaction</string>
     <string name="other">Others</string>
-    <string name="delete_success">Unregister SOTP for %s successfully</string>
+    <string name="delete_success">Unregister BVB eToken for %s successfully!</string>
     <string name="refuse">Cancel</string>
     <string name="msg_scan_biometric">Please place your fingerprint on the sensor</string>
     <string name="msg_setup_finger_print_success">Fingerprint registered successfully</string>
@@ -158,7 +157,7 @@
     <string name="transaction_date">Transaction date:</string>
     <string name="transaction_info">Transaction information</string>
     <string name="msg_have_mobile_push">You have new Mobile Push</string>
-    <string name="msg_reset_pin">Are you sure you want to reset your PIN?</string>
+    <string name="msg_reset_pin">Are you sure you want to reset your PIN?\n(If you agree, please visit BAOVIET Bank branches to re-activate BVB eToken).</string>
     <string name="confirm_transaction_mobile">Confirm transaction - Mobile Push</string>
     <string name="msg_unregistered">User %s has unregistered/activated on other mobile divide successfully.</string>
     <string name="detail_trans_tittle">This is the detail of tranfer:</string>
@@ -179,7 +178,8 @@
     <string name="finger_print">Fingerprint</string>
     <string name="fingerprint_not_set_msg">Fingerprint is temporarily disabled</string>
     <string name="mobile_push">Mobile Push</string>
-    <string name="mobile_push_msg">You have new Mobile Push. Click for details</string>
+    <string name="mobile_push_msg">You have new Mobile Push.</string>
+    <string name="mobile_push_msg_active">You have new Mobile Push. Click for details</string>
     <string name="mobile_push_invalid_tittle">Invalid Mobile Push</string>
     <string name="mobile_push_invalid_msg">Invalid Mobile Push. Transaction failed.</string>
     <string name="transaction_failed">Transaction failed</string>
@@ -187,4 +187,15 @@
     <string name="invalid_active_code_msg">The activation code is not valid. Please check again.</string>
     <string name="invalid_qr_tittle">Invalid QR Code</string>
     <string name="invalid_qr_msg">Invalid QR Code. Transaction failed.</string>
+    <string name="otp_qr_tittle">Confirm transaction – QR code</string>
+    <string name="qr_invalid">Invalid QR code!</string>
+    <string name="transaction_qr_login_tittle">Confirm transaction – QR code</string>
+    <string name="huy">Cancel</string>
+    <string name="active_app_input_empty">You must input all fields</string>
+    <string name="transaction_denied">Transaction denied</string>
+    <string name="transaction_successful">Transaction successful</string>
+    <string name="invalid_mobile_push">Invalid Mobile Push</string>
+    <string name="msg_disable_finger_success">Fingerprint/Face ID unregistered successfully</string>
+    <string name="btn_close">Close</string>
+
 </resources>

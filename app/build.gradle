@@ -7,27 +7,33 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.bvb.sotp"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 6
+        versionName "5.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+//        debug {
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+
+//        13/6: bị lỗi không xác thực được QR CODE, PUSH và kích hoạt user, sau khi bỏ phần release thì bình thường
+//        release {
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
     }
 
     useLibrary 'org.apache.http.legacy'
@@ -38,6 +44,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -71,9 +80,9 @@ dependencies {
 //    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 //    implementation project(':centagateSdk')
 //    implementation 'commons-codec:1.10'
-    implementation files('libs/centagate-release_20200817.aar')
+    implementation files('libs/centagate-release-20210716.aar')
 
-            implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
+    implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
@@ -91,6 +100,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
 
 }
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin

@@ -12,14 +12,15 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <!-- Step 2: This permission is depreciated in Android P  -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
+    <!--<16/6: thêm quyền android.permission.POST_NOTIFICATIONS-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-feature
         android:name="android.hardware.fingerprint"
         android:required="false" />
+    <!--<15/6: chuyển android:debuggable từ true thành false-->
 
     <application
         android:name=".PeepApp"
@@ -30,14 +31,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
+        android:debuggable="false"
+        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode"
         tools:replace="android:allowBackup">
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
+        <!--<15/6: thêm android:exported="true" khi nâng cấp targetsdkversion 33 và chuyển android:debuggable từ true thành false-->
         <activity
             android:name=".screen.splash.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
@@ -69,11 +72,7 @@
             android:configChanges="locale"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
-        <activity
-            android:name=".screen.selectlanguage.SelectLanguageActivity"
-            android:configChanges="locale"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar" />
+
 
         <activity
             android:name=".screen.transaction.OtpAdvanceActivity"
@@ -89,7 +88,12 @@
             android:name=".screen.user.AddUserActivity"
             android:configChanges="layoutDirection|locale"
             android:theme="@style/AppTheme.NoActionAndStatusBar"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity
             android:name=".screen.authen.pincode.change.ChangePincodeActivity"
             android:configChanges="locale"
@@ -200,8 +204,8 @@
 
         <service
             android:name=".firebase.SoftOTPFirebaseMessageService"
-            android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

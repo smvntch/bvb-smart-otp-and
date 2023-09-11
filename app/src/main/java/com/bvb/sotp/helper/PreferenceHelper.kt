@@ -25,6 +25,7 @@ class PreferenceHelper(context: Context) {
         const val KEY_BIOMETRIC = "biometric"
         const val KEY_GPS = "gps"
         const val KEY_SESSION = "session"
+        const val KEY_SESSION_PENDING = "session_pending"
         const val KEY_NAME = "name"
         const val KEY_IS_NOTIFICATION = "is_notification"
         const val KEY_IS_LOCKED = "is_locked"
@@ -147,6 +148,15 @@ class PreferenceHelper(context: Context) {
 
     fun getSession(): String {
         return preferences[KEY_SESSION, ""]!!
+
+    }
+
+    fun setSessionPending(time: String) {
+        preferences[KEY_SESSION_PENDING] = time
+    }
+
+    fun getSessionPending(): String {
+        return preferences[KEY_SESSION_PENDING, ""]!!
 
     }
 

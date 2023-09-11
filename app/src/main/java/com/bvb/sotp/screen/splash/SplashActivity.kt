@@ -65,6 +65,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
     }
 
     fun startCount() {
+
         compositeDisposable.add(showPeepSubject.debounce(1000, TimeUnit.MILLISECONDS)
             .observeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -90,30 +91,184 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
             applicationContext.resources.getString(R.string.app_default_server_enc_public_key)
         Configuration.getInstance().serverSignPublicKey =
             applicationContext.resources.getString(R.string.app_default_server_verify_public_key)
+        Configuration.getInstance().integrationKey =
+            applicationContext.resources.getString(R.string.app_integration_key)
+        //trusted chain from BVB Production - update production value
 
-        //trusted chain from office.securemetric.com
-        val Go_Daddy_Root_CA =
-            "MIIEfTCCA2WgAwIBAgIDG+cVMA0GCSqGSIb3DQEBCwUAMGMxCzAJBgNVBAYTAlVTMSEwHwYDVQQKExhUaGUgR28gRGFkZHkgR3JvdXAsIEluYy4xMTAvBgNVBAsTKEdvIERhZGR5IENsYXNzIDIgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTQwMTAxMDcwMDAwWhcNMzEwNTMwMDcwMDAwWjCBgzELMAkGA1UEBhMCVVMxEDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxGjAYBgNVBAoTEUdvRGFkZHkuY29tLCBJbmMuMTEwLwYDVQQDEyhHbyBEYWRkeSBSb290IENlcnRpZmljYXRlIEF1dGhvcml0eSAtIEcyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv3FiCPH6WTT3G8kYo/eASVjpIoMTpsUgQwE7hPHmhUmfJ+r2hBtOoLTbcJjHMgGxBT4HTu70+k8vWTAi56sZVmvigAf88xZ1gDlRe+X5NbZ0TqmNghPktj+pA4P6or6KFWp/3gvDthkUBcrqw6gElDtGfDIN8wBmIsiNaW02jBEYt9OyHGC0OPoCjM7T3UYH3go+6118yHz7sCtTpJJiaVElBWEaRIGMLKlDliPfrDqBmg4pxRyp6V0etp6eMAo5zvGIgPtLXcwy7IViQyU0AlYnAZG0O3AqP26x6JyIAX2f1PnbU21gnb8s51iruF9G/M7EGwM8CetJMVxpRrPgRwIDAQABo4IBFzCCARMwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFDqahQcQZyi27/a9BUFuIMGU2g/eMB8GA1UdIwQYMBaAFNLEsNKR1EwRcbNhyz2h/t2oatTjMDQGCCsGAQUFBwEBBCgwJjAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZ29kYWRkeS5jb20vMDIGA1UdHwQrMCkwJ6AloCOGIWh0dHA6Ly9jcmwuZ29kYWRkeS5jb20vZ2Ryb290LmNybDBGBgNVHSAEPzA9MDsGBFUdIAAwMzAxBggrBgEFBQcCARYlaHR0cHM6Ly9jZXJ0cy5nb2RhZGR5LmNvbS9yZXBvc2l0b3J5LzANBgkqhkiG9w0BAQsFAAOCAQEAWQtTvZKGEacke+1bMc8dH2xwxbhuvk679r6XUOEwf7ooXGKUwuN+M/f7QnaF25UcjCJYdQkMiGVnOQoWCcWgOJekxSOTP7QYpgEGRJHjp2kntFolfzq3Ms3dhP8qOCkzpN1nsoX+oYggHFCJyNwq9kIDN0zmiN/VryTyscPfzLXs4Jlet0lUIDyUGAzHHFIYSaRt4bNYC8nY7NmuHDKOKHAN4v6mF56ED71XcLNa6R+ghlO773z/aQvgSMO3kwvIClTErF0UZzdsyqUvMQg3qm5vjLyb4lddJIGvl5echK1srDdMZvNhkREg5L4wn3qkKQmw4TRfZHcYQFHfjDCmrw=="
-        //trusted chain from office.securemetric.com
-        val Go_Daddy_Secure_CA =
-            "MIIE0DCCA7igAwIBAgIBBzANBgkqhkiG9w0BAQsFADCBgzELMAkGA1UEBhMCVVMxEDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxGjAYBgNVBAoTEUdvRGFkZHkuY29tLCBJbmMuMTEwLwYDVQQDEyhHbyBEYWRkeSBSb290IENlcnRpZmljYXRlIEF1dGhvcml0eSAtIEcyMB4XDTExMDUwMzA3MDAwMFoXDTMxMDUwMzA3MDAwMFowgbQxCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdBcml6b25hMRMwEQYDVQQHEwpTY290dHNkYWxlMRowGAYDVQQKExFHb0RhZGR5LmNvbSwgSW5jLjEtMCsGA1UECxMkaHR0cDovL2NlcnRzLmdvZGFkZHkuY29tL3JlcG9zaXRvcnkvMTMwMQYDVQQDEypHbyBEYWRkeSBTZWN1cmUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5IC0gRzIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC54MsQ1K92vdSTYuswZLiBCGzDBNliF44v/z5lz4/OYuY8UhzaFkVLVat4a2ODYpDOD2lsmcgaFItMzEUz6ojcnqOvK/6AYZ15V8TPLvQ/MDxdR/yaFrzDN5ZBUY4RS1T4KL7QjL7wMDge87Am+GZHY23ecSZHjzhHU9FGHbTj3ADqRay9vHHZqm8A29vNMDp5T19MR/gd71vCxJ1gO7GyQ5HYpDNO6rPWJ0+tJYqlxvTV0KaudAVkV4i1RFXULSo6Pvi4vekyCgKUZMQWOlDxSq7neTOvDCAHf+jfBDnCaQJsY1L6d8EbyHSHyLmTGFBUNUtpTrw700kuH9zB0lL7AgMBAAGjggEaMIIBFjAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4EFgQUQMK9J47MNIMwojPX+2yz8LQsgM4wHwYDVR0jBBgwFoAUOpqFBxBnKLbv9r0FQW4gwZTaD94wNAYIKwYBBQUHAQEEKDAmMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5nb2RhZGR5LmNvbS8wNQYDVR0fBC4wLDAqoCigJoYkaHR0cDovL2NybC5nb2RhZGR5LmNvbS9nZHJvb3QtZzIuY3JsMEYGA1UdIAQ/MD0wOwYEVR0gADAzMDEGCCsGAQUFBwIBFiVodHRwczovL2NlcnRzLmdvZGFkZHkuY29tL3JlcG9zaXRvcnkvMA0GCSqGSIb3DQEBCwUAA4IBAQAIfmyTEMg4uJapkEv/oV9PBO9sPpyIBslQj6Zz91cxG7685C/b+LrTW+C05+Z5Yg4MotdqY3MxtfWoSKQ7CC2iXZDXtHwlTxFWMMS2RJ17LJ3lXubvDGGqv+QqG+6EnriDfcFDzkSnE3ANkR/0yBOtg2DZ2HKocyQetawiDsoXiWJYRBuriSUBAA/NxBti21G00w9RKpv0vHP8ds42pM3Z2Czqrpv1KrKQ0U11GIo/ikGQI31bS/6kA1ibRrLDYGCD+H1QQc7CoZDDu+8CL9IVVO5EFdkKrqeKM+2xLXY2JtwE65/3YR8V3Idv7kaWKK2hJn0KCacuBKONvPi8BDAB"
+        val bvbProdI =
+            "MIIEYTCCA0mgAwIBAgIOSKQC3SeSDaIINJ3RmXswDQYJKoZIhvcNAQELBQAwTDEg" +
+                    "MB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2Jh" +
+                    "bFNpZ24xEzARBgNVBAMTCkdsb2JhbFNpZ24wHhcNMTYwOTIxMDAwMDAwWhcNMjYw" +
+                    "OTIxMDAwMDAwWjBiMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBu" +
+                    "di1zYTE4MDYGA1UEAxMvR2xvYmFsU2lnbiBFeHRlbmRlZCBWYWxpZGF0aW9uIENB" +
+                    "IC0gU0hBMjU2IC0gRzMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCr" +
+                    "awNnVNXcEfvFohPBjBkn3BB04mGDPfqO24+lD+SpvkY/Ar5EpAkcJjOfR0iBFYhW" +
+                    "N80HzpXYy2tIA7mbXpKu2JpmYdU1xcoQpQK0ujE/we+vEDyjyjmtf76LLqbOfuq3" +
+                    "xZbSqUqAY+MOvA67nnpdawvkHgJBFVPnxui45XH4BwTwbtDucx+Mo7EK4mS0Ti+P" +
+                    "1NzARxFNCUFM8Wxc32wxXKff6WU4TbqUx/UJm485ttkFqu0Ox4wTUUbn0uuzK7yV" +
+                    "3Y986EtGzhKBraMH36MekSYlE473GqHetRi9qbNG5pM++Sa+WjR9E1e0Yws16CGq" +
+                    "smVKwAqg4uc43eBTFUhVAgMBAAGjggEpMIIBJTAOBgNVHQ8BAf8EBAMCAQYwEgYD" +
+                    "VR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU3bPnbagu6MVObs905nU8lBXO6B0w" +
+                    "HwYDVR0jBBgwFoAUj/BLf6guRSSuTVD6Y5qL3uLdG7wwPgYIKwYBBQUHAQEEMjAw" +
+                    "MC4GCCsGAQUFBzABhiJodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vcm9vdHIz" +
+                    "MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9v" +
+                    "dC1yMy5jcmwwRwYDVR0gBEAwPjA8BgRVHSAAMDQwMgYIKwYBBQUHAgEWJmh0dHBz" +
+                    "Oi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMA0GCSqGSIb3DQEBCwUA" +
+                    "A4IBAQBVaJzl0J/i0zUV38iMXIQ+Q/yht+JZZ5DW1otGL5OYV0LZ6ZE6xh+WuvWJ" +
+                    "J4hrDbhfo6khUEaFtRUnurqzutvVyWgW8msnoP0gtMZO11cwPUMUuUV8iGyIOuIB" +
+                    "0flo6G+XbV74SZuR5v5RAgqgGXucYUPZWvv9AfzMMQhRQkr/MO/WR2XSdiBrXHoD" +
+                    "L2xk4DmjA4K6iPI+1+qMhyrkUM/2ZEdA8ldqwl8nQDkKS7vq6sUZ5LPVdfpxJZZu" +
+                    "5JBj4y7FNFTVW1OMlCUvwt5H8aFgBMLFik9xqK6JFHpYxYmf4t2sLLxN0LlCthJE" +
+                    "abvp10ZlOtfu8hL5gCXcxnwGxzSb"
+//        //trusted chain from BVB Production - update production value
+        val bvbProdR =
+            "MIIDXzCCAkegAwIBAgILBAAAAAABIVhTCKIwDQYJKoZIhvcNAQELBQAwTDEgMB4G" +
+                    "A1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2JhbFNp" +
+                    "Z24xEzARBgNVBAMTCkdsb2JhbFNpZ24wHhcNMDkwMzE4MTAwMDAwWhcNMjkwMzE4" +
+                    "MTAwMDAwWjBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEG" +
+                    "A1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjCCASIwDQYJKoZI" +
+                    "hvcNAQEBBQADggEPADCCAQoCggEBAMwldpB5BngiFvXAg7aEyiie/QV2EcWtiHL8" +
+                    "RgJDx7KKnQRfJMsuS+FggkbhUqsMgUdwbN1k0ev1LKMPgj0MK66X17YUhhB5uzsT" +
+                    "gHeMCOFJ0mpiLx9e+pZo34knlTifBtc+ycsmWQ1z3rDI6SYOgxXG71uL0gRgykmm" +
+                    "KPZpO/bLyCiR5Z2KYVc3rHQU3HTgOu5yLy6c+9C7v/U9AOEGM+iCK65TpjoWc4zd" +
+                    "QQ4gOsC0p6Hpsk+QLjJg6VfLuQSSaGjlOCZgdbKfd/+RFO+uIEn8rUAVSNECMWEZ" +
+                    "XriX7613t2Saer9fwRPvm2L7DWzgVGkWqQPabumDk3F2xmmFghcCAwEAAaNCMEAw" +
+                    "DgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFI/wS3+o" +
+                    "LkUkrk1Q+mOai97i3Ru8MA0GCSqGSIb3DQEBCwUAA4IBAQBLQNvAUKr+yAzv95ZU" +
+                    "RUm7lgAJQayzE4aGKAczymvmdLm6AC2upArT9fHxD4q/c2dKg8dEe3jgr25sbwMp" +
+                    "jjM5RcOO5LlXbKr8EpbsU8Yt5CRsuZRj+9xTaGdWPoO4zzUhw8lo/s7awlOqzJCK" +
+                    "6fBdRoyV3XpYKBovHd7NADdBj+1EbddTKJd+82cEHhXXipa0095MJ6RMG3NzdvQX" +
+                    "mcIfeg7jLQitChws/zyrVQ4PkX4268NXSb7hLi18YIvDQVETI53O9zJrlAGomecs" +
+                    "Mx86OyXShkDOOyyGeMlhLxS67ttVb9+E7gUJTb0o2HLO02JQZR7rkpeDMdmztcpH" +
+                    "WD9f"
+        // 22/11/23 16:36 VuNA: Added this single cert for domain
+        val bvbUatDomainB64 =
+            "MIIEmzCCA4OgAwIBAgIUHkZwcbcN3lvlrV9PJsvgAjJ4bo0wDQYJKoZIhvcNAQEL" +
+                    "BQAwKTEMMAoGA1UEAwwDU1NMMQwwCgYDVQQKDANTU0wxCzAJBgNVBAYTAlZOMB4X" +
+                    "DTIxMDcyMjA3MTEyMVoXDTIzMDYxMzE3MjczNVowITEfMB0GA1UEAwwWc29mdG90" +
+                    "cC5iYW92aWV0YmFuay52bjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB" +
+                    "AO0n4j+0zrZ7KZp/fDBO9zTUXX1GkjMEGOZ7Zo412VQdIDBGMIWsxisIqqT/I8vc" +
+                    "MhJyJoIoYoX8B94QHFsjZbQYR8W7va7WEYt1+uWuAOkJGkhSQKeTxO7exSY9H8tw" +
+                    "Y4g7e+bIKVpzJWRfh0CzaExMtz+d8Io/B+OE7KqN82zeX7VN/X5izv3Q8cVaHnIh" +
+                    "/wwKOvIMjf71zH0KtC3BA56a7sUdcKmUBa7iYf/hrCGUElVfzkpqrj5E6OOzDDq+" +
+                    "8F6O/eFzrie0h63TJoRAXQR3zBAsWgWxeRlhTiiKkQhZsoG/QqvBbQsLpVfwvCoS" +
+                    "HT/UD8tmOrGLiuwjznwqjj0CAwEAAaOCAcEwggG9MAwGA1UdEwEB/wQCMAAwHwYD" +
+                    "VR0jBBgwFoAUTAeT4NnpuSRjxrlzx0ND/Fh7HTkwbAYIKwYBBQUHAQEEYDBeMFwG" +
+                    "CCsGAQUFBzABhlBodHRwOi8vZWMyLTMtOTMtMTQzLTE5OC5jb21wdXRlLTEuYW1h" +
+                    "em9uYXdzLmNvbTo4MDgwL2VqYmNhL3B1YmxpY3dlYi9zdGF0dXMvb2NzcDAhBgNV" +
+                    "HREEGjAYghAqLmJhb3ZpZXRiYW5rLnZuhwRnOKggMCMGA1UdJQQcMBoGBFUdJQAG" +
+                    "CCsGAQUFBwMCBggrBgEFBQcDATCBpgYDVR0fBIGeMIGbMIGYoGGgX4ZdaHR0cDov" +
+                    "L2xvY2FsaG9zdDo4MDgwL2VqYmNhL3B1YmxpY3dlYi93ZWJkaXN0L2NlcnRkaXN0" +
+                    "P2NtZD1jcmwmaXNzdWVyPUNOPVRlc3RDQSxPPUFuYVRvbSxDPVNFojOkMTAvMQ8w" +
+                    "DQYDVQQDDAZUZXN0Q0ExDzANBgNVBAoMBkFuYVRvbTELMAkGA1UEBhMCU0UwHQYD" +
+                    "VR0OBBYEFK7iknMOKDIv/AtNTEvM6M1GcQ9MMA4GA1UdDwEB/wQEAwIFoDANBgkq" +
+                    "hkiG9w0BAQsFAAOCAQEALT/9gh/LNkIQYyogGj4moJC069lnPRlbrn7m7Ue6HbUx" +
+                    "skz6gR0wJfbE4+qZk7wSFsCkdA+Rh8Fl8PFV+Pt7JJAuo5LgABe3ukW3gDuPV8yb" +
+                    "V/xZHohdZpSO2n6U2fCbmQKl9YcKEtt21W3P+VKuUU15BFZnKJYpALMEMIMzLuvR" +
+                    "asEYUMMRBHP0FKvZNfzM0m6055lrhcJYW2gBeisH2z6hB3hCxSF1GeAMhAxi72or" +
+                    "Uk60CQ6Vr1xJkodAdWrpWC/+POSKmoDnttnicln+B8QJXIOuaaeHOAxyZreT4f+n" +
+                    "vr0WHeIxE1MMc1tjSk+nOXaaTr7AYx13wABqllzacQ=="
 
-        //trusted chain from https://iotp.ocb.com.vn
-        val GlobalSign_Root_CA =
-            "MIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw05ODA5MDExMjAwMDBaFw0yODAxMjgxMjAwMDBaMFcxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMRAwDgYDVQQLEwdSb290IENBMRswGQYDVQQDExJHbG9iYWxTaWduIFJvb3QgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDaDuaZjc6j40+Kfvvxi4Mla+pIH/EqsLmVEQS98GPR4mdmzxzdzxtIK+6NiY6arymAZavpxy0Sy6scTHAHoT0KMM0VjU/43dSMUBUc71DuxC73/OlS8pF94G3VNTCOXkNz8kHp1Wrjsok6Vjk4bwY8iGlbKk3Fp1S4bInMm/k8yuX9ifUSPJJ4ltbcdG6TRGHRjcdGsnUOhugZitVtbNV4FpWi6cgKOOvyJBNPc1STE4U6G7weNLWLBYy5d4ux2x8gkasJU26Qzns3dLlwR5EiUWMWea6xrkEmCMgZK9FGqkjWZCrXgzT/LCrBbBlDSgeF59N89iFo7+ryUp9/k5DPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRge2YaRQ2XyolQL30EzTSo//z9SzANBgkqhkiG9w0BAQUFAAOCAQEA1nPnfE920I2/7LqivjTFKDK1fPxsnCwrvQmeU79rXqoRSLblCKOzyj1hTdNGCbM+w6DjY1Ub8rrvrTnhQ7k4o+YviiY776BQVvnGCv04zcQLcFGUl5gE38NflNUVyRRBnMRddWQVDf9VMOyGj/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhHhm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveCX4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A=="
-
-        //trusted chain from https://iotp.ocb.com.vn
-        val GlobalSign_Organization_Validation_CA =
-            "MIIEaTCCA1GgAwIBAgILBAAAAAABRE7wQkcwDQYJKoZIhvcNAQELBQAwVzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xNDAyMjAxMDAwMDBaFw0yNDAyMjAxMDAwMDBaMGYxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTwwOgYDVQQDEzNHbG9iYWxTaWduIE9yZ2FuaXphdGlvbiBWYWxpZGF0aW9uIENBIC0gU0hBMjU2IC0gRzIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDHDmw/I5N/zHClnSDDDlM/fsBOwphJykfVI+8DNIV0yKMCLkZcC33JiJ1Pi/D4nGyMVTXbv/Kz6vvjVudKRtkTIso21ZvBqOOWQ5PyDLzm+ebomchjSHh/VzZpGhkdWtHUfcKc1H/hgBKueuqI6lfYygoKOhJJomIZeg0k9zfrtHOSewUjmxK1zusp36QUArkBpdSmnENkiN74fv7j9R7l/tyjqORmMdlMJekYuYlZCa7pnRxtNw9KHjUgKOKv1CGLAcRFrW4rY6uSa2EKTSDtc7p8zv4WtdufgPDWi2zZCHlKT3hl2pK8vjX5s8T5J4BO/5ZS5gIg4Qdz6V0rvbLxAgMBAAGjggElMIIBITAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUlt5h8b0cFilTHMDMfTuDAEDmGnwwRwYDVR0gBEAwPjA8BgRVHSAAMDQwMgYIKwYBBQUHAgEWJmh0dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMDMGA1UdHwQsMCowKKAmoCSGImh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5uZXQvcm9vdC5jcmwwPQYIKwYBBQUHAQEEMTAvMC0GCCsGAQUFBzABhiFodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9yb290cjEwHwYDVR0jBBgwFoAUYHtmGkUNl8qJUC99BM00qP/8/UswDQYJKoZIhvcNAQELBQADggEBAEYq7l69rgFgNzERhnF0tkZJyBAW/i9iIxerH4f4gu3K3w4s32R1juUYcqeMOovJrKV3UPfvnqTgoI8UV6MqX+x+bRDmuo2wCId2Dkyy2VG7EQLyXN0cvfNVlg/UBsD84iOKJHDTu/B5GqdhcIOKrwbFINihY9Bsrk8y1658GEV1BSl330JAZGSGvip2CTFvHST0mdCF/vIhCPnG9vHQWe3WVjwIKANnuvD58ZAWR65n5ryASOlCdjSXVWkkDoPWoC209fN5ikkodBpBocLTJIg1MGCUF7ThBCIxPTsvFwayuJ2GK1pp74P1S8SqtCr4fKGxhZSM9AyHDPSsQPhZSZg="
+//        val Securemetric_internal_ROOT_CA =
+//            "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw" +
+//                    "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh" +
+//                    "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4" +
+//                    "WhcNMzUwNjA0MTEwNDM4WjBPMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJu" +
+//                    "ZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNVBAMTDElTUkcgUm9vdCBY" +
+//                    "MTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAK3oJHP0FDfzm54rVygc" +
+//                    "h77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj/RQSa78f0uoxmyF+" +
+//                    "0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7iS4+3mX6U" +
+//                    "A5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW" +
+//                    "T8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyH" +
+//                    "B5T0Y3HsLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UC" +
+//                    "B5iPNgiV5+I3lg02dZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUv" +
+//                    "KBds0pjBqAlkd25HN7rOrFleaJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWn" +
+//                    "OlFuhjuefXKnEgV4We0+UXgVCwOPjdAvBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTn" +
+//                    "jh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymCzLq9gwQbooMDQaHWBfEbwrbw" +
+//                    "qHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC1CLQJ13hef4Y53CI" +
+//                    "rU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNV" +
+//                    "HRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq" +
+//                    "hkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZL" +
+//                    "ubhzEFnTIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ" +
+//                    "3BebYhtF8GaV0nxvwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KK" +
+//                    "NFtY2PwByVS5uCbMiogziUwthDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5" +
+//                    "ORAzI4JMPJ+GslWYHb4phowim57iaztXOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7Ur" +
+//                    "TkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIuvtd7u+Nxe5AW0wdeRlN8NwdC" +
+//                    "jNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1NbdWhscdCb+ZAJzVc" +
+//                    "oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq" +
+//                    "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA" +
+//                    "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d" +
+//                    "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc="
 
         val Securemetric_internal_ROOT_CA =
-            "MIIDUzCCAjugAwIBAgIUMqXNErW2CsWjJIwbKTheas0wOJowDQYJKoZIhvcNAQELBQAwMTEQMA4GA1UEAwwHU1NMQ09SUDEQMA4GA1UECgwHU1NMQ09SUDELMAkGA1UEBhMCVVMwHhcNMjAwNzIxMTc0ODI5WhcNMzAwNzE5MTc0ODI5WjAxMRAwDgYDVQQDDAdTU0xDT1JQMRAwDgYDVQQKDAdTU0xDT1JQMQswCQYDVQQGEwJVUzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANTS3ky4MmD30JF+Hyx8XGgVyEskpCuifIzunEyrTVpNyhFDjAG7s3jQw2CDKA6cl9y4jj9qKafLIzRx/xtT9k6uCecJKOys88hMiw0/JQnSaItVy4rkb4PTJtKszAn3UyyKTBp38nLkINrX8yJSQcBRCxZ/cM7AA6dlcTSkjwkhRs1g/eXhkdxwhGzE0fRr5NpEwKLmo7EJftG8foaGp1e5cmKEezrMPhU8ilV9e0RrA5zkJr//JW3qzBh0Hdf/MF73/i53Hr73o92Fp9b8ePcES2rKMPCkg13+G7f32+RkooyzF1nlp4nE1RzjXPnwIciEL6rXEciLt17/5eCqymMCAwEAAaNjMGEwDwYDVR0TAQH/BAUwAwEB/zAfBgNVHSMEGDAWgBSGkQCnHV46cOSYegnDfP7r81W5SjAdBgNVHQ4EFgQUhpEApx1eOnDkmHoJw3z+6/NVuUowDgYDVR0PAQH/BAQDAgGGMA0GCSqGSIb3DQEBCwUAA4IBAQB7UJvMWDJ2LlLxh2eIbp9Xd6PaIUCgxAmWB6UzgnVe30Zqn8H5DQao6HbI/Ov98dP6MK00m93ZIUPS93o9vBjNdaKDLGWcRgJHnVSgQkI3vyBAVTHxEJ3la/tumCcxFDyeKwzDKU32nRpVQKXrFssdW6jAYr8lQP56agrSkJWFdsnqWqbOOO5hyI42tKc4kf9qvdr81GyQ1WRgYsklDim9hIVZNqerkEFn++nBDrVwqOxZyyBbJ4rPYwRQ4VZuNObp4w/5+30x51HXy5zugw1FuDngpso9J6TAPRx5pe07fXlKt+Q2tdz0GDhRtzTn/j/2cDKQ6bK+ULGnuJTbJFz2"
+            "MIIC9DCCAdygAwIBAgIEYMq1eDANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
+                    "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
+                    "MB4XDTIxMDYxNzAyMzc0NFoXDTI2MDYxNzAyMzc0NFowPDELMAkGA1UEBhMCVk4x" +
+                    "DjAMBgNVBAgMBUhhbm9pMR0wGwYDVQQDDBRTZWN1cmVtZXRyaWMgVmlldG5hbTCC" +
+                    "ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN0PbNrxaUEMfvDeVaLtZCGH" +
+                    "0oQxlpuP0nVJ4ZPIS45SYKKNGq4ozWB0LcYR1Ccl3aVSzm9LAm6jpdRajUb3+olD" +
+                    "QXUbnTxEaQ5zH8hVlGxcT9ENrmHIHIEGAU4KQeWhGdRxnkCIV5TPKz6eqGRdu0cv" +
+                    "uvZQP9l3vAes4wkr/kqYD7rE57vcUdKwvHkoQ2F92E//g1yjbJn3amctxP0fpXTe" +
+                    "Pzf7rxELbPPUohD0qjVANk4Xc76bqYmJx5Hofshm6MZ1Kwz3kndPEFvedtnjrIIs" +
+                    "83K8w2MSil5jQWCRfd7xmwMeLDkWkGtCM4PRIEHZG74P3mosaspAn9TQ3wbIQJcC" +
+                    "AwEAATANBgkqhkiG9w0BAQsFAAOCAQEArsGu1IOOYrh+GFXfSb/YB/VcS5SMVmwU" +
+                    "XI+Eqlv/31R6qtE/gqPR0MhtanT3bnASjq/gZzcoLd131qQoyqRk1AMdQcdONwFw" +
+                    "hjXt1/4U/PIsh8DcT1VpTpvY5O+8cRWVXehOVDtvfOj+HsMedNDvKkZgidgtvYKy" +
+                    "mzNszyN0ojHN1ePl9xmlr1wzcLIUJIN9w0gvfUfocRsH0aJmge0Ka/G8A3RZ/qy2" +
+                    "VaumoZZF7HopelWKoOJODloSOstqRcOwzUXuKNJxhOhhsqch6RyDzNCs/YPrqKFt" +
+                    "uz68xSAc3wY88o3N+P/Va7uoxyPVIqLer19gxcFBsPEcLECwNwhQ+A=="
 
-        //trsuted chain from 118.70.13.108:3443
+        //trusted chain from 118.70.13.108:3443
+//        val Securemetric_internal_SSL_CA =
+//            "MIIFFjCCAv6gAwIBAgIRAJErCErPDBinU/bWLiWnX1owDQYJKoZIhvcNAQELBQAw" +
+//                    "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh" +
+//                    "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjAwOTA0MDAwMDAw" +
+//                    "WhcNMjUwOTE1MTYwMDAwWjAyMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg" +
+//                    "RW5jcnlwdDELMAkGA1UEAxMCUjMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK" +
+//                    "AoIBAQC7AhUozPaglNMPEuyNVZLD+ILxmaZ6QoinXSaqtSu5xUyxr45r+XXIo9cP" +
+//                    "R5QUVTVXjJ6oojkZ9YI8QqlObvU7wy7bjcCwXPNZOOftz2nwWgsbvsCUJCWH+jdx" +
+//                    "sxPnHKzhm+/b5DtFUkWWqcFTzjTIUu61ru2P3mBw4qVUq7ZtDpelQDRrK9O8Zutm" +
+//                    "NHz6a4uPVymZ+DAXXbpyb/uBxa3Shlg9F8fnCbvxK/eG3MHacV3URuPMrSXBiLxg" +
+//                    "Z3Vms/EY96Jc5lP/Ooi2R6X/ExjqmAl3P51T+c8B5fWmcBcUr2Ok/5mzk53cU6cG" +
+//                    "/kiFHaFpriV1uxPMUgP17VGhi9sVAgMBAAGjggEIMIIBBDAOBgNVHQ8BAf8EBAMC" +
+//                    "AYYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMBIGA1UdEwEB/wQIMAYB" +
+//                    "Af8CAQAwHQYDVR0OBBYEFBQusxe3WFbLrlAJQOYfr52LFMLGMB8GA1UdIwQYMBaA" +
+//                    "FHm0WeZ7tuXkAXOACIjIGlj26ZtuMDIGCCsGAQUFBwEBBCYwJDAiBggrBgEFBQcw" +
+//                    "AoYWaHR0cDovL3gxLmkubGVuY3Iub3JnLzAnBgNVHR8EIDAeMBygGqAYhhZodHRw" +
+//                    "Oi8veDEuYy5sZW5jci5vcmcvMCIGA1UdIAQbMBkwCAYGZ4EMAQIBMA0GCysGAQQB" +
+//                    "gt8TAQEBMA0GCSqGSIb3DQEBCwUAA4ICAQCFyk5HPqP3hUSFvNVneLKYY611TR6W" +
+//                    "PTNlclQtgaDqw+34IL9fzLdwALduO/ZelN7kIJ+m74uyA+eitRY8kc607TkC53wl" +
+//                    "ikfmZW4/RvTZ8M6UK+5UzhK8jCdLuMGYL6KvzXGRSgi3yLgjewQtCPkIVz6D2QQz" +
+//                    "CkcheAmCJ8MqyJu5zlzyZMjAvnnAT45tRAxekrsu94sQ4egdRCnbWSDtY7kh+BIm" +
+//                    "lJNXoB1lBMEKIq4QDUOXoRgffuDghje1WrG9ML+Hbisq/yFOGwXD9RiX8F6sw6W4" +
+//                    "avAuvDszue5L3sz85K+EC4Y/wFVDNvZo4TYXao6Z0f+lQKc0t8DQYzk1OXVu8rp2" +
+//                    "yJMC6alLbBfODALZvYH7n7do1AZls4I9d1P4jnkDrQoxB3UqQ9hVl3LEKQ73xF1O" +
+//                    "yK5GhDDX8oVfGKF5u+decIsH4YaTw7mP3GFxJSqv3+0lUFJoi5Lc5da149p90Ids" +
+//                    "hCExroL1+7mryIkXPeFM5TgO9r0rvZaBFOvV2z0gp35Z0+L4WPlbuEjN/lxPFin+" +
+//                    "HlUjr8gRsI3qfJOQFy/9rKIJR0Y/8Omwt/8oTWgy1mdeHmmjk7j1nYsvC9JSQ6Zv" +
+//                    "MldlTTKB3zhThV1+XWYp6rjd5JW1zbVWEkLNxE7GJThEUG3szgBVGP7pSWTUTsqX" +
+//                    "nLRbwHOoq7hHwg=="
+
         val Securemetric_internal_SSL_CA =
-            "MIIDSzCCAjOgAwIBAgIUHBDkhfBl7KMAu29YEwvXEwlXkakwDQYJKoZIhvcNAQELBQAwMTEQMA4GA1UEAwwHU1NMQ09SUDEQMA4GA1UECgwHU1NMQ09SUDELMAkGA1UEBhMCVVMwHhcNMjAwOTE2MTcyNzM1WhcNMjMwNjEzMTcyNzM1WjApMQwwCgYDVQQDDANTU0wxDDAKBgNVBAoMA1NTTDELMAkGA1UEBhMCVk4wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2P8R9/TkKP5NLwZBuVXlLlQ/Q9Ry2JGm1DW2Kd4Ljdl86SgQXe1GQOsVGBPqb/dYJLi++As6nwStPZqjpmG7Oh2fumzmxbv7ZR8N8qPjduVXNnoZ+y42ZN4kST+F6Y29S6qnEwmY+tXYLRnqrXX+Z4ai6W79P8X4uW6/6fF2mgfb+1z4rIU/6mMvlbyaYDmEU7T58qHzTU44Dy/36nER2JSs7sC7ScJjJhyL2uhvkj7Q6ruiZCAowXQ/7UrF70XCKW4xSbqaagGfYQE/y+++PYDZ36GVJe2VQo0J7EItThImrTKFXxXaHzDTkOn+CHY660rDJi4ng8Z3yTBPwCi2dAgMBAAGjYzBhMA8GA1UdEwEB/wQFMAMBAf8wHwYDVR0jBBgwFoAUhpEApx1eOnDkmHoJw3z+6/NVuUowHQYDVR0OBBYEFEwHk+DZ6bkkY8a5c8dDQ/xYex05MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAQEAIf1kPVa74ZNV4v+DXPx5hFwSmZkZfAA1c7WX8J/zeoP5ulCZeW+DH+qN+QD0cPUHpgnk4QTlo6KO+GOJaeIKEIyLvodx+N2tacUKHQ78J9VOnUe3AmSDobN99vQ845lHQtYFANwD8JUwbyf5M9t+7Xhe9EDgIHBWqum4UbHnhHSebMIvzdf7E1lmxtPYpn0CKzQsCA/44BygzpU5+trN7Q1lQX0kZ7rFJXc9ILAi5bGpDp8dMcPREJy+o9NPPafG3EFV4N44oamNNvIvh3YtzDP00rGFsEnuCzKLfIWeUGFNzYbb8HWLSF6HlxyPzpyeExKatz1eFHVOr2SsudPVFg=="
+            "MIIDQjCCAiqgAwIBAgIEYOQQezANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
+                    "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
+                    "MB4XDTIxMDcwNjA4MTI0M1oXDTI1MDcwNjA4MTI0M1owazELMAkGA1UEBhMCVk4x" +
+                    "DjAMBgNVBAgMBUhhbm9pMRowGAYDVQQHDBE4OCBMYW5nIEhhIFN0cmVldDENMAsG" +
+                    "A1UECgwEU01WTjEhMB8GA1UEAwwYU2VjdXJlbWV0cmljIFZpZXRuYW0gSUNBMIIB" +
+                    "IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7z4sobsKZ0hqIcAa5aymzw/G" +
+                    "DoRf2JXeeA4dsslo+rXnBdsZhTZbRV6pDnxW1nD1vrykrxgCccYzm5vr07QqxbHr" +
+                    "kwIfjJAWUWOGzv/YzVMKmDFdcU9xUb1TljsywicsECbs69cGuTVS5+v3b+4QqONq" +
+                    "/rZWpGmNKSatVudR8VkbQDBc0vu/g9zdCc3keMMQRsZeQ3JBkxq7SmMIShgPuPjF" +
+                    "bLOVRHPgWT4rThoEDa2ds3kwVlB4ebEdVDVcBEkj0ZQ08orlnbhdGYbTdx3IYGI0" +
+                    "M51OFW1YjEJ+zUCiQlTyV07QiBgCS2VZGBwGfI5oCy7HWn+hBWfz4vUQUVHYsQID" +
+                    "AQABox0wGzAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwIBpjANBgkqhkiG9w0BAQsF" +
+                    "AAOCAQEAwdI3JXKKUVlPy+HDA//r9JwM5HaLl0LEZRP8YmeuxwOvdJCn2SDHM4pN" +
+                    "eJpKJGWNf6xhlbTcU+rBvME4zKs1Ug0t0qvCqIJsrY16GZKo9f3oK+TicnfQq8+q" +
+                    "wWv55kcUWiHeKFdB9p016xpHds0bfVog2N+7VYCp+9sK13AtSbqD/cuGw6fHOxuv" +
+                    "bNyDtaMZblpytd1D2nZ5dJQUXgaEuuFx8LoYGWnWOR5oKr3RTCGEaq0lm0k/XP8Q" +
+                    "vKlHJ3LQc+DszJUxPtxnirtoFkGJvBszoMSAHGEyhZzN3CAsiHLXUhCGY+d9wAVB" +
+                    "vJo/4yirVwYw2Msw5yZ5KFUerPLN/A=="
 
-        val bvbRootCA_UAT = "MIIFvTCCBKWgAwIBAgITPgAAAHoTJac0cp+P4QADAAAAejANBgkqhkiG9w0BAQUFADBWMRIwEAYKCZImiZPyLGQBGRYCdm4xGzAZBgoJkiaJk/IsZAEZFgtiYW92aWV0YmFuazEjMCEGA1UEAxMaYmFvdmlldGJhbmstSE5JLUFELVNSVjItQ0EwHhcNMjEwNTI1MDE0NzU1WhcNMjQwNTI0MDE0NzU1WjBxMQswCQYDVQQGEwJWTjEOMAwGA1UECBMFSGFOb2kxDjAMBgNVBAcTBUhhTm9pMRQwEgYDVQQKEwtCYW9WaWV0QmFuazEOMAwGA1UECxMFSVREZXAxHDAaBgNVBAMTE3NvdHAuYmFvdmlldGJhbmsudm4wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC5GA9AnZ6E2lkqDSzAGwl9p26e4blAoO11nHwSsq2kqjW5M2BNmMGqW/05THkSbrfm91tdJbgDwslxCTUPSdEYo0q0AB/SlVoltGI2ZQem2JGH0ofVBFBQuRTjf+xp5XdLnEIpumUj7/EOefk3IvJSS7GrxpIf54WeW9iUIMFQZzzfJUqzYQ+2kVtZknoA1YLxPhqhvc4DeXEY9MscBFTpVxyoma3+zLswocogUW+q4CjdUd0oXId0fbcKiXZaE+H2lKh0bmISPiOuCIcldNx+5OKv6YUr72zjPKPI8SRq3CmxFct+yncuJ0dPgfzzKMTU4E2bC5zpaPU6hPoEgHKtAgMBAAGjggJnMIICYzAmBgNVHREEHzAdghVzb3RwLmJhb3ZpZXRiYW5rLnZuIDuHBGc4qCAwHQYDVR0OBBYEFMlvB1PS2xIt+LdBIWfM7DzsYIe4MB8GA1UdIwQYMBaAFGzrZ+WbnS/osF8M94ldoqlvjsPpMIHhBgNVHR8EgdkwgdYwgdOggdCggc2GgcpsZGFwOi8vL0NOPWJhb3ZpZXRiYW5rLUhOSS1BRC1TUlYyLUNBKDMpLENOPURDLUFEMTktMDIsQ049Q0RQLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9YmFvdmlldGJhbmssREM9dm4/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MIHPBggrBgEFBQcBAQSBwjCBvzCBvAYIKwYBBQUHMAKGga9sZGFwOi8vL0NOPWJhb3ZpZXRiYW5rLUhOSS1BRC1TUlYyLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPWJhb3ZpZXRiYW5rLERDPXZuP2NBQ2VydGlmaWNhdGU/YmFzZT9vYmplY3RDbGFzcz1jZXJ0aWZpY2F0aW9uQXV0aG9yaXR5MCEGCSsGAQQBgjcUAgQUHhIAVwBlAGIAUwBlAHIAdgBlAHIwCwYDVR0PBAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA0GCSqGSIb3DQEBBQUAA4IBAQBZ3BdAlZ2xSnoWe20jZwYrCsI1n94an1+LdERJJQqB1L98rxunNYGyMnCNBgXYErf8rJD758/gn7LUJJWH5faJrgiMti7PG+TyyoJGBay8xRxeAzBJTjMzDjVbsKuWqRbzdZEY8yRt1nhs/ygZGsYcZ5ngookhRZuU1vCFZTVm+V2oz/dISHorkAKESr+WjbCc8XjB/lnp2uvrgir+dl1fwtKK9bJhh+j5nin4IoMGAmJ0NnvIE1/C2QafhYM7J8TcKUgQhev84AWJaGwQv9u45pvuwd4m6tCuIQW6VQaNT5B9cbU+3QEvWwN1uUefSdw5xTQ5P1+254xkK2Bcn01L"
 
         var keyStore: KeyStore? = null
         try {
@@ -147,51 +302,36 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                 "securemetric_internal_SSL_CA",
                 securemetric_internal_SSL_CA
             )
-            keyStore.setCertificateEntry("bvb_ROOT_CA_UAT", cf.generateCertificate(ByteArrayInputStream(Base64.decode(bvbRootCA_UAT, Base64.DEFAULT))))
 
-            val go_Daddy_Root_CA = cf.generateCertificate(
+            val bvbProdICA = cf.generateCertificate(
                 ByteArrayInputStream(
                     Base64.decode(
-                        Go_Daddy_Root_CA,
+                        bvbProdI,
                         Base64.DEFAULT
                     )
                 )
             )
-            keyStore.setCertificateEntry("go_Daddy_Root_CA", go_Daddy_Root_CA)
+            keyStore.setCertificateEntry("go_Daddy_Root_CA", bvbProdICA)
 
-            val go_Daddy_Secure_CA = cf.generateCertificate(
+            val bvbProdRCA = cf.generateCertificate(
                 ByteArrayInputStream(
                     Base64.decode(
-                        Go_Daddy_Secure_CA,
+                        bvbProdR,
                         Base64.DEFAULT
                     )
                 )
             )
-            keyStore.setCertificateEntry("go_Daddy_Secure_CA", go_Daddy_Secure_CA)
+            keyStore.setCertificateEntry("go_Daddy_Secure_CA", bvbProdRCA)
 
-            val globalSign_Root_CA = cf.generateCertificate(
+            val bvbUatDomain = cf.generateCertificate(
                 ByteArrayInputStream(
                     Base64.decode(
-                        GlobalSign_Root_CA,
+                        bvbUatDomainB64,
                         Base64.DEFAULT
                     )
                 )
             )
-            keyStore.setCertificateEntry("globalSign_Root_CA", globalSign_Root_CA)
-
-            val globalSign_Organization_Validation_CA = cf.generateCertificate(
-                ByteArrayInputStream(
-                    Base64.decode(
-                        GlobalSign_Organization_Validation_CA,
-                        Base64.DEFAULT
-                    )
-                )
-            )
-            keyStore.setCertificateEntry(
-                "globalSign_Organization_Validation_CA",
-                globalSign_Organization_Validation_CA
-            )
-
+            keyStore.setCertificateEntry("bvbUatDomain", bvbUatDomain)
 
         } catch (e: Exception) {
 
@@ -207,10 +347,11 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
 
 
     override fun gotoNext() {
+
         val authentication = AccountRepository.getInstance(this).authentication
         val account = AccountRepository.getInstance(this).accounts
         if (authentication != null && account.value != null && account.value?.size!! > 0) {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = LoginActivity.newValidateIntent(this)
             startActivity(intent)
             finish()
             return

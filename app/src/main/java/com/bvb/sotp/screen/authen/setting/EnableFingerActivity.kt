@@ -35,6 +35,7 @@ import com.bvb.sotp.screen.authen.login.LoginViewContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
+import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
@@ -96,18 +97,6 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     @BindView(R.id.num_back)
     lateinit var numBack: ImageView
 
-//    @BindView(R.id.img_close_fail)
-//    lateinit var imgCloseFail: ImageView
-
-//    @BindView(R.id.cstr_success)
-//    lateinit var cstrSuccess: CardView
-
-//    @BindView(R.id.cstr_fail)
-//    lateinit var cstrFail: CardView
-
-//    @BindView(R.id.popup)
-//    lateinit var popup: View
-
     @BindView(R.id.biometricInputLayout)
     lateinit var biometricInputLayout: View
 
@@ -118,28 +107,11 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     @BindView(R.id.bio_status)
     lateinit var tvBioStatus: RegularTextView
 
+    @BindView(R.id.tv_tittle)
+    lateinit var tvTittle: RegularBoldTextView
+
     var count: Int = 0
 
-    companion object {
-        fun newValidateIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", true)
-            intent.putExtra("cancelable", false)
-            return intent
-        }
-
-        fun newCancelAbleIntent(context: Context): Intent {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("is_validate", false)
-            intent.putExtra("cancelable", true)
-            return intent
-        }
-    }
-
-
-    private fun isValidate(): Boolean {
-        return intent.getBooleanExtra("is_validate", false)
-    }
 
     private fun isCancelable(): Boolean {
         return intent.getBooleanExtra("cancelable", false)
@@ -219,6 +191,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     override fun initViews() {
         setAppBarHeight()
 //        bioClose.visibility = View.GONE
+        tvTittle.text = getString(R.string.security)
 
         for (i in 1..5) {
             val randomInteger = (0..9).shuffled().first()
@@ -253,6 +226,11 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
         }
 
         bioClose.setOnClickListener {
+            try {
+                mFingerprintConnector?.stopListening()
+            }catch (e:Exception){
+
+            }
             finish()
 //            biometricInputLayout.visibility = View.GONE
 //            var authentication = AccountRepository.getInstance(this).authentication
@@ -328,7 +306,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
                     .savePin(authentication)
                 var tryFailed = authentication.tryLimit - authentication?.remainingTry!!
 
-                if (authentication?.remainingTry == 0) {
+                if (tryFailed == 5) {
 
                     showDialogLock()
 
@@ -464,7 +442,10 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
 
     }
 
-
+    @OnClick(R.id.menu)
+    fun onBack() {
+        finish()
+    }
 
     @OnClick(R.id.lnVn)
     fun OnVnClick() {
@@ -480,7 +461,9 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
 
     override fun changeLang(type: String) {
         super<MvpLoginActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+finish();
+overridePendingTransition(0, 0);
     }
 
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
@@ -523,11 +506,20 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
                     finish()
                 })
         } else {
-            Toast.makeText(this, errMsgId, Toast.LENGTH_SHORT).show()
+
+            finish()
+//            biometricInputLayout.visibility = View.GONE
         }
     }
 
     override fun onStartListen() {
         biometricInputLayout.visibility = View.VISIBLE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mFingerprintConnector != null) {
+            mFingerprintConnector?.stopListening()
+        }
     }
 }

@@ -159,7 +159,7 @@ class Utils {
             }
         }
 
-        fun saveNotiOther(type: String) {
+        fun saveNotiOther(type: String, code: String?) {
             val realm = Realm.getDefaultInstance()
             val id = PeepApp.mobilePushPrimaryKey!!.getAndIncrement()
             realm.executeTransactionAsync { realm1: Realm ->
@@ -168,14 +168,17 @@ class Utils {
                 )
                 model.date = System.currentTimeMillis()
                 model.type = type
+                model.detail = code
             }
         }
 
-        fun getSessionCode(content: String): String {
+        fun getSessionCode(s: String): String {
             var result = ""
             try {
-                val jObject = JSONObject(content)
-                result = jObject.getString("sessioncode")
+                val ssContent: String = s.substring(s.indexOf("sessioncode=") + 12, s.length)
+                result = ssContent.substring(0, s.indexOf("type"))
+//                val jObject = JSONObject(content)
+//                result = jObject.getString("sessioncode")
             } catch (e: Exception) {
 
             }
@@ -196,7 +199,7 @@ class Utils {
                 }
 
                 if (jObject.has("f3")) {
-                    result += "Người thụ hưởng:: " + jObject.getString("f3") + "\n"
+                    result += "Người thụ hưởng: " + jObject.getString("f3") + "\n"
                 }
 
                 if (jObject.has("f4")) {
@@ -317,15 +320,19 @@ class Utils {
                 }
 
                 if (jObject.has("f33")) {
-                    result += context.getString(R.string.total_amount_transaction) + jObject.getString(
+                    result += context.getString(R.string.total_amount_transaction) + " " + jObject.getString(
                         "f33"
                     ) + "\n"
                 }
                 if (jObject.has("f34")) {
-                    result += context.getString(R.string.total_amount_money) + jObject.getString("f34") + "\n"
+                    result += context.getString(R.string.total_amount_money) + " " + jObject.getString(
+                        "f34"
+                    ) + "\n"
                 }
                 if (jObject.has("f35")) {
-                    result += context.getString(R.string.transaction_date) + jObject.getString("f35") + "\n"
+                    result += context.getString(R.string.transaction_date) + " " + jObject.getString(
+                        "f35"
+                    ) + "\n"
                 }
 
             } catch (e: Exception) {

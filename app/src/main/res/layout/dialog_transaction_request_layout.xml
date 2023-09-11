@@ -55,6 +55,7 @@
             <ImageView
                 android:id="@+id/cancel"
                 android:layout_width="@dimen/_35sdp"
+                android:filterTouchesWhenObscured="true"
                 android:layout_height="@dimen/_35sdp"
                 android:src="@drawable/ic_reject" />
 
@@ -64,6 +65,7 @@
 
             <ImageView
                 android:id="@+id/ok"
+                android:filterTouchesWhenObscured="true"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:src="@drawable/ic_check" />

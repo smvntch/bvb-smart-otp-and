@@ -16,13 +16,13 @@ import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginConfirmQrActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
+import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.Utils
 import com.centagate.module.account.Account
 import com.centagate.module.authentication.AuthenticationService
 import com.centagate.module.authentication.QrAuthentication
 import com.centagate.module.exception.CentagateException
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
@@ -153,25 +153,37 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
             progressDialog!!.dismiss()
             if (param == 1) {
-//                saveNoti("","1")
                 Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "1")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch thành công", false, Runnable {
-                    finish()
-
-                })
+                dialogHelper.showAlertDialog(
+                    getString(R.string.transaction_successful),
+                    false,
+                    "OK",
+                    Runnable {
+                        val a = Intent(this@QrCodeTransactionDetailActivity, AddUserActivity::class.java)
+                        a.addFlags(
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
+                        )
+                        startActivity(a)
+                        finish()
+                    })
 
             } else {
                 runOnUiThread {
-//                    saveNoti("","3")
-                    Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "3")
+//                    Utils.saveNoti(getDetail(), "", Constant.NOTI_TYPE_TRANSACTION, "3")
+                    Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.invalid_qr_tittle) + " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        getString(R.string.close),
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
@@ -220,20 +232,37 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
                 Utils.saveNoti(getDetail(), "", "2", "2")
 
                 var dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
-                dialogHelper.showAlertDialog("Giao dịch bị từ chối", false, Runnable {
-                    finish()
-                })
+                dialogHelper.showAlertDialog(
+                    getString(R.string.transaction_denied),
+                    true,
+                    Runnable {
+                        val a = Intent(
+                            this@QrCodeTransactionDetailActivity,
+                            AddUserActivity::class.java
+                        )
+                        a.addFlags(
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
+                        )
+                        startActivity(a)
+                        finish()
+                    })
 
             } else {
+
                 runOnUiThread {
 //                    saveNoti("","3")
-                    Utils.saveNoti(getDetail(), "", "2", "3")
+//                    Utils.saveNoti(getDetail(), "", "2", "3")
+                    Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                     val dialogHelper = DialogHelper(this@QrCodeTransactionDetailActivity)
                     dialogHelper.showAlertDialog(
-                        "Giao dịch không hợp lệ",
+                        getString(R.string.qr_invalid) + " (" + param.toString() + ")",
                         true,
-                        Runnable { })
+                        Runnable {
+                            finish()
+                        })
                 }
 
             }
@@ -262,7 +291,9 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
 
     }
 

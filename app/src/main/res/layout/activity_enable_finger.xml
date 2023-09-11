@@ -15,7 +15,7 @@
         android:background="@drawable/bg_header_new"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/include_toolbar_pincode" />
+        <include layout="@layout/include_toolbar_back" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:card_view="http://schemas.android.com/tools"
@@ -353,10 +353,6 @@
                     android:src="@drawable/ic_backspace" />
             </LinearLayout>
         </LinearLayout>
-
-        <include
-            layout="@layout/dialog_migrate_layout"
-            android:visibility="gone" />
 
         <include
             android:id="@+id/langLayout"

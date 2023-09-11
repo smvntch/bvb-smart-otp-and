@@ -13,16 +13,17 @@ import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeContract
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodePresenter
+import com.bvb.sotp.screen.authen.security.SecurityActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
 
-class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeContract, View.OnClickListener {
+class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeContract,
+    View.OnClickListener {
 
 
     @BindView(R.id.img_code_1)
@@ -328,12 +329,16 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
             pin1 = pincode.toString()
 //            if (pin1 == preferenceHelper.getPincode()) {
             val authentication = AccountRepository.getInstance(this).authentication
-            if (authentication != null && authentication.authenticate(pin1, preferenceHelper.getHid())) {
+            if (authentication != null && authentication.authenticate(
+                    pin1,
+                    preferenceHelper.getHid()
+                )
+            ) {
                 val dialog = DialogHelper(this)
                 dialog.showAlertDialog(getString(R.string.pincode_match), true,
-                        Runnable {
-                            reset0()
-                        })
+                    Runnable {
+                        reset0()
+                    })
                 return
             }
             tvLbl.text = getString(R.string.reinput_pincode_message_new)
@@ -360,27 +365,31 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
 //                securityDeviceNew.setPin(pin1)
                 securityDeviceNew.tryLimit = Constant.tryLimit
                 securityDeviceNew.setTryLeft(Constant.tryLimit)
-                println("--getHid-----------"+ preferenceHelper.getHid())
+                println("--getHid-----------" + preferenceHelper.getHid())
                 securityDeviceNew.setPin(pin1, preferenceHelper.getHid())
-                AccountRepository.getInstance(this).updateAuthentication(securityDeviceOld, securityDeviceNew)
+                AccountRepository.getInstance(this)
+                    .updateAuthentication(securityDeviceOld, securityDeviceNew)
 //                preferenceHelper.setPincode(pin1)
                 preferenceHelper.setLastChangePin(System.currentTimeMillis())
 
                 val dialog = DialogHelper(this)
                 dialog.showAlertDialog(getString(R.string.change_pin_success), false,
-                        Runnable {
-                            var intent = Intent(this@ChangePincodeActivity, LoginActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                        })
+                    Runnable {
+                        var intent =
+                            Intent(this@ChangePincodeActivity, SecurityActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    })
             } else {
 
                 val dialog = DialogHelper(this)
 
                 dialog.showAlertDialog(getString(R.string.input_pincode_invalid), true,
-                        Runnable {
-                            reset()
-                        })
+                    Runnable {
+                        reset()
+                    })
 
                 enableKeyboard(false)
             }
@@ -408,7 +417,11 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
 
     @OnClick(R.id.menu)
     fun onBack() {
-        finish()
+        if (count == 0) {
+            finish()
+        } else {
+            reset0()
+        }
     }
 
 
@@ -423,7 +436,7 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
     }
 
     private fun reset0() {
-
+        tvLbl.text = getString(R.string.input_pin_code_new)
         initRandomKeyPad()
         count = 0
         pin1 = ""

@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Build
 import android.text.Html
+import android.text.TextUtils
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
@@ -195,21 +196,8 @@ class DialogHelper(private var context: Context) {
         text.text = msg
         if (isError) {
             imgStatus.setImageResource(R.drawable.ic_warning)
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                text.setTextColor(context.resources.getColor(R.color.colorRed, null))
-//            } else {
-//                text.setTextColor(context.resources.getColor(R.color.colorRed))
-//
-//            }
         } else {
             imgStatus.setImageResource(R.drawable.ic_check_active)
-
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                text.setTextColor(context.resources.getColor(R.color.black, null))
-//            } else {
-//                text.setTextColor(context.resources.getColor(R.color.black))
-//
-//            }
         }
         val dialogButton = dialog.findViewById(R.id.close) as AppCompatButton
         dialogButton.setOnClickListener {
@@ -227,7 +215,7 @@ class DialogHelper(private var context: Context) {
 
     }
 
-    fun showAlertDialog(msg: String, isError: Boolean, ok: Runnable, cancel: Runnable) {
+    fun showAlertDialog(msg: String, isError: Boolean,btnText : String, ok: Runnable) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -255,6 +243,10 @@ class DialogHelper(private var context: Context) {
 //            }
         }
         val dialogButton = dialog.findViewById(R.id.close) as AppCompatButton
+        if (!TextUtils.isEmpty(btnText)){
+            dialogButton.setText(btnText)
+
+        }
         dialogButton.setOnClickListener {
             ok.run()
             dialog.dismiss()
@@ -270,6 +262,70 @@ class DialogHelper(private var context: Context) {
 
     }
 
+    fun showAlertDialog(msg: String, isError: Boolean, ok: Runnable, cancel: Runnable) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_success_layout)
+
+        val text = dialog.findViewById(R.id.message) as RegularTextView
+        val imgStatus = dialog.findViewById(R.id.imgStatus) as AppCompatImageView
+        text.text = msg
+        if (isError) {
+            imgStatus.setImageResource(R.drawable.ic_warning)
+        } else {
+            imgStatus.setImageResource(R.drawable.ic_check_active)
+        }
+        val dialogButton = dialog.findViewById(R.id.close) as AppCompatButton
+        dialogButton.setOnClickListener {
+            ok.run()
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+        dialog.show()
+
+    }
+
+    fun showAlertDialogYN(message: String, okText: String, cancelText: String, ok: Runnable) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_confirm_layout)
+
+        val dialogButton = dialog.findViewById(R.id.bio_next) as AppCompatButton
+        if (!TextUtils.isEmpty(okText)){
+            dialogButton.setText(okText)
+        }
+        dialogButton.setOnClickListener {
+            ok.run()
+            dialog.dismiss()
+        }
+
+        val close = dialog.findViewById(R.id.bio_cancel) as AppCompatButton
+        if (!TextUtils.isEmpty(cancelText)){
+            close.setText(cancelText)
+        }
+        val msg = dialog.findViewById(R.id.message) as RegularTextView
+        msg.text = message
+        close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+
+        dialog.show()
+    }
     fun showAlertDialogBiometric(message: String, ok: Runnable, cancel: Runnable) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

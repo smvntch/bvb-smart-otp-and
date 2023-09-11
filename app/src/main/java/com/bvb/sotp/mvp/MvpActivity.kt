@@ -1,8 +1,11 @@
 package com.bvb.sotp.mvp
 
 import android.app.Activity
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,11 +13,16 @@ import android.os.Handler
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import butterknife.ButterKnife
+import com.bvb.sotp.Constant
 import com.google.android.material.appbar.AppBarLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,10 +30,23 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
+import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.helper.PreferenceHelper
+import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.authen.login.LoginActivity
+import com.bvb.sotp.screen.main.PushEvent
+import com.bvb.sotp.screen.transaction.TransactionDetailActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.util.LogUtils
+import com.bvb.sotp.util.Utils
+import com.bvb.sotp.view.RegularTextView
+import com.centagate.module.account.AccountInfo
+import com.centagate.module.authentication.AuthenticationService
+import com.centagate.module.authentication.RequestInfo
+import com.centagate.module.exception.CentagateException
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.TimeUnit
 
 
@@ -50,18 +71,9 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
     fun setAppBarHeight() {
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-        if (getStatusBarHeight() > dpToPx(24)) {
-//            var topbarLp =  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            topbarLp.setMargins(0, getStatusBarHeight(), 0, 0);
-//
-//            //Set above layout params to your layout which was getting cut because of notch
-//            topbar.setLayoutParams(topbarlp)
-        }else{
             var height = getStatusBarHeight() + dpToPx(56)
             appBarLayout.layoutParams =
                 CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
-
-        }
     }
 
     private val disconnectCallback = Runnable {
@@ -90,15 +102,15 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
     }
 
     var sessionTimer = Observable.interval(1, TimeUnit.SECONDS)
-            .take(DISCONNECT_TIMEOUT)
-            .observeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                val app = application as PeepApp
-                if (System.currentTimeMillis() - app.mLastPause >= DISCONNECT_TIMEOUT) {
-                    showLogin()
-                }
+        .take(DISCONNECT_TIMEOUT)
+        .observeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+            val app = application as PeepApp
+            if (System.currentTimeMillis() - app.mLastPause >= DISCONNECT_TIMEOUT) {
+                showLogin()
             }
+        }
 
     fun resetSessionTimer() {
 //
@@ -152,14 +164,15 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
     fun dpToPx(dp: Int): Int {
         val density = resources
-                .displayMetrics
-                .density
+            .displayMetrics
+            .density
         return Math.round(dp.toFloat() * density)
     }
 
     public override fun onStop() {
         super.onStop()
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
+        EventBus.getDefault().unregister(this)
 
     }
 
@@ -198,18 +211,17 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
 
         super.onPause()
         stopDisconnectTimer()
-//        (this.application as PeepApp).mLastPause = System.currentTimeMillis()
+        (this.application as PeepApp).mLastPause = System.currentTimeMillis()
     }
 
     override fun onResume() {
-//        val app = application as PeepApp
-//        if (System.currentTimeMillis() - app.mLastPause > 600000) {
-//            showLogin()
-//        } else {
-        resetDisconnectTimer()
-        resetSessionTimer()
-
-//        }
+        val app = application as PeepApp
+        if (System.currentTimeMillis() - app.mLastPause > DISCONNECT_TIMEOUT) {
+            showLogin()
+        } else {
+            resetDisconnectTimer()
+            resetSessionTimer()
+        }
 
         super.onResume()
 
@@ -303,9 +315,11 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
     fun hideSoftKeyboard(activity: Activity) {
         if (currentFocus != null) {
             val inputMethodManager = getSystemService(
-                    Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                Activity.INPUT_METHOD_SERVICE
+            ) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
-                    currentFocus?.windowToken, 0)
+                currentFocus?.windowToken, 0
+            )
         }
 
     }
@@ -347,7 +361,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
         return false
     }
 
-     fun getDeviceName(): String? {
+    fun getDeviceName(): String? {
         val manufacturer = Build.MANUFACTURER
         val model = Build.MODEL
         return if (model.startsWith(manufacturer)) {
@@ -375,6 +389,167 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
         }
 
         return phrase.toString()
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: PushEvent) {
+        println("--onMessageEvent--------------")
+
+        showNotification()
+
+        onNotification()
+    }
+
+    open fun onNotification() {
+
+    }
+
+    var dialogMP: Dialog? = null
+
+    fun showNotification() {
+        println("--showNotification--------------")
+        if (isFinishing) {
+            return
+        }
+
+        if (dialogMP != null && dialogMP!!.isShowing) {
+            dialogMP!!.dismiss()
+        }
+
+        dialogMP = Dialog(this)
+        dialogMP!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogMP!!.setCancelable(false)
+        dialogMP!!.setContentView(R.layout.dialog_biometric_layout)
+
+        val dialogButton = dialogMP!!.findViewById(R.id.bio_next) as AppCompatButton
+        dialogButton.setOnClickListener {
+            getTokenProcess().execute()
+
+            dialogMP!!.dismiss()
+        }
+
+        val close = dialogMP!!.findViewById(R.id.bio_cancel) as AppCompatButton
+        val msg = dialogMP!!.findViewById(R.id.message) as RegularTextView
+        msg.text = getString(R.string.msg_have_mobile_push)
+        close.setOnClickListener {
+            preferenceHelper.setIsNotification(false)
+
+            dialogMP!!.dismiss()
+        }
+
+        dialogMP!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialogMP!!.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+
+        dialogMP!!.show()
+
+    }
+
+    internal inner class getTokenProcess : AsyncTask<Int, Void, String?>() {
+        var mProgressDialog: ProgressDialog? = null
+        override fun doInBackground(vararg params: Int?): String? {
+            var result: Boolean? = false
+            try {
+                result = getTransactionDetail()
+            } catch (e: CentagateException) {
+                return e.errorCode.toString()
+            } catch (e: Exception) {
+                return "123"
+            }
+
+            return "1"
+        }
+
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            mProgressDialog = ProgressDialog(this@MvpActivity)
+            mProgressDialog!!.setTitle("")
+            mProgressDialog!!.setCancelable(false)
+            mProgressDialog!!.show()
+        }
+
+        override fun onPostExecute(param: String?) {
+            preferenceHelper.setIsNotification(false)
+            mProgressDialog!!.dismiss()
+            if (param == "1") {
+                var intent =
+                    Intent(this@MvpActivity, TransactionDetailActivity::class.java)
+                intent.putExtra("randomString", requestInfo?.randomString)
+                intent.putExtra("detail", requestInfo?.details)
+                intent.putExtra("requestId", requestInfo?.requestId)
+                startActivity(intent)
+//                var dialogHelper = DialogHelper(this@AddUserActivity)
+//                dialogHelper.showAlertDialogQrTransactionRequest(
+//                    requestInfo?.details!!,
+//                    {
+//                        AcceptTransactionProcess().execute()
+//                    },
+//                    {
+//                        RejectTransactionProcess().execute()
+//
+//                    })
+            } else {
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_MOBILE_PUSH, param)
+
+                runOnUiThread {
+                    val dialogHelper = DialogHelper(this@MvpActivity)
+                    dialogHelper.showAlertDialog(
+                        getString(R.string.mobile_push_invalid_tittle) + " (" + param.toString() + ")",
+                        true,
+                        Runnable { })
+                }
+
+            }
+//            onGetRequestInfoSuccess()
+
+        }
+    }
+
+    var requestInfo: RequestInfo? = null
+
+    fun getTransactionDetail(): Boolean {
+        var success = false
+        try {
+            var message = ""
+            var accountInfo: AccountInfo
+            var authenticationService = AuthenticationService()
+            val securityDevice = AccountRepository.getInstance(this).authentication
+
+
+            if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {
+                var account = AccountRepository.getInstance(this).onlineAccounts[0]
+                accountInfo = account.accountInfo
+
+                println("------------------getSession----" + preferenceHelper.getSession())
+                requestInfo = authenticationService.getRequestInfo(
+                    preferenceHelper.getHid(),
+                    preferenceHelper.getSession(),
+                    true,
+                    accountInfo,
+                    securityDevice
+                )
+                message = requestInfo?.details!!
+                println("----------------------" + message)
+            }
+
+            success = false
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            throw e
+        }
+
+
+        return success
     }
 
 }

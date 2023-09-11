@@ -13,6 +13,11 @@ class ErrorUtils {
         if (context == null) {
             return
         }
+        val dialogHelper = DialogHelper(context)
+        dialogHelper.showAlertDialog(context.getString(R.string.active_message_failed)+ " (" + param + ")", true, Runnable {
+
+        })
+        return
         if (param == 3000) {
             val dialogHelper = DialogHelper(context)
             dialogHelper.showAlertDialog(context.getString(R.string.msg_error_3000), true, Runnable {
@@ -47,7 +52,7 @@ class ErrorUtils {
 
         if (param == 10004) {
             val dialogHelper = DialogHelper(context)
-            dialogHelper.showAlertDialog(context.getString(R.string.msg_error_10004) + "(" + param + ")", true, Runnable {
+            dialogHelper.showAlertDialog(context.getString(R.string.msg_error_10004) + " (" + param + ")", true, Runnable {
 
             })
             return
@@ -55,17 +60,14 @@ class ErrorUtils {
 
         if (param == 20026) {
             val dialogHelper = DialogHelper(context)
-            dialogHelper.showAlertDialog(context.getString(R.string.msg_error_10004) + "(" + param + ")", true, Runnable {
+            dialogHelper.showAlertDialog(context.getString(R.string.msg_error_10004) + " (" + param + ")", true, Runnable {
 
             })
             return
         }
 
 
-        val dialogHelper = DialogHelper(context)
-        dialogHelper.showAlertDialog(context.getString(R.string.active_message_failed) + "(" + param + ")", true, Runnable {
 
-        })
     }
 
     fun encryptUserErrorHandle(data: String, context: Activity) {

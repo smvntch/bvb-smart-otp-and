@@ -44,23 +44,23 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     @BindView(R.id.tv_next)
     lateinit var mNext: RegularBoldTextView
 
-    @BindView(R.id.tv_code_1)
-    lateinit var tvCode1: RegularTextView
-
-    @BindView(R.id.tv_code_2)
-    lateinit var tvCode2: RegularTextView
-
-    @BindView(R.id.tv_code_3)
-    lateinit var tvCode3: RegularTextView
-
-    @BindView(R.id.tv_code_4)
-    lateinit var tvCode4: RegularTextView
-
-    @BindView(R.id.tv_code_5)
-    lateinit var tvCode5: RegularTextView
-
-    @BindView(R.id.tv_code_6)
-    lateinit var tvCode6: RegularTextView
+//    @BindView(R.id.tv_code_1)
+//    lateinit var tvCode1: RegularTextView
+//
+//    @BindView(R.id.tv_code_2)
+//    lateinit var tvCode2: RegularTextView
+//
+//    @BindView(R.id.tv_code_3)
+//    lateinit var tvCode3: RegularTextView
+//
+//    @BindView(R.id.tv_code_4)
+//    lateinit var tvCode4: RegularTextView
+//
+//    @BindView(R.id.tv_code_5)
+//    lateinit var tvCode5: RegularTextView
+//
+//    @BindView(R.id.tv_code_6)
+//    lateinit var tvCode6: RegularTextView
 
     @BindView(R.id.can_not_scan)
     lateinit var notScan: RegularTextView
@@ -68,15 +68,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     @BindView(R.id.content_frame)
     lateinit var contentFrame: FrameLayout
 
-    @BindView(R.id.inputActiveCode)
-    lateinit var inputActiveCode: View
-
-    @BindView(R.id.edtPincode)
-    lateinit var edtPincode: EditText
-
     @BindView(R.id.root)
     lateinit var mRoot: View
-
 
     private var mScannerView: ZXingScannerView? = null
     var username = ""
@@ -101,7 +94,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
     fun reloadUI() {
-        tvTittle.text = getString(R.string.get_otp)
+        tvTittle.text = getString(R.string.otp_qr_tittle)
 
         mNext.text = getString(R.string.transaction_qr)
         notScan.text = getString(R.string.not_scan_qr)
@@ -129,21 +122,11 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         finish()
     }
 
-//    @OnClick(R.id.lnVn)
-//    fun OnVnClick() {
-//        changeLang("vi")
-//
-//    }
-//
-//    @OnClick(R.id.lnEng)
-//    fun OnEnClick() {
-//        changeLang("en")
-//
-//    }
-
     override fun changeLang(type: String) {
         super<MvpActivity>.changeLang(type)
-        recreate()
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
 
     }
 
@@ -175,16 +158,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     var qrCode = ""
 
     override fun handleResult(rawResult: Result?) {
-//        Toast.makeText(
-//                this, "Contents = " + rawResult!!.text +
-//                ", Format = " + rawResult!!.barcodeFormat.toString(), Toast.LENGTH_SHORT
-//        ).show()
-
         qrCode = rawResult?.text!!
-        println("--qrCode--------" + qrCode)
         GetSessionProcess().execute()
-
-
     }
 
     var data: RequestInfo? = null
@@ -205,10 +180,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 account!!.accountInfo,
                 securityDevice
             )
-            println("--------details-------" + requestInfo.details)
-            println("--------location-------" + requestInfo.location)
-            println("--------qrchallenge-------" + requestInfo.qrchallenge)
-            println("--------username-------" + requestInfo.username)
             data = requestInfo
 
             result = true
@@ -224,11 +195,8 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
 
-
     internal inner class GetSessionProcess : AsyncTask<Int, Void, Int>() {
         override fun doInBackground(vararg params: Int?): Int {
-            println("-----onPostExecute----------------")
-
             var result: Boolean? = false
             try {
                 result = getSessionCode()
@@ -248,7 +216,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
         override fun onPreExecute() {
             super.onPreExecute()
-            println("-----onPreExecute----------------")
             progressDialog = SpotsDialog.Builder().setContext(this@GetOtpQrActivity).build()
             progressDialog!!.setTitle("")
             progressDialog!!.setCancelable(false)
@@ -256,8 +223,6 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         }
 
         override fun onPostExecute(param: Int?) {
-            println("-----onPostExecute----------------")
-
             progressDialog!!.dismiss()
             if (param == 1) {
                 var intent =
@@ -266,27 +231,14 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
                 intent.putExtra("detail", data?.details)
                 intent.putExtra("requestId", data?.requestId)
                 startActivity(intent)
-//                var dialogHelper = DialogHelper(this@GetOtpQrActivity)
-//                dialogHelper.showAlertDialogQrTransactionRequest(
-//                        data?.details!!,
-//                        Runnable {
-//                            AcceptTransactionProcess().execute()
-//                            resumeQrScan()
-////                            showBiometric()
-//                        },
-//                        Runnable {
-//                            RejectTransactionProcess().execute()
-//                            resumeQrScan()
-//
-//                        })
 
             } else {
-                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR)
+                Utils.saveNotiOther(Constant.NOTI_TYPE_INVALID_QR, param.toString())
 
                 runOnUiThread {
                     val dialogHelper = DialogHelper(this@GetOtpQrActivity)
                     dialogHelper.showAlertDialog(
-                        "Không thể lấy thông tin giao dịch",
+                        getString(R.string.qr_invalid) + " (" + param.toString() + ")",
                         true,
                         Runnable {
                             resumeQrScan()

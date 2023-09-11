@@ -2,6 +2,8 @@ package com.bvb.sotp.screen.transaction
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ class NotificationAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var pos = 0
+    var sessionPending = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 1) {
             val inflater = LayoutInflater.from(parent.context)
@@ -42,8 +45,16 @@ class NotificationAdapter(
         val movie: MobilePushRealmModel = list[position]
 
         if (holder is ItemViewHolder) {
-            holder.bind(holder.itemView.context, movie)
+            holder.bind(holder.itemView.context, movie, sessionPending)
+            println("---detail---------------" + movie.detail)
+            println("----sessionPending--------------" + sessionPending)
 
+            if (!TextUtils.isEmpty(movie.detail) && movie.detail.equals(sessionPending)) {
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFD236"))
+                holder.content
+            } else {
+                holder.itemView.setBackgroundColor(Color.WHITE)
+            }
 
         } else if (holder is TransactionItemViewHolder) {
             holder.bind(holder.itemView.context, movie)
@@ -85,23 +96,45 @@ class ItemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     @SuppressLint("SetTextI18n")
-    fun bind(context: Context, model: MobilePushRealmModel) {
+    fun bind(context: Context, model: MobilePushRealmModel, sessionPending: String) {
         if (model.type == Constant.NOTI_TYPE_MOBILE_PUSH) {
-            tittle?.text = context.getString(R.string.mobile_push)
-            content?.text = context.getString(R.string.mobile_push_msg)
+            if (!TextUtils.isEmpty(model.detail) && model.detail.equals(sessionPending)) {
+                tittle?.text = context.getString(R.string.mobile_push)
+                content?.text = context.getString(R.string.mobile_push_msg_active)
+            } else {
+                tittle?.text = context.getString(R.string.mobile_push)
+                content?.text = context.getString(R.string.mobile_push_msg)
+            }
+
         } else if (model.type == Constant.NOTI_TYPE_INVALID_MOBILE_PUSH) {
-            tittle?.text = context.getString(R.string.mobile_push_invalid_tittle)
+            if (!TextUtils.isEmpty(model.detail)) {
+                tittle?.text =
+                    context.getString(R.string.mobile_push_invalid_tittle) + " (" + model.detail + ")"
+            } else {
+                tittle?.text =
+                    context.getString(R.string.mobile_push_invalid_tittle)
+            }
             content?.text = context.getString(R.string.mobile_push_invalid_msg)
+
         } else if (model.type == Constant.NOTI_TYPE_INVALID_ACTIVE_CODE) {
             tittle?.text = context.getString(R.string.invalid_active_code_tittle)
             content?.text = context.getString(R.string.invalid_active_code_msg)
         } else if (model.type == Constant.NOTI_TYPE_INVALID_QR) {
-            tittle?.text = context.getString(R.string.invalid_qr_tittle)
+
+            if (!TextUtils.isEmpty(model.detail)) {
+                tittle?.text =
+                    context.getString(R.string.invalid_qr_tittle) + " (" + model.detail + ")"
+
+            } else {
+                tittle?.text =
+                    context.getString(R.string.invalid_qr_tittle)
+            }
             content?.text = context.getString(R.string.invalid_qr_msg)
+
         }
 
 
-        val dateString: String = SimpleDateFormat("HH:mm:ss MM-dd-yyyy").format(Date(model.date))
+        val dateString: String = SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Date(model.date))
         date?.text = dateString
 
     }
@@ -139,7 +172,7 @@ class TransactionItemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 //        tittle?.text = model.tittle
         content?.text = Utils.getTransactionDetail(context, model.content)
 
-        val dateString: String = SimpleDateFormat("HH:mm:ss MM-dd-yyyy").format(Date(model.date))
+        val dateString: String = SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Date(model.date))
         date?.text = dateString
 
         var tempTittle = ""

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="@dimen/_48sdp"
     android:layout_weight="1"
     android:background="@color/blue"
     android:fitsSystemWindows="true">
@@ -29,6 +29,7 @@
             android:id="@+id/noti"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="wrap_content"
+            android:filterTouchesWhenObscured="true"
             android:adjustViewBounds="true"
             android:padding="@dimen/_6sdp"
             android:src="@drawable/ic_noti"
@@ -39,6 +40,7 @@
         <ImageView
             android:id="@+id/menu"
             android:layout_width="@dimen/_30sdp"
+            android:filterTouchesWhenObscured="true"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_4sdp"
             android:adjustViewBounds="true"
