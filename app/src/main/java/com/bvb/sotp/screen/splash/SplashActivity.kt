@@ -269,22 +269,28 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "vKlHJ3LQc+DszJUxPtxnirtoFkGJvBszoMSAHGEyhZzN3CAsiHLXUhCGY+d9wAVB" +
                     "vJo/4yirVwYw2Msw5yZ5KFUerPLN/A=="
 
-
+            //tuanle: KeyStore is a class in Java for storing private keys, certificates, and other security information. KeyStore can be used to encrypt, decrypt, authenticate, and protect data.
         var keyStore: KeyStore? = null
         try {
+            //tuanle:The KeyStore.getInstance function is a function in Java to get a KeyStore object of the specified keystore type
             keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
+            //tuanle: The KeyStore.getInstance function returns a KeyStore object of the corresponding keystore type. To access the KeyStore object, you need to call the load method to create an empty keystore or read from a data source.
             keyStore!!.load(null, null)
-
+            //tuanle: CertificateFactory.getInstance is a method of the CertificateFactory class in Java, used to create a CertificateFactory object with the specified certificate type. CertificateFactory is a class used to generate certificate objects, certificate paths (CertPaths) and certificate revocation lists (CRLs) from their encodings.
             val cf = CertificateFactory.getInstance("X.509")
 
+            //tuanle: generateCertificate is a method of the CertificateFactory class in Java, used to create a Certificate object from a data stream (InputStream) containing the encryption of the certificate. This method takes an InputStream object as a parameter and returns a Certificate object of the certificate type specified when creating the CertificateFactory object.
             val securemetric_internal_ROOT_CA = cf.generateCertificate(
+                //ByteArrayInputStream is a class in Java that reads a byte array as an input stream. This class has an internal buffer to store the data of the specified byte array
                 ByteArrayInputStream(
+            //tuanle: Base64.decode is a method used to decode a character string that has been encoded according to the Base64 standard
                     Base64.decode(
                         Securemetric_internal_ROOT_CA,
                         Base64.DEFAULT
                     )
                 )
             )
+            //tuanle: keyStore.setCertificateEntry is a method of the KeyStore class in Java, used to add a certificate to the keystore
             keyStore.setCertificateEntry(
                 "securemetric_internal_ROOT_CA",
                 securemetric_internal_ROOT_CA
@@ -338,6 +344,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         }
 
         //the certs which are trusted to has connection, will reject if doesn't match with server cert
+        //tuanle: configuration.getInstance().connectionKeyStore = keyStore is a command line in Java, used to assign a KeyStore object to the connectionKeyStore property of a Configuration object. The Configuration object is a class used to manage the configuration parameters of an application or a system
         Configuration.getInstance().connectionKeyStore = keyStore
 
         //if want to truested all connection to server
@@ -346,8 +353,13 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
     }
 
 
+    //tuanle: override function gotoNext()
     override fun gotoNext() {
-
+//tuanle: AccountRepository.getInstance(this).authentication is a command line in Java, used to get the authentication object from the AccountRepository object
+        //The AccountRepository object is a class used to manage user accounts in the application
+        //The authentication object is a class used to authenticate and authorize users in the application.
+        //The getInstance(this) method is a method of the AccountRepository class, used to return a single AccountRepository object according to the singleton design pattern.
+        //The singleton design pattern is a design pattern used to ensure that only one instance of a class is created and provide a global access point to it.
         val authentication = AccountRepository.getInstance(this).authentication
         val account = AccountRepository.getInstance(this).accounts
         if (authentication != null && account.value != null && account.value?.size!! > 0) {
