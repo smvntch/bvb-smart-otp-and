@@ -48,9 +48,9 @@ class PeepApp : Application() {
             //attempt will fail, and then in the catch clause you want to create a table
             mobilePushPrimaryKey =
                 AtomicLong(
-                    realm.where(
+                    (realm.where(
                         MobilePushRealmModel::class.java
-                    ).max("id").toLong() + 1
+                    ).max("id")?.toLong() ?: 0) + 1
                 )
         } catch (e: Exception) {
             //All write transaction should happen within a transaction, this code block
@@ -62,13 +62,13 @@ class PeepApp : Application() {
             //Now set the primary key again
             mobilePushPrimaryKey =
                 AtomicLong(
-                    realm.where(
+                    (realm.where(
                         MobilePushRealmModel::class.java
-                    ).max("id").toLong() + 1
+                    ).max("id")?.toLong() ?: 0) + 1
                 )
             //remove temp quote
             val results: RealmResults<MobilePushRealmModel> =
-                realm.where(MobilePushRealmModel::class.java).equalTo("id", 0).findAll()
+                realm.where(MobilePushRealmModel::class.java).equalTo("id", 0L).findAll()
             results.deleteAllFromRealm()
             realm.commitTransaction()
         }
