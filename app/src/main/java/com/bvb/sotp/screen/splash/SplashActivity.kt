@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Base64
+import android.util.Log
+import com.bvb.sotp.BuildConfig
 import com.bvb.sotp.R
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
@@ -17,11 +19,24 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import java.io.ByteArrayInputStream
 import java.security.KeyStore
+import java.security.MessageDigest
 import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+/**
+In the SplashActivity.kt class, the Model-View-Presenter (MVP) pattern is being used. This is a software architectural pattern that separates the application's logic into three interconnected components:
+Model: This represents the data and the business logic of the application. It's responsible for retrieving and storing data, as well as performing any necessary data processing. In this case, the AccountRepository class could be considered part of the Model, as it's used to manage user accounts and authentication.
+View: This is responsible for displaying the data provided by the Model and forwarding user actions to the Presenter. In this context, SplashActivity acts as the View. It inherits from MvpLoginActivity<SplashPresenterContract> and implements SplashViewContract, indicating that it's responsible for rendering the UI and handling user interactions.
+Presenter: This acts as a bridge between the Model and the View. It retrieves data from the Model, applies the UI logic, and updates the View. In this case, SplashPresenter would be the Presenter (although it's not directly visible in the provided code). It's likely responsible for handling the logic related to the splash screen, such as deciding what screen to navigate to next.
+In the SplashActivity class, the gotoNext() function is an example of a method that would be called by the Presenter to instruct the View to navigate to the next screen.
+ */
 
+/**
+ * VuNA:
+ * This is the first screen that is shown when the app is launched. It is responsible for initializing the SDK and navigating to the next screen.
+ */
 class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewContract {
     private val timeout = 30 //in second, timeout of request
 
@@ -64,7 +79,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         }
     }
 
-    fun startCount() {
+    private fun startCount() {
 
         compositeDisposable.add(showPeepSubject.debounce(1000, TimeUnit.MILLISECONDS)
             .observeOn(Schedulers.io())
@@ -75,6 +90,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         showPeepSubject.onNext(true)
 
     }
+
 
 
     private fun initSDK() {
@@ -93,8 +109,13 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
             applicationContext.resources.getString(R.string.app_default_server_verify_public_key)
         Configuration.getInstance().integrationKey =
             applicationContext.resources.getString(R.string.app_integration_key)
-        //trusted chain from BVB Production - update production value
 
+
+
+
+
+
+        //trusted chain from BVB Production - update production value
         val bvbProdI =
             "MIIEYTCCA0mgAwIBAgIOSKQC3SeSDaIINJ3RmXswDQYJKoZIhvcNAQELBQAwTDEg" +
                     "MB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2Jh" +
@@ -169,38 +190,19 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "Uk60CQ6Vr1xJkodAdWrpWC/+POSKmoDnttnicln+B8QJXIOuaaeHOAxyZreT4f+n" +
                     "vr0WHeIxE1MMc1tjSk+nOXaaTr7AYx13wABqllzacQ=="
 
-//        val Securemetric_internal_ROOT_CA =
-//            "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw" +
-//                    "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh" +
-//                    "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4" +
-//                    "WhcNMzUwNjA0MTEwNDM4WjBPMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJu" +
-//                    "ZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNVBAMTDElTUkcgUm9vdCBY" +
-//                    "MTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAK3oJHP0FDfzm54rVygc" +
-//                    "h77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj/RQSa78f0uoxmyF+" +
-//                    "0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7iS4+3mX6U" +
-//                    "A5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW" +
-//                    "T8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyH" +
-//                    "B5T0Y3HsLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UC" +
-//                    "B5iPNgiV5+I3lg02dZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUv" +
-//                    "KBds0pjBqAlkd25HN7rOrFleaJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWn" +
-//                    "OlFuhjuefXKnEgV4We0+UXgVCwOPjdAvBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTn" +
-//                    "jh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymCzLq9gwQbooMDQaHWBfEbwrbw" +
-//                    "qHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC1CLQJ13hef4Y53CI" +
-//                    "rU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNV" +
-//                    "HRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq" +
-//                    "hkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZL" +
-//                    "ubhzEFnTIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ" +
-//                    "3BebYhtF8GaV0nxvwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KK" +
-//                    "NFtY2PwByVS5uCbMiogziUwthDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5" +
-//                    "ORAzI4JMPJ+GslWYHb4phowim57iaztXOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7Ur" +
-//                    "TkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIuvtd7u+Nxe5AW0wdeRlN8NwdC" +
-//                    "jNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1NbdWhscdCb+ZAJzVc" +
-//                    "oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq" +
-//                    "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA" +
-//                    "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d" +
-//                    "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc="
+        // List of trusted certificates for pinning
+        val certificatePinningMap = HashMap<String, String>()
 
-        val Securemetric_internal_ROOT_CA =
+        // Alias: SM-Dev-RootCA
+        // Subject DN: CN=Securemetric Vietnam,ST=Hanoi,C=VN
+        // Issuer DN:  CN=Securemetric Vietnam,ST=Hanoi,C=VN
+        // Subject Alternative Names: null
+        // Serial Number (Hex): 60cab578
+        // Fingerprint SHA-1:   885EEB8BA129E5C9028BB82F632DC9D8C56A5265
+        // Fingerprint SHA-256: 582B0673AFB703C04B212A1047F52B80D6ED0DC163B952509FA7335E933395E7
+        // Not Before: Thu Jun 17 09:37:44 GMT+07:00 2021
+        // Not After:  Wed Jun 17 09:37:44 GMT+07:00 2026
+        certificatePinningMap["SM-Dev-RootCA"] =
             "MIIC9DCCAdygAwIBAgIEYMq1eDANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
                     "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
                     "MB4XDTIxMDYxNzAyMzc0NFoXDTI2MDYxNzAyMzc0NFowPDELMAkGA1UEBhMCVk4x" +
@@ -218,38 +220,16 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "VaumoZZF7HopelWKoOJODloSOstqRcOwzUXuKNJxhOhhsqch6RyDzNCs/YPrqKFt" +
                     "uz68xSAc3wY88o3N+P/Va7uoxyPVIqLer19gxcFBsPEcLECwNwhQ+A=="
 
-        //trusted chain from 118.70.13.108:3443
-//        val Securemetric_internal_SSL_CA =
-//            "MIIFFjCCAv6gAwIBAgIRAJErCErPDBinU/bWLiWnX1owDQYJKoZIhvcNAQELBQAw" +
-//                    "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh" +
-//                    "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjAwOTA0MDAwMDAw" +
-//                    "WhcNMjUwOTE1MTYwMDAwWjAyMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg" +
-//                    "RW5jcnlwdDELMAkGA1UEAxMCUjMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK" +
-//                    "AoIBAQC7AhUozPaglNMPEuyNVZLD+ILxmaZ6QoinXSaqtSu5xUyxr45r+XXIo9cP" +
-//                    "R5QUVTVXjJ6oojkZ9YI8QqlObvU7wy7bjcCwXPNZOOftz2nwWgsbvsCUJCWH+jdx" +
-//                    "sxPnHKzhm+/b5DtFUkWWqcFTzjTIUu61ru2P3mBw4qVUq7ZtDpelQDRrK9O8Zutm" +
-//                    "NHz6a4uPVymZ+DAXXbpyb/uBxa3Shlg9F8fnCbvxK/eG3MHacV3URuPMrSXBiLxg" +
-//                    "Z3Vms/EY96Jc5lP/Ooi2R6X/ExjqmAl3P51T+c8B5fWmcBcUr2Ok/5mzk53cU6cG" +
-//                    "/kiFHaFpriV1uxPMUgP17VGhi9sVAgMBAAGjggEIMIIBBDAOBgNVHQ8BAf8EBAMC" +
-//                    "AYYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMBIGA1UdEwEB/wQIMAYB" +
-//                    "Af8CAQAwHQYDVR0OBBYEFBQusxe3WFbLrlAJQOYfr52LFMLGMB8GA1UdIwQYMBaA" +
-//                    "FHm0WeZ7tuXkAXOACIjIGlj26ZtuMDIGCCsGAQUFBwEBBCYwJDAiBggrBgEFBQcw" +
-//                    "AoYWaHR0cDovL3gxLmkubGVuY3Iub3JnLzAnBgNVHR8EIDAeMBygGqAYhhZodHRw" +
-//                    "Oi8veDEuYy5sZW5jci5vcmcvMCIGA1UdIAQbMBkwCAYGZ4EMAQIBMA0GCysGAQQB" +
-//                    "gt8TAQEBMA0GCSqGSIb3DQEBCwUAA4ICAQCFyk5HPqP3hUSFvNVneLKYY611TR6W" +
-//                    "PTNlclQtgaDqw+34IL9fzLdwALduO/ZelN7kIJ+m74uyA+eitRY8kc607TkC53wl" +
-//                    "ikfmZW4/RvTZ8M6UK+5UzhK8jCdLuMGYL6KvzXGRSgi3yLgjewQtCPkIVz6D2QQz" +
-//                    "CkcheAmCJ8MqyJu5zlzyZMjAvnnAT45tRAxekrsu94sQ4egdRCnbWSDtY7kh+BIm" +
-//                    "lJNXoB1lBMEKIq4QDUOXoRgffuDghje1WrG9ML+Hbisq/yFOGwXD9RiX8F6sw6W4" +
-//                    "avAuvDszue5L3sz85K+EC4Y/wFVDNvZo4TYXao6Z0f+lQKc0t8DQYzk1OXVu8rp2" +
-//                    "yJMC6alLbBfODALZvYH7n7do1AZls4I9d1P4jnkDrQoxB3UqQ9hVl3LEKQ73xF1O" +
-//                    "yK5GhDDX8oVfGKF5u+decIsH4YaTw7mP3GFxJSqv3+0lUFJoi5Lc5da149p90Ids" +
-//                    "hCExroL1+7mryIkXPeFM5TgO9r0rvZaBFOvV2z0gp35Z0+L4WPlbuEjN/lxPFin+" +
-//                    "HlUjr8gRsI3qfJOQFy/9rKIJR0Y/8Omwt/8oTWgy1mdeHmmjk7j1nYsvC9JSQ6Zv" +
-//                    "MldlTTKB3zhThV1+XWYp6rjd5JW1zbVWEkLNxE7GJThEUG3szgBVGP7pSWTUTsqX" +
-//                    "nLRbwHOoq7hHwg=="
-
-        val Securemetric_internal_SSL_CA =
+        // Alias: SM-Dev-IntermediateCA
+        // Subject DN: CN=Securemetric Vietnam ICA,O=SMVN,L=88 Lang Ha Street,ST=Hanoi,C=VN
+        // Issuer DN:  CN=Securemetric Vietnam,ST=Hanoi,C=VN
+        // Subject Alternative Names: null
+        // Serial Number (Hex): 60e4107b
+        // Fingerprint SHA-1:   B0D07E9A58D759EE4ECEC2651706BB377C673981
+        // Fingerprint SHA-256: 0E386DDFA0A3DBAF484A3C1541697BC692836679539D3CBE273A54E6F0DDA4AE
+        // Not Before: Tue Jul 06 15:12:43 GMT+07:00 2021
+        // Not After:  Sun Jul 06 15:12:43 GMT+07:00 2025
+        certificatePinningMap["SM-Dev-IntermediateCA"] =
             "MIIDQjCCAiqgAwIBAgIEYOQQezANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
                     "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
                     "MB4XDTIxMDcwNjA4MTI0M1oXDTI1MDcwNjA4MTI0M1owazELMAkGA1UEBhMCVk4x" +
@@ -269,45 +249,157 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "vKlHJ3LQc+DszJUxPtxnirtoFkGJvBszoMSAHGEyhZzN3CAsiHLXUhCGY+d9wAVB" +
                     "vJo/4yirVwYw2Msw5yZ5KFUerPLN/A=="
 
-            //tuanle: KeyStore is a class in Java for storing private keys, certificates, and other security information. KeyStore can be used to encrypt, decrypt, authenticate, and protect data.
-        var keyStore: KeyStore? = null
+        // Alias: BVB-Production-RootCA
+        // Subject DN: CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R3
+        // Issuer DN:  CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R3
+        // Subject Alternative Names: null
+        // Serial Number (Hex): 4000000000121585308a2
+        // Fingerprint SHA-1:   D69B561148F01C77C54578C10926DF5B856976AD
+        // Fingerprint SHA-256: CBB522D7B7F127AD6A0113865BDF1CD4102E7D0759AF635A7CF4720DC963C53B
+        // Not Before: Wed Mar 18 17:00:00 GMT+07:00 2009
+        // Not After:  Sun Mar 18 17:00:00 GMT+07:00 2029
+        certificatePinningMap["BVB-Production-RootCA"] =
+            "MIIDXzCCAkegAwIBAgILBAAAAAABIVhTCKIwDQYJKoZIhvcNAQELBQAwTDEgMB4G" +
+                    "A1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2JhbFNp" +
+                    "Z24xEzARBgNVBAMTCkdsb2JhbFNpZ24wHhcNMDkwMzE4MTAwMDAwWhcNMjkwMzE4" +
+                    "MTAwMDAwWjBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEG" +
+                    "A1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjCCASIwDQYJKoZI" +
+                    "hvcNAQEBBQADggEPADCCAQoCggEBAMwldpB5BngiFvXAg7aEyiie/QV2EcWtiHL8" +
+                    "RgJDx7KKnQRfJMsuS+FggkbhUqsMgUdwbN1k0ev1LKMPgj0MK66X17YUhhB5uzsT" +
+                    "gHeMCOFJ0mpiLx9e+pZo34knlTifBtc+ycsmWQ1z3rDI6SYOgxXG71uL0gRgykmm" +
+                    "KPZpO/bLyCiR5Z2KYVc3rHQU3HTgOu5yLy6c+9C7v/U9AOEGM+iCK65TpjoWc4zd" +
+                    "QQ4gOsC0p6Hpsk+QLjJg6VfLuQSSaGjlOCZgdbKfd/+RFO+uIEn8rUAVSNECMWEZ" +
+                    "XriX7613t2Saer9fwRPvm2L7DWzgVGkWqQPabumDk3F2xmmFghcCAwEAAaNCMEAw" +
+                    "DgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFI/wS3+o" +
+                    "LkUkrk1Q+mOai97i3Ru8MA0GCSqGSIb3DQEBCwUAA4IBAQBLQNvAUKr+yAzv95ZU" +
+                    "RUm7lgAJQayzE4aGKAczymvmdLm6AC2upArT9fHxD4q/c2dKg8dEe3jgr25sbwMp" +
+                    "jjM5RcOO5LlXbKr8EpbsU8Yt5CRsuZRj+9xTaGdWPoO4zzUhw8lo/s7awlOqzJCK" +
+                    "6fBdRoyV3XpYKBovHd7NADdBj+1EbddTKJd+82cEHhXXipa0095MJ6RMG3NzdvQX" +
+                    "mcIfeg7jLQitChws/zyrVQ4PkX4268NXSb7hLi18YIvDQVETI53O9zJrlAGomecs" +
+                    "Mx86OyXShkDOOyyGeMlhLxS67ttVb9+E7gUJTb0o2HLO02JQZR7rkpeDMdmztcpH" +
+                    "WD9f"
+
+        // Alias: BVB-Production-IntermediateCA
+        // Subject DN: CN=GlobalSign Extended Validation CA - SHA256 - G3,O=GlobalSign nv-sa,C=BE
+        // Issuer DN:  CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R3
+        // Subject Alternative Names: null
+        // Serial Number (Hex): 48a402dd27920da208349dd1997b
+        // Fingerprint SHA-1:   6023192FE7B59D2789130A9FE4094F9B5570D4A2
+        // Fingerprint SHA-256: AED5DD9A5339685DFB029F6D89A14335A96512C3CACC52B2994AF8B6B37FA4D2
+        // Not Before: Wed Sep 21 07:00:00 GMT+07:00 2016
+        // Not After:  Mon Sep 21 07:00:00 GMT+07:00 2026
+        certificatePinningMap["BVB-Production-IntermediateCA"] =
+            "MIIEYTCCA0mgAwIBAgIOSKQC3SeSDaIINJ3RmXswDQYJKoZIhvcNAQELBQAwTDEg" +
+                    "MB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2Jh" +
+                    "bFNpZ24xEzARBgNVBAMTCkdsb2JhbFNpZ24wHhcNMTYwOTIxMDAwMDAwWhcNMjYw" +
+                    "OTIxMDAwMDAwWjBiMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBu" +
+                    "di1zYTE4MDYGA1UEAxMvR2xvYmFsU2lnbiBFeHRlbmRlZCBWYWxpZGF0aW9uIENB" +
+                    "IC0gU0hBMjU2IC0gRzMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCr" +
+                    "awNnVNXcEfvFohPBjBkn3BB04mGDPfqO24+lD+SpvkY/Ar5EpAkcJjOfR0iBFYhW" +
+                    "N80HzpXYy2tIA7mbXpKu2JpmYdU1xcoQpQK0ujE/we+vEDyjyjmtf76LLqbOfuq3" +
+                    "xZbSqUqAY+MOvA67nnpdawvkHgJBFVPnxui45XH4BwTwbtDucx+Mo7EK4mS0Ti+P" +
+                    "1NzARxFNCUFM8Wxc32wxXKff6WU4TbqUx/UJm485ttkFqu0Ox4wTUUbn0uuzK7yV" +
+                    "3Y986EtGzhKBraMH36MekSYlE473GqHetRi9qbNG5pM++Sa+WjR9E1e0Yws16CGq" +
+                    "smVKwAqg4uc43eBTFUhVAgMBAAGjggEpMIIBJTAOBgNVHQ8BAf8EBAMCAQYwEgYD" +
+                    "VR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU3bPnbagu6MVObs905nU8lBXO6B0w" +
+                    "HwYDVR0jBBgwFoAUj/BLf6guRSSuTVD6Y5qL3uLdG7wwPgYIKwYBBQUHAQEEMjAw" +
+                    "MC4GCCsGAQUFBzABhiJodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vcm9vdHIz" +
+                    "MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9v" +
+                    "dC1yMy5jcmwwRwYDVR0gBEAwPjA8BgRVHSAAMDQwMgYIKwYBBQUHAgEWJmh0dHBz" +
+                    "Oi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMA0GCSqGSIb3DQEBCwUA" +
+                    "A4IBAQBVaJzl0J/i0zUV38iMXIQ+Q/yht+JZZ5DW1otGL5OYV0LZ6ZE6xh+WuvWJ" +
+                    "J4hrDbhfo6khUEaFtRUnurqzutvVyWgW8msnoP0gtMZO11cwPUMUuUV8iGyIOuIB" +
+                    "0flo6G+XbV74SZuR5v5RAgqgGXucYUPZWvv9AfzMMQhRQkr/MO/WR2XSdiBrXHoD" +
+                    "L2xk4DmjA4K6iPI+1+qMhyrkUM/2ZEdA8ldqwl8nQDkKS7vq6sUZ5LPVdfpxJZZu" +
+                    "5JBj4y7FNFTVW1OMlCUvwt5H8aFgBMLFik9xqK6JFHpYxYmf4t2sLLxN0LlCthJE" +
+                    "abvp10ZlOtfu8hL5gCXcxnwGxzSb"
+
+        // tuanle: KeyStore is a class in Java for storing private keys, certificates, and other security information. KeyStore can be used to encrypt, decrypt, authenticate, and protect data.
+        var connectionKeyStore: KeyStore? = null
         try {
-            //tuanle:The KeyStore.getInstance function is a function in Java to get a KeyStore object of the specified keystore type
-            keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
-            //tuanle: The KeyStore.getInstance function returns a KeyStore object of the corresponding keystore type. To access the KeyStore object, you need to call the load method to create an empty keystore or read from a data source.
-            keyStore!!.load(null, null)
-            //tuanle: CertificateFactory.getInstance is a method of the CertificateFactory class in Java, used to create a CertificateFactory object with the specified certificate type. CertificateFactory is a class used to generate certificate objects, certificate paths (CertPaths) and certificate revocation lists (CRLs) from their encodings.
+            // tuanle:The KeyStore.getInstance function is a function in Java to get a KeyStore object of the specified keystore type
+            connectionKeyStore = KeyStore.getInstance(KeyStore.getDefaultType())
+            // tuanle: The KeyStore.getInstance function returns a KeyStore object of the corresponding keystore type. To access the KeyStore object, you need to call the load method to create an empty keystore or read from a data source.
+            connectionKeyStore!!.load(null, null)
+            // tuanle: CertificateFactory.getInstance is a method of the CertificateFactory class in Java, used to create a CertificateFactory object with the specified certificate type. CertificateFactory is a class used to generate certificate objects, certificate paths (CertPaths) and certificate revocation lists (CRLs) from their encodings.
             val cf = CertificateFactory.getInstance("X.509")
 
-            //tuanle: generateCertificate is a method of the CertificateFactory class in Java, used to create a Certificate object from a data stream (InputStream) containing the encryption of the certificate. This method takes an InputStream object as a parameter and returns a Certificate object of the certificate type specified when creating the CertificateFactory object.
-            val securemetric_internal_ROOT_CA = cf.generateCertificate(
-                //ByteArrayInputStream is a class in Java that reads a byte array as an input stream. This class has an internal buffer to store the data of the specified byte array
-                ByteArrayInputStream(
-            //tuanle: Base64.decode is a method used to decode a character string that has been encoded according to the Base64 standard
-                    Base64.decode(
-                        Securemetric_internal_ROOT_CA,
-                        Base64.DEFAULT
+            for ((alias, certificateB64) in certificatePinningMap) {
+                val certificateObject = cf.generateCertificate(
+                    ByteArrayInputStream(
+                        Base64.decode(
+                            certificateB64,
+                            Base64.DEFAULT
+                        )
                     )
                 )
-            )
-            //tuanle: keyStore.setCertificateEntry is a method of the KeyStore class in Java, used to add a certificate to the keystore
-            keyStore.setCertificateEntry(
-                "securemetric_internal_ROOT_CA",
-                securemetric_internal_ROOT_CA
-            )
+                connectionKeyStore.setCertificateEntry(
+                    alias,
+                    certificateObject
+                )
 
-            val securemetric_internal_SSL_CA = cf.generateCertificate(
-                ByteArrayInputStream(
-                    Base64.decode(
-                        Securemetric_internal_SSL_CA,
-                        Base64.DEFAULT
-                    )
-                )
-            )
-            keyStore.setCertificateEntry(
-                "securemetric_internal_SSL_CA",
-                securemetric_internal_SSL_CA
-            )
+                if (BuildConfig.DEBUG) {
+                    // Assuming certificateObject is of type X509Certificate
+                    val x509Certificate = certificateObject as X509Certificate
+
+                    // Get Subject DN
+                    val subjectDn = x509Certificate.subjectX500Principal.name
+
+                    // Get Issuer DN
+                    val issuerDn = x509Certificate.issuerX500Principal.name
+
+                    // Get Subject Alternative Names
+                    val subjectAlternativeNames = x509Certificate.subjectAlternativeNames
+
+                    // Get serial number
+                    val serialNumber = x509Certificate.serialNumber
+                    // Convert to Hexadecimal
+                    val serialNumberHex = serialNumber.toString(16)
+
+                    // Get fingerprint using SHA-1
+                    val mdSHA1 = MessageDigest.getInstance("SHA-1")
+                    val derSHA1 = x509Certificate.encoded
+                    mdSHA1.update(derSHA1)
+                    val digestSHA1 = mdSHA1.digest()
+                    val hexStringSHA1 = StringBuilder()
+                    for (byte in digestSHA1) {
+                        hexStringSHA1.append(String.format("%02X", byte))
+                    }
+                    val fingerprintSHA1 = hexStringSHA1.toString()
+
+                    // Get fingerprint using SHA-256
+                    val mdSHA256 = MessageDigest.getInstance("SHA-256")
+                    val derSHA256 = x509Certificate.encoded
+                    mdSHA256.update(derSHA256)
+                    val digestSHA256 = mdSHA256.digest()
+                    val hexStringSHA256 = StringBuilder()
+                    for (byte in digestSHA256) {
+                        hexStringSHA256.append(String.format("%02X", byte))
+                    }
+                    val fingerprintSHA256 = hexStringSHA256.toString()
+
+                    // Get notBefore and notAfter dates
+                    val notBefore = x509Certificate.notBefore
+                    val notAfter = x509Certificate.notAfter
+
+                    // Get Issuer key identifier
+                    // Note: There's no direct way to get issuer key identifier from X509Certificate in Java.
+                    // You would need to use BouncyCastle or another library to parse the certificate extensions.
+                    // That's why we will skip that part for now.
+
+                    Log.d("Certificate", "-------------------------")
+                    Log.d("Certificate", "Alias: $alias")
+                    Log.d("Certificate", "Subject DN: $subjectDn")
+                    Log.d("Certificate", "Issuer DN:  $issuerDn")
+                    Log.d("Certificate", "Subject Alternative Names: $subjectAlternativeNames")
+                    Log.d("Certificate", "Serial Number (Hex): $serialNumberHex")
+                    Log.d("Certificate", "Fingerprint SHA-1:   $fingerprintSHA1")
+                    Log.d("Certificate", "Fingerprint SHA-256: $fingerprintSHA256")
+                    Log.d("Certificate", "Not Before: $notBefore")
+                    Log.d("Certificate", "Not After:  $notAfter")
+                    Log.d("Certificate", "-------------------------")
+                }
+            }
 
             val bvbProdICA = cf.generateCertificate(
                 ByteArrayInputStream(
@@ -317,7 +409,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     )
                 )
             )
-            keyStore.setCertificateEntry("go_Daddy_Root_CA", bvbProdICA)
+            connectionKeyStore.setCertificateEntry("go_Daddy_Root_CA", bvbProdICA)
 
             val bvbProdRCA = cf.generateCertificate(
                 ByteArrayInputStream(
@@ -327,7 +419,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     )
                 )
             )
-            keyStore.setCertificateEntry("go_Daddy_Secure_CA", bvbProdRCA)
+            connectionKeyStore.setCertificateEntry("go_Daddy_Secure_CA", bvbProdRCA)
 
             val bvbUatDomain = cf.generateCertificate(
                 ByteArrayInputStream(
@@ -337,23 +429,30 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     )
                 )
             )
-            keyStore.setCertificateEntry("bvbUatDomain", bvbUatDomain)
+            connectionKeyStore.setCertificateEntry("bvbUatDomain", bvbUatDomain)
 
         } catch (e: Exception) {
-
+            if (BuildConfig.DEBUG) {
+                e.printStackTrace()
+            }
         }
 
-        //the certs which are trusted to has connection, will reject if doesn't match with server cert
-        //tuanle: configuration.getInstance().connectionKeyStore = keyStore is a command line in Java, used to assign a KeyStore object to the connectionKeyStore property of a Configuration object. The Configuration object is a class used to manage the configuration parameters of an application or a system
-        Configuration.getInstance().connectionKeyStore = keyStore
+        // tuanle: configuration.getInstance().connectionKeyStore = keyStore is a command line in Java, used to assign a KeyStore object to the connectionKeyStore property of a Configuration object. The Configuration object is a class used to manage the configuration parameters of an application or a system
 
-        //if want to truested all connection to server
-        //Configuration.getInstance().setConnectionKeyStore(null);
+
+        // The KeyStore instance contains the certificates that are trusted to establish a connection with the server.
+        // If the server's certificate doesn't match with any certificate in this KeyStore, the connection will be rejected.
+        Configuration.getInstance().connectionKeyStore = connectionKeyStore
+
+        // If you want to accept any certificate from the server, do as below
+        // Configuration.getInstance().setConnectionKeyStore(null);
+        // Some other code to accept all connections was removed after pen-testing
 
     }
 
 
-    //tuanle: override function gotoNext()
+    // tuanle: override function gotoNext()
+    // VuNA: In the context of the Model-View-Presenter (MVP) pattern, which seems to be used in this project, the gotoNext() function is likely a navigation method that is called by the Presenter (SplashPresenter) to instruct the View (SplashActivity) to navigate to the next screen or activity in the application.
     override fun gotoNext() {
 //tuanle: AccountRepository.getInstance(this).authentication is a command line in Java, used to get the authentication object from the AccountRepository object
         //The AccountRepository object is a class used to manage user accounts in the application
