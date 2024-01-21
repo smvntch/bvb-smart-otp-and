@@ -1,3 +1,26 @@
+/**
+ * The provided code is from a `settings.gradle` file, which is a part of a Gradle-based project.
+ * This file is used to define the structure of the project,
+ * including which modules are included in the build.
+ */
+
+/**
+ * The commented line `//include ':centagateSdk'` suggests that there might be another module
+ * named `centagateSdk` which is currently not included in the build.
+ * If you want to include this module in the build, you would need to uncomment this line.
+ */
 //include ':centagateSdk'
+
+/**
+ * The line `include ':app'` indicates that the `app` module is included in the project.
+ * This means that when Gradle builds the project, it will also build the `app` module.
+ * The `app` module typically contains the application code and resources.
+ */
 include ':app'
+
+/**
+ * The line `rootProject.name = "BVBSotp"` sets the name of the root project to "BVBSotp".
+ * This name is used when generating the build artifacts and also
+ * when identifying the project in multi-project builds.
+ */
 rootProject.name = "BVBSotp"

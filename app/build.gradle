@@ -1,10 +1,36 @@
+/**
+ * VuNA:
+ * This plugins are applied specifically to the application module, not the entire project.
+ * In a typical Android project, you might have multiple modules -
+ * for example, an app module, a library module, etc.
+ * Each of these modules will have its own build.gradle file,
+ * and the plugins applied in each build.gradle file affect only that specific module.
+ * Other modules in the project will have their own build.gradle files
+ * and may use different plugins, such as 'com.android.library' for library modules.
+ */
 plugins {
+    /**
+     * VuNA:
+     * The id 'com.android.application' line is found in the build.gradle file of
+     * the application module of your Android project.
+     * This plugin provides the necessary Android-specific configurations and tasks
+     * needed to build an Android application.
+     * So, in this case, the 'com.android.application' plugin is applied only to the module
+     * where this build.gradle file is located, which is the application module.
+     */
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
+/**
+ * VuNA:
+ * The 'android' block contains configurations specific to the Android build.
+ * It includes the compile SDK version, default configurations like application ID,
+ * minimum SDK version, target SDK version, and version details.
+ * It also includes build types, compile options, and other Android-specific configurations.
+ */
 android {
     compileSdkVersion 34
 //    buildToolsVersion 34
@@ -58,8 +84,35 @@ androidExtensions {
 }
 
 
+/**
+ * VuNA:
+ * The dependencies block lists all the libraries that the project depends on.
+ * These libraries are downloaded and included in the build process by Gradle.
+ * The dependencies include standard Android libraries, Kotlin standard library,
+ * testing libraries, and various third-party libraries.
+ */
 dependencies {
 
+    /**
+     * The `implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"` line
+     * is located in the `build.gradle` file of your app module.
+     * Gradle downloads and stores the dependencies in a cache directory
+     * to speed up subsequent builds. The location of this cache directory can vary:
+     * - On Windows, it's typically located at `%USERPROFILE%\.gradle\caches\modules-2\`.
+     * - On macOS and Linux, it's typically located at `~/.gradle/caches/modules-2/`.
+     * They are organized by group, name, and version, which correspond to the parts
+     * of the dependency coordinates you specify in your `build.gradle` file.
+     * For example, the `org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version` dependency
+     * would be located in a directory structure similar to
+     * `~/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/$kotlin_version/`.
+     * Please note that these files are meant to be managed by Gradle,
+     * and you typically don't need to interact with them directly.
+     * If you need to force Gradle to re-download the dependencies,
+     * you can use the `--refresh-dependencies` option when running your Gradle build.
+     * Remember, `$kotlin_version` is a variable defined in the `build.gradle` file
+     * at the project level, which is `build.gradle (Project: YourProjectName)`.
+     * This variable holds the version of Kotlin used in your project.
+     */
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -106,5 +159,12 @@ dependencies {
     implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
 
 }
+
+/**
+ * VuNA:
+ * The apply plugin lines at the end of the file are used
+ * to apply additional plugins to the project.
+ * In this case, the Google Services plugin and the Realm Android plugin are applied.
+ */
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
 apply plugin: 'realm-android'
