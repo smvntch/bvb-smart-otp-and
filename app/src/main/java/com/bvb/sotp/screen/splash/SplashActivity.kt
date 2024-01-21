@@ -26,16 +26,38 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
-In the SplashActivity.kt class, the Model-View-Presenter (MVP) pattern is being used. This is a software architectural pattern that separates the application's logic into three interconnected components:
-Model: This represents the data and the business logic of the application. It's responsible for retrieving and storing data, as well as performing any necessary data processing. In this case, the AccountRepository class could be considered part of the Model, as it's used to manage user accounts and authentication.
-View: This is responsible for displaying the data provided by the Model and forwarding user actions to the Presenter. In this context, SplashActivity acts as the View. It inherits from MvpLoginActivity<SplashPresenterContract> and implements SplashViewContract, indicating that it's responsible for rendering the UI and handling user interactions.
-Presenter: This acts as a bridge between the Model and the View. It retrieves data from the Model, applies the UI logic, and updates the View. In this case, SplashPresenter would be the Presenter (although it's not directly visible in the provided code). It's likely responsible for handling the logic related to the splash screen, such as deciding what screen to navigate to next.
-In the SplashActivity class, the gotoNext() function is an example of a method that would be called by the Presenter to instruct the View to navigate to the next screen.
+ * VuNA:
+ * In the SplashActivity.kt class, the Model-View-Presenter (MVP) pattern is being used.
+ * This is a software architectural pattern that separates the application's logic
+ * into three interconnected components:
+ * - Model: This represents the data and the business logic of the application.
+ *      It's responsible for retrieving and storing data, as well as performing
+ *      any necessary data processing. In this case, the AccountRepository class could be
+ *      considered part of the Model, as it's used to manage user accounts and authentication.
+ * - View: This is responsible for displaying the data provided by the Model
+ *      and forwarding user actions to the Presenter. In this context,
+ *      SplashActivity acts as the View. It inherits from MvpLoginActivity<SplashPresenterContract>
+ *      and implements SplashViewContract,
+ *      indicating that it's responsible for rendering the UI and handling user interactions.
+ * - Presenter: This acts as a bridge between the Model and the View.
+ *      It retrieves data from the Model, applies the UI logic, and updates the View.
+ *      In this case, SplashPresenter would be the Presenter
+ *      (although it's not directly visible in the provided code).
+ *      It's likely responsible for handling the logic related to the splash screen,
+ *      such as deciding what screen to navigate to next.
+ *
+ * In the SplashActivity class, the gotoNext() function is an example of a method
+ * that would be called by the Presenter to instruct the View to navigate to the next screen.
  */
 
 /**
  * VuNA:
- * This is the first screen that is shown when the app is launched. It is responsible for initializing the SDK and navigating to the next screen.
+ * This is the first screen that is shown when the app is launched.
+ * It is responsible for initializing the SDK and navigating to the next screen.
+ * Here is the sequence of these function calls:
+ * 1. onCreate()
+ * 2. setupViews()
+ * 3. gotoNext()
  */
 class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewContract {
     private val timeout = 30 //in second, timeout of request
@@ -58,6 +80,12 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         }
     }
 
+    /**
+     * VuNA:
+     * This function is part of the Android lifecycle and is the first to be called
+     * when an activity is created. In this function, the activity's user interface
+     * is usually set up and any necessary initializations are performed.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!isTaskRoot) {
@@ -452,15 +480,23 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
 
 
     // tuanle: override function gotoNext()
-    // VuNA: In the context of the Model-View-Presenter (MVP) pattern, which seems to be used in this project, the gotoNext() function is likely a navigation method that is called by the Presenter (SplashPresenter) to instruct the View (SplashActivity) to navigate to the next screen or activity in the application.
+
+    /**
+     * 22/11/23 16:36 VuNA: Added this function
+     * VuNA: In the context of the Model-View-Presenter (MVP) pattern,
+     * which seems to be used in this project, the gotoNext() function is likely
+     * a navigation method that is called by the Presenter (SplashPresenter)
+     * to instruct the View (SplashActivity) to navigate to the next screen
+     * or activity in the application.
+     */
     override fun gotoNext() {
 //tuanle: AccountRepository.getInstance(this).authentication is a command line in Java, used to get the authentication object from the AccountRepository object
         //The AccountRepository object is a class used to manage user accounts in the application
         //The authentication object is a class used to authenticate and authorize users in the application.
         //The getInstance(this) method is a method of the AccountRepository class, used to return a single AccountRepository object according to the singleton design pattern.
         //The singleton design pattern is a design pattern used to ensure that only one instance of a class is created and provide a global access point to it.
-        val authentication = AccountRepository.getInstance(this).authentication
-        val account = AccountRepository.getInstance(this).accounts
+        val authentication = AccountRepository.getInstance(this).deviceAuthentication
+        val account = AccountRepository.getInstance(this).accountsData
         if (authentication != null && account.value != null && account.value?.size!! > 0) {
             val intent = LoginActivity.newValidateIntent(this)
             startActivity(intent)

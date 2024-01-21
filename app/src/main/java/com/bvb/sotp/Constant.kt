@@ -2,6 +2,9 @@ package com.bvb.sotp
 
 object Constant {
 
+    /**
+     * The Centagate SDK uses this filename to store the OTP seed.
+     */
     const val FILENAME = "smvn_sotp"
     const val ERROR_DATA_NULL = 1000
     const val Intv = 30

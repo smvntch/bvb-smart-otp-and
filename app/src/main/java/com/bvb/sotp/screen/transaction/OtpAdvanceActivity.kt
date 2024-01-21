@@ -13,7 +13,6 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.account.Account
-import com.centagate.module.device.PinAuthentication
 import com.centagate.module.exception.CentagateException
 import com.centagate.module.otp.OtpOperation
 import dmax.dialog.SpotsDialog
@@ -193,7 +192,7 @@ class OtpAdvanceActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeC
     private fun getAllData(context: Context): Account? {
 
         try {
-            var accounts = AccountRepository.getInstance(context).accounts.value
+            var accounts = AccountRepository.getInstance(context).accountsData.value
             for (i in 0 until accounts?.size!!) {
                 var account = accounts[i]
                 if (account.accountInfo.accountId == id) {
@@ -315,7 +314,7 @@ class OtpAdvanceActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeC
 //            val security = PinAuthentication()
 
 //            security.setPin(preferenceHelper.getPincode())
-            val security = AccountRepository.getInstance(this).authentication
+            val security = AccountRepository.getInstance(this).deviceAuthentication
             var hid: String = preferenceHelper.getHid()
             val otp = otpOperation.generateSignOtp(tranId, hid, account.otpInfo, security)
             edtActiveCode.setText(otp)

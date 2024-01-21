@@ -1,7 +1,6 @@
 package com.bvb.sotp.screen.transaction
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Handler
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.Constant
-import com.bvb.sotp.PeepApp
 import com.bvb.sotp.PeepApp.Companion.mobilePushPrimaryKey
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
@@ -28,8 +26,6 @@ import com.bvb.sotp.util.RecycleViewItemClickListener
 import com.bvb.sotp.view.RegularBoldTextView
 import com.centagate.module.account.AccountInfo
 import com.centagate.module.authentication.AuthenticationService
-import com.centagate.module.common.CompleteEntity
-import com.centagate.module.device.FileSystem
 import com.centagate.module.exception.CentagateException
 import io.realm.Realm
 
@@ -331,10 +327,10 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
 
     fun getPendingRequest(): Int {
         var result = 0
-        val securityDevice = AccountRepository.getInstance(this).authentication
+        val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
         try {
 
-            var accounts = AccountRepository.getInstance(this).accounts.value
+            var accounts = AccountRepository.getInstance(this).accountsData.value
             if (accounts != null && accounts[0] != null) {
                 val authenticationRequest = AuthenticationService()
                 val pendingRequestExist = authenticationRequest.getPendingRequestInfo(
@@ -436,7 +432,7 @@ class NotificationActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCod
             var message = ""
             var accountInfo: AccountInfo
             var authenticationService = AuthenticationService()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
 
             if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {

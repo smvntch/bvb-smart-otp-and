@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
 import com.centagate.module.fingerprint.FingerprintConnector
 import com.bvb.sotp.Constant
 import com.bvb.sotp.PeepApp
@@ -21,15 +20,12 @@ import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.repository.CommonListener
 import com.bvb.sotp.screen.active.ActiveAppActivity
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.setting.info.ContactActivity
 import com.bvb.sotp.screen.transaction.GetOtpQrActivity
 import com.bvb.sotp.screen.transaction.NotificationActivity
 import com.bvb.sotp.screen.user.AddUserActivity
-import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.util.Utils
-import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import com.centagate.module.account.Account
 import kotlinx.android.synthetic.main.activity_login.*
@@ -214,7 +210,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         super.onResume()
         tvBioStatus.text = ""
 
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
         val timeFail = authentication?.remainingTry
 
@@ -245,7 +241,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         tvTittle.setText(getString(R.string.login_tittle))
 
 //        bioClose.visibility = View.GONE
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
         num1.setOnClickListener(this)
         num2.setOnClickListener(this)
@@ -296,7 +292,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         }
 
         fingerLayout.setOnClickListener {
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
             if (authentication is FingerprintAuthentication && Utils.isAvailable(this)) {
 
@@ -325,7 +321,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
             }
         }
 
-        var accounts = AccountRepository.getInstance(this).accounts.value
+        var accounts = AccountRepository.getInstance(this).accountsData.value
 
         if (accounts != null && accounts.size > 0) {
             account = accounts[0]
@@ -362,8 +358,8 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
         preferenceHelper.setPincodeFail(0)
         (this.application as PeepApp).mLastPause = System.currentTimeMillis()
         if (isValidate()) {
-            val authentication = AccountRepository.getInstance(this).authentication
-            val account = AccountRepository.getInstance(this).accounts
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
+            val account = AccountRepository.getInstance(this).accountsData
             if (authentication != null && account.value != null && account.value?.size!! > 0) {
                 val intent = Intent(this@LoginActivity, AddUserActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -407,7 +403,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     fun onNext() {
         if (pincode.length == 6) {
             enableKeyboard(false)
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
 
             if (authentication != null && authentication.authenticate(
                     pincode.toString(),
@@ -584,7 +580,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
 
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
         authentication.setTryLeft(Constant.tryLimitFinger)
         authentication.tryLimit = Constant.tryLimitFinger
         AccountRepository.getInstance(this).savePin(authentication)
@@ -620,7 +616,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
         } else if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_LOCKOUT) {
 
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
             authentication.setTryLeft(Constant.tryLimit)
             authentication.tryLimit = Constant.tryLimit
             AccountRepository.getInstance(this).savePin(authentication)
@@ -640,12 +636,12 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     }
 
     fun onCheckStatus() {
-        var list = AccountRepository.getInstance(this).accounts.value
+        var list = AccountRepository.getInstance(this).accountsData.value
         if (list.isNullOrEmpty()) {
             return
         }
 
-        val securityDevice = AccountRepository.getInstance(application).authentication
+        val securityDevice = AccountRepository.getInstance(application).deviceAuthentication
         var count = 0
         val hid: String
         hid = preferenceHelper.getHid()
@@ -686,7 +682,7 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
 
     var listUser: ArrayList<Account> = ArrayList()
     fun getUsers() {
-        var list = AccountRepository.getInstance(this).accounts.value
+        var list = AccountRepository.getInstance(this).accountsData.value
         if (list != null) {
 //            accountName.text = list[0].accountInfo.displayName
             listUser.clear()

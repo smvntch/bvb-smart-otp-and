@@ -1,6 +1,5 @@
 package com.bvb.sotp.screen.user
 
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -11,10 +10,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.EditText
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.Constant
-import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.helper.PreferenceHelper
 import com.bvb.sotp.mvp.MvpActivity
-import com.bvb.sotp.realm.MobilePushRealmModel
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.repository.CommonListener
 import com.bvb.sotp.screen.active.ActiveAppActivity
@@ -35,7 +29,6 @@ import com.bvb.sotp.screen.active.ActiveAppOfflineActivity
 import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.pincode.change.ChangePincodeActivity
 import com.bvb.sotp.screen.authen.setting.SettingActivity
-import com.bvb.sotp.screen.main.PushEvent
 import com.bvb.sotp.screen.transaction.*
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.RecycleViewOnClickListener
@@ -43,19 +36,13 @@ import com.bvb.sotp.util.Utils
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
 import com.centagate.module.account.Account
-import com.centagate.module.account.AccountInfo
 import com.centagate.module.authentication.AuthenticationService
-import com.centagate.module.authentication.RequestInfo
 import com.centagate.module.common.CompleteEntity
 import com.centagate.module.common.Configuration
 import com.centagate.module.device.DeviceService
 import com.centagate.module.device.FileSystem
 import com.centagate.module.exception.CentagateException
 import com.google.firebase.messaging.FirebaseMessaging
-import io.realm.Realm
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -151,7 +138,7 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
 
     fun updateToken(): Int {
         var result = 0
-        val securityDevice = AccountRepository.getInstance(this).authentication
+        val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
 
         try {
@@ -236,13 +223,13 @@ class AddUserActivity : MvpActivity<AddUserPresenter>(), AddUserViewContract,
         println("--getPendingRequest--------------")
 
         //this will be the security key of every important data in the SDK
-        val securityDevice = AccountRepository.getInstance(this).authentication
+        val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
         //set Pin or Password
 //        securityDevice.setPin(preferenceHelper.getPincode())
 
         try {
 
-            var accounts = AccountRepository.getInstance(this).accounts.value
+            var accounts = AccountRepository.getInstance(this).accountsData.value
 //            if (completeEntity != null) {
             if (accounts != null && accounts[0] != null) {
                 val authenticationRequest = AuthenticationService()
@@ -350,7 +337,7 @@ overridePendingTransition(0, 0);
     }
 
     fun getUsers() {
-        var list = AccountRepository.getInstance(this).accounts.value
+        var list = AccountRepository.getInstance(this).accountsData.value
         if (list != null) {
 //            accountName.text = list[0].accountInfo.displayName
             bindUser(list)
@@ -585,12 +572,12 @@ overridePendingTransition(0, 0);
     }
 
     fun onCheckStatus() {
-        var list = AccountRepository.getInstance(this).accounts.value
+        var list = AccountRepository.getInstance(this).accountsData.value
         if (list.isNullOrEmpty()) {
             return
         }
 
-        val securityDevice = AccountRepository.getInstance(application).authentication
+        val securityDevice = AccountRepository.getInstance(application).deviceAuthentication
         var count = 0
         val hid: String
         hid = preferenceHelper.getHid()

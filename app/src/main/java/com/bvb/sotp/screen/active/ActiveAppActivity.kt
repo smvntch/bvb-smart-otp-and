@@ -14,7 +14,6 @@ import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -221,7 +220,7 @@ class ActiveAppActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppContract {
         val accountService = AccountService()
 
         //this will be the security key of every important data in the SDK
-        val securityDevice = AccountRepository.getInstance(this).authentication
+        val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
         model = getDeviceName().toString()
 

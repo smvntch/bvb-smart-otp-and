@@ -1,38 +1,21 @@
 package com.bvb.sotp.screen.authen.login
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import androidx.core.content.ContextCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
-import android.text.TextUtils
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
 import com.centagate.module.fingerprint.FingerprintConnector
-import com.easyfingerprint.EasyFingerPrint
-import com.samsung.android.sdk.pass.Spass
-import com.samsung.android.sdk.pass.SpassFingerprint
 import com.bvb.sotp.Constant
 import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.repository.CommonListener
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
-import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.DateUtils
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.util.Utils
@@ -211,7 +194,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
         super.onResume()
         tvBioStatus.text = ""
 
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
         val timeFail = authentication?.remainingTry
 
@@ -298,14 +281,14 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
         tvBioCancel.setOnClickListener {
             biometricInputLayout.visibility = View.GONE
             isChangeToPin = true
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
             authentication.setTryLeft(Constant.tryLimit)
             authentication.tryLimit = Constant.tryLimit
             AccountRepository.getInstance(this).savePin(authentication)
         }
 
 //        var pHashPassCode = preferenceHelper.getOldPrefNoneDecrypt(this, "pHashPassCode")
-        var account = AccountRepository.getInstance(this).accounts.value
+        var account = AccountRepository.getInstance(this).accountsData.value
 
         if (account != null && account.size > 0) {
             username.text = account[0].accountInfo.displayName
@@ -358,7 +341,7 @@ class LoginConfirmQrActivity : MvpLoginActivity<LoginPresenter>(), LoginViewCont
     fun onNext() {
         if (pincode.length == 6) {
             enableKeyboard(false)
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
 
             if (authentication != null && authentication.authenticate(
                     pincode.toString(),
@@ -529,7 +512,7 @@ overridePendingTransition(0, 0);
 
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
 
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
         authentication.setTryLeft(Constant.tryLimitFinger)
         authentication.tryLimit = Constant.tryLimitFinger
         AccountRepository.getInstance(this).savePin(authentication)
@@ -565,7 +548,7 @@ overridePendingTransition(0, 0);
 
         } else if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_LOCKOUT) {
 
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
             authentication.setTryLeft(Constant.tryLimit)
             authentication.tryLimit = Constant.tryLimit
             AccountRepository.getInstance(this).savePin(authentication)

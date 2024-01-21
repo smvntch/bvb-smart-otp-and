@@ -242,7 +242,7 @@ class ActiveAppOfflineActivity : MvpActivity<ActiveAppPresenter>(), ActiveAppCon
 
 
         //this will be the security key of every important data in the SDK
-        val securityDevice = AccountRepository.getInstance(this).authentication
+        val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
         model = this.getDeviceName().toString()
 

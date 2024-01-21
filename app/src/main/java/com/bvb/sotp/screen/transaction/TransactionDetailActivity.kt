@@ -23,7 +23,6 @@ import com.centagate.module.account.Account
 import com.centagate.module.authentication.AuthenticationService
 import com.centagate.module.authentication.CrAuthentication
 import com.centagate.module.exception.CentagateException
-import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -70,7 +69,7 @@ class TransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         title.text = getString(R.string.confirm_transaction_mobile)
 
-        var accounts = AccountRepository.getInstance(this).accounts.value
+        var accounts = AccountRepository.getInstance(this).accountsData.value
 
         if (accounts != null && accounts.size > 0) {
             account = accounts[0]
@@ -277,10 +276,10 @@ overridePendingTransition(0, 0);
     fun acceptTransaction() {
         try {
             var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
             var account =
-                AccountRepository.getInstance(this).accounts.value?.get(0)
+                AccountRepository.getInstance(this).accountsData.value?.get(0)
 
             var crAuthentication = CrAuthentication()
             var test = crAuthentication.approve(
@@ -306,9 +305,9 @@ overridePendingTransition(0, 0);
     fun rejectTransaction() {
         try {
             var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
             var account =
-                AccountRepository.getInstance(this).accounts.value?.get(0)
+                AccountRepository.getInstance(this).accountsData.value?.get(0)
 
             var authenticationService = AuthenticationService()
             authenticationService.rejectRequest(

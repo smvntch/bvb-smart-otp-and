@@ -1,37 +1,23 @@
 package com.bvb.sotp.screen.authen.login
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import androidx.core.content.ContextCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.Constant
 import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
-import com.easyfingerprint.EasyFingerPrint
 import com.samsung.android.sdk.pass.Spass
 import com.samsung.android.sdk.pass.SpassFingerprint
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
-import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.repository.CommonListener
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
 import com.bvb.sotp.screen.authen.pincode.change.ChangePincodeActivity
-import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.view.RegularBoldTextView
-import com.bvb.sotp.view.RegularTextView
 import java.util.*
 
 
@@ -284,7 +270,7 @@ class LoginChangeActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContrac
     fun onNext() {
         if (pincode.length == 6) {
             enableKeyboard(false)
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
             if (authentication != null && authentication.authenticate(
                     pincode.toString(),
                     preferenceHelper.getHid()

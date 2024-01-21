@@ -222,7 +222,7 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
         }
 
         var pHashPassCode = preferenceHelper.getOldPrefNoneDecrypt(this, "pHashPassCode")
-        var account = AccountRepository.getInstance(this).accounts.value
+        var account = AccountRepository.getInstance(this).accountsData.value
 
         if (!TextUtils.isEmpty(pHashPassCode) && account?.size == 0) {
             var dialog = DialogHelper(this)
@@ -282,12 +282,12 @@ class DisableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContr
     fun onNext() {
         if (pincode.length == 6) {
             enableKeyboard(false)
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
 
             if (authentication != null && authentication.authenticate(pincode.toString(), preferenceHelper.getHid())) {
                 preferenceHelper.setPincodeLoginLastTime(System.currentTimeMillis())
 
-                val securityDeviceOld = AccountRepository.getInstance(this).authentication
+                val securityDeviceOld = AccountRepository.getInstance(this).deviceAuthentication
                 val securityDeviceNew = PinAuthentication()
                 securityDeviceNew.tryLimit = Constant.tryLimit
                 securityDeviceNew.setTryLeft(Constant.tryLimit)
@@ -472,7 +472,7 @@ overridePendingTransition(0, 0);
             var dialogHelper = DialogHelper(this@DisableFingerActivity)
             dialogHelper.showAlertDialog("Vượt quá số lần xác thực vân tay", true, Runnable {
 
-                var authentication = AccountRepository.getInstance(this).authentication
+                var authentication = AccountRepository.getInstance(this).deviceAuthentication
                 authentication.setTryLeft(Constant.tryLimitFinger)
                 authentication.tryLimit = Constant.tryLimitFinger
                 AccountRepository.getInstance(this).savePin(authentication)

@@ -1,39 +1,21 @@
 package com.bvb.sotp.screen.authen.setting
 
-import android.app.Activity
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.text.TextUtils
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
-import com.centagate.module.device.PinAuthentication
 import com.centagate.module.fingerprint.FingerprintConnector
-import com.easyfingerprint.EasyFingerPrint
-import com.samsung.android.sdk.pass.Spass
-import com.samsung.android.sdk.pass.SpassFingerprint
 import com.bvb.sotp.Constant
 import com.bvb.sotp.PeepApp
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
-import com.bvb.sotp.repository.CommonListener
-import com.bvb.sotp.screen.authen.login.LoginActivity
 import com.bvb.sotp.screen.authen.login.LoginPresenter
 import com.bvb.sotp.screen.authen.login.LoginViewContract
-import com.bvb.sotp.screen.authen.pincode.CreatePinCodeActivity
-import com.bvb.sotp.screen.user.AddUserActivity
 import com.bvb.sotp.util.LanguageUtils
 import com.bvb.sotp.view.RegularBoldTextView
 import com.bvb.sotp.view.RegularTextView
@@ -286,7 +268,7 @@ class EnableFingerActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContra
     fun onNext() {
         if (pincode.length == 6) {
             enableKeyboard(false)
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
             if (authentication != null && authentication.authenticate(
                     pincode.toString(),
                     preferenceHelper.getHid()
@@ -467,7 +449,7 @@ overridePendingTransition(0, 0);
     }
 
     override fun onAuthenticatedSuccess(fprint: FingerprintAuthentication?) {
-        var authentication = AccountRepository.getInstance(this).authentication
+        var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
         try {
             fprint?.tryLimit = Constant.tryLimitFinger
@@ -493,7 +475,7 @@ overridePendingTransition(0, 0);
 
         } else if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_LOCKOUT) {
 
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
             authentication.setTryLeft(Constant.tryLimit)
             authentication.tryLimit = Constant.tryLimit
             AccountRepository.getInstance(this).savePin(authentication)

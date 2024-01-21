@@ -17,7 +17,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -523,7 +522,7 @@ abstract class MvpActivity<P : AndroidPresenter<*>> : AppCompatActivity(), Andro
             var message = ""
             var accountInfo: AccountInfo
             var authenticationService = AuthenticationService()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
 
             if (AccountRepository.getInstance(this).onlineAccounts.size > 0) {

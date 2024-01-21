@@ -106,7 +106,7 @@ overridePendingTransition(0, 0);
     private fun getUserName(context: Context): String? {
 
         try {
-            var accounts = AccountRepository.getInstance(context).accounts.value
+            var accounts = AccountRepository.getInstance(context).accountsData.value
             for (i in 0 until accounts?.size!!) {
                 var account = accounts[i]
                 if (account.accountInfo.accountId == getId()) {
@@ -125,7 +125,7 @@ overridePendingTransition(0, 0);
     private fun getDisplayName(context: Context): String? {
 
         try {
-            var accounts = AccountRepository.getInstance(context).accounts.value
+            var accounts = AccountRepository.getInstance(context).accountsData.value
             for (i in 0 until accounts?.size!!) {
                 var account = accounts[i]
                 if (account.accountInfo.accountId == getId()) {

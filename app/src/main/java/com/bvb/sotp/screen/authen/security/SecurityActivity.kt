@@ -87,7 +87,7 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
 
     @OnClick(R.id.change_pin_code)
     fun changePinCode() {
-        val securityDevice = AccountRepository.getInstance(application).authentication
+        val securityDevice = AccountRepository.getInstance(application).deviceAuthentication
         if (securityDevice is FingerprintAuthentication) {
             onDisableFingerFirst()
             return
@@ -120,7 +120,7 @@ class SecurityActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
     }
 
     fun bindBiometric() {
-        val securityDevice = AccountRepository.getInstance(application).authentication
+        val securityDevice = AccountRepository.getInstance(application).deviceAuthentication
         swBiometric.isChecked = securityDevice is FingerprintAuthentication
     }
 

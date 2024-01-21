@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Handler
 import android.view.View
-import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,7 +14,6 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.bvb.sotp.Constant
 import com.centagate.module.account.Account
-import com.centagate.module.authentication.AuthenticationService
 import com.centagate.module.authentication.QrAuthentication
 import com.centagate.module.authentication.RequestInfo
 import com.centagate.module.exception.CentagateException
@@ -171,7 +169,7 @@ class GetOtpQrActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCon
         try {
 
             var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
             var qrAuthentication = QrAuthentication()
             var requestInfo = qrAuthentication.getQrRequestInfo(

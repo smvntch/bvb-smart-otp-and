@@ -1,11 +1,9 @@
 package com.bvb.sotp.screen.authen.pincode
 
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.device.FingerprintAuthentication
@@ -13,13 +11,10 @@ import com.centagate.module.device.PinAuthentication
 import com.bvb.sotp.Constant
 import com.bvb.sotp.R
 import com.bvb.sotp.helper.DialogHelper
-import com.bvb.sotp.helper.PreferenceHelper
-import com.bvb.sotp.mvp.MvpActivity
 import com.bvb.sotp.mvp.MvpLoginActivity
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.screen.active.ActiveAppActivity
 import com.bvb.sotp.util.LanguageUtils
-import com.bvb.sotp.util.LogUtils
 import com.bvb.sotp.util.Utils.Companion.isAvailable
 import com.bvb.sotp.util.Utils.Companion.isAvailableFinger
 import com.bvb.sotp.view.RegularBoldTextView
@@ -529,7 +524,7 @@ class CreatePinCodeActivity : MvpLoginActivity<CreatePinCodePresenter>(), Create
 
         } else if (errMsgId == FingerprintConnector.FINGERPRINT_ERROR_LOCKOUT) {
 
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
             authentication.setTryLeft(Constant.tryLimit)
             authentication.tryLimit = Constant.tryLimit
             AccountRepository.getInstance(this).savePin(authentication)

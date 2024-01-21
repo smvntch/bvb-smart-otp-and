@@ -13,7 +13,6 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.centagate.module.account.Account
-import com.centagate.module.device.PinAuthentication
 import com.centagate.module.exception.CentagateException
 import com.centagate.module.log.Logger
 import com.centagate.module.otp.OtpOperation
@@ -194,7 +193,7 @@ class OtpTimeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
     private fun getAllData(context: Context): Account? {
 
         try {
-            var accounts = AccountRepository.getInstance(context).accounts.value
+            var accounts = AccountRepository.getInstance(context).accountsData.value
             for (i in 0 until accounts?.size!!) {
                 var account = accounts[i]
                 if (account.accountInfo.accountId == id) {
@@ -292,7 +291,7 @@ class OtpTimeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCodeCont
             val account = completeEntity
             val otpOperation = OtpOperation()
 
-            val security = AccountRepository.getInstance(this).authentication
+            val security = AccountRepository.getInstance(this).deviceAuthentication
             var hid: String = preferenceHelper.getHid()
             val otp = otpOperation.generateTOtp(hid,account.otpInfo, security)
             System.out.print(otp)

@@ -2,21 +2,13 @@ package com.bvb.sotp.screen.user
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.TextUtils
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.centagate.module.account.Account
-import com.centagate.module.device.PinAuthentication
-import com.chauthai.swipereveallayout.SwipeRevealLayout
 import kotlinx.android.synthetic.main.item_add_user.view.*
 import com.bvb.sotp.R
-import com.bvb.sotp.helper.PreferenceHelper
 import com.bvb.sotp.repository.AccountRepository
 import com.bvb.sotp.repository.CommonListener
 import com.bvb.sotp.util.RecycleViewOnClickListener
@@ -68,7 +60,7 @@ class AddUserAdapter(val context: Context, private val list: List<Account>, val 
     fun saveUserName(pos: Int, name: String) {
 
 //        var preferenceHelper = PreferenceHelper(context)
-        val securityDevice = AccountRepository.getInstance(context).authentication
+        val securityDevice = AccountRepository.getInstance(context).deviceAuthentication
 
 
         var account = list[pos]

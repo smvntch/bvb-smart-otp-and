@@ -62,7 +62,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
 
         title.text = getString(R.string.confirm_transaction_qrcode)
 
-        var accounts = AccountRepository.getInstance(this).accounts.value
+        var accounts = AccountRepository.getInstance(this).accountsData.value
 
         if (accounts != null && accounts.size > 0) {
             account = accounts[0]
@@ -302,7 +302,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
         try {
             println("---getQrCode-------------" + getQrCode())
             var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
             var qrAuthentication = QrAuthentication()
             qrAuthentication.approve(
@@ -325,7 +325,7 @@ class QrCodeTransactionDetailActivity : MvpActivity<CreatePinCodePresenter>(),
     fun rejectTransaction() {
         try {
             var hid: String = preferenceHelper.getHid()
-            val securityDevice = AccountRepository.getInstance(this).authentication
+            val securityDevice = AccountRepository.getInstance(this).deviceAuthentication
 
             var authenticationService = AuthenticationService()
             authenticationService.rejectRequest(

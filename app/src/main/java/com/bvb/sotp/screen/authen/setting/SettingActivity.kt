@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.TextUtils
@@ -158,7 +157,7 @@ overridePendingTransition(0, 0);
 
 //        val securityDevice = PinAuthentication()
 //        securityDevice.setPin(preferenceHelper.getPincode())
-        val securityDevice = AccountRepository.getInstance(application).authentication
+        val securityDevice = AccountRepository.getInstance(application).deviceAuthentication
 
         var count = 0
         val serial: String
@@ -236,7 +235,7 @@ overridePendingTransition(0, 0);
     }
 
     fun makeErrorString(map: HashMap<Int, Int>): String {
-        var list = AccountRepository.getInstance(this).accounts.value
+        var list = AccountRepository.getInstance(this).accountsData.value
 
         var result = "\n"
         val myVeryOwnIterator = map.keys.iterator()

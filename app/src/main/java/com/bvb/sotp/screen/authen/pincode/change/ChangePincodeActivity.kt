@@ -328,7 +328,7 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
         if (count == 0) {
             pin1 = pincode.toString()
 //            if (pin1 == preferenceHelper.getPincode()) {
-            val authentication = AccountRepository.getInstance(this).authentication
+            val authentication = AccountRepository.getInstance(this).deviceAuthentication
             if (authentication != null && authentication.authenticate(
                     pin1,
                     preferenceHelper.getHid()
@@ -360,7 +360,7 @@ class ChangePincodeActivity : MvpActivity<CreatePinCodePresenter>(), CreatePinCo
 
 //                val securityDeviceOld = PinAuthentication()
 //                securityDeviceOld.setPin(preferenceHelper.getPincode())
-                val securityDeviceOld = AccountRepository.getInstance(this).authentication
+                val securityDeviceOld = AccountRepository.getInstance(this).deviceAuthentication
                 val securityDeviceNew = PinAuthentication()
 //                securityDeviceNew.setPin(pin1)
                 securityDeviceNew.tryLimit = Constant.tryLimit

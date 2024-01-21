@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
@@ -127,7 +126,7 @@ abstract class MvpLoginActivity<P : AndroidPresenter<*>> : AppCompatActivity(), 
     protected fun initFingerprint(): Boolean? {
         try {
             var fingerprintAuthentication: FingerprintAuthentication
-            var authentication = AccountRepository.getInstance(this).authentication
+            var authentication = AccountRepository.getInstance(this).deviceAuthentication
 
             if (authentication is FingerprintAuthentication) {
                 fingerprintAuthentication = authentication
