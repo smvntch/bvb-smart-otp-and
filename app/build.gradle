@@ -46,13 +46,31 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    flavorDimensions "version"
 
+    productFlavors {
+        SMVN {
+            dimension "version"
+            applicationIdSuffix ".smvn"
+        }
+        bvbUAT {
+            dimension "version"
+            applicationIdSuffix ".bvbuat"
+        }
+        bvbPROD{
+            dimension "version"
+            applicationIdSuffix ".bvbprod"
+        }
+
+    }
     buildTypes {
-//        debug {
+        debug {
+//            applicationIdSuffix ".debug"
+//            versionNameSuffix "-debug"
 //            minifyEnabled true
 //            shrinkResources true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//        }
+       }
 
 //        13/6: bị lỗi không xác thực được QR CODE, PUSH và kích hoạt user, sau khi bỏ phần release thì bình thường
 //        release {
@@ -60,6 +78,20 @@ android {
 //            shrinkResources true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //        }
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                def appName = "BVB-eToken"
+                def versionCode = defaultConfig.versionCode
+                def versionName = defaultConfig.versionName
+                def flavorName = variant.flavorName ?: ""
+                // Mặc định là chuỗi trống nếu flavorName là null
+                def buildType = variant.buildType.name
+                def dateTime = new Date().format('yyyyMMdd-HHmmss')
+
+                // Bao gồm flavorName trong outputFileName
+                outputFileName = "${appName}-${flavorName}-v${versionName}(${versionCode})-${buildType}-${dateTime}.apk"
+            }
+        }
     }
     compileOptions {
         sourceCompatibility 11
@@ -136,6 +168,9 @@ dependencies {
 //    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 //    implementation project(':centagateSdk')
 //    implementation 'commons-codec:1.10'
+
+    //Thêm SDK aar vào thư mục lib
+    //Thêm đoạn mã này vào build.gradle Module app để khởi tạo thư viện
     implementation files('libs/centagate-release-20210716.aar')
 
     implementation 'com.github.HenriqueMachine:EasyFingerPrint:1.0.1'
@@ -167,4 +202,7 @@ dependencies {
  * In this case, the Google Services plugin and the Realm Android plugin are applied.
  */
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
+//Realm là một cơ sở dữ liệu nhanh và nhẹ dành cho các ứng dụng di động và nền tảng web. Trong Android Studio, Realm là một thư viện dùng để làm việc với cơ sở dữ liệu trên thiết bị di động chạy hệ điều hành Android.
+// đây là cách khai báo
 apply plugin: 'realm-android'

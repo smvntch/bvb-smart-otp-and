@@ -1,5 +1,13 @@
 <resources>
+    <!--    tuanle-->
+    <!--    an important file used to manage all the text strings your application uses-->
+    <!--    string: This is an XML element that defines a text string.-->
 
+    <!--    name="app_default_auth_url": Identifier of the text string. a way to set an ID for a string, allowing you to reference it from Java source code or XML.-->
+
+    <!--    translatable="false": This attribute specifies whether the string can be translated or not. In this case, the value is "false", i.e. the string does not need to be translated. commonly used for strings containing URL values or fixed data that do not need to be translated.-->
+
+    <!--    https://117.4.241.150:448/v2/CentagateWS/webresources: Actual value of string-->
     <string name="app_name" translatable="false">BVB eToken</string>
     <string name="input_pincode_msg">Đặt PIN (Mã PIN gồm 06 ký tự số)</string>
     <string name="chuc_mung">Chúc mừng!</string>
@@ -48,12 +56,12 @@
 
     <!-- SMDEV Environment: https://117.4.241.150:448 -->
     <!--    Test Environment-->
-    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>
-    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>
-    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>
-    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>
-    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>
-    <string name="app_integration_key" translatable="false">8e5afa68042e544daba8676b3e6d446e9c10e7e66abc13d7d15939df1778a640</string>
+<!--    <string name="app_default_soft_cert_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->
+<!--    <string name="app_default_web_service_url" translatable="false">https://117.4.241.150:448/CentagateMobileWS/webresources</string>-->
+<!--    <string name="app_default_auth_url" translatable="false">https://117.4.241.150:448/v2/CentagateWS/webresources</string>-->
+<!--    <string name="app_default_server_verify_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBnH7SMUUdyEsTdOHzew4XEegZnllZbeYtXgOPd4wYhrpNFrddncxUDg9JR+gE+yplRnaAlqQJ5Ca1WgBpzxTr5kwBFlqhWYSYmhfzu8ywNUBVRQC9ihTO7sJdh8uaROZCoYx1iLI3SUuZakueDqQYBHR7srm4ubU3qst/2EOJHzPcKCA=</string>-->
+<!--    <string name="app_default_server_enc_public_key" translatable="false">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAaLQrzzS99Z3R35Er94jFDmQIO5+UbPwB86Z0o4QVh7zvx71EJziKlBQesYXpjxJs7LYwFq5UEw7wKGKhAHwxX3YAohma7+RB9ij/lDEoZ6VHzaeTcfYbAnOIFbK71pvbIeODIZZ1F2Um9m6Mql3y/lqbM8Wp+mxUfzk+BbMLnpFXtaw=</string>-->
+<!--    <string name="app_integration_key" translatable="false">8e5afa68042e544daba8676b3e6d446e9c10e7e66abc13d7d15939df1778a640</string>-->
 
     <!-- SMDEV Environment: https://centagate.com.vn:448 -->
 <!--    <string name="app_default_soft_cert_url" translatable="false">https://centagate.com.vn:448/CentagateMobileWS/webresources/auth/secure/mobile/approveSoftCert/</string>-->

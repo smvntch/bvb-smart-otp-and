@@ -119,15 +119,17 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     lateinit var biometricZone: View
 
     var count: Int = 0
-
+    // The Companion object is a special object in Kotlin that allows you to create components that act as static methods and properties, just like when using static in Java.
     companion object {
+        //    This method returns an Intent configured to open the LoginActivity with the purpose of validation.
+//    It takes a Context as an argument to create the Intent and provides additional information such as setting "is_validate" to true and "cancelable" to false
         fun newValidateIntent(context: Context): Intent {
             val intent = Intent(context, LoginActivity::class.java)
             intent.putExtra("is_validate", true)
             intent.putExtra("cancelable", false)
             return intent
         }
-
+        // This method also returns an Intent similar to newValidateIntent, but with the value of "is_validate" set to false and "cancelable" set to true.
         fun newCancelAbleIntent(context: Context): Intent {
             val intent = Intent(context, LoginActivity::class.java)
             intent.putExtra("is_validate", false)
@@ -137,10 +139,15 @@ class LoginActivity : MvpLoginActivity<LoginPresenter>(), LoginViewContract, Vie
     }
 
 
+    //    This is a private function named isValidate that returns a Boolean value.
+//    It retrieves a boolean extra named "is_validate" from the intent associated with this activity.
+//    If the extra is not found, it returns false as a default value
     private fun isValidate(): Boolean {
         return intent.getBooleanExtra("is_validate", false)
     }
-
+    //    Similar to the isValidate function, this is another private function named isCancelable that returns a Boolean value.
+//    It retrieves a boolean extra named "cancelable" from the intent associated with this activity.
+//    If the extra is not found, it returns false as a default value.
     private fun isCancelable(): Boolean {
         return intent.getBooleanExtra("cancelable", false)
     }

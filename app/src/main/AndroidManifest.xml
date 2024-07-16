@@ -2,26 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bvb.sotp">
-
+    <!--    Tuanld-->
+    <!--    This section declares the access permissions that the application requests from the Android system,-->
+    <!--    including Internet access, external memory, phone state, and write permissions to external memory.-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--    thêm permission này vào do trong tài liệu tích hợp SDK có yêu cầu-->
+    <!--    quyền này cho phép ứng dụng đọc trạng thái điện thoại đặc quyền-->
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions"/>
     <!-- Step 1: Add the following permission to the app  -->
+    <!--    Tuanld-->
+    <!--    Declare your rights to use biometric features, including fingerprint scanning (FINGERPRINT).-->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <!-- Step 2: This permission is depreciated in Android P  -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <!--<16/6: thêm quyền android.permission.POST_NOTIFICATIONS-->
+    <!--    Tuanld-->
+    <!--    Other permissions include staying awake (WAKE_LOCK),-->
+    <!--    receiving notifications from Google Cloud Messaging (com.google.android.c2dm.permission.RECEIVE),-->
+    <!--    using the camera, and sending notifications.-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!--    Declare features of Android devices, here is fingerprint support.-->
+    <!--    The android:required="false" attribute indicates that the app does not require the device to have this feature.-->
     <uses-feature
         android:name="android.hardware.fingerprint"
         android:required="false" />
     <!--<15/6: chuyển android:debuggable từ true thành false-->
-
+    <!--    android:allowBackup="false" does not allow backing up application data.-->
+    <!--    android:debuggable="false" turns off debuggable mode.-->
     <application
         android:name=".PeepApp"
         android:allowBackup="false"

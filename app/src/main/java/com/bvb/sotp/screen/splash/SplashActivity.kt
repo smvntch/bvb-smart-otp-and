@@ -119,7 +119,8 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
 
     }
 
-
+//để tích hợp SDK phải thiết lập URL. Ví dụ URL dịch vụ web cho các lệnh gọi API, URL xác thực dành cho người dùng
+    // URL phê duyệt cho sortcert liên quan đến xác thực, các cấu hình key
 
     private fun initSDK() {
         //Setup the initialize of SDK
@@ -219,6 +220,10 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "vr0WHeIxE1MMc1tjSk+nOXaaTr7AYx13wABqllzacQ=="
 
         // List of trusted certificates for pinning
+
+
+        //Cần có cấu hình cho Chứng chỉ SSL để đo lường lớp an toàn khi gọi API
+        //Khởi tạo một HashMap có tên là certificatePinningMap, được sử dụng để lưu trữ các chứng chỉ (certificates)
         val certificatePinningMap = HashMap<String, String>()
 
         // Alias: SM-Dev-RootCA
@@ -343,9 +348,11 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                     "abvp10ZlOtfu8hL5gCXcxnwGxzSb"
 
         // tuanle: KeyStore is a class in Java for storing private keys, certificates, and other security information. KeyStore can be used to encrypt, decrypt, authenticate, and protect data.
+        //Cần có cấu hình cho Chứng chỉ SSL để đo lường lớp an toàn khi gọi API
         var connectionKeyStore: KeyStore? = null
         try {
             // tuanle:The KeyStore.getInstance function is a function in Java to get a KeyStore object of the specified keystore type
+            // Khởi tạo một đối tượng KeyStore để quản lý các chứng chỉ. KeyStore là một phần của API Security của Java và được sử dụng để lưu trữ và quản lý các chứng chỉ, khóa và bí mật.
             connectionKeyStore = KeyStore.getInstance(KeyStore.getDefaultType())
             // tuanle: The KeyStore.getInstance function returns a KeyStore object of the corresponding keystore type. To access the KeyStore object, you need to call the load method to create an empty keystore or read from a data source.
             connectionKeyStore!!.load(null, null)
@@ -361,6 +368,7 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
                         )
                     )
                 )
+                // Sử dụng setCertificateEntry để đặt chứng chỉ vào KeyStore, với alias và chứng chỉ tương ứng.
                 connectionKeyStore.setCertificateEntry(
                     alias,
                     certificateObject

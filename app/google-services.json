@@ -9,7 +9,65 @@
       "client_info": {
         "mobilesdk_app_id": "1:325241030126:android:43a36b8737f88948f0faff",
         "android_client_info": {
-          "package_name": "com.bvb.sotp"
+          "package_name": "com.bvb.sotp.smvn" // Thêm suffix ".smvn" cho flavor SMVN
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARzqDV8sQ6oA-l2mgbq6tPTrKgiUQV6HM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325241030126:android:43a36b8737f88948f0faff",
+        "android_client_info": {
+          "package_name": "com.bvb.sotp.bvbuat" // Thêm suffix ".bvbuat" cho flavor bvbUAT
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARzqDV8sQ6oA-l2mgbq6tPTrKgiUQV6HM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325241030126-hq72kn15qragg57r9odb8u4l7neqo7qo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325241030126:android:43a36b8737f88948f0faff",
+        "android_client_info": {
+          "package_name": "com.bvb.sotp.bvbprod" // Thêm suffix ".bvbuat" cho flavor bvbPROD
         }
       },
       "oauth_client": [
