@@ -236,22 +236,36 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         // Not Before: Thu Jun 17 09:37:44 GMT+07:00 2021
         // Not After:  Wed Jun 17 09:37:44 GMT+07:00 2026
         certificatePinningMap["SM-Dev-RootCA"] =
-            "MIIC9DCCAdygAwIBAgIEYMq1eDANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
-                    "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
-                    "MB4XDTIxMDYxNzAyMzc0NFoXDTI2MDYxNzAyMzc0NFowPDELMAkGA1UEBhMCVk4x" +
-                    "DjAMBgNVBAgMBUhhbm9pMR0wGwYDVQQDDBRTZWN1cmVtZXRyaWMgVmlldG5hbTCC" +
-                    "ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN0PbNrxaUEMfvDeVaLtZCGH" +
-                    "0oQxlpuP0nVJ4ZPIS45SYKKNGq4ozWB0LcYR1Ccl3aVSzm9LAm6jpdRajUb3+olD" +
-                    "QXUbnTxEaQ5zH8hVlGxcT9ENrmHIHIEGAU4KQeWhGdRxnkCIV5TPKz6eqGRdu0cv" +
-                    "uvZQP9l3vAes4wkr/kqYD7rE57vcUdKwvHkoQ2F92E//g1yjbJn3amctxP0fpXTe" +
-                    "Pzf7rxELbPPUohD0qjVANk4Xc76bqYmJx5Hofshm6MZ1Kwz3kndPEFvedtnjrIIs" +
-                    "83K8w2MSil5jQWCRfd7xmwMeLDkWkGtCM4PRIEHZG74P3mosaspAn9TQ3wbIQJcC" +
-                    "AwEAATANBgkqhkiG9w0BAQsFAAOCAQEArsGu1IOOYrh+GFXfSb/YB/VcS5SMVmwU" +
-                    "XI+Eqlv/31R6qtE/gqPR0MhtanT3bnASjq/gZzcoLd131qQoyqRk1AMdQcdONwFw" +
-                    "hjXt1/4U/PIsh8DcT1VpTpvY5O+8cRWVXehOVDtvfOj+HsMedNDvKkZgidgtvYKy" +
-                    "mzNszyN0ojHN1ePl9xmlr1wzcLIUJIN9w0gvfUfocRsH0aJmge0Ka/G8A3RZ/qy2" +
-                    "VaumoZZF7HopelWKoOJODloSOstqRcOwzUXuKNJxhOhhsqch6RyDzNCs/YPrqKFt" +
-                    "uz68xSAc3wY88o3N+P/Va7uoxyPVIqLer19gxcFBsPEcLECwNwhQ+A=="
+            "MIIFTTCCAzWgAwIBAgIMGoT4TqStvtLU+HOHMA0GCSqGSIb3DQEBCwUAMDIxFDAS" +
+                    "BgNVBAMMC1NNVk4gUm9vdENBMQ0wCwYDVQQKDARTTVZOMQswCQYDVQQGEwJWTjAe" +
+                    "Fw0yNDAzMjkwMTU0NDRaFw00OTAzMjMwMTU0NDRaMDIxFDASBgNVBAMMC1NNVk4g" +
+                    "Um9vdENBMQ0wCwYDVQQKDARTTVZOMQswCQYDVQQGEwJWTjCCAiIwDQYJKoZIhvcN" +
+                    "AQEBBQADggIPADCCAgoCggIBAIGTNKYM1MsDwe//AzKgayhr20NZcNNpKZBCPMns" +
+                    "rcWUYUmFDemWPmOpizTNfBYNBk4boftUY09HydQvpkliSXu5rEV57HVbCKNMQn6W" +
+                    "//ZAe9qckJG0KUgcLc1FylofJ+UcJxlp0xpDVIojFtAki6MrCFTKFhvTfsgHTFIU" +
+                    "aTLWy49iVRXB9k5tSdd0NF6SiGrSGEDdILmeR+XrFd1JzW/XgD9cGqMHQw6G1zT3" +
+                    "N8euSx6AgWz21vQ19h2QFYwDdBkTU1t0guhB58Q5ZW6LUz+J34fOOCJdY90n4Oqm" +
+                    "s2TexWft/IzaPVEn6p+jVOF6AUPqdRCI0njmwTGvDNO/fCQsjkNkQL+GNl0tMBFi" +
+                    "/RLOZ1mP5GD4Qcc+HFb0UNAeeLDkY8gn7s07EY0c8QlDijPun8gsAM3mHdszZHyt" +
+                    "GupYEoPvsReQIBegcgz9raOnmA7gGZChPFnlVWjjLwavO3LCrlq2GlXONIdpl/pR" +
+                    "F/li9IYDLWxK4AFumjcKZDDAZO14PZoi62u6DC9zo8kXEOo/WSMfHjw0FMZXpFxD" +
+                    "d5GOMUYKpx05xBobQvoneipUA69du6XnFTnG71KsQts04X+G4pZHnoEZpto+fPRl" +
+                    "9ExYqdaazf9PbtuC+vs5log73DmkRgUZO93ykFKabPaWK0IToDEAP3qG/eAcx/yz" +
+                    "IqAPAgMBAAGjYzBhMB0GA1UdDgQWBBRX5coinYSZXQaRvRGm5soescxRyTAPBgNV" +
+                    "HRMBAf8EBTADAQH/MB8GA1UdIwQYMBaAFFflyiKdhJldBpG9Eabmyh6xzFHJMA4G" +
+                    "A1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAgEAS9pYzBq20MTnBJsupsMD" +
+                    "ppcL6tysLl9jf+u6craSYBSuRrwwPezpLv66cMQcYqODWF//lsCGajaGfliWCkTG" +
+                    "JG1Q1d5TWXWtlyxSvJ1VyxGgb2huHv5lhAW6qFUdKuVGHH1IdTahOZY1NuTlL7HT" +
+                    "0OQoy3UVFTZuZuwASu/dTlljZ8huDiLOm0Ocn1LZZCbvrqfdtXeXybcH94f7Da3j" +
+                    "DHC0NoCXQhK2ylTzWiomA8PytLkPHEr9n8sHHWP8bCYGcS8s6uAyNAbbNYpdWsPB" +
+                    "eM6poS+fVdyx9Qm7SzuhDVeH3MBBpXZgwyZpHQscWb6ku3zZ6vWP4UXVZNRMBRxe" +
+                    "zVMRUFiOeYZZ/xVGpr1QV+1wThz4FVsKfhsKnmmjIdaLPYE2SpI1kIT28IEby1k0" +
+                    "1DDTRgM4fbAwM1wzqa9yl4/7qBHSM0dkO+Ei0tPHn9E9Wmpdx9rZZ2rMkqGAtXNX" +
+                    "a5bpXktdznM30VTOyGVSFVT3LmmFX3bmn2Df80OqFOTV3kx7tuRtRsjf34AAAl0q" +
+                    "PdNLic3w8v+t+H3/VdPgR6GM1pb2/Cj4LnZvGSC5QRIpF7KKa6bKSJXPiEETLAkN" +
+                    "XSb4HCK5wJryzs+g2Fb1Xtmhs4fWBpu6C0TX0TaPF+3acXdOV0scJV4vWyUATxSW" +
+                    "F4GIUq3EwkADvgM0/E+2Q84="
+
 
         // Alias: SM-Dev-IntermediateCA
         // Subject DN: CN=Securemetric Vietnam ICA,O=SMVN,L=88 Lang Ha Street,ST=Hanoi,C=VN
@@ -263,24 +277,29 @@ class SplashActivity : MvpLoginActivity<SplashPresenterContract>(), SplashViewCo
         // Not Before: Tue Jul 06 15:12:43 GMT+07:00 2021
         // Not After:  Sun Jul 06 15:12:43 GMT+07:00 2025
         certificatePinningMap["SM-Dev-IntermediateCA"] =
-            "MIIDQjCCAiqgAwIBAgIEYOQQezANBgkqhkiG9w0BAQsFADA8MQswCQYDVQQGEwJW" +
-                    "TjEOMAwGA1UECAwFSGFub2kxHTAbBgNVBAMMFFNlY3VyZW1ldHJpYyBWaWV0bmFt" +
-                    "MB4XDTIxMDcwNjA4MTI0M1oXDTI1MDcwNjA4MTI0M1owazELMAkGA1UEBhMCVk4x" +
-                    "DjAMBgNVBAgMBUhhbm9pMRowGAYDVQQHDBE4OCBMYW5nIEhhIFN0cmVldDENMAsG" +
-                    "A1UECgwEU01WTjEhMB8GA1UEAwwYU2VjdXJlbWV0cmljIFZpZXRuYW0gSUNBMIIB" +
-                    "IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7z4sobsKZ0hqIcAa5aymzw/G" +
-                    "DoRf2JXeeA4dsslo+rXnBdsZhTZbRV6pDnxW1nD1vrykrxgCccYzm5vr07QqxbHr" +
-                    "kwIfjJAWUWOGzv/YzVMKmDFdcU9xUb1TljsywicsECbs69cGuTVS5+v3b+4QqONq" +
-                    "/rZWpGmNKSatVudR8VkbQDBc0vu/g9zdCc3keMMQRsZeQ3JBkxq7SmMIShgPuPjF" +
-                    "bLOVRHPgWT4rThoEDa2ds3kwVlB4ebEdVDVcBEkj0ZQ08orlnbhdGYbTdx3IYGI0" +
-                    "M51OFW1YjEJ+zUCiQlTyV07QiBgCS2VZGBwGfI5oCy7HWn+hBWfz4vUQUVHYsQID" +
-                    "AQABox0wGzAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwIBpjANBgkqhkiG9w0BAQsF" +
-                    "AAOCAQEAwdI3JXKKUVlPy+HDA//r9JwM5HaLl0LEZRP8YmeuxwOvdJCn2SDHM4pN" +
-                    "eJpKJGWNf6xhlbTcU+rBvME4zKs1Ug0t0qvCqIJsrY16GZKo9f3oK+TicnfQq8+q" +
-                    "wWv55kcUWiHeKFdB9p016xpHds0bfVog2N+7VYCp+9sK13AtSbqD/cuGw6fHOxuv" +
-                    "bNyDtaMZblpytd1D2nZ5dJQUXgaEuuFx8LoYGWnWOR5oKr3RTCGEaq0lm0k/XP8Q" +
-                    "vKlHJ3LQc+DszJUxPtxnirtoFkGJvBszoMSAHGEyhZzN3CAsiHLXUhCGY+d9wAVB" +
-                    "vJo/4yirVwYw2Msw5yZ5KFUerPLN/A=="
+            "MIIESjCCAjKgAwIBAgIMf67lwUmCC0Q0eIc1MA0GCSqGSIb3DQEBCwUAMDIxFDAS" +
+                    "BgNVBAMMC1NNVk4gUm9vdENBMQ0wCwYDVQQKDARTTVZOMQswCQYDVQQGEwJWTjAe" +
+                    "Fw0yNDAzMjkwMjAxMDdaFw0zNDAzMjcwMjAxMDdaMC8xETAPBgNVBAMMCFNNVk4g" +
+                    "SUNBMQ0wCwYDVQQKDARTTVZOMQswCQYDVQQGEwJWTjCCASIwDQYJKoZIhvcNAQEB" +
+                    "BQADggEPADCCAQoCggEBALiG834ZpE0tNVI5DbS4XWidsYjTrkAKwekZMSgNFysU" +
+                    "o8W0W5BrJSiRbzZwvoDOMeTFeb+W2Om0hDsfHJawY0EgGUbE49MA6lVTLqASs78N" +
+                    "hc4ABZoM/14oQ3VXE9PYR0AMabMPlyn7FsAnXzoH7njhDYYWf7eJj1n/Xcq4yiAg" +
+                    "Wr1wQiXfs5+fhIB2HQjPUFl9uXWdCUcYiW7J+zIARk7LLxs3rkyIFvKlJDfYwiye" +
+                    "d67rsTWAyhjME0Wea81TiT+k2t2St9z1SSCinL/5+NIF9/JsGbx2Wc8EqpPuQsvR" +
+                    "LY+aPAzrWLWTInqzKbrRnjJf6USMSd3LgRSL6WlH8y8CAwEAAaNjMGEwHQYDVR0O" +
+                    "BBYEFMlqW+5Ms4o1Ox9ZZ4AULLbKu3TGMA8GA1UdEwEB/wQFMAMBAf8wHwYDVR0j" +
+                    "BBgwFoAUV+XKIp2EmV0Gkb0RpubKHrHMUckwDgYDVR0PAQH/BAQDAgGGMA0GCSqG" +
+                    "SIb3DQEBCwUAA4ICAQByg37fbJUW8fLcfXBp2P5quXntHQOSuirBiyg2Qi8hkC2X" +
+                    "OP3Dx/v3pY1iPT2OpEeSvQbGhrVeGY/fKf4WK+85q/8PFAut7xkZDQwQoK93ex87" +
+                    "3Wwx6OcNYjmjK1YY2uCUbfHSwqy16LBPzG3qsCA9W7xQFzmG52GfDdUOE34/A4Ea" +
+                    "akhydpGOlIF7j4izA8mmtFtSkBzO7rywn+gflJ3I/eKUtG6N4uCqt3JtXNz399d0" +
+                    "w0YIPGqlBL/9IW6ybaFEw/HxjOnCCwBZuPPSOUiHvuDSa/WLsYLdSC9pzElFLgK8" +
+                    "CLRqMxlPEUnOpAzfMHFENuZCpo5x5BE/WXVFhSM4tfMa+LU9RrgnY311RyE9c2VP" +
+                    "jVFx7fkT6n7Sb2Cr2Tk+Sps9ojvv3tfyDv754SJVON+jgE/l9xlsbwxrNFFB5Z4J" +
+                    "njaPNnyEJQoP8NBVNvLWctwRj7LYI5pgqJArDmOE/burPl3LlqgjNxwMLBC5R1aW" +
+                    "PeFZu/c0yPI0tmVbsaJNX+xAG8K3aUYIrFwmXsG9dqMShj81Q33eVkD7q5lYixH3" +
+                    "7YZFWEqRZ7vAlhAQFGw9vmakOjWUA1yM43dRpH/JJ+Nw8f5wGkjnRsWlLzKF+4i6" +
+                    "aPJ1hBm/DASHBi81JpwzUD1YzpSp3RT4+EbfkayD9zShfoWo7YGOh5mI25OvlQ=="
 
         // Alias: BVB-Production-RootCA
         // Subject DN: CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R3
